@@ -145,15 +145,19 @@
         async function showArticle(articlePath, markdownContent) {
             articlesGrid.style.display = 'none';
             
-            const contentWithAbsoluteImagePaths = markdownContent.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, imagePath) => {
-                if (imagePath.startsWith('http')) {
-                    return match;
+            // DEFINITIVE FIX: Use marked.walkTokens to correctly rewrite image paths
+            const tokens = marked.lexer(markdownContent);
+            marked.walkTokens(tokens, (token) => {
+                if (token.type === 'image') {
+                    const imageUrl = token.href;
+                    if (!imageUrl.startsWith('http')) {
+                        // Decode URI component to handle spaces or special chars in filenames
+                        const decodedUrl = decodeURIComponent(imageUrl);
+                        token.href = `${RAW_CONTENT_URL}/${ARTICLES_PATH}/${articlePath}/${decodedUrl}`;
+                    }
                 }
-                const fullUrl = `${RAW_CONTENT_URL}/${ARTICLES_PATH}/${articlePath}/${imagePath}`;
-                return `![${altText}](${fullUrl})`;
             });
-            
-            const htmlContent = marked.parse(contentWithAbsoluteImagePaths);
+            const htmlContent = marked.parser(tokens);
 
             articleView.innerHTML = `
                 <a href="#" class="back-button" onclick="event.preventDefault(); showGrid();">Torna indietro</a>
@@ -203,8 +207,6 @@
 
             for (const folder of articleFolders) {
                 try {
-                    // This part still needs to fetch individual files, which we can't easily cache without complexity.
-                    // The main benefit is caching the directory listing.
                     const folderContentsResponse = await fetch(folder.url);
                     if (!folderContentsResponse.ok) continue;
                     const folderContents = await folderContentsResponse.json();
@@ -254,7 +256,6 @@
             try {
                 response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ARTICLES_PATH}`);
                 if (!response.ok) {
-                    // Pass the whole response to the error to check status later
                     throw response;
                 }
                 const data = await response.json();

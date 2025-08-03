@@ -145,13 +145,11 @@
         async function showArticle(articlePath, markdownContent) {
             articlesGrid.style.display = 'none';
             
-            // DEFINITIVE FIX: Use marked.walkTokens to correctly rewrite image paths
             const tokens = marked.lexer(markdownContent);
             marked.walkTokens(tokens, (token) => {
                 if (token.type === 'image') {
                     const imageUrl = token.href;
                     if (!imageUrl.startsWith('http')) {
-                        // Decode URI component to handle spaces or special chars in filenames
                         const decodedUrl = decodeURIComponent(imageUrl);
                         token.href = `${RAW_CONTENT_URL}/${ARTICLES_PATH}/${articlePath}/${decodedUrl}`;
                     }
@@ -185,20 +183,33 @@
             return card;
         }
 
-        function extractArticleDetails(markdownText, imageUrl) {
-            const titleMatch = markdownText.match(/^#\s(.+)/);
+        function extractArticleDetails(markdownText) {
+            const titleMatch = markdownText.match(/^#\s(.+)/m);
             const title = titleMatch ? titleMatch[1] : 'Titolo non trovato';
 
-            const summaryMatch = markdownText.split(/\n\s*\n/);
+            const imageMatch = markdownText.match(/!\[.*?\]\((.*?)\)/);
+            let firstImageSrc = null;
+            if (imageMatch) {
+                firstImageSrc = imageMatch[1];
+            }
+
             let summary = 'Sommario non disponibile.';
-            for(let i = 1; i < summaryMatch.length; i++) {
-                if (summaryMatch[i] && !summaryMatch[i].trim().startsWith('!') && !summaryMatch[i].trim().startsWith('di:')) {
-                    summary = summaryMatch[i].replace(/\[(.*?)\]\(.*?\)/g, '$1').replace(/[*_]/g, '');
+            let textAfterImage = markdownText;
+            if (imageMatch) {
+                const imageTagEndIndex = imageMatch.index + imageMatch[0].length;
+                textAfterImage = markdownText.substring(imageTagEndIndex);
+            }
+            
+            const paragraphs = textAfterImage.split(/\n\s*\n/);
+            for (const p of paragraphs) {
+                const trimmedP = p.trim();
+                if (trimmedP) {
+                    summary = trimmedP.replace(/\[(.*?)\]\(.*?\)/g, '$1').replace(/[*_]/g, '');
                     break;
                 }
             }
 
-            return { title, summary, imageUrl };
+            return { title, summary, firstImageSrc };
         }
 
         async function processArticleData(articleFolders) {
@@ -211,28 +222,39 @@
                     if (!folderContentsResponse.ok) continue;
                     const folderContents = await folderContentsResponse.json();
 
-                    const mdFile = folderContents.find(file => file.name.endsWith('.md') && !file.name.endsWith('_en.md') && !file.name.endsWith('_es.md') && !file.name.endsWith('_fr.md') && !file.name.endsWith('_de.md'));
-                    const imageFile = folderContents.find(file => file.name.toLowerCase().endsWith('.jpg') || file.name.toLowerCase().endsWith('.png') || file.name.toLowerCase().endsWith('.webp'));
+                    // Find all Italian markdown files and sort them
+                    const mdFiles = folderContents
+                        .filter(file => file.name.endsWith('.md') && !file.name.endsWith('_en.md') && !file.name.endsWith('_es.md') && !file.name.endsWith('_fr.md') && !file.name.endsWith('_de.md'))
+                        .sort((a, b) => a.name.localeCompare(b.name));
 
-                    if (mdFile) {
-                        const mdContentResponse = await fetch(mdFile.download_url);
-                        if (!mdContentResponse.ok) continue;
-                        const markdownContent = await mdContentResponse.text();
-                        
-                        const imageUrl = imageFile ? imageFile.download_url : 'https://via.placeholder.com/300x200.png?text=Immagine+non+disponibile';
+                    if (mdFiles.length > 0) {
+                        for (const mdFile of mdFiles) {
+                            const mdContentResponse = await fetch(mdFile.download_url);
+                            if (!mdContentResponse.ok) continue;
+                            const markdownContent = await mdContentResponse.text();
+                            
+                            const { title, summary, firstImageSrc } = extractArticleDetails(markdownContent);
+                            
+                            let imageUrl = 'https://via.placeholder.com/300x200.png?text=Immagine+non+disponibile';
+                            if (firstImageSrc) {
+                                if (firstImageSrc.startsWith('http')) {
+                                    imageUrl = firstImageSrc;
+                                } else {
+                                    imageUrl = `${RAW_CONTENT_URL}/${ARTICLES_PATH}/${folder.name}/${decodeURIComponent(firstImageSrc)}`;
+                                }
+                            }
 
-                        const { title, summary } = extractArticleDetails(markdownContent, imageUrl);
+                            const articleData = {
+                                path: folder.name,
+                                title,
+                                summary,
+                                imageUrl,
+                                markdownContent
+                            };
 
-                        const articleData = {
-                            path: folder.name,
-                            title,
-                            summary,
-                            imageUrl,
-                            markdownContent
-                        };
-
-                        const card = createArticleCard(articleData);
-                        articlesGrid.appendChild(card);
+                            const card = createArticleCard(articleData);
+                            articlesGrid.appendChild(card);
+                        }
                     }
                 } catch (error) {
                     console.error(`Error loading content for article ${folder.name}:`, error);

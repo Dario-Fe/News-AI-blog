@@ -213,7 +213,8 @@
         }
 
         async function processArticleData(articleFolders) {
-            articleFolders.reverse();
+            // Sort folders descending (newest first), e.g., '10-...' before '01-...'
+            articleFolders.sort((a, b) => b.name.localeCompare(a.name));
             articlesGrid.innerHTML = ''; 
 
             for (const folder of articleFolders) {
@@ -222,10 +223,10 @@
                     if (!folderContentsResponse.ok) continue;
                     const folderContents = await folderContentsResponse.json();
 
-                    // Find all Italian markdown files and sort them
+                    // Find all Italian markdown files and sort them descending to match the main article order
                     const mdFiles = folderContents
                         .filter(file => file.name.endsWith('.md') && !file.name.endsWith('_en.md') && !file.name.endsWith('_es.md') && !file.name.endsWith('_fr.md') && !file.name.endsWith('_de.md'))
-                        .sort((a, b) => a.name.localeCompare(b.name));
+                        .sort((a, b) => b.name.localeCompare(a.name));
 
                     if (mdFiles.length > 0) {
                         for (const mdFile of mdFiles) {

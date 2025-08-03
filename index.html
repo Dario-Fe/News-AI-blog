@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizie IA</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dddfe2;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #000;
+        }
+        header h2 {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: normal;
+            color: #606770;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .article-card-content {
+            padding: 15px;
+        }
+        .article-card-content h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .article-card-content p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #606770;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #article-view {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #article-view img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #article-view h1 {
+            font-size: 2.2em;
+        }
+        #article-view p {
+            line-height: 1.6;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .footer-back-button {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .loader {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Notizie IA</h1>
+        <h2>A cura di Verbania Notizie</h2>
+    </header>
+    <main>
+        <div id="app">
+            <div id="articles-grid">
+                <div class="loader">Caricamento articoli...</div>
+            </div>
+            <div id="article-view" style="display:none;"></div>
+        </div>
+    </main>
+
+    <script>
+        const GITHUB_OWNER = 'matteobaccan';
+        const GITHUB_REPO = 'CorsoAIBook';
+        const ARTICLES_PATH = 'articoli';
+        const RAW_CONTENT_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main`;
+        const CACHE_KEY = 'articlesCache';
+        const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hour
+
+        const app = document.getElementById('app');
+        const articlesGrid = document.getElementById('articles-grid');
+        const articleView = document.getElementById('article-view');
+
+        function showGrid() {
+            articleView.style.display = 'none';
+            articleView.innerHTML = '';
+            articlesGrid.style.display = 'grid';
+        }
+
+        async function showArticle(articlePath, markdownContent) {
+            articlesGrid.style.display = 'none';
+            
+            const contentWithAbsoluteImagePaths = markdownContent.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, imagePath) => {
+                if (imagePath.startsWith('http')) {
+                    return match;
+                }
+                const fullUrl = `${RAW_CONTENT_URL}/${ARTICLES_PATH}/${articlePath}/${imagePath}`;
+                return `![${altText}](${fullUrl})`;
+            });
+            
+            const htmlContent = marked.parse(contentWithAbsoluteImagePaths);
+
+            articleView.innerHTML = `
+                <a href="#" class="back-button" onclick="event.preventDefault(); showGrid();">Torna indietro</a>
+                ${htmlContent}
+                <div class="footer-back-button">
+                    <a href="#" class="back-button" onclick="event.preventDefault(); showGrid();">Torna indietro</a>
+                </div>
+            `;
+            articleView.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function createArticleCard(article) {
+            const card = document.createElement('div');
+            card.className = 'article-card';
+            card.addEventListener('click', () => showArticle(article.path, article.markdownContent));
+
+            card.innerHTML = `
+                <img src="${article.imageUrl}" alt="${article.title}">
+                <div class="article-card-content">
+                    <h3>${article.title}</h3>
+                    <p>${article.summary}</p>
+                </div>
+            `;
+            return card;
+        }
+
+        function extractArticleDetails(markdownText, imageUrl) {
+            const titleMatch = markdownText.match(/^#\s(.+)/);
+            const title = titleMatch ? titleMatch[1] : 'Titolo non trovato';
+
+            const summaryMatch = markdownText.split(/\n\s*\n/);
+            let summary = 'Sommario non disponibile.';
+            for(let i = 1; i < summaryMatch.length; i++) {
+                if (summaryMatch[i] && !summaryMatch[i].trim().startsWith('!') && !summaryMatch[i].trim().startsWith('di:')) {
+                    summary = summaryMatch[i].replace(/\[(.*?)\]\(.*?\)/g, '$1').replace(/[*_]/g, '');
+                    break;
+                }
+            }
+
+            return { title, summary, imageUrl };
+        }
+
+        async function processArticleData(articleFolders) {
+            articleFolders.reverse();
+            articlesGrid.innerHTML = ''; 
+
+            for (const folder of articleFolders) {
+                try {
+                    // This part still needs to fetch individual files, which we can't easily cache without complexity.
+                    // The main benefit is caching the directory listing.
+                    const folderContentsResponse = await fetch(folder.url);
+                    if (!folderContentsResponse.ok) continue;
+                    const folderContents = await folderContentsResponse.json();
+
+                    const mdFile = folderContents.find(file => file.name.endsWith('.md') && !file.name.endsWith('_en.md') && !file.name.endsWith('_es.md') && !file.name.endsWith('_fr.md') && !file.name.endsWith('_de.md'));
+                    const imageFile = folderContents.find(file => file.name.toLowerCase().endsWith('.jpg') || file.name.toLowerCase().endsWith('.png') || file.name.toLowerCase().endsWith('.webp'));
+
+                    if (mdFile) {
+                        const mdContentResponse = await fetch(mdFile.download_url);
+                        if (!mdContentResponse.ok) continue;
+                        const markdownContent = await mdContentResponse.text();
+                        
+                        const imageUrl = imageFile ? imageFile.download_url : 'https://via.placeholder.com/300x200.png?text=Immagine+non+disponibile';
+
+                        const { title, summary } = extractArticleDetails(markdownContent, imageUrl);
+
+                        const articleData = {
+                            path: folder.name,
+                            title,
+                            summary,
+                            imageUrl,
+                            markdownContent
+                        };
+
+                        const card = createArticleCard(articleData);
+                        articlesGrid.appendChild(card);
+                    }
+                } catch (error) {
+                    console.error(`Error loading content for article ${folder.name}:`, error);
+                }
+            }
+        }
+
+        async function loadArticles() {
+            const cachedData = sessionStorage.getItem(CACHE_KEY);
+            if (cachedData) {
+                const { timestamp, data } = JSON.parse(cachedData);
+                if (Date.now() - timestamp < CACHE_DURATION_MS) {
+                    console.log("Loading articles from cache.");
+                    await processArticleData(data);
+                    return;
+                }
+            }
+
+            console.log("Fetching articles from GitHub API.");
+            let response;
+            try {
+                response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ARTICLES_PATH}`);
+                if (!response.ok) {
+                    // Pass the whole response to the error to check status later
+                    throw response;
+                }
+                const data = await response.json();
+                
+                const cachePayload = {
+                    timestamp: Date.now(),
+                    data: data
+                };
+                sessionStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
+
+                await processArticleData(data);
+
+            } catch (error) {
+                let errorMessage = `Errore API GitHub: ${error.message || 'Unknown error'}`;
+                if (error.status === 403) {
+                    errorMessage = "Limite richieste API GitHub superato. Riprova tra un'ora.";
+                } else if (error.status) {
+                    errorMessage = `Errore API GitHub: ${error.status} ${error.statusText}`;
+                }
+                articlesGrid.innerHTML = `<div class="loader" style="color: red;">Impossibile caricare gli articoli. ${errorMessage}</div>`;
+                console.error("Error loading articles:", error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadArticles);
+    </script>
+</body>
+</html>

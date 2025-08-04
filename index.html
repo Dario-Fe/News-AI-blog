@@ -128,19 +128,37 @@
             padding: 50px;
             font-size: 1.5em;
         }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-top: 1px solid #dddfe2;
+            color: #606770;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <header>
         <div id="language-selector-container">
             <select id="language-selector">
-                <option value="it">Italiano</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Español</option>
             </select>
         </div>
-        <img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;">
-        <h2>Notizie ed analisi sull'Intelligenza Artificiale a cura di <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></h2>
+        <a href="index.html"><img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
+        <h2>Notizie ed analisi sull'Intelligenza Artificiale</h2>
     </header>
     <main>
         <div id="app">
@@ -150,6 +168,15 @@
             <div id="article-view" style="display:none;"></div>
         </div>
     </main>
+
+    <footer>
+        <p>A cura di Verbania Notizie</p>
+        <p>
+            <a href="mailto:info@verbanianotizie.it">Contatti</a> |
+            <a href="#">Cookie</a> |
+            <a href="#">Privacy Policy</a>
+        </p>
+    </footer>
 
     <script>
         const GITHUB_OWNER = 'matteobaccan';
@@ -233,7 +260,7 @@
             card.addEventListener('click', () => showArticle(article.path, article.markdownContent));
 
             card.innerHTML = `
-                <img src="${article.imageUrl}" alt="${article.title}">
+                <img src="${article.imageUrl}" alt="${article.title}" loading="lazy">
                 <div class="article-card-content">
                     <h3>${article.title}</h3>
                     <p>${article.summary}</p>

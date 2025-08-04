@@ -17,6 +17,19 @@
             padding: 20px;
             text-align: center;
             border-bottom: 1px solid #dddfe2;
+            position: relative;
+        }
+        #language-selector-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #language-selector {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            background-color: #f0f2f5;
+            font-size: 1em;
         }
         header h1 {
             margin: 0;
@@ -112,6 +125,13 @@
 </head>
 <body>
     <header>
+        <div id="language-selector-container">
+            <select id="language-selector">
+                <option value="it">Italiano</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+            </select>
+        </div>
         <img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;">
         <h2>Notizie ed analisi sull'Intelligenza Artificiale a cura di <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></h2>
     </header>
@@ -135,11 +155,43 @@
         const app = document.getElementById('app');
         const articlesGrid = document.getElementById('articles-grid');
         const articleView = document.getElementById('article-view');
+        const languageSelector = document.getElementById('language-selector');
+
+        let currentLang = localStorage.getItem('lang') || 'it';
+
+        const translations = {
+            it: {
+                goBack: 'Torna indietro',
+                loading: 'Caricamento articoli...',
+                errorAPI: 'Impossibile caricare gli articoli.',
+                errorAPILimit: "Limite richieste API GitHub superato. Riprova tra un'ora."
+            },
+            en: {
+                goBack: 'Go back',
+                loading: 'Loading articles...',
+                errorAPI: 'Could not load articles.',
+                errorAPILimit: 'GitHub API rate limit exceeded. Please try again in an hour.'
+            },
+            es: {
+                goBack: 'Volver atrás',
+                loading: 'Cargando artículos...',
+                errorAPI: 'No se pudieron cargar los artículos.',
+                errorAPILimit: 'Límite de solicitudes a la API de GitHub superado. Por favor, inténtalo de nuevo en una hora.'
+            }
+        };
 
         function showGrid() {
             articleView.style.display = 'none';
             articleView.innerHTML = '';
             articlesGrid.style.display = 'grid';
+        }
+
+        function updateStaticTexts() {
+            document.querySelectorAll('.back-button').forEach(btn => btn.textContent = translations[currentLang].goBack);
+            const loader = document.querySelector('.loader');
+            if (loader) {
+                loader.textContent = translations[currentLang].loading;
+            }
         }
 
         async function showArticle(articlePath, markdownContent) {
@@ -158,10 +210,10 @@
             const htmlContent = marked.parser(tokens);
 
             articleView.innerHTML = `
-                <a href="#" class="back-button" onclick="event.preventDefault(); showGrid();">Torna indietro</a>
+                <a href="#" class="back-button" onclick="event.preventDefault(); showGrid();">${translations[currentLang].goBack}</a>
                 ${htmlContent}
                 <div class="footer-back-button">
-                    <a href="#" class="back-button" onclick="event.preventDefault(); showGrid();">Torna indietro</a>
+                    <a href="#" class="back-button" onclick="event.preventDefault(); showGrid();">${translations[currentLang].goBack}</a>
                 </div>
             `;
             articleView.style.display = 'block';
@@ -223,10 +275,19 @@
                     if (!folderContentsResponse.ok) continue;
                     const folderContents = await folderContentsResponse.json();
 
-                    // Find all Italian markdown files and sort them descending to match the main article order
-                    const mdFiles = folderContents
-                        .filter(file => file.name.endsWith('.md') && !file.name.endsWith('_en.md') && !file.name.endsWith('_es.md') && !file.name.endsWith('_fr.md') && !file.name.endsWith('_de.md'))
-                        .sort((a, b) => b.name.localeCompare(a.name));
+                    let mdFiles;
+                    if (currentLang === 'it') {
+                        mdFiles = folderContents.filter(file => file.name.endsWith('.md') && !file.name.endsWith('_en.md') && !file.name.endsWith('_es.md') && !file.name.endsWith('_fr.md') && !file.name.endsWith('_de.md'));
+                    } else {
+                        const langSuffix = `_${currentLang}.md`;
+                        mdFiles = folderContents.filter(file => file.name.endsWith(langSuffix));
+                        // Fallback to Italian if no articles are found for the selected language
+                        if (mdFiles.length === 0) {
+                            mdFiles = folderContents.filter(file => file.name.endsWith('.md') && !file.name.endsWith('_en.md') && !file.name.endsWith('_es.md') && !file.name.endsWith('_fr.md') && !file.name.endsWith('_de.md'));
+                        }
+                    }
+
+                    mdFiles.sort((a, b) => b.name.localeCompare(a.name));
 
                     if (mdFiles.length > 0) {
                         for (const mdFile of mdFiles) {
@@ -264,17 +325,19 @@
         }
 
         async function loadArticles() {
-            const cachedData = sessionStorage.getItem(CACHE_KEY);
+            updateStaticTexts();
+            const cacheKey = `${CACHE_KEY}_${currentLang}`;
+            const cachedData = sessionStorage.getItem(cacheKey);
             if (cachedData) {
                 const { timestamp, data } = JSON.parse(cachedData);
                 if (Date.now() - timestamp < CACHE_DURATION_MS) {
-                    console.log("Loading articles from cache.");
+                    console.log(`Loading ${currentLang} articles from cache.`);
                     await processArticleData(data);
                     return;
                 }
             }
 
-            console.log("Fetching articles from GitHub API.");
+            console.log(`Fetching ${currentLang} articles from GitHub API.`);
             let response;
             try {
                 response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${ARTICLES_PATH}`);
@@ -287,23 +350,32 @@
                     timestamp: Date.now(),
                     data: data
                 };
-                sessionStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
+                sessionStorage.setItem(cacheKey, JSON.stringify(cachePayload));
 
                 await processArticleData(data);
 
             } catch (error) {
-                let errorMessage = `Errore API GitHub: ${error.message || 'Unknown error'}`;
+                let errorMessage = translations[currentLang].errorAPI;
                 if (error.status === 403) {
-                    errorMessage = "Limite richieste API GitHub superato. Riprova tra un'ora.";
+                    errorMessage = translations[currentLang].errorAPILimit;
                 } else if (error.status) {
-                    errorMessage = `Errore API GitHub: ${error.status} ${error.statusText}`;
+                    errorMessage += ` ${error.status} ${error.statusText}`;
                 }
-                articlesGrid.innerHTML = `<div class="loader" style="color: red;">Impossibile caricare gli articoli. ${errorMessage}</div>`;
+                articlesGrid.innerHTML = `<div class="loader" style="color: red;">${errorMessage}</div>`;
                 console.error("Error loading articles:", error);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadArticles);
+        languageSelector.addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem('lang', currentLang);
+            loadArticles();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            languageSelector.value = currentLang;
+            loadArticles();
+        });
     </script>
 </body>
 </html>

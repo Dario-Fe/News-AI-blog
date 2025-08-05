@@ -158,7 +158,7 @@
             </select>
         </div>
         <a href="index.html"><img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
-        <h2>Notizie ed analisi sull'Intelligenza Artificiale</h2>
+        <h2 id="subtitle">Notizie ed analisi sull'Intelligenza Artificiale</h2>
     </header>
     <main>
         <div id="app">
@@ -195,18 +195,21 @@
 
         const translations = {
             it: {
+                subtitle: "Notizie ed analisi sull'Intelligenza Artificiale",
                 goBack: 'Torna indietro',
                 loading: 'Caricamento articoli...',
                 errorAPI: 'Impossibile caricare gli articoli.',
                 errorAPILimit: "Limite richieste API GitHub superato. Riprova tra un'ora."
             },
             en: {
+                subtitle: "News and analysis on Artificial Intelligence",
                 goBack: 'Go back',
                 loading: 'Loading articles...',
                 errorAPI: 'Could not load articles.',
                 errorAPILimit: 'GitHub API rate limit exceeded. Please try again in an hour.'
             },
             es: {
+                subtitle: "Noticias y análisis sobre Inteligencia Artificial",
                 goBack: 'Volver atrás',
                 loading: 'Cargando artículos...',
                 errorAPI: 'No se pudieron cargar los artículos.',
@@ -222,6 +225,7 @@
         }
 
         function updateStaticTexts() {
+            document.getElementById('subtitle').textContent = translations[currentLang].subtitle;
             document.querySelectorAll('.back-button').forEach(btn => btn.textContent = translations[currentLang].goBack);
             const loader = document.querySelector('.loader');
             if (loader) {

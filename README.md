@@ -1,36 +1,74 @@
-# 🤖 Notizie IA - Web App 📰
+# Notizie IA - Static Site Generator
 
-Questa è una web app semplice e auto-contenuta, creata per visualizzare gli articoli del repository [CorsoAIBook](https://github.com/matteobaccan/CorsoAIBook) in un formato blog user-friendly. ✨
+Questa repository contiene il codice sorgente per il sito web di Notizie IA, un'applicazione web moderna e performante costruita come generatore di sito statico (Static Site Generator - SSG).
 
-## 📝 Descrizione
+Il sito recupera dinamicamente gli articoli dal repository [CorsoAIBook](https://github.com/matteobaccan/CorsoAIBook) durante un processo di build e genera un sito HTML statico, veloce e multilingua.
 
-La web app, intitolata **"Notizie IA"**, è presentata con il logo ufficiale e un sottotitolo descrittivo. È interamente contenuta nel singolo file `index.html` ed è stata progettata per essere leggera, veloce e non richiedere un backend o un processo di build. 🚀
+## Core Technologies
+- **Python**: Per la logica di build principale.
+- **Static Site Generation (SSG)**: Per la massima performance e affidabilità.
+- **GitHub Actions**: Per l'automazione del processo di build e deployment (CI/CD).
+- **Netlify**: Piattaforma di hosting e gestione form "serverless".
 
-Il footer della pagina contiene i credits e i link per contatti, cookie e privacy policy.
+## Struttura del Progetto
+```
+.
+├── .github/workflows/      # Configurazione di GitHub Actions per il CI/CD
+├── dist/                   # Cartella di output del sito generato (non versionata)
+├── pages/                  # Pagine HTML locali (es. newsletter) da includere nel build
+├── templates/              # Contiene il template base (base.html)
+├── build.py                # Lo script Python principale che contiene la logica di build
+├── build.sh                # Lo script shell che orchestra l'intero processo di build
+├── requirements.txt        # Le dipendenze Python del progetto
+├── README.md               # Questo file
+└── ...                     # Altri file statici (logo, etc.)
+```
 
-## ⚙️ Come Funziona
+## Come Funziona: Il Processo di Build
+Il sito viene generato tramite lo script `build.sh`, che esegue i seguenti passaggi:
 
-L'applicazione utilizza JavaScript per interagire con l'API pubblica di GitHub e caricare dinamicamente i contenuti. Al caricamento della pagina:
+1.  **Pulizia**: Cancella la cartella `dist/` per assicurare un build pulito.
+2.  **Copia Asset Statici**: Copia tutti i file statici (immagini, CSS, JS, e file HTML statici come `thank-you.html`) dalla root del progetto alla cartella `dist/`.
+3.  **Build Multilingua**: Esegue un ciclo per ogni lingua supportata (`it`, `en`, `es`). Per ogni lingua:
+    a. **Recupera Articoli**: Contatta le API di GitHub per scaricare gli ultimi articoli dal repository esterno.
+    b. **Genera Pagine Articoli**: Crea una pagina HTML per ogni singolo articolo.
+    c. **Genera Pagine Locali**: Crea pagine HTML basate sui file presenti nella cartella `pages/` (es. `newsletter.html`).
+    d. **Genera Pagine Indice**: Crea la pagina `index.html` per la lingua corrente, con la lista di tutti gli articoli.
+    e. **Genera Feed RSS**: Crea un file `rss.xml` per la lingua corrente.
+4.  **Crea Redirect Principale**: Genera il file `index.html` nella root di `dist/` che reindirizza automaticamente alla versione italiana del sito.
 
-1.  **🔍 Recupera gli Articoli**: Effettua una chiamata all'API di GitHub per elencare tutte le cartelle presenti nella directory `/articoli` del repository.
-2.  **🌐 Selezione Lingua**: L'utente può scegliere la lingua di visualizzazione (Italiano, Inglese, Spagnolo) tramite un menu a discesa. La preferenza viene salvata per le sessioni future. Se un articolo non è disponibile nella lingua selezionata, viene mostrata la versione italiana come fallback.
-3.  **📊 Ordinamento Dinamico**: Le cartelle e gli articoli in più parti vengono ordinati per mostrare sempre i più recenti in cima alla lista.
-4.  **🖼️ Genera le Schede**: Per ogni articolo (o parte di articolo) trovato, genera una scheda di anteprima sulla pagina principale. Questa scheda include:
-    *   Il titolo dell'articolo.
-    *   Un'immagine di copertina (la prima immagine trovata nel file Markdown).
-    *   Un breve sommario (il primo paragrafo di testo dopo l'immagine).
-5.  **📖 Visualizzazione Articolo**: Cliccando su una scheda, l'utente può visualizzare l'articolo completo. Il contenuto del file `.md` corrispondente viene caricato, convertito in HTML al volo (usando la libreria `marked.js`), e visualizzato in una pagina di lettura pulita.
+## Funzionalità Principali
+- **Generazione di Sito Statico**: Il sito è pre-renderizzato in file HTML, garantendo velocità di caricamento massime per l'utente finale.
+- **Supporto Multilingua Completo**: Il sito è generato in Italiano, Inglese e Spagnolo. L'interfaccia, inclusi i link, i sottotitoli e le pagine, è completamente tradotta grazie a un sistema di traduzione centralizzato in `build.py`.
+- **Form per Newsletter (Netlify-Ready)**: Include una pagina di iscrizione alla newsletter con un form HTML pronto per essere gestito da Netlify Forms, eliminando la necessità di un backend dedicato.
+- **Build e Deployment Automatizzati**: Grazie a GitHub Actions, il sito viene ricostruito e pubblicato automaticamente due volte al giorno per recuperare i nuovi articoli e ad ogni modifica del codice sorgente.
 
-## 🌟 Caratteristiche Principali
+## Sviluppo Locale
+Per eseguire il progetto in locale, segui questi passaggi.
 
--   **📄 Single-File Application**: Tutta la logica, gli stili e la struttura sono contenuti in `index.html`.
--   **🛠️ Zero Dipendenze di Build**: Funziona direttamente in un browser web senza necessità di compilazione o installazione di pacchetti.
--   **🔄 Contenuti Dinamici**: Nuovi articoli o nuove parti di articoli aggiunti alla cartella `/articoli` appariranno automaticamente nell'app al successivo caricamento (dopo la scadenza della cache di sessione).
--   **🧠 Caching Intelligente**: Utilizza `sessionStorage` per memorizzare nella cache l'elenco degli articoli per un'ora, riducendo le chiamate all'API di GitHub e migliorando i tempi di caricamento.
--   **⚡ Lazy Loading**: Le immagini delle schede degli articoli vengono caricate solo quando entrano nel campo visivo dell'utente, ottimizzando le prestazioni.
--   **📱 Design Responsivo**: L'interfaccia si adatta a diverse dimensioni di schermo, dai desktop ai dispositivi mobili.
--   **🖱️ Logo Cliccabile**: Il logo nell'header funge da pulsante "Home" per ricaricare la pagina principale.
+**Prerequisiti**:
+- Python 3.x
 
-## 🚀 Utilizzo
+**Installazione**:
+1. Clona la repository.
+2. Installa le dipendenze Python:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Per utilizzare l'applicazione, è sufficiente aprire il file `index.html` in un qualsiasi browser web moderno.
+**Esecuzione del Build**:
+Per generare il sito nella cartella `dist/`, esegui:
+```bash
+./build.sh
+```
+
+**Visualizzazione**:
+Per visualizzare il sito generato, puoi avviare un semplice server web locale dalla cartella `dist`:
+```bash
+cd dist
+python -m http.server
+```
+Il sito sarà quindi accessibile all'indirizzo `http://localhost:8000`.
+
+## Deployment
+Il deployment è gestito automaticamente da GitHub Actions. Il workflow è configurato per la pubblicazione su **Netlify**. È necessario configurare il progetto su Netlify per usare il comando di build `./build.sh` e la cartella di pubblicazione `dist`.

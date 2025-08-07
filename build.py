@@ -74,9 +74,10 @@ def main():
 
     # 3. Process all articles from the markdown files
     processed_articles = []
-    # Sort files by parent directory name (desc) and then by file name (asc)
-    # This keeps articles grouped and parts in order
-    sorted_md_files = sorted(md_files, key=lambda x: (x['parent_dir'], x['name']), reverse=True)
+    # Sort files by name case-insensitively ascending to get parts in order
+    s1 = sorted(md_files, key=lambda x: x['name'].lower())
+    # Then sort by parent directory descending to get newest article groups first
+    sorted_md_files = sorted(s1, key=lambda x: x['parent_dir'], reverse=True)
 
     for md_file in sorted_md_files:
         article_data = process_article(md_file)

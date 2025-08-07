@@ -88,12 +88,7 @@ def main():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    # 1. Copy static assets
-    # Note: This will copy assets to each language folder.
-    # A more advanced setup might copy them to a shared root assets folder.
-    copy_static_assets(output_dir)
-
-    # 2. Fetch all markdown files from GitHub API
+    # Fetch all markdown files from GitHub API
     md_files = fetch_markdown_files(lang)
     if not md_files:
         print(f"No markdown files found for language '{lang}'. Exiting.")

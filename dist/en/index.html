@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizie IA</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dddfe2;
+            position: relative;
+        }
+        #language-selector-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #language-selector {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            background-color: #f0f2f5;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            #language-selector-container {
+                position: static;
+                margin-bottom: 15px;
+            }
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #000;
+        }
+        header h2 {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: normal;
+            color: #606770;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .article-card-content {
+            padding: 15px;
+        }
+        .article-card-content h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .article-card-content p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #606770;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #article-view {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #article-view img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #article-view h1 {
+            font-size: 2.2em;
+        }
+        #article-view p {
+            line-height: 1.6;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .footer-back-button {
+            margin-top: 30px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-top: 1px solid #dddfe2;
+            color: #606770;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em;">
+            <a href="/it/index.html" title="Italiano">🇮🇹</a>
+            <a href="/en/index.html" title="English">🇬🇧</a>
+            <a href="/es/index.html" title="Español">🇪🇸</a>
+        </div>
+        <a href="/it/index.html"><img src="/logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
+        <h2 id="subtitle">Notizie ed analisi sull'Intelligenza Artificiale</h2>
+    </header>
+    <main>
+        <div id="articles-grid">
+
+        <a href="articolo_hrm_en.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/11 - AI La rivoluzione HRM /hrm_le_dimensioni_non_contano.jpg" alt=""When Size Doesn't Matter": The Revolution of the HRM Model" loading="lazy">
+            <div class="article-card-content">
+                <h3>"When Size Doesn't Matter": The Revolution of the HRM Model</h3>
+                <p>by Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="AI_Valutazione_ed_etica_en.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/06-AI Valutazione ed Etica/Leonardo_Phoenix_An_ethically_charged_portrait_of_AIs_challeng_0.jpg" alt="Evaluating Artificial Intelligence: When Numbers Meet Ethics" loading="lazy">
+            <div class="article-card-content">
+                <h3>Evaluating Artificial Intelligence: When Numbers Meet Ethics</h3>
+                <p>by Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="IA_Aziende_e_Servizi_en.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/05-AI Aziende e Servizi/Leonardo_Phoenix_10_A_fiercely_competitive_scene_in_the_world_1.jpg" alt="The Artificial Intelligence Landscape: Tech Giants, Competitive Challenges, and the Tools Democratizing AI" loading="lazy">
+            <div class="article-card-content">
+                <h3>The Artificial Intelligence Landscape: Tech Giants, Competitive Challenges, and the Tools Democratizing AI</h3>
+                <p>By Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="Dalle Applicazioni Consolidate alle Frontiere del Futuro_en.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/03-Dalle Applicazioni Consolidate alle Frontiere del Futuro/fotocopertina2.jpg" alt="Artificial Intelligence Today: From Consolidated Applications to Future Frontiers" loading="lazy">
+            <div class="article-card-content">
+                <h3>Artificial Intelligence Today: From Consolidated Applications to Future Frontiers</h3>
+                <p>By Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna_en.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/02-Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_2.jpg" alt="Machine Learning, Deep Learning, and Generative Algorithms: The Beating Heart of Modern Artificial Intelligence" loading="lazy">
+            <div class="article-card-content">
+                <h3>Machine Learning, Deep Learning, and Generative Algorithms: The Beating Heart of Modern Artificial Intelligence</h3>
+                <p>By: Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo_en.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/01-L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_1.jpg" alt="Artificial Intelligence: A Journey into the Technology That is Redefining Our World" loading="lazy">
+            <div class="article-card-content">
+                <h3>Artificial Intelligence: A Journey into the Technology That is Redefining Our World</h3>
+                <p>By: Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+        </div>
+    </main>
+    <footer>
+        <p>A cura di Verbania Notizie</p>
+        <p>
+            <a href="mailto:info@verbanianotizie.it">Contatti</a> |
+            <a href="#">Cookie</a> |
+            <a href="#">Privacy Policy</a>
+        </p>
+    </footer>
+</body>
+</html>

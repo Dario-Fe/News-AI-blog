@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>Notizie IA - Aggiornamenti e Analisi (en)</title>
+    <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/</link>
+    <description>Le ultime notizie e approfondimenti sull'intelligenza artificiale, a cura di Verbania Notizie.</description>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>python-feedgen</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 07 Aug 2025 12:59:38 +0000</lastBuildDate>
+    <item>
+      <title>Artificial Intelligence: A Journey into the Technology That is Redefining Our World</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo_en.html</link>
+      <description>By: Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Machine Learning, Deep Learning, and Generative Algorithms: The Beating Heart of Modern Artificial Intelligence</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna_en.html</link>
+      <description>By: Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Artificial Intelligence Today: From Consolidated Applications to Future Frontiers</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/Dalle Applicazioni Consolidate alle Frontiere del Futuro_en.html</link>
+      <description>By Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>The Artificial Intelligence Landscape: Tech Giants, Competitive Challenges, and the Tools Democratizing AI</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/IA_Aziende_e_Servizi_en.html</link>
+      <description>By Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Evaluating Artificial Intelligence: When Numbers Meet Ethics</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/AI_Valutazione_ed_etica_en.html</link>
+      <description>by Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>"When Size Doesn't Matter": The Revolution of the HRM Model</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/articolo_hrm_en.html</link>
+      <description>by Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+  </channel>
+</rss>

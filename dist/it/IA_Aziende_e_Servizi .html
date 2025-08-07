@@ -143,47 +143,27 @@
         footer a:hover {
             text-decoration: underline;
         }
-        #newsletter-form-container {
-            max-width: 500px;
-            margin: 0 auto 40px auto;
-            padding: 20px;
-            background-color: #f0f2f5;
-            border-radius: 8px;
-        }
-        #newsletter-form-container h3 {
-            margin-top: 0;
-        }
-        #newsletter-form-container form {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        #newsletter-form-container input[type="text"],
-        #newsletter-form-container input[type="email"] {
-            width: 40%;
-            padding: 10px;
-            border: 1px solid #dddfe2;
-            border-radius: 6px;
-        }
-        #newsletter-form-container button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #1877f2;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .privacy-note {
+        .subscribe-link {
             font-size: 0.8em;
-            color: #606770;
-            margin-top: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #1877f2;
+            background-color: #e7f3ff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .subscribe-link:hover {
+            background-color: #dcebff;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <header>
-        <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em;">
+        <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em; align-items: center;">
+            <a href="newsletter.html" class="subscribe-link">Iscriviti</a>
+            <span class="separator" style="border-left: 1px solid #dddfe2; height: 20px;"></span>
             <a href="../it/index.html" title="Italiano">🇮🇹</a>
             <a href="../en/index.html" title="English">🇬🇧</a>
             <a href="../es/index.html" title="Español">🇪🇸</a>
@@ -401,16 +381,6 @@
 
     </main>
     <footer>
-        <div id="newsletter-form-container">
-            <h3>Iscriviti alla Newsletter</h3>
-            <p>Ricevi le ultime notizie sull'IA direttamente nella tua casella di posta.</p>
-            <form name="newsletter" method="POST" data-netlify="true" action="/thank-you.html">
-                <input type="text" name="name" placeholder="Il tuo nome" required />
-                <input type="email" name="email" placeholder="La tua email" required />
-                <button type="submit">Iscriviti</button>
-            </form>
-            <p class="privacy-note">Rispettiamo la tua privacy. Non condivideremo mai i tuoi dati.</p>
-        </div>
         <p>A cura di Verbania Notizie</p>
         <p>
             <a href="mailto:info@verbanianotizie.it">Contatti</a> |

@@ -19,6 +19,7 @@ echo "3. Building site for each language..."
 for lang in it en es; do
   echo "--- Building for $lang ---"
   python3 build.py --lang "$lang"
+  python3 -c "from build import generate_local_pages; generate_local_pages('dist/$lang', '$lang')"
 done
 
 # 4. Create the root redirect file

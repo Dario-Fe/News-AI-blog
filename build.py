@@ -295,16 +295,44 @@ def generate_index_page(articles, output_dir, lang='it'):
     with open(os.path.join(output_dir, "index.html"), "w") as f:
         f.write(final_page_html)
 
+def generate_local_pages(output_dir, lang='it'):
+    """
+    Generates standalone pages from the /pages directory.
+    """
+    print("\nGenerating local pages...")
+    pages_dir = "pages"
+    if not os.path.exists(pages_dir):
+        return
+
+    with open("templates/base.html", "r") as f:
+        base_template = f.read()
+
+    for filename in os.listdir(pages_dir):
+        if filename.endswith(".html"):
+            print(f"  - {filename}")
+            with open(os.path.join(pages_dir, filename), "r") as f:
+                page_content = f.read()
+
+            # Replace placeholders
+            subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+            temp_html = base_template.replace("{{subtitle}}", subtitle)
+            final_page_html = temp_html.replace("{{content}}", page_content)
+
+            with open(os.path.join(output_dir, filename), "w") as f:
+                f.write(final_page_html)
+
 def copy_static_assets(output_dir):
     """
     Copies static assets from the root to the output directory.
     """
     print("\nCopying static assets...")
-    static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js']
+    static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html']
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
-            print(f"  - {item}")
-            shutil.copy(item, os.path.join(output_dir, item))
+            # Let's avoid copying the template files themselves if they are in the root
+            if item not in ["base.html"]: # Simple exclusion for templates
+                 print(f"  - {item}")
+                 shutil.copy(item, os.path.join(output_dir, item))
 
 def generate_rss_feed(articles, output_dir, lang='it'):
     """

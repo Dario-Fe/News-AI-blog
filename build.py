@@ -17,29 +17,40 @@ OUTPUT_DIR = "dist"
 # In GitHub Actions, this can be set as a secret.
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
-def fetch_articles_list():
+def fetch_markdown_files():
     """
-    Fetches the list of articles (directories) from the GitHub repository.
+    Recursively fetches all markdown file details from the GitHub repository.
     """
+    print("Fetching all markdown files...")
     headers = {}
     if GITHUB_TOKEN:
         headers["Authorization"] = f"token {GITHUB_TOKEN}"
 
     response = requests.get(GITHUB_API_URL, headers=headers)
-
-    if response.status_code == 403:
-        print("GitHub API rate limit exceeded. Please use a GITHUB_TOKEN.")
-        # Fallback to unauthenticated request, which might also be rate limited
-        response = requests.get(GITHUB_API_URL)
-
     if response.status_code != 200:
-        print(f"Error fetching articles list: {response.status_code}")
-        print(f"Response: {response.text}")
+        print(f"Error fetching root articles list: {response.status_code}")
         return []
 
-    articles = [item for item in response.json() if item['type'] == 'dir']
-    print(f"Found {len(articles)} articles.")
-    return articles
+    all_md_files = []
+    # Process top-level directories (each representing an article container)
+    for item in response.json():
+        if item['type'] == 'dir':
+            dir_url = item['url']
+            dir_contents_response = requests.get(dir_url, headers=headers)
+            if dir_contents_response.status_code == 200:
+                dir_contents = dir_contents_response.json()
+                for file_item in dir_contents:
+                    name = file_item['name']
+                    # We only care about Italian .md files for the main build
+                    if name.endswith('.md') and not name.endswith(('_en.md', '_es.md', '_fr.md', '_de.md')):
+                        # Add parent directory info to the file object for later use
+                        file_item['parent_dir'] = item['name']
+                        all_md_files.append(file_item)
+            else:
+                print(f"Warning: Could not fetch contents of {item['name']}")
+
+    print(f"Found {len(all_md_files)} markdown files to process.")
+    return all_md_files
 
 def main():
     """
@@ -55,23 +66,24 @@ def main():
     # 1. Copy static assets
     copy_static_assets()
 
-    # 2. Fetch articles from GitHub API
-    articles = fetch_articles_list()
-    if not articles:
-        print("No articles found. Exiting.")
+    # 2. Fetch all markdown files from GitHub API
+    md_files = fetch_markdown_files()
+    if not md_files:
+        print("No markdown files found. Exiting.")
         return
 
-    # 2. Process all articles
+    # 3. Process all articles from the markdown files
     processed_articles = []
-    # Sort articles by name descending to get newest first
-    sorted_articles = sorted(articles, key=lambda x: x['name'], reverse=True)
+    # Sort files by parent directory name (desc) and then by file name (asc)
+    # This keeps articles grouped and parts in order
+    sorted_md_files = sorted(md_files, key=lambda x: (x['parent_dir'], x['name']), reverse=True)
 
-    for article_dir in sorted_articles:
-        article_data = process_article(article_dir)
+    for md_file in sorted_md_files:
+        article_data = process_article(md_file)
         if article_data:
             processed_articles.append(article_data)
 
-    # 3. Generate individual article pages
+    # 4. Generate individual article pages
     generate_article_pages(processed_articles)
 
     # 4. Generate index page
@@ -81,28 +93,11 @@ def main():
     generate_rss_feed(processed_articles)
 
 
-def process_article(article_dir):
+def process_article(md_file):
     """
-    Fetches the content of a single article, parses it, and returns a dict.
+    Fetches the content of a single markdown file, parses it, and returns a dict.
     """
-    print(f"Processing article: {article_dir['name']}...")
-
-    headers = {}
-    if GITHUB_TOKEN:
-        headers["Authorization"] = f"token {GITHUB_TOKEN}"
-
-    dir_contents_response = requests.get(article_dir["url"], headers=headers)
-    if dir_contents_response.status_code != 200:
-        print(f"  Error fetching content for {article_dir['name']}")
-        return None
-
-    dir_contents = dir_contents_response.json()
-
-    md_file = next((f for f in dir_contents if f['name'].endswith('.md') and '_en' not in f['name'] and '_es' not in f['name']), None)
-
-    if not md_file:
-        print(f"  Markdown file not found in {article_dir['name']}")
-        return None
+    print(f"Processing file: {md_file['name']} in {md_file['parent_dir']}...")
 
     md_content_response = requests.get(md_file['download_url'])
     if md_content_response.status_code != 200:
@@ -126,7 +121,7 @@ def process_article(article_dir):
         # Rewrite image paths to be absolute
         for img in soup.find_all('img'):
             if img['src'] and not img['src'].startswith('http'):
-                img['src'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{article_dir['name']}/{img['src']}"
+                img['src'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{md_file['parent_dir']}/{img['src']}"
 
         # Get the first image for the summary card
         main_image_url = soup.find('img')['src'] if soup.find('img') else None
@@ -134,7 +129,8 @@ def process_article(article_dir):
         # Get the final HTML content after modifications
         final_html_content = str(soup)
 
-        slug = article_dir['name']
+        # Create a unique slug from the filename
+        slug = os.path.splitext(md_file['name'])[0]
 
         return {
             "title": title,

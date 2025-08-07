@@ -1,0 +1,6 @@
+requests
+python-frontmatter
+feedgen
+beautifulsoup4
+lxml
+markdown2

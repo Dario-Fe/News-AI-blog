@@ -300,11 +300,13 @@ def copy_static_assets(output_dir):
     Copies static assets from the root to the output directory.
     """
     print("\nCopying static assets...")
-    static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js']
+    static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html']
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
-            print(f"  - {item}")
-            shutil.copy(item, os.path.join(output_dir, item))
+            # Let's avoid copying the template files themselves if they are in the root
+            if item not in ["base.html"]: # Simple exclusion for templates
+                 print(f"  - {item}")
+                 shutil.copy(item, os.path.join(output_dir, item))
 
 def generate_rss_feed(articles, output_dir, lang='it'):
     """

@@ -123,15 +123,24 @@ def process_article(article_dir):
         if first_p:
             summary = first_p.get_text()
 
-        image_url = soup.find('img')['src'] if soup.find('img') else None
+        # Rewrite image paths to be absolute
+        for img in soup.find_all('img'):
+            if img['src'] and not img['src'].startswith('http'):
+                img['src'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{article_dir['name']}/{img['src']}"
+
+        # Get the first image for the summary card
+        main_image_url = soup.find('img')['src'] if soup.find('img') else None
+
+        # Get the final HTML content after modifications
+        final_html_content = str(soup)
 
         slug = article_dir['name']
 
         return {
             "title": title,
             "summary": summary,
-            "image_url": image_url,
-            "html_content": html_content,
+            "image_url": main_image_url,
+            "html_content": final_html_content,
             "slug": slug,
             "path": f"{slug}.html"
         }

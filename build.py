@@ -2,6 +2,7 @@ import os
 import requests
 import frontmatter
 import shutil
+import argparse
 from feedgen.feed import FeedGenerator
 from bs4 import BeautifulSoup
 import markdown2
@@ -9,7 +10,7 @@ import markdown2
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
 SITE_URL = "https://<YOUR_USERNAME>.github.io/<YOUR_REPO>/" # We will replace this later
-OUTPUT_DIR = "dist"
+BASE_OUTPUT_DIR = "dist"
 
 # It's recommended to use a GitHub token to avoid rate limiting.
 # Create a Personal Access Token (PAT) with 'repo' scope and set it as an environment variable.
@@ -17,11 +18,11 @@ OUTPUT_DIR = "dist"
 # In GitHub Actions, this can be set as a secret.
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
-def fetch_markdown_files():
+def fetch_markdown_files(lang='it'):
     """
-    Recursively fetches all markdown file details from the GitHub repository.
+    Recursively fetches all markdown file details for a specific language.
     """
-    print("Fetching all markdown files...")
+    print(f"Fetching markdown files for language: '{lang}'...")
     headers = {}
     if GITHUB_TOKEN:
         headers["Authorization"] = f"token {GITHUB_TOKEN}"
@@ -32,44 +33,59 @@ def fetch_markdown_files():
         return []
 
     all_md_files = []
-    # Process top-level directories (each representing an article container)
+    lang_suffix = f"_{lang}.md"
+
     for item in response.json():
         if item['type'] == 'dir':
             dir_url = item['url']
             dir_contents_response = requests.get(dir_url, headers=headers)
             if dir_contents_response.status_code == 200:
                 dir_contents = dir_contents_response.json()
-                for file_item in dir_contents:
-                    name = file_item['name']
-                    # We only care about Italian .md files for the main build
-                    if name.endswith('.md') and not name.endswith(('_en.md', '_es.md', '_fr.md', '_de.md')):
-                        # Add parent directory info to the file object for later use
-                        file_item['parent_dir'] = item['name']
-                        all_md_files.append(file_item)
+
+                # Find the language-specific file
+                lang_file = next((f for f in dir_contents if f['name'].endswith(lang_suffix)), None)
+
+                # If not found, and we are not looking for Italian, try to fall back to Italian
+                if not lang_file and lang != 'it':
+                    lang_file = next((f for f in dir_contents if f['name'].endswith('.md') and not f['name'].endswith(('_en.md', '_es.md', '_fr.md', '_de.md'))), None)
+
+                # If we are looking for Italian, find the base .md file
+                if not lang_file and lang == 'it':
+                     lang_file = next((f for f in dir_contents if f['name'].endswith('.md') and not f['name'].endswith(('_en.md', '_es.md', '_fr.md', '_de.md'))), None)
+
+                if lang_file:
+                    lang_file['parent_dir'] = item['name']
+                    all_md_files.append(lang_file)
             else:
                 print(f"Warning: Could not fetch contents of {item['name']}")
 
-    print(f"Found {len(all_md_files)} markdown files to process.")
+    print(f"Found {len(all_md_files)} markdown files to process for '{lang}'.")
     return all_md_files
 
 def main():
     """
     Main function to build the static site and RSS feed.
     """
-    print("Starting build process...")
+    parser = argparse.ArgumentParser(description="Build the static site for a specific language.")
+    parser.add_argument('--lang', default='it', help='Language to build (e.g., en, es)')
+    args = parser.parse_args()
+
+    lang = args.lang
+    output_dir = os.path.join(BASE_OUTPUT_DIR, lang)
+
+    print(f"Starting build process for language: '{lang}'...")
 
     # Create/clean output directory
-    if os.path.exists(OUTPUT_DIR):
-        shutil.rmtree(OUTPUT_DIR)
-    os.makedirs(OUTPUT_DIR)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
     # 1. Copy static assets
-    copy_static_assets()
+    copy_static_assets(output_dir)
 
     # 2. Fetch all markdown files from GitHub API
-    md_files = fetch_markdown_files()
+    md_files = fetch_markdown_files(lang)
     if not md_files:
-        print("No markdown files found. Exiting.")
+        print(f"No markdown files found for language '{lang}'. Exiting.")
         return
 
     # 3. Process all articles from the markdown files
@@ -85,13 +101,13 @@ def main():
             processed_articles.append(article_data)
 
     # 4. Generate individual article pages
-    generate_article_pages(processed_articles)
+    generate_article_pages(processed_articles, output_dir, lang)
 
-    # 4. Generate index page
-    generate_index_page(processed_articles)
+    # 5. Generate index page
+    generate_index_page(processed_articles, output_dir, lang)
 
-    # 5. Generate RSS feed
-    generate_rss_feed(processed_articles)
+    # 6. Generate RSS feed
+    generate_rss_feed(processed_articles, output_dir, lang)
 
 
 def process_article(md_file):
@@ -146,7 +162,7 @@ def process_article(md_file):
         print(f"  Error parsing markdown for {md_file['name']}: {e}")
         return None
 
-def generate_article_pages(articles):
+def generate_article_pages(articles, output_dir, lang='it'):
     """
     Generates an HTML page for each article.
     """
@@ -170,10 +186,10 @@ def generate_article_pages(articles):
 
         final_page_html = base_template.replace("{{content}}", article_view_html)
 
-        with open(os.path.join(OUTPUT_DIR, article['path']), "w") as f:
+        with open(os.path.join(output_dir, article['path']), "w") as f:
             f.write(final_page_html)
 
-def generate_index_page(articles):
+def generate_index_page(articles, output_dir, lang='it'):
     """
     Generates the main index.html page with a grid of all articles.
     """
@@ -197,10 +213,10 @@ def generate_index_page(articles):
 
     final_page_html = base_template.replace("{{content}}", grid_html)
 
-    with open(os.path.join(OUTPUT_DIR, "index.html"), "w") as f:
+    with open(os.path.join(output_dir, "index.html"), "w") as f:
         f.write(final_page_html)
 
-def copy_static_assets():
+def copy_static_assets(output_dir):
     """
     Copies static assets from the root to the output directory.
     """
@@ -209,28 +225,28 @@ def copy_static_assets():
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
             print(f"  - {item}")
-            shutil.copy(item, os.path.join(OUTPUT_DIR, item))
+            shutil.copy(item, os.path.join(output_dir, item))
 
-def generate_rss_feed(articles):
+def generate_rss_feed(articles, output_dir, lang='it'):
     """
     Generates an RSS feed from the list of articles.
     """
     print("\nGenerating RSS feed...")
     fg = FeedGenerator()
-    fg.title('Notizie IA - Aggiornamenti e Analisi')
-    fg.link(href=SITE_URL, rel='alternate')
+    fg.title(f'Notizie IA - Aggiornamenti e Analisi ({lang})')
+    fg.link(href=f"{SITE_URL}{lang}/", rel='alternate')
     fg.description('Le ultime notizie e approfondimenti sull\'intelligenza artificiale, a cura di Verbania Notizie.')
-    fg.language('it')
+    fg.language(lang)
 
     for article in articles:
         fe = fg.add_entry()
         fe.title(article['title'])
-        fe.link(href=f"{SITE_URL}{article['path']}")
+        fe.link(href=f"{SITE_URL}{lang}/{article['path']}")
         fe.description(article['summary'])
         # fe.pubDate() # We could add pubDate if we can parse it from the article name or metadata
 
-    fg.rss_file(os.path.join(OUTPUT_DIR, 'rss.xml'), pretty=True)
-    print("  - rss.xml")
+    fg.rss_file(os.path.join(output_dir, 'rss.xml'), pretty=True)
+    print(f"  - rss.xml (for {lang})")
 
     print("Build process finished successfully!")
 

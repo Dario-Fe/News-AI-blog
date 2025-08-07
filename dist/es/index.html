@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizie IA</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dddfe2;
+            position: relative;
+        }
+        #language-selector-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #language-selector {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            background-color: #f0f2f5;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            #language-selector-container {
+                position: static;
+                margin-bottom: 15px;
+            }
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #000;
+        }
+        header h2 {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: normal;
+            color: #606770;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .article-card-content {
+            padding: 15px;
+        }
+        .article-card-content h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .article-card-content p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #606770;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #article-view {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #article-view img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #article-view h1 {
+            font-size: 2.2em;
+        }
+        #article-view p {
+            line-height: 1.6;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .footer-back-button {
+            margin-top: 30px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-top: 1px solid #dddfe2;
+            color: #606770;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em;">
+            <a href="/it/index.html" title="Italiano">🇮🇹</a>
+            <a href="/en/index.html" title="English">🇬🇧</a>
+            <a href="/es/index.html" title="Español">🇪🇸</a>
+        </div>
+        <a href="/it/index.html"><img src="/logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
+        <h2 id="subtitle">Notizie ed analisi sull'Intelligenza Artificiale</h2>
+    </header>
+    <main>
+        <div id="articles-grid">
+
+        <a href="articolo_hrm_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/11 - AI La rivoluzione HRM /hrm_le_dimensioni_non_contano.jpg" alt=""Cuando el tamaño no importa": La revolución del modelo HRM" loading="lazy">
+            <div class="article-card-content">
+                <h3>"Cuando el tamaño no importa": La revolución del modelo HRM</h3>
+                <p>por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="articolo_ai_lavoro_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/10 - AI Posti di Lavoro/work_wrestling.jpg" alt="Inteligencia Artificial y el Futuro del Trabajo" loading="lazy">
+            <div class="article-card-content">
+                <h3>Inteligencia Artificial y el Futuro del Trabajo</h3>
+                <p>por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="kimi_k2_article_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/09 - AI Kimi K2 il nuovo sfidante/DavideGolia_IA.jpg" alt="Kimi K2: La Inteligencia Artificial China que Desafía a los Gigantes de la Programación" loading="lazy">
+            <div class="article-card-content">
+                <h3>Kimi K2: La Inteligencia Artificial China que Desafía a los Gigantes de la Programación</h3>
+                <p>por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="AI_Musica_Copyright_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/08-AI Musica e Copyright/Band_AI.jpg" alt="Cuando la Inteligencia Artificial Hace Música: El Fenómeno de The Velvet Sundown e Iam Entre Tecnología y Ética" loading="lazy">
+            <div class="article-card-content">
+                <h3>Cuando la Inteligencia Artificial Hace Música: El Fenómeno de The Velvet Sundown e Iam Entre Tecnología y Ética</h3>
+                <p>por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="Giganti_Ai_Bocciati_seconda_puntata_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg" alt="Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Segunda Parte)" loading="lazy">
+            <div class="article-card-content">
+                <h3>Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Segunda Parte)</h3>
+                <p>por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="Giganti_Ai_Bocciati_prima_puntata_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg" alt="Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Primera Parte)" loading="lazy">
+            <div class="article-card-content">
+                <h3>Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Primera Parte)</h3>
+                <p>por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="AI_Valutazione_ed_etica_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/06-AI Valutazione ed Etica/Leonardo_Phoenix_An_ethically_charged_portrait_of_AIs_challeng_0.jpg" alt="Evaluar la Inteligencia Artificial: Cuando los Números se Encuentran con la Ética" loading="lazy">
+            <div class="article-card-content">
+                <h3>Evaluar la Inteligencia Artificial: Cuando los Números se Encuentran con la Ética</h3>
+                <p>por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="IA_Aziende_e_Servizi_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/05-AI Aziende e Servizi/Leonardo_Phoenix_10_A_fiercely_competitive_scene_in_the_world_1.jpg" alt="El Panorama de la Inteligencia Artificial: Gigantes Tecnológicos, Desafíos Competitivos y las Herramientas que Democratizan la IA" loading="lazy">
+            <div class="article-card-content">
+                <h3>El Panorama de la Inteligencia Artificial: Gigantes Tecnológicos, Desafíos Competitivos y las Herramientas que Democratizan la IA</h3>
+                <p>Por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="AI_Creazione_Contenuti_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/04-AI_Creazione_Contenuti/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_whimsical_arti_1.jpg" alt="IA y Creación de Contenidos: El Presente y el Futuro de la Creatividad Digital" loading="lazy">
+            <div class="article-card-content">
+                <h3>IA y Creación de Contenidos: El Presente y el Futuro de la Creatividad Digital</h3>
+                <p>Por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="Dalle Applicazioni Consolidate alle Frontiere del Futuro_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/03-Dalle Applicazioni Consolidate alle Frontiere del Futuro/fotocopertina2.jpg" alt="Inteligencia Artificial Hoy: De las Aplicaciones Consolidadas a las Fronteras del Futuro" loading="lazy">
+            <div class="article-card-content">
+                <h3>Inteligencia Artificial Hoy: De las Aplicaciones Consolidadas a las Fronteras del Futuro</h3>
+                <p>Por Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/02-Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_2.jpg" alt="Machine Learning, Deep Learning y Algoritmos Generativos: El Corazón Palpitante de la Inteligencia Artificial Moderna" loading="lazy">
+            <div class="article-card-content">
+                <h3>Machine Learning, Deep Learning y Algoritmos Generativos: El Corazón Palpitante de la Inteligencia Artificial Moderna</h3>
+                <p>Por: Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+
+        <a href="L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo_es.html" class="article-card">
+            <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/01-L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_1.jpg" alt="Inteligencia Artificial: Un Viaje a la Tecnología Que Está Redefiniendo Nuestro Mundo" loading="lazy">
+            <div class="article-card-content">
+                <h3>Inteligencia Artificial: Un Viaje a la Tecnología Que Está Redefiniendo Nuestro Mundo</h3>
+                <p>Por: Dario Ferrero (VerbaniaNotizie.it)
+</p>
+            </div>
+        </a>
+        </div>
+    </main>
+    <footer>
+        <p>A cura di Verbania Notizie</p>
+        <p>
+            <a href="mailto:info@verbanianotizie.it">Contatti</a> |
+            <a href="#">Cookie</a> |
+            <a href="#">Privacy Policy</a>
+        </p>
+    </footer>
+</body>
+</html>

@@ -18,58 +18,83 @@ BASE_OUTPUT_DIR = "dist"
 # In GitHub Actions, this can be set as a secret.
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
-def fetch_markdown_files(lang='it'):
+def get_all_repo_files():
     """
-    Recursively fetches all markdown file details for a specific language.
+    Gets a flat list of all files in the repo using the recursive tree API.
+    This is much more efficient than making multiple API calls.
     """
-    print(f"Fetching markdown files for language: '{lang}'...")
-    headers = {}
-    if GITHUB_TOKEN:
-        headers["Authorization"] = f"token {GITHUB_TOKEN}"
+    print("Fetching file tree from GitHub...")
+    # Get the main branch name
+    repo_info_url = "https://api.github.com/repos/matteobaccan/CorsoAIBook"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
+    repo_info = requests.get(repo_info_url, headers=headers).json()
+    main_branch = repo_info.get('default_branch', 'main')
 
-    response = requests.get(GITHUB_API_URL, headers=headers)
-    if response.status_code != 200:
-        print(f"Error fetching root articles list: {response.status_code}")
-        return []
+    # Get the tree recursively
+    tree_url = f"https://api.github.com/repos/matteobaccan/CorsoAIBook/git/trees/{main_branch}?recursive=1"
+    tree_response = requests.get(tree_url, headers=headers)
+    if tree_response.status_code != 200:
+        print("Error fetching repository file tree.")
+        return None
 
-    all_md_files = []
-    lang_suffix = f"_{lang}.md"
+    return tree_response.json()['tree']
 
-    for item in response.json():
-        if item['type'] == 'dir':
-            # This second API call is the one that is likely failing due to rate limits.
-            # The GitHub Action run should have a proper token and not fail.
-            dir_contents_response = requests.get(item['url'], headers=headers)
-            if dir_contents_response.status_code != 200:
-                print(f"Warning: Could not fetch contents of {item['name']}. Status: {dir_contents_response.status_code}")
-                continue # Skip this directory if we can't read it
 
-            dir_contents = dir_contents_response.json()
+def structure_articles_by_language(all_files):
+    """
+    Structures all markdown files by their article group and language.
+    """
+    articles_db = {}
+    for file_info in all_files:
+        path = file_info['path']
+        if path.startswith('articoli/') and path.endswith('.md'):
+            parts = path.split('/')
+            if len(parts) == 3: # articoli/DIR/file.md
+                article_dir = parts[1]
+                filename = parts[2]
 
-            # Simplified and more robust file finding logic
-            italian_file = None
-            specific_lang_file = None
+                if article_dir not in articles_db:
+                    articles_db[article_dir] = {}
 
-            for f in dir_contents:
-                name = f['name']
-                if name.endswith('.md') and not name.endswith(('_en.md', '_es.md', '_fr.md', '_de.md')):
-                    italian_file = f
-                elif name.endswith(lang_suffix):
-                    specific_lang_file = f
+                # Determine language
+                if filename.endswith('_en.md'):
+                    lang = 'en'
+                elif filename.endswith('_es.md'):
+                    lang = 'es'
+                elif filename.endswith('.md'):
+                    # This is Italian only if no other lang suffix is present
+                    is_base_file = not any(s in filename for s in ['_en.md', '_es.md', '_fr.md', '_de.md'])
+                    if is_base_file:
+                        lang = 'it'
+                    else:
+                        continue # Skip other languages like _fr, _de for now
+                else:
+                    continue
 
-            # Decide which file to use
-            chosen_file = None
-            if lang == 'it':
-                chosen_file = italian_file
-            else:
-                chosen_file = specific_lang_file if specific_lang_file else italian_file
+                if lang not in articles_db[article_dir]:
+                    articles_db[article_dir][lang] = []
 
-            if chosen_file:
-                chosen_file['parent_dir'] = item['name']
-                all_md_files.append(chosen_file)
+                # Add file info needed for processing
+                file_info['name'] = filename
+                file_info['parent_dir'] = article_dir
+                file_info['download_url'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/{path}"
+                articles_db[article_dir][lang].append(file_info)
 
-    print(f"Found {len(all_md_files)} markdown files to process for '{lang}'.")
-    return all_md_files
+    return articles_db
+
+def get_files_for_lang(articles_db, lang='it'):
+    """
+    Gets all markdown files for a specific language from the structured DB.
+    NO FALLBACK. If a translation doesn't exist, it's skipped.
+    """
+    files_for_lang = []
+    for article_dir, languages in articles_db.items():
+        if lang in languages:
+            for file_info in languages[lang]:
+                files_for_lang.append(file_info)
+
+    print(f"Found {len(files_for_lang)} markdown files to process for '{lang}'.")
+    return files_for_lang
 
 def main():
     """
@@ -88,13 +113,22 @@ def main():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    # Fetch all markdown files from GitHub API
-    md_files = fetch_markdown_files(lang)
-    if not md_files:
-        print(f"No markdown files found for language '{lang}'. Exiting.")
+    # This is now a global database fetched only once if the script were to run
+    # for multiple languages in one go. For now, it's fetched for each run.
+    all_files = get_all_repo_files()
+    if not all_files:
         return
 
-    # 3. Process all articles from the markdown files
+    articles_db = structure_articles_by_language(all_files)
+
+    md_files = get_files_for_lang(articles_db, lang)
+
+    if not md_files:
+        print(f"No markdown files found for language '{lang}'. Exiting.")
+        # We still finish successfully, just for an empty site for this lang
+        return
+
+    # Process all articles from the markdown files
     processed_articles = []
     # Sort files by name case-insensitively descending to get newest parts first
     s1 = sorted(md_files, key=lambda x: x['name'].lower(), reverse=True)

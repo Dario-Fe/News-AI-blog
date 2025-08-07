@@ -23,6 +23,48 @@ TRANSLATIONS = {
         "it": "Iscriviti",
         "en": "Subscribe",
         "es": "Suscríbete"
+    },
+    "newsletter_page": {
+        "title": {
+            "it": "Iscriviti alla nostra Newsletter",
+            "en": "Subscribe to our Newsletter",
+            "es": "Suscríbete a nuestro boletín"
+        },
+        "description": {
+            "it": "Rimani aggiornato con le ultime notizie e analisi sull'Intelligenza Artificiale. Inserisci i tuoi dati qui sotto per non perdere neanche un articolo.",
+            "en": "Stay updated with the latest news and analysis on Artificial Intelligence. Enter your details below to not miss a single article.",
+            "es": "Mantente actualizado con las últimas noticias y análisis sobre Inteligencia Artificial. Ingresa tus datos a continuación para no perderte ni un solo artículo."
+        },
+        "label_name": {
+            "it": "Nome:",
+            "en": "Name:",
+            "es": "Nombre:"
+        },
+        "placeholder_name": {
+            "it": "Il tuo nome",
+            "en": "Your name",
+            "es": "Tu nombre"
+        },
+        "label_email": {
+            "it": "Email:",
+            "en": "Email:",
+            "es": "Correo electrónico:"
+        },
+        "placeholder_email": {
+            "it": "La tua email",
+            "en": "Your email",
+            "es": "Tu correo electrónico"
+        },
+        "button_text": {
+            "it": "Iscriviti Ora",
+            "en": "Subscribe Now",
+            "es": "Suscríbete Ahora"
+        },
+        "privacy_note": {
+            "it": "Rispettiamo la tua privacy. I tuoi dati non saranno condivisi con terze parti.",
+            "en": "We respect your privacy. Your data will not be shared with third parties.",
+            "es": "Respetamos tu privacidad. Tus datos no serán compartidos con terceros."
+        }
     }
 }
 
@@ -322,12 +364,21 @@ def generate_local_pages(output_dir, lang='it'):
             with open(os.path.join(pages_dir, filename), "r") as f:
                 page_content = f.read()
 
-            # Replace placeholders
+            # Replace placeholders in the base template
             subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
             subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
             temp_html = base_template.replace("{{subtitle}}", subtitle)
             temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
-            final_page_html = temp_html.replace("{{content}}", page_content)
+
+            # Replace placeholders in the page content itself
+            final_content = page_content
+            if filename == "newsletter.html":
+                for key, trans_dict in TRANSLATIONS["newsletter_page"].items():
+                    placeholder = f"{{{{newsletter_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
+
+            final_page_html = temp_html.replace("{{content}}", final_content)
 
             with open(os.path.join(output_dir, filename), "w") as f:
                 f.write(final_page_html)

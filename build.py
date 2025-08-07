@@ -37,27 +37,36 @@ def fetch_markdown_files(lang='it'):
 
     for item in response.json():
         if item['type'] == 'dir':
-            dir_url = item['url']
-            dir_contents_response = requests.get(dir_url, headers=headers)
-            if dir_contents_response.status_code == 200:
-                dir_contents = dir_contents_response.json()
+            # This second API call is the one that is likely failing due to rate limits.
+            # The GitHub Action run should have a proper token and not fail.
+            dir_contents_response = requests.get(item['url'], headers=headers)
+            if dir_contents_response.status_code != 200:
+                print(f"Warning: Could not fetch contents of {item['name']}. Status: {dir_contents_response.status_code}")
+                continue # Skip this directory if we can't read it
 
-                # Find the language-specific file
-                lang_file = next((f for f in dir_contents if f['name'].endswith(lang_suffix)), None)
+            dir_contents = dir_contents_response.json()
 
-                # If not found, and we are not looking for Italian, try to fall back to Italian
-                if not lang_file and lang != 'it':
-                    lang_file = next((f for f in dir_contents if f['name'].endswith('.md') and not f['name'].endswith(('_en.md', '_es.md', '_fr.md', '_de.md'))), None)
+            # Simplified and more robust file finding logic
+            italian_file = None
+            specific_lang_file = None
 
-                # If we are looking for Italian, find the base .md file
-                if not lang_file and lang == 'it':
-                     lang_file = next((f for f in dir_contents if f['name'].endswith('.md') and not f['name'].endswith(('_en.md', '_es.md', '_fr.md', '_de.md'))), None)
+            for f in dir_contents:
+                name = f['name']
+                if name.endswith('.md') and not name.endswith(('_en.md', '_es.md', '_fr.md', '_de.md')):
+                    italian_file = f
+                elif name.endswith(lang_suffix):
+                    specific_lang_file = f
 
-                if lang_file:
-                    lang_file['parent_dir'] = item['name']
-                    all_md_files.append(lang_file)
+            # Decide which file to use
+            chosen_file = None
+            if lang == 'it':
+                chosen_file = italian_file
             else:
-                print(f"Warning: Could not fetch contents of {item['name']}")
+                chosen_file = specific_lang_file if specific_lang_file else italian_file
+
+            if chosen_file:
+                chosen_file['parent_dir'] = item['name']
+                all_md_files.append(chosen_file)
 
     print(f"Found {len(all_md_files)} markdown files to process for '{lang}'.")
     return all_md_files
@@ -75,11 +84,13 @@ def main():
 
     print(f"Starting build process for language: '{lang}'...")
 
-    # Create/clean output directory
+    # Create language-specific output directory if it doesn't exist
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
     # 1. Copy static assets
+    # Note: This will copy assets to each language folder.
+    # A more advanced setup might copy them to a shared root assets folder.
     copy_static_assets(output_dir)
 
     # 2. Fetch all markdown files from GitHub API
@@ -108,6 +119,30 @@ def main():
 
     # 6. Generate RSS feed
     generate_rss_feed(processed_articles, output_dir, lang)
+
+def create_root_redirect():
+    """
+    Creates a root index.html to redirect to the default language.
+    """
+    print("\nCreating root redirect...")
+    html_content = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>Notizie IA</title>
+<meta http-equiv="refresh" content="0; url=it/index.html" />
+<script type="text/javascript">
+    window.location.href = "it/index.html"
+</script>
+</head>
+<body>
+<p>Redirecting to the Italian version of the site... <a href="it/index.html">Click here if you are not redirected.</a></p>
+</body>
+</html>
+"""
+    with open(os.path.join(BASE_OUTPUT_DIR, "index.html"), "w") as f:
+        f.write(html_content)
+    print("  - dist/index.html (redirect)")
 
 
 def process_article(md_file):

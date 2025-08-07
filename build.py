@@ -1,6 +1,7 @@
 import os
 import requests
 import frontmatter
+import shutil
 from feedgen.feed import FeedGenerator
 from bs4 import BeautifulSoup
 import markdown2
@@ -46,11 +47,15 @@ def main():
     """
     print("Starting build process...")
 
-    # Create output directory if it doesn't exist
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
+    # Create/clean output directory
+    if os.path.exists(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
+    os.makedirs(OUTPUT_DIR)
 
-    # 1. Fetch articles from GitHub API
+    # 1. Copy static assets
+    copy_static_assets()
+
+    # 2. Fetch articles from GitHub API
     articles = fetch_articles_list()
     if not articles:
         print("No articles found. Exiting.")
@@ -188,6 +193,17 @@ def generate_index_page(articles):
 
     with open(os.path.join(OUTPUT_DIR, "index.html"), "w") as f:
         f.write(final_page_html)
+
+def copy_static_assets():
+    """
+    Copies static assets from the root to the output directory.
+    """
+    print("\nCopying static assets...")
+    static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js']
+    for item in os.listdir('.'):
+        if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
+            print(f"  - {item}")
+            shutil.copy(item, os.path.join(OUTPUT_DIR, item))
 
 def generate_rss_feed(articles):
     """

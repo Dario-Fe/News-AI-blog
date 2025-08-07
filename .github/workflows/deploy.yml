@@ -44,17 +44,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build the site
+      - name: Setup build environment
         run: |
-          # Clean the base dist directory once before starting
           if [ -d "dist" ]; then rm -r dist; fi
           mkdir dist
-          # Run build for each language
-          python3 build.py --lang it
-          python3 build.py --lang en
-          python3 build.py --lang es
+
+      - name: Build Italian site
+        run: python3 build.py --lang it
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build English site
+        run: python3 build.py --lang en
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Spanish site
+        run: python3 build.py --lang es
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create root redirect
+        run: python3 -c "from build import create_root_redirect; create_root_redirect()"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

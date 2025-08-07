@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>Notizie IA - Aggiornamenti e Analisi (es)</title>
+    <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/</link>
+    <description>Le ultime notizie e approfondimenti sull'intelligenza artificiale, a cura di Verbania Notizie.</description>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>python-feedgen</generator>
+    <language>es</language>
+    <lastBuildDate>Thu, 07 Aug 2025 13:13:45 +0000</lastBuildDate>
+    <item>
+      <title>Inteligencia Artificial: Un Viaje a la Tecnología Que Está Redefiniendo Nuestro Mundo</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo_es.html</link>
+      <description>Por: Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Machine Learning, Deep Learning y Algoritmos Generativos: El Corazón Palpitante de la Inteligencia Artificial Moderna</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna_es.html</link>
+      <description>Por: Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Inteligencia Artificial Hoy: De las Aplicaciones Consolidadas a las Fronteras del Futuro</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/Dalle Applicazioni Consolidate alle Frontiere del Futuro_es.html</link>
+      <description>Por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>IA y Creación de Contenidos: El Presente y el Futuro de la Creatividad Digital</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/AI_Creazione_Contenuti_es.html</link>
+      <description>Por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>El Panorama de la Inteligencia Artificial: Gigantes Tecnológicos, Desafíos Competitivos y las Herramientas que Democratizan la IA</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/IA_Aziende_e_Servizi_es.html</link>
+      <description>Por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Evaluar la Inteligencia Artificial: Cuando los Números se Encuentran con la Ética</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/AI_Valutazione_ed_etica_es.html</link>
+      <description>por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Primera Parte)</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/Giganti_Ai_Bocciati_prima_puntata_es.html</link>
+      <description>por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Segunda Parte)</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/Giganti_Ai_Bocciati_seconda_puntata_es.html</link>
+      <description>por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Cuando la Inteligencia Artificial Hace Música: El Fenómeno de The Velvet Sundown e Iam Entre Tecnología y Ética</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/AI_Musica_Copyright_es.html</link>
+      <description>por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Kimi K2: La Inteligencia Artificial China que Desafía a los Gigantes de la Programación</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/kimi_k2_article_es.html</link>
+      <description>por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>Inteligencia Artificial y el Futuro del Trabajo</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/articolo_ai_lavoro_es.html</link>
+      <description>por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+    <item>
+      <title>"Cuando el tamaño no importa": La revolución del modelo HRM</title>
+      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/es/articolo_hrm_es.html</link>
+      <description>por Dario Ferrero (VerbaniaNotizie.it)
+</description>
+    </item>
+  </channel>
+</rss>

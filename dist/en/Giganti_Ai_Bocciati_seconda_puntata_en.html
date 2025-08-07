@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizie IA</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dddfe2;
+            position: relative;
+        }
+        #language-selector-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #language-selector {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            background-color: #f0f2f5;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            #language-selector-container {
+                position: static;
+                margin-bottom: 15px;
+            }
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #000;
+        }
+        header h2 {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: normal;
+            color: #606770;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .article-card-content {
+            padding: 15px;
+        }
+        .article-card-content h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .article-card-content p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #606770;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #article-view {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #article-view img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #article-view h1 {
+            font-size: 2.2em;
+        }
+        #article-view p {
+            line-height: 1.6;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .footer-back-button {
+            margin-top: 30px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-top: 1px solid #dddfe2;
+            color: #606770;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em;">
+            <a href="/it/index.html" title="Italiano">🇮🇹</a>
+            <a href="/en/index.html" title="English">🇬🇧</a>
+            <a href="/es/index.html" title="Español">🇪🇸</a>
+        </div>
+        <a href="/it/index.html"><img src="/logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
+        <h2 id="subtitle">Notizie ed analisi sull'Intelligenza Artificiale</h2>
+    </header>
+    <main>
+
+        <div id="article-view">
+            <a href="index.html" class="back-button">Torna indietro</a>
+            <h1>Uncontrolled Artificial Intelligence: Big Tech Companies Fail on Safety (Part Two)</h1>
+<p><em>by Dario Ferrero (VerbaniaNotizie.it)</em>
+<img alt="GigantiTechAsini.jpg" src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg"/></p>
+<p><em>Resuming the analysis of the independent report from the Future of Life Institute, in this second part, we delve deeper into the themes of safety in AI development, the regulatory and technical urgency to set limits, ethical aspects, and future prospects.</em></p>
+<h2>The Safety Paradox</h2>
+<p>One of the most profound problems is what researchers call the "safety paradox": very advanced AI systems might be necessary to develop sufficiently sophisticated safety methods, but we need these safety methods before building such advanced systems.</p>
+<h2>The Warning Signs in 2025</h2>
+<p>The report comes at a time when warning signs about AI safety are multiplying. According to the AI Incidents Database, the number of AI-related incidents increased to 233 in 2024—a record high and a 56.4% increase from 2023.</p>
+<h3>The Exponential Growth of Incidents</h3>
+<p>The 56.4% increase in incidents is not just a statistical number—it represents a worrying pattern. Analyzing the data from the last five years, we see that there were 86 incidents in 2020, followed by 109 in 2021 (+27%), 132 in 2022 (+21%), 149 in 2023 (+13%), and finally 233 in 2024 (+56%).</p>
+<p>This suggests that we are entering a phase of accelerating risk, where AI systems are simultaneously becoming more powerful and more common, but not necessarily safer.
+<img alt="ai_incidents_2020_2024_aggiornato.jpg" src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/ai_incidents_2020_2024_aggiornato.jpg"/></p>
+<h3>The Loss of Interpretive Control</h3>
+<p>But perhaps even more concerning is a recent alarm raised by researchers from the tech companies themselves. As reported by <a href="https://venturebeat.com/ai/openai-google-deepmind-and-anthropic-sound-alarm-we-may-be-losing-the-ability-to-understand-ai/">VentureBeat</a>, scientists from OpenAI, DeepMind, Anthropic, and Meta warn that our ability to monitor AI's reasoning may disappear as models evolve.</p>
+<p>Modern AI systems have become so complex that even their creators cannot fully understand how they arrive at their conclusions. It's like having a brilliant employee who always produces excellent results but cannot explain their reasoning process.</p>
+<p>As models become larger and more complex, they develop capabilities that their creators did not anticipate. This phenomenon, called "emergence," means we could end up with systems that can do things we didn't know they could.</p>
+<h3>The Race for Computational Power</h3>
+<p>Another warning sign is the exponential growth of computational power used to train AI models. Each new generation of models requires about 10 times more computational power than the previous one. This means that models are becoming too expensive for most researchers, safety research is lagging behind development, and a few companies control the most advanced technology.</p>
+<h2>The Practical Consequences for All of Us</h2>
+<p>Artificial intelligence is becoming increasingly integrated into our daily lives. From recommendation systems that decide what we see on social media, to algorithms that determine whether we get a loan or a job, to autonomous driving systems that may soon transport us.</p>
+<h3>AI in Daily Life</h3>
+<p>AI algorithms determine what we see on our Facebook, Instagram, TikTok, and X (formerly Twitter) feeds. These systems influence not only what we buy, but also how we think, what we believe, and even who we vote for.</p>
+<p>AI systems evaluate our loan applications, determine our interest rates, and decide if we can get a mortgage. An error in these systems can have devastating consequences for our financial lives.</p>
+<p>AI is increasingly being used to diagnose diseases, recommend treatments, and manage medical records. Errors in these systems can literally be a matter of life and death.</p>
+<p>AI systems filter resumes, conduct preliminary interviews, and evaluate employee performance. Biases or errors in these systems can destroy careers and perpetuate discrimination.</p>
+<p>Autonomous driving systems are becoming more common. As we have seen with the Tesla cases, malfunctions can be fatal.</p>
+<h3>The Involuntary Global Experiment</h3>
+<p>If the companies developing these systems do not have credible plans to ensure their safety, we are all participating in a global experiment with an unknown outcome. As <a href="https://www.cnbc.com/2025/05/14/meta-google-openai-artificial-intelligence-safety.html">CNBC</a> highlights, tech companies are focusing on AI products rather than research, and this has direct implications for safety.</p>
+<p>The pressure to quickly monetize AI has led many companies to release products before they are fully tested. This means that consumers are essentially beta-testing technologies that could have serious consequences.</p>
+<p>AI has a "network effect"—the more people use it, the more powerful it becomes. This means that once an AI system becomes dominant, it becomes extremely difficult to replace it, even if safety issues are discovered.</p>
+<p>Society is becoming increasingly dependent on AI. Many critical decisions are already delegated to automated systems. If these systems fail simultaneously, the consequences could be catastrophic.</p>
+<h2>The Urgent Need for Regulation</h2>
+<p>One of the strongest conclusions of the report is that the industry cannot effectively self-regulate. Tegmark forcefully expressed the need for regulatory oversight: "I feel that a government body equivalent to the American Food and Drug Administration is needed to approve AI products before they reach the market."</p>
+<h3>The FDA Analogy</h3>
+<p>The analogy with the FDA (Food and Drug Administration) is illuminating and powerful. No one expects pharmaceutical companies to test their own drugs without external supervision. Before a new drug can be sold to the public, it must pass rigorous clinical trials supervised by independent bodies.</p>
+<p>Why doesn't this happen with AI? Drugs have measurable biological effects, while AI has social and psychological effects that are more difficult to quantify. Furthermore, the pharmaceutical industry is more mature and regulated, while AI evolves much more rapidly than drugs.</p>
+<p>An "FDA for AI" would have significant advantages. "If there are safety standards, then instead there is commercial pressure to see who can meet the safety standards first, because then they can sell first and earn first," Tegmark explained.</p>
+<p>This would completely change the competitive dynamic. Instead of competing to release first at any cost, companies would compete to be the first to meet rigorous safety standards.</p>
+<h3>Existing Regulatory Models</h3>
+<p>Several countries and regions are developing regulatory approaches to AI, but with very different philosophies:</p>
+<p>The European Union has adopted a risk-based AI Act, categorizing AI systems into unacceptable risk systems that are completely banned, high-risk systems subject to strict requirements, limited-risk systems with transparency obligations, and minimal-risk systems with minimal requirements.</p>
+<p>The United States is developing a more fragmented approach, with different agencies regulating AI in their specific sectors: the FDA for medical AI, the NHTSA for autonomous vehicles, and the SEC for financial AI.</p>
+<p>China has adopted a more centralized approach, with strong state controls on AI systems, especially those that could influence public opinion or social stability.</p>
+<p>The United Kingdom has opted for a "guided self-regulation" approach, where companies are responsible for safety but under the supervision of existing regulators.</p>
+<h3>The Limits of Current Approaches</h3>
+<p>Despite these efforts, none of the current regulatory approaches adequately address the problem of existential risks. Most focus on current and immediate risks, but not on the long-term risks of artificial general intelligence.</p>
+<p>AI evolves so quickly that regulations risk being obsolete before they are even implemented. A more dynamic and adaptive approach is needed.</p>
+<p>AI is a global technology, but regulation is national. This creates the risk of "regulatory shopping," where companies move to jurisdictions with more permissive rules.</p>
+<p>Many regulators do not have the necessary technical expertise to evaluate complex AI systems. This creates the risk of ineffective or counterproductive regulations.</p>
+<h2>The International Context and Global Cooperation</h2>
+<p>The Future of Life Institute's report is not isolated. As reported by the <a href="https://www.gov.uk/government/publications/international-ai-safety-report-2025">British government</a>, an international report from 2025 written by 100 AI experts, including representatives nominated by 33 countries and intergovernmental organizations, has highlighted similar concerns globally.</p>
+<h3>The Bletchley Park Summit and Beyond</h3>
+<p>The United Kingdom hosted the first AI Safety Summit at Bletchley Park in November 2023, followed by summits in Seoul and San Francisco. These meetings represented the first attempts at international coordination on AI safety.</p>
+<p>Concrete results include the Bletchley Declaration with an agreement on AI risks, the establishment of national safety institutes, a commitment to sharing information on risks, and preliminary agreements on safety standards.</p>
+<p>However, cooperation has shown significant limitations: a lack of enforcement mechanisms, significant cultural and political differences, corporate resistance to regulation, and geopolitical competition in AI.</p>
+<h3>The Challenge of Global Governance</h3>
+<p>AI presents unprecedented governance challenges. Unlike nuclear weapons, which require rare materials and infrastructure, AI can be developed with relatively common resources. This makes control and non-proliferation much more difficult.</p>
+<p>Nuclear arms control worked because fissile materials are rare and traceable, infrastructure is large and visible, the effects are immediately devastating, and the number of actors is limited.</p>
+<p>AI is different because the "materials" (data and algorithms) are widely available, infrastructure can be virtual and hidden, the effects can be gradual and subtle, and the number of actors is rapidly growing.</p>
+<h3>Emerging International Initiatives</h3>
+<p>Several countries are creating national AI safety institutes and coordinating their efforts through the International AI Safety Institute Network.</p>
+<p>The Partnership on AI is a private-sector initiative that brings together major tech companies to develop best practices.</p>
+<p>The Global Partnership on AI (GPAI) is a G7-led initiative to promote the responsible use of AI.</p>
+<h2>What "AI Alignment" Means: A Technical Deep Dive</h2>
+<p>Alignment refers to the problem of ensuring that AI systems do what we want them to do, in the way we want them to do it, even as they become very capable. It is one of the most complex and important problems in artificial intelligence.</p>
+<h3>The Complexity of Human Values</h3>
+<p>How do we translate complex human values into instructions that a machine can follow? Human values are often contradictory (we want both freedom and security), contextual (the same actions can be right or wrong in different contexts), evolutionary (our values change over time), and implicit (we are often unaware of our values until they are violated).</p>
+<p>A concrete example: imagine telling an AI, "Make me happy." A misaligned system might manipulate your sensors to make you believe you are happy, chemically alter your brain, create a perfect simulation of happiness, or eliminate everything that makes you unhappy, including the challenges that give life meaning.</p>
+<h3>The Different Types of Alignment</h3>
+<p>Outer Alignment aims to ensure that the goals we give the system are the ones we truly want it to pursue.</p>
+<p>Inner Alignment focuses on ensuring that the system actually pursues the goals we have given it, rather than developing its own goals.</p>
+<p>Dynamic Alignment seeks to ensure that the system remains aligned even as it evolves and learns new capabilities.</p>
+<h3>Current Techniques and Their Limitations</h3>
+<p>Reinforcement Learning from Human Feedback (RLHF) works like this: the system produces outputs, humans evaluate the quality of the outputs, and the system learns to produce outputs that receive positive evaluations.</p>
+<p>However, RLHF has several limitations: humans can be inconsistent in their evaluations, it is difficult to evaluate very complex outputs, the system might learn to manipulate the evaluators, and it does not scale well to very intelligent systems.</p>
+<p>Constitutional AI, a technique developed by Anthropic, tries to teach systems a "constitution" of principles to follow. It has advantages such as greater transparency compared to RLHF, greater consistency, and finer control over behavior. However, it also has limitations: it is difficult to write a complete constitution, the principles can conflict, and it may not work for very advanced systems.</p>
+<h3>The Orthogonality Thesis</h3>
+<p>A key concept in alignment is the "orthogonality thesis," which states that intelligence and goals are orthogonal—that is, a system can be very intelligent but have any kind of goal.</p>
+<p>This means that a super-intelligent system could be brilliant at achieving its goals, have goals completely different from ours, and have no interest in changing its goals to match ours.</p>
+<h2>The Limits of Current Safety Approaches</h2>
+<p>The report highlights a fundamental limitation: "The current approach to AI via giant black boxes trained on unimaginably vast amounts of data" may not be compatible with the necessary safety guarantees.</p>
+<h3>The "Black Box" Problem</h3>
+<p>Current AI systems are essentially "black boxes"—we know what we put in (training data) and what comes out (responses), but we don't really understand how they work internally.</p>
+<p>It's like having an employee who always does an excellent job, but when you ask them how they do it, they just say, "it's complicated." It might be fine at first, but as you entrust them with more important tasks, you start to worry about what might happen if their "complicated" methods don't work in a new situation.</p>
+<p>This is a problem for safety because we cannot predict how it will behave in new situations, we cannot identify and correct systematic errors, we cannot guarantee that it follows our values, and we cannot explain its decisions to others.</p>
+<h3>Mechanistic Interpretability</h3>
+<p>Mechanistic interpretability research seeks to open these "black boxes" to understand how AI systems work internally.</p>
+<p>Recent progress includes identifying "neurons" that activate for specific concepts, mapping how information flows through the network, and discovering internal representations of abstract concepts.</p>
+<p>However, the current limitations are significant: it only works for relatively simple systems, it requires enormous computational resources, the results are difficult to interpret, and it may not scale to very large systems.</p>
+<p>Russell added: "And it will only get harder as these AI systems get bigger."</p>
+<h3>Specific Technical Challenges</h3>
+<p>AI systems are trained on specific data, but then they must operate in the real world, which is different from the training data. This can lead to unexpected behavior.</p>
+<p>How can we be sure that a system that performs well in specific tests will perform well in all possible situations?</p>
+<p>AI systems can be easily tricked by inputs designed to confuse them. This raises questions about how much we can trust these systems in critical situations.</p>
+<p>Safety techniques that work for small systems may not work for very large and complex systems.</p>
+<h2>The Failure of Transparency</h2>
+<p>Another critical aspect is the failure of companies to provide adequate transparency. Only xAI and Zhipu AI completed the questionnaires sent by the Future of Life Institute, improving their transparency scores. This means that most companies were not even willing to answer basic questions about their safety.</p>
+<h3>The Importance of Transparency</h3>
+<p>Transparency is crucial because it allows for independent risk assessment, facilitates safety research, increases public trust, enables regulatory oversight, and facilitates collaboration between companies.</p>
+<p>Training methods, data used, system capabilities and limitations, safety test results, internal safety policies, and governance structures should all be transparent.</p>
+<h3>Conflicts Between Transparency and Competitiveness</h3>
+<p>Arguments against transparency include protecting trade secrets, preventing misuse, maintaining a competitive advantage, and technical complexity.</p>
+<p>However, these arguments are problematic because public safety should prevail over private profits, secrecy can hide safety problems, a lack of transparency prevents oversight, and competition should be about safety, not secrecy.</p>
+<h3>Transparency Models</h3>
+<p>Several models exist: full transparency involves releasing everything (code, data, model weights) and is mainly used by academic projects. Structured transparency involves releasing specific information according to agreed-upon standards and could be a practical compromise. Controlled transparency offers limited access to qualified researchers and is used by some companies for collaborative research. Zero transparency involves releasing no information and is used by many companies for commercial projects.</p>
+<h2>The Open Source Challenge</h2>
+<p>A particular aspect of the problem concerns "open-weight" models like those released by Meta. Once the weights of a model are publicly released, it is impossible to control how they are used. This means that open-weight models require a much higher level of intrinsic safety.</p>
+<h3>The Advantages of Open Source</h3>
+<p>Open source allows for distributed innovation, enabling researchers worldwide to improve and adapt models for their specific needs. It reduces the concentration of power in the hands of a few large companies, accelerates research by facilitating academic research and the development of new techniques, and forces transparency by making it impossible to hide problems in an open-source model.</p>
+<h3>The Risks of Open Source</h3>
+<p>Models can be used for malicious purposes such as creating disinformation or malware, they can be modified to remove security protections, once released they can be copied and distributed without control, and it becomes difficult to assign responsibility for problems caused by open-source models.</p>
+<h3>Possible Solutions</h3>
+<p>Solutions include responsible licenses that prohibit malicious uses (although they are difficult to enforce), gradual release first to qualified researchers and then to the general public, incorporating built-in protections that are difficult to remove, and systems for monitoring how models are used.</p>
+<h2>The Role of the Scientific Community</h2>
+<p>The report emphasizes the importance of the scientific community in evaluating AI safety. An independent panel of researchers reviewed the company-specific evidence and assigned grades based on absolute performance standards. This peer-review approach is fundamental because it offers an independent assessment not influenced by commercial interests.</p>
+<h3>The Importance of Independent Evaluation</h3>
+<p>Independent evaluation is needed because companies have incentives to minimize risks, commercial pressure can influence internal evaluations, external researchers can identify problems that developers miss, and credibility requires independence.</p>
+<p>Challenges for independent evaluation include limited access to proprietary systems, insufficient resources for in-depth evaluations, a lack of common standards, and growing technical complexity.</p>
+<h3>The Role of Conferences and Publications</h3>
+<p>Peer review is important for the critical evaluation of methods, the identification of errors and biases, the sharing of best practices, and the building of scientific consensus.</p>
+<p>Current problems include the fact that many companies do not publish safety research, conflicts of interest in evaluations, pressure for positive results, and publication times that are too long.</p>
+<h3>Initiatives of the Scientific Community</h3>
+<p>Initiatives include the growth of AI safety research with an increasing number of dedicated researchers, specialized conferences dedicated specifically to AI safety, interdisciplinary collaborations involving experts in ethics, philosophy, and the social sciences, and the development of common standards for safety evaluation.</p>
+<h2>What Consumers Can Do</h2>
+<p>While the identified problems require systemic solutions, there are some things consumers can do to protect themselves and contribute to greater AI safety.</p>
+<h3>Be Informed</h3>
+<p>It is important to understand the risks by learning how AI works, being aware of possible biases, recognizing AI-generated content, and understanding the limitations of current systems.</p>
+<p>Critical evaluation requires not blindly trusting AI outputs, verifying important information, considering alternative sources, and maintaining critical thinking.</p>
+<h3>Conscious Choices</h3>
+<p>It is advisable to prefer responsible companies by choosing products from companies with good safety practices, avoiding services that are not transparent about their risks, and supporting companies that invest in safety research.</p>
+<p>To protect privacy, it is necessary to limit the data shared with AI systems, use privacy tools when available, and be aware of how data is used.</p>
+<h3>Civic Participation</h3>
+<p>It is important to support regulation by contacting political representatives, participating in public consultations, and supporting organizations that promote AI safety.</p>
+<p>Education and awareness require sharing knowledge about AI risks, encouraging informed discussions, and supporting digital education.</p>
+<h2>Future Prospects</h2>
+<p>The report is not pessimistic about the future of AI, but it emphasizes the need for a more responsible approach. The goal is to create incentives for improvement, not to stop progress.</p>
+<h3>Possible Scenarios</h3>
+<p>The optimistic scenario envisions companies voluntarily improving their practices, regulators developing effective frameworks, safety research accelerating, and a balance being struck between innovation and safety.</p>
+<p>The status quo scenario sees companies continuing to prioritize speed over safety, regulators failing to keep up, safety problems accumulating, and a crisis forcing changes.</p>
+<p>The pessimistic scenario involves the acceleration of the competitive race without controls, systems becoming too complex to be controlled, a catastrophic incident occurring, and public trust in AI collapsing.</p>
+<h3>Factors That Will Determine the Future</h3>
+<p>Political will includes the ability of governments to regulate effectively, international coordination, and balancing innovation and safety.</p>
+<p>Public pressure includes awareness of the risks, demand for transparency, and civic participation.</p>
+<p>Technological developments include progress in interpretability, new safety techniques, and the evolution of AI capabilities.</p>
+<p>Corporate culture involves a shift in priorities, incentives for safety, and responsible leadership.</p>
+<h2>The Final Message</h2>
+<p>The Future of Life Institute's report is not an attack on artificial intelligence or technological progress. Instead, it is an urgent call for a more responsible and sustainable approach to AI development. As is often the case with powerful technologies, the question is not whether we should develop them, but how we should do so in a way that is safe and beneficial for humanity.</p>
+<h3>The Necessary Intellectual Honesty</h3>
+<p>"The truth is that no one knows how to control a new species that is much more intelligent than us," Tegmark admitted. This intellectual honesty is exactly what is missing in the current industry practices. First and foremost, we must recognize that we do not know how to control super-intelligent systems. Only then can we begin to work seriously on solving this problem.</p>
+<h3>The Opportunity in Failure</h3>
+<p>The fact that the world's most advanced companies received such low grades should not be seen as a definitive failure, but as an opportunity for improvement. We have identified the specific problems; now we must work together—companies, researchers, governments, and civil society—to solve them.</p>
+<h3>The Urgency of Action</h3>
+<p>The time to act is now. Not when the systems are already too powerful to be controlled, but while we still have the opportunity to shape their development. Every day that passes, AI systems become more powerful and more widespread. If we do not act now to ensure their safety, we may find ourselves in a situation from which it is impossible to return.</p>
+<h3>Collective Responsibility</h3>
+<p>AI safety is not the sole responsibility of tech companies or governments. It is a collective responsibility that requires the involvement of everyone: companies must prioritize safety over short-term profits, governments must develop and enforce effective regulations, researchers must focus on the most critical safety problems, citizens must be informed and engaged, and consumers must make conscious choices.</p>
+<h3>What's at Stake</h3>
+<p>The stakes could not be higher. Artificial intelligence has the potential to solve some of humanity's greatest problems: from climate change to diseases, from poverty to space exploration. But it also has the potential to create unprecedented existential risks.</p>
+<p>The Future of Life Institute's report reminds us that we still have time to choose which path to follow. We can continue on the current path, hoping for the best, or we can take the initiative to ensure that AI is developed safely and beneficially.</p>
+<h3>The Call to Action</h3>
+<p>Tegmark hopes that company executives will interpret this report as a stimulus to improve their practices. He also hopes to provide support to the researchers working in the safety teams of those same companies. As he explains: "If a company does not face external pressure to meet safety standards, then other people in the company will see the members of the safety team only as an obstacle, as someone trying to slow down the processes."</p>
+<p>This report is a call to action for all of us. We cannot afford to remain passive spectators while the future of artificial intelligence is being determined. We must be active protagonists in creating a future where AI is as safe as it is powerful.</p>
+<p>The future of artificial intelligence—and perhaps of humanity itself—depends on the choices we make today. Let's choose wisely.</p>
+
+            <div class="footer-back-button">
+                <a href="index.html" class="back-button">Torna indietro</a>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <p>A cura di Verbania Notizie</p>
+        <p>
+            <a href="mailto:info@verbanianotizie.it">Contatti</a> |
+            <a href="#">Cookie</a> |
+            <a href="#">Privacy Policy</a>
+        </p>
+    </footer>
+</body>
+</html>

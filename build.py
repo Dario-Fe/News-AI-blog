@@ -18,6 +18,11 @@ TRANSLATIONS = {
         "it": "Notizie ed analisi sull'Intelligenza Artificiale",
         "en": "News and analysis on Artificial Intelligence",
         "es": "Noticias y análisis sobre Inteligencia Artificial"
+    },
+    "subscribe": {
+        "it": "Iscriviti",
+        "en": "Subscribe",
+        "es": "Suscríbete"
     }
 }
 
@@ -259,7 +264,9 @@ def generate_article_pages(articles, output_dir, lang='it'):
 
         # Replace placeholders
         subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+        subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
         temp_html = base_template.replace("{{subtitle}}", subtitle)
+        temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
         final_page_html = temp_html.replace("{{content}}", article_view_html)
 
         with open(os.path.join(output_dir, article['path']), "w") as f:
@@ -289,7 +296,9 @@ def generate_index_page(articles, output_dir, lang='it'):
 
     # Replace placeholders
     subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+    subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
     temp_html = base_template.replace("{{subtitle}}", subtitle)
+    temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
     final_page_html = temp_html.replace("{{content}}", grid_html)
 
     with open(os.path.join(output_dir, "index.html"), "w") as f:
@@ -315,7 +324,9 @@ def generate_local_pages(output_dir, lang='it'):
 
             # Replace placeholders
             subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+            subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
             temp_html = base_template.replace("{{subtitle}}", subtitle)
+            temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
             final_page_html = temp_html.replace("{{content}}", page_content)
 
             with open(os.path.join(output_dir, filename), "w") as f:

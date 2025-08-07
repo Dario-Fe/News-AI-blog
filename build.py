@@ -12,6 +12,15 @@ GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents
 SITE_URL = "https://<YOUR_USERNAME>.github.io/<YOUR_REPO>/" # We will replace this later
 BASE_OUTPUT_DIR = "dist"
 
+# Translations
+TRANSLATIONS = {
+    "subtitle": {
+        "it": "Notizie ed analisi sull'Intelligenza Artificiale",
+        "en": "News and analysis on Artificial Intelligence",
+        "es": "Noticias y análisis sobre Inteligencia Artificial"
+    }
+}
+
 # It's recommended to use a GitHub token to avoid rate limiting.
 # Create a Personal Access Token (PAT) with 'repo' scope and set it as an environment variable.
 # For local development: export GITHUB_TOKEN='your_token_here'
@@ -248,7 +257,10 @@ def generate_article_pages(articles, output_dir, lang='it'):
         </div>
         """
 
-        final_page_html = base_template.replace("{{content}}", article_view_html)
+        # Replace placeholders
+        subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+        temp_html = base_template.replace("{{subtitle}}", subtitle)
+        final_page_html = temp_html.replace("{{content}}", article_view_html)
 
         with open(os.path.join(output_dir, article['path']), "w") as f:
             f.write(final_page_html)
@@ -275,7 +287,10 @@ def generate_index_page(articles, output_dir, lang='it'):
         grid_html += card_html
     grid_html += '</div>'
 
-    final_page_html = base_template.replace("{{content}}", grid_html)
+    # Replace placeholders
+    subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+    temp_html = base_template.replace("{{subtitle}}", subtitle)
+    final_page_html = temp_html.replace("{{content}}", grid_html)
 
     with open(os.path.join(output_dir, "index.html"), "w") as f:
         f.write(final_page_html)

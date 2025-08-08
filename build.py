@@ -67,6 +67,28 @@ TRANSLATIONS = {
             "es": "Respetamos tu privacidad. Tus datos no serán compartidos con terceros."
         }
     },
+    "thank_you_page": {
+        "title": {
+            "it": "Grazie per l'iscrizione!",
+            "en": "Thanks for subscribing!",
+            "es": "¡Gracias por suscribirte!"
+        },
+        "heading": {
+            "it": "Grazie!",
+            "en": "Thank You!",
+            "es": "¡Gracias!"
+        },
+        "paragraph": {
+            "it": "La tua iscrizione alla newsletter è stata confermata.",
+            "en": "Your subscription to the newsletter has been confirmed.",
+            "es": "Tu suscripción al boletín ha sido confirmada."
+        },
+        "button_text": {
+            "it": "Torna alla Home",
+            "en": "Back to Home",
+            "es": "Volver al Inicio"
+        }
+    },
     "footer": {
         "curated_by": {
             "it": "A cura di",
@@ -229,6 +251,12 @@ def main():
 
     # 6. Generate RSS feed
     generate_rss_feed(processed_articles, output_dir, lang)
+
+    # 7. Generate local pages (like newsletter)
+    generate_local_pages(output_dir, lang)
+
+    # 8. Copy static assets
+    copy_static_assets(output_dir)
 
 def create_root_redirect():
     """
@@ -460,6 +488,12 @@ def generate_local_pages(output_dir, lang='it'):
                     hidden_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'language', 'value': lang})
                     form.append(hidden_input)
                     final_content = str(soup)
+
+            if filename == "thank-you.html":
+                for key, trans_dict in TRANSLATIONS["thank_you_page"].items():
+                    placeholder = f"{{{{thank_you_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
 
             final_page_html = temp_html.replace("{{content}}", final_content)
 

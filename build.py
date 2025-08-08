@@ -519,7 +519,13 @@ def generate_local_pages(output_dir, lang='it'):
             soup = BeautifulSoup(final_content, 'html.parser')
             form = soup.find('form', {'name': 'newsletter'})
             if form:
-                form['name'] = f"newsletter-{lang}"
+                form_name = f"newsletter-{lang}"
+                form['name'] = form_name
+
+                # Add hidden form-name input for Netlify
+                form_name_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'form-name', 'value': form_name})
+                form.append(form_name_input)
+
                 # Add language input only if it's the main newsletter form
                 if filename == "newsletter.html":
                     hidden_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'language', 'value': lang})
@@ -540,7 +546,7 @@ def copy_static_assets(output_dir):
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
             # Let's avoid copying the template files themselves if they are in the root
-            if item not in ["base.html"]: # Simple exclusion for templates
+            if item not in ["base.html", "forms.html"]: # Simple exclusion for templates
                  print(f"  - {item}")
                  shutil.copy(item, os.path.join(output_dir, item))
 

@@ -9,7 +9,11 @@ echo "1. Cleaning previous build..."
 if [ -d "dist" ]; then rm -r dist; fi
 mkdir dist
 
-# 2. Build the site for each language
+# 2. Copy site-wide static files (like form definitions)
+echo "2. Copying site-wide static files..."
+cp forms.html dist/forms.html
+
+# 3. Build the site for each language
 echo "2. Building site for each language..."
 for lang in it en es; do
   echo "--- Building for $lang ---"

@@ -338,6 +338,7 @@ def generate_article_pages(articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
         temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
         temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+        temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on article pages
         final_page_html = temp_html.replace("{{content}}", article_view_html)
 
         with open(os.path.join(output_dir, article['path']), "w") as f:
@@ -442,6 +443,7 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
             temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
             temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+            temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on local pages
 
             # Replace placeholders in the page content itself
             final_content = page_content

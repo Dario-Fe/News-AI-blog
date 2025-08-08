@@ -320,7 +320,7 @@ def process_article(md_file):
         final_html_content = str(soup)
 
         # Create a unique slug from the filename
-        slug = os.path.splitext(md_file['name'])[0]
+        slug = os.path.splitext(md_file['name'])[0].strip()
 
         return {
             "title": title,
@@ -362,10 +362,17 @@ def generate_article_pages(articles, output_dir, lang='it'):
         subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
         footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
         footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
+
+        # Path for pages at root level of language dir
+        home_link = "index.html"
+        logo_path = "logo_vn_ia.png"
+
         temp_html = base_template.replace("{{subtitle}}", subtitle)
         temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
         temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
         temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+        temp_html = temp_html.replace("{{home_link}}", home_link)
+        temp_html = temp_html.replace("{{logo_path}}", logo_path)
         temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on article pages
         final_page_html = temp_html.replace("{{content}}", article_view_html)
 
@@ -422,10 +429,20 @@ def generate_index_page(articles, output_dir, lang='it'):
         footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
         footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
 
+        # Set paths based on page depth
+        if page_num == 1:
+            home_link = "index.html"
+            logo_path = "logo_vn_ia.png"
+        else:
+            home_link = "../../index.html"
+            logo_path = "../../logo_vn_ia.png"
+
         temp_html = base_template.replace("{{subtitle}}", subtitle)
         temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
         temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
         temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+        temp_html = temp_html.replace("{{home_link}}", home_link)
+        temp_html = temp_html.replace("{{logo_path}}", logo_path)
         temp_html = temp_html.replace("{{content}}", grid_html)
         final_page_html = temp_html.replace("{{pagination_controls}}", pagination_html)
 
@@ -467,10 +484,17 @@ def generate_local_pages(output_dir, lang='it'):
             subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
             footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
             footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
+
+            # Path for pages at root level of language dir
+            home_link = "index.html"
+            logo_path = "logo_vn_ia.png"
+
             temp_html = base_template.replace("{{subtitle}}", subtitle)
             temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
             temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
             temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+            temp_html = temp_html.replace("{{home_link}}", home_link)
+            temp_html = temp_html.replace("{{logo_path}}", logo_path)
             temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on local pages
 
             # Replace placeholders in the page content itself

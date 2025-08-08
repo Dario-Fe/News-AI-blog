@@ -6,6 +6,7 @@ import argparse
 from feedgen.feed import FeedGenerator
 from bs4 import BeautifulSoup
 import markdown2
+import math
 
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
@@ -76,6 +77,18 @@ TRANSLATIONS = {
             "it": "Contatti",
             "en": "Contacts",
             "es": "Contacto"
+        }
+    },
+    "pagination": {
+        "next": {
+            "it": "Articoli Successivi &rarr;",
+            "en": "Next Articles &rarr;",
+            "es": "Artículos Siguientes &rarr;"
+        },
+        "prev": {
+            "it": "&larr; Articoli Precedenti",
+            "en": "&larr; Previous Articles",
+            "es": "&larr; Artículos Anteriores"
         }
     }
 }
@@ -332,39 +345,75 @@ def generate_article_pages(articles, output_dir, lang='it'):
 
 def generate_index_page(articles, output_dir, lang='it'):
     """
-    Generates the main index.html page with a grid of all articles.
+    Generates paginated index pages with a grid of articles.
     """
-    print("\nGenerating index page...")
+    print("\nGenerating index pages...")
     with open("templates/base.html", "r") as f:
         base_template = f.read()
 
-    grid_html = '<div id="articles-grid">\n'
-    for article in articles:
-        card_html = f"""
-        <a href="{article['path']}" class="article-card">
-            <img src="{article['image_url'] if article['image_url'] else 'logo_vn_ia.png'}" alt="{article['title']}" loading="lazy">
-            <div class="article-card-content">
-                <h3>{article['title']}</h3>
-                <p>{article['summary']}</p>
-            </div>
-        </a>
-        """
-        grid_html += card_html
-    grid_html += '</div>'
+    ARTICLES_PER_PAGE = 15
+    total_pages = math.ceil(len(articles) / ARTICLES_PER_PAGE)
 
-    # Replace placeholders
-    subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
-    subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
-    footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
-    footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
-    temp_html = base_template.replace("{{subtitle}}", subtitle)
-    temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
-    temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
-    temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
-    final_page_html = temp_html.replace("{{content}}", grid_html)
+    for page_num in range(1, total_pages + 1):
+        start_index = (page_num - 1) * ARTICLES_PER_PAGE
+        end_index = start_index + ARTICLES_PER_PAGE
+        page_articles = articles[start_index:end_index]
 
-    with open(os.path.join(output_dir, "index.html"), "w") as f:
-        f.write(final_page_html)
+        grid_html = '<div id="articles-grid">\n'
+        for article in page_articles:
+            card_html = f"""
+            <a href="{article['path']}" class="article-card">
+                <img src="{article['image_url'] if article['image_url'] else 'logo_vn_ia.png'}" alt="{article['title']}" loading="lazy">
+                <div class="article-card-content">
+                    <h3>{article['title']}</h3>
+                    <p>{article['summary']}</p>
+                </div>
+            </a>
+            """
+            grid_html += card_html
+        grid_html += '</div>'
+
+        # Generate pagination controls
+        pagination_html = ''
+        if page_num > 1:
+            prev_path = f"../page/{page_num - 1}/index.html" if page_num > 2 else "../index.html"
+            prev_text = TRANSLATIONS["pagination"]["prev"].get(lang, TRANSLATIONS["pagination"]["prev"]["it"])
+            pagination_html += f'<a href="{prev_path}" class="prev-button">{prev_text}</a>'
+
+        if page_num < total_pages:
+            next_path = f"../page/{page_num + 1}/index.html"
+            next_text = TRANSLATIONS["pagination"]["next"].get(lang, TRANSLATIONS["pagination"]["next"]["it"])
+            # Add a spacer if there's also a prev button
+            spacer = '<div style="flex-grow: 1;"></div>' if page_num > 1 else ''
+            pagination_html += f'{spacer}<a href="{next_path}" class="next-button">{next_text}</a>'
+
+        # Replace all placeholders
+        subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+        subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
+        footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
+        footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
+
+        temp_html = base_template.replace("{{subtitle}}", subtitle)
+        temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
+        temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
+        temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+        temp_html = temp_html.replace("{{content}}", grid_html)
+        final_page_html = temp_html.replace("{{pagination_controls}}", pagination_html)
+
+        # Determine output path
+        if page_num == 1:
+            page_output_dir = output_dir
+            output_path = os.path.join(page_output_dir, "index.html")
+        else:
+            page_output_dir = os.path.join(output_dir, "page", str(page_num))
+            output_path = os.path.join(page_output_dir, "index.html")
+
+        if not os.path.exists(page_output_dir):
+            os.makedirs(page_output_dir)
+
+        print(f"  - Generating page {page_num} at {output_path}")
+        with open(output_path, "w") as f:
+            f.write(final_page_html)
 
 def generate_local_pages(output_dir, lang='it'):
     """

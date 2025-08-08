@@ -519,6 +519,10 @@ def generate_local_pages(output_dir, lang='it'):
                     translation = trans_dict.get(lang, trans_dict["it"])
                     final_content = final_content.replace(placeholder, translation)
 
+            # Inject the dynamic, absolute thank you page link
+            thank_you_link = f"/{lang}/thank-you.html"
+            final_content = final_content.replace("{{thank_you_link}}", thank_you_link)
+
             final_page_html = temp_html.replace("{{content}}", final_content)
 
             with open(os.path.join(output_dir, filename), "w") as f:

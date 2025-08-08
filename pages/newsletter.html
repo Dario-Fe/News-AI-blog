@@ -1,7 +1,7 @@
 <div id="newsletter-page-container" style="padding: 20px; max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center;">
     <h1>{{newsletter_page_title}}</h1>
     <p>{{newsletter_page_description}}</p>
-    <form name="newsletter" method="POST" data-netlify="true" action="thank-you.html" style="margin-top: 30px;">
+    <form name="newsletter" method="POST" data-netlify="true" action="{{thank_you_link}}" style="margin-top: 30px;">
         <p style="margin-bottom: 15px;">
             <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold; text-align: left;">{{newsletter_page_label_name}}</label>
             <input type="text" id="name" name="name" placeholder="{{newsletter_page_placeholder_name}}" required style="width: 100%; padding: 10px; border: 1px solid #dddfe2; border-radius: 6px;" />

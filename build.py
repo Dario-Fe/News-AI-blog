@@ -453,6 +453,14 @@ def generate_local_pages(output_dir, lang='it'):
                     translation = trans_dict.get(lang, trans_dict["it"])
                     final_content = final_content.replace(placeholder, translation)
 
+                # Inject the hidden language field
+                soup = BeautifulSoup(final_content, 'html.parser')
+                form = soup.find('form', {'name': 'newsletter'})
+                if form:
+                    hidden_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'language', 'value': lang})
+                    form.append(hidden_input)
+                    final_content = str(soup)
+
             final_page_html = temp_html.replace("{{content}}", final_content)
 
             with open(os.path.join(output_dir, filename), "w") as f:

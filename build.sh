@@ -9,17 +9,11 @@ echo "1. Cleaning previous build..."
 if [ -d "dist" ]; then rm -r dist; fi
 mkdir dist
 
-# 2. Copy static assets to the root of the output directory
-# We run this as a separate Python call to keep concerns separate.
-echo "2. Copying static assets..."
-python3 -c "from build import copy_static_assets; copy_static_assets('dist')"
-
-# 3. Build the site for each language
-echo "3. Building site for each language..."
+# 2. Build the site for each language
+echo "2. Building site for each language..."
 for lang in it en es; do
   echo "--- Building for $lang ---"
   python3 build.py --lang "$lang"
-  python3 -c "from build import generate_local_pages; generate_local_pages('dist/$lang', '$lang')"
 done
 
 # 4. Create the root redirect file

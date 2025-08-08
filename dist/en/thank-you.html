@@ -203,25 +203,24 @@
     </header>
     <main>
         <div class="container">
-    <h1>Thank You!</h1>
-    <p>Your subscription to the newsletter has been confirmed.</p>
-    <a href="index.html" class="back-button">Back to Home</a>
+<h1>Thank You!</h1>
+<p>Your subscription to the newsletter has been confirmed.</p>
+<a class="back-button" href="index.html">Back to Home</a>
 </div>
-
 <!-- Netlify form handling -->
-<form name="newsletter" method="POST" data-netlify="true" action="/en/thank-you.html" hidden>
-    <p>
-        <label>Name</label>
-        <input type="text" name="name" />
-    </p>
-    <p>
-        <label>Email</label>
-        <input type="email" name="email" />
-    </p>
-    <input type="hidden" name="language" />
-    <p>
-        <button type="submit">Subscribe</button>
-    </p>
+<form action="/en/thank-you.html" data-netlify="true" hidden="" method="POST" name="newsletter-en">
+<p>
+<label>Name</label>
+<input name="name" type="text"/>
+</p>
+<p>
+<label>Email</label>
+<input name="email" type="email"/>
+</p>
+<input name="language" type="hidden"/>
+<p>
+<button type="submit">Subscribe</button>
+</p>
 </form>
 
         <div class="pagination-controls">

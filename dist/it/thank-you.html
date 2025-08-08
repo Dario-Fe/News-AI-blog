@@ -203,25 +203,24 @@
     </header>
     <main>
         <div class="container">
-    <h1>Grazie!</h1>
-    <p>La tua iscrizione alla newsletter è stata confermata.</p>
-    <a href="index.html" class="back-button">Torna alla Home</a>
+<h1>Grazie!</h1>
+<p>La tua iscrizione alla newsletter è stata confermata.</p>
+<a class="back-button" href="index.html">Torna alla Home</a>
 </div>
-
 <!-- Netlify form handling -->
-<form name="newsletter" method="POST" data-netlify="true" action="/it/thank-you.html" hidden>
-    <p>
-        <label>Name</label>
-        <input type="text" name="name" />
-    </p>
-    <p>
-        <label>Email</label>
-        <input type="email" name="email" />
-    </p>
-    <input type="hidden" name="language" />
-    <p>
-        <button type="submit">Subscribe</button>
-    </p>
+<form action="/it/thank-you.html" data-netlify="true" hidden="" method="POST" name="newsletter-it">
+<p>
+<label>Name</label>
+<input name="name" type="text"/>
+</p>
+<p>
+<label>Email</label>
+<input name="email" type="email"/>
+</p>
+<input name="language" type="hidden"/>
+<p>
+<button type="submit">Subscribe</button>
+</p>
 </form>
 
         <div class="pagination-controls">

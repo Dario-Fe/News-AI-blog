@@ -49,5 +49,20 @@
         <p>La tua iscrizione alla newsletter è stata confermata.</p>
         <a href="/it/index.html" class="back-button">Torna alla Home</a>
     </div>
+
+    <!-- Netlify form handling -->
+    <form name="newsletter" method="POST" data-netlify="true" action="/thank-you.html" hidden>
+        <p>
+            <label>Name</label>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>Email</label>
+            <input type="email" name="email" />
+        </p>
+        <p>
+            <button type="submit">Subscribe</button>
+        </p>
+    </form>
 </body>
 </html>

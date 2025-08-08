@@ -192,27 +192,55 @@
         <h2 id="subtitle">Notizie ed analisi sull'Intelligenza Artificiale</h2>
     </header>
     <main>
-        <div id="newsletter-page-container" style="padding: 20px; max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center;">
-    <h1>Iscriviti alla nostra Newsletter</h1>
-    <p>Rimani aggiornato con le ultime notizie e analisi sull'Intelligenza Artificiale. Inserisci i tuoi dati qui sotto per non perdere neanche un articolo.</p>
-    <form name="newsletter" method="POST" data-netlify="true" action="/thank-you.html" style="margin-top: 30px;">
-        <p style="margin-bottom: 15px;">
-            <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold; text-align: left;">Nome:</label>
-            <input type="text" id="name" name="name" placeholder="Il tuo nome" required style="width: 100%; padding: 10px; border: 1px solid #dddfe2; border-radius: 6px;" />
-        </p>
-        <p style="margin-bottom: 20px;">
-            <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold; text-align: left;">Email:</label>
-            <input type="email" id="email" name="email" placeholder="La tua email" required style="width: 100%; padding: 10px; border: 1px solid #dddfe2; border-radius: 6px;" />
-        </p>
-        <p>
-            <button type="submit" style="padding: 12px 25px; border: none; background-color: #1877f2; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1.1em;">Iscriviti Ora</button>
-        </p>
-    </form>
-    <p style="font-size: 0.8em; color: #606770; margin-top: 20px;">Rispettiamo la tua privacy. I tuoi dati non saranno condivisi con terze parti.</p>
-</div>
+        <div id="articles-grid">
 
+            <a href="Giganti_Ai_Bocciati_prima_puntata.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg" alt="L'intelligenza artificiale senza controllo: le grandi aziende tech bocciate in sicurezza (Prima Puntata)" loading="lazy">
+                <div class="article-card-content">
+                    <h3>L'intelligenza artificiale senza controllo: le grandi aziende tech bocciate in sicurezza (Prima Puntata)</h3>
+                    <p>di Dario Ferrero (VerbaniaNotizie.it)
+</p>
+                </div>
+            </a>
+
+            <a href="AI_Valutazione_ed_etica.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/06-AI Valutazione ed Etica/Leonardo_Phoenix_An_ethically_charged_portrait_of_AIs_challeng_0.jpg" alt="Valutare l'Intelligenza Artificiale: Quando i Numeri Incontrano l'Etica" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Valutare l'Intelligenza Artificiale: Quando i Numeri Incontrano l'Etica</h3>
+                    <p>di Dario Ferrero (VerbaniaNotizie.it)
+</p>
+                </div>
+            </a>
+
+            <a href="IA_Aziende_e_Servizi .html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/05-AI Aziende e Servizi/Leonardo_Phoenix_10_A_fiercely_competitive_scene_in_the_world_1.jpg" alt="Il Panorama dell'Intelligenza Artificiale: Giganti Tecnologici, Sfide Competitive e gli Strumenti che Democratizzano l'IA" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Il Panorama dell'Intelligenza Artificiale: Giganti Tecnologici, Sfide Competitive e gli Strumenti che Democratizzano l'IA</h3>
+                    <p>di Dario Ferrero (VerbaniaNotizie.it)
+</p>
+                </div>
+            </a>
+
+            <a href="AI_Creazione_Contenuti.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/04-AI_Creazione_Contenuti/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_whimsical_arti_1.jpg" alt="AI e Creazione di Contenuti: Il Presente e il Futuro della Creatività Digitale" loading="lazy">
+                <div class="article-card-content">
+                    <h3>AI e Creazione di Contenuti: Il Presente e il Futuro della Creatività Digitale</h3>
+                    <p>di Dario Ferrero (VerbaniaNotizie.it)
+</p>
+                </div>
+            </a>
+
+            <a href="Dalle Applicazioni Consolidate alle Frontiere del Futuro.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/03-Dalle Applicazioni Consolidate alle Frontiere del Futuro/fotocopertina2.jpg" alt="L'Intelligenza Artificiale Oggi: Dalle Applicazioni Consolidate alle Frontiere del Futuro" loading="lazy">
+                <div class="article-card-content">
+                    <h3>L'Intelligenza Artificiale Oggi: Dalle Applicazioni Consolidate alle Frontiere del Futuro</h3>
+                    <p>di Dario Ferrero (VerbaniaNotizie.it)
+</p>
+                </div>
+            </a>
+            </div>
         <div class="pagination-controls">
-            {{pagination_controls}}
+            <a href="../index.html" class="prev-button">&larr; Articoli Precedenti</a><div style="flex-grow: 1;"></div><a href="../page/3/index.html" class="next-button">Articoli Successivi &rarr;</a>
         </div>
     </main>
     <footer>

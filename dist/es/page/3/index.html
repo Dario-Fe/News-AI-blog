@@ -182,43 +182,44 @@
 <body>
     <header>
         <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em; align-items: center;">
-            <a href="newsletter.html" class="subscribe-link">Iscriviti</a>
+            <a href="newsletter.html" class="subscribe-link">Suscríbete</a>
             <span class="separator" style="border-left: 1px solid #dddfe2; height: 20px;"></span>
             <a href="../it/index.html" title="Italiano">🇮🇹</a>
             <a href="../en/index.html" title="English">🇬🇧</a>
             <a href="../es/index.html" title="Español">🇪🇸</a>
         </div>
         <a href="../it/index.html"><img src="../logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
-        <h2 id="subtitle">Notizie ed analisi sull'Intelligenza Artificiale</h2>
+        <h2 id="subtitle">Noticias y análisis sobre Inteligencia Artificial</h2>
     </header>
     <main>
-        <div id="newsletter-page-container" style="padding: 20px; max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center;">
-    <h1>Iscriviti alla nostra Newsletter</h1>
-    <p>Rimani aggiornato con le ultime notizie e analisi sull'Intelligenza Artificiale. Inserisci i tuoi dati qui sotto per non perdere neanche un articolo.</p>
-    <form name="newsletter" method="POST" data-netlify="true" action="/thank-you.html" style="margin-top: 30px;">
-        <p style="margin-bottom: 15px;">
-            <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold; text-align: left;">Nome:</label>
-            <input type="text" id="name" name="name" placeholder="Il tuo nome" required style="width: 100%; padding: 10px; border: 1px solid #dddfe2; border-radius: 6px;" />
-        </p>
-        <p style="margin-bottom: 20px;">
-            <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold; text-align: left;">Email:</label>
-            <input type="email" id="email" name="email" placeholder="La tua email" required style="width: 100%; padding: 10px; border: 1px solid #dddfe2; border-radius: 6px;" />
-        </p>
-        <p>
-            <button type="submit" style="padding: 12px 25px; border: none; background-color: #1877f2; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1.1em;">Iscriviti Ora</button>
-        </p>
-    </form>
-    <p style="font-size: 0.8em; color: #606770; margin-top: 20px;">Rispettiamo la tua privacy. I tuoi dati non saranno condivisi con terze parti.</p>
-</div>
+        <div id="articles-grid">
 
+            <a href="Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna_es.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/02-Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_2.jpg" alt="Machine Learning, Deep Learning y Algoritmos Generativos: El Corazón Palpitante de la Inteligencia Artificial Moderna" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Machine Learning, Deep Learning y Algoritmos Generativos: El Corazón Palpitante de la Inteligencia Artificial Moderna</h3>
+                    <p>Por: Dario Ferrero (VerbaniaNotizie.it)
+</p>
+                </div>
+            </a>
+
+            <a href="L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo_es.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/01-L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_1.jpg" alt="Inteligencia Artificial: Un Viaje a la Tecnología Que Está Redefiniendo Nuestro Mundo" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Inteligencia Artificial: Un Viaje a la Tecnología Que Está Redefiniendo Nuestro Mundo</h3>
+                    <p>Por: Dario Ferrero (VerbaniaNotizie.it)
+</p>
+                </div>
+            </a>
+            </div>
         <div class="pagination-controls">
-            {{pagination_controls}}
+            <a href="../page/2/index.html" class="prev-button">&larr; Artículos Anteriores</a>
         </div>
     </main>
     <footer>
-        <p>A cura di <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></p>
+        <p>A cargo de <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></p>
         <p>
-            <a href="mailto:info@verbanianotizie.it">Contatti</a> |
+            <a href="mailto:info@verbanianotizie.it">Contacto</a> |
             <a href="#">Cookie</a> |
             <a href="#">Privacy Policy</a>
         </p>

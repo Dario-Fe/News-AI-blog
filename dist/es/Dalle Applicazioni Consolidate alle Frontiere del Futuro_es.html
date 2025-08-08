@@ -157,6 +157,26 @@
             background-color: #dcebff;
             text-decoration: none;
         }
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .pagination-controls a {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #1c1e21;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .pagination-controls a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -522,6 +542,9 @@
             </div>
         </div>
 
+        <div class="pagination-controls">
+            {{pagination_controls}}
+        </div>
     </main>
     <footer>
         <p>A cargo de <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></p>

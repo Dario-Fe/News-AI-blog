@@ -65,6 +65,18 @@ TRANSLATIONS = {
             "en": "We respect your privacy. Your data will not be shared with third parties.",
             "es": "Respetamos tu privacidad. Tus datos no serán compartidos con terceros."
         }
+    },
+    "footer": {
+        "curated_by": {
+            "it": "A cura di",
+            "en": "Curated by",
+            "es": "A cargo de"
+        },
+        "contacts": {
+            "it": "Contatti",
+            "en": "Contacts",
+            "es": "Contacto"
+        }
     }
 }
 
@@ -307,8 +319,12 @@ def generate_article_pages(articles, output_dir, lang='it'):
         # Replace placeholders
         subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
         subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
+        footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
+        footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
         temp_html = base_template.replace("{{subtitle}}", subtitle)
         temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
+        temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
+        temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
         final_page_html = temp_html.replace("{{content}}", article_view_html)
 
         with open(os.path.join(output_dir, article['path']), "w") as f:
@@ -339,8 +355,12 @@ def generate_index_page(articles, output_dir, lang='it'):
     # Replace placeholders
     subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
     subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
+    footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
+    footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
     temp_html = base_template.replace("{{subtitle}}", subtitle)
     temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
+    temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
+    temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
     final_page_html = temp_html.replace("{{content}}", grid_html)
 
     with open(os.path.join(output_dir, "index.html"), "w") as f:
@@ -367,8 +387,12 @@ def generate_local_pages(output_dir, lang='it'):
             # Replace placeholders in the base template
             subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
             subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
+            footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
+            footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
             temp_html = base_template.replace("{{subtitle}}", subtitle)
             temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
+            temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
+            temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
 
             # Replace placeholders in the page content itself
             final_content = page_content

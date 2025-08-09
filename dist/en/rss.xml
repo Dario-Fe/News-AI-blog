@@ -2,83 +2,71 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
   <channel>
     <title>Notizie IA - Aggiornamenti e Analisi (en)</title>
-    <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/</link>
+    <link>https://ianotizie.netlify.app/en/</link>
     <description>Le ultime notizie e approfondimenti sull'intelligenza artificiale, a cura di Verbania Notizie.</description>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 08 Aug 2025 18:22:53 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Aug 2025 09:32:30 +0000</lastBuildDate>
     <item>
-      <title>Artificial Intelligence: A Journey into the Technology That is Redefining Our World</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo_en.html</link>
-      <description>By: Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>Machine Learning, Deep Learning, and Generative Algorithms: The Beating Heart of Modern Artificial Intelligence</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna_en.html</link>
-      <description>By: Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>Artificial Intelligence Today: From Consolidated Applications to Future Frontiers</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/Dalle Applicazioni Consolidate alle Frontiere del Futuro_en.html</link>
-      <description>By Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>AI and Content Creation: The Present and Future of Digital Creativity</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/AI_Creazione_Contenuti_en.html</link>
-      <description>By Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>The Artificial Intelligence Landscape: Tech Giants, Competitive Challenges, and the Tools Democratizing AI</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/IA_Aziende_e_Servizi_en.html</link>
-      <description>By Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>Evaluating Artificial Intelligence: When Numbers Meet Ethics</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/AI_Valutazione_ed_etica_en.html</link>
-      <description>by Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>Uncontrolled Artificial Intelligence: Big Tech Companies Fail on Safety (Part One)</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/Giganti_Ai_Bocciati_prima_puntata_en.html</link>
-      <description>by Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>Uncontrolled Artificial Intelligence: Big Tech Companies Fail on Safety (Part Two)</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/Giganti_Ai_Bocciati_seconda_puntata_en.html</link>
-      <description>by Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>When Artificial Intelligence Makes Music: The Phenomenon of The Velvet Sundown and Iam Between Technology and Ethics</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/AI_Musica_Copyright_en.html</link>
-      <description>by Dario Ferrero (VerbaniaNotizie.it)
-</description>
-    </item>
-    <item>
-      <title>Kimi K2: The Chinese Artificial Intelligence That Challenges the Coding Giants</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/kimi_k2_article_en.html</link>
-      <description>by Dario Ferrero (VerbaniaNotizie.it)
-</description>
+      <title>"When Size Doesn't Matter": The Revolution of the HRM Model</title>
+      <link>https://ianotizie.netlify.app/en/articolo_hrm_en.html</link>
+      <description>The biggest revolution in artificial intelligence in recent years comes not from the labs of OpenAI or Google, but from a small startup in Singapore called Sapient Intelligence.</description>
     </item>
     <item>
       <title>Artificial Intelligence and the Future of Work</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/articolo_ai_lavoro_en.html</link>
-      <description>by Dario Ferrero (VerbaniaNotizie.it)
-</description>
+      <link>https://ianotizie.netlify.app/en/articolo_ai_lavoro_en.html</link>
+      <description>Like in The Matrix, we are faced with a choice: red pill or blue pill? Artificial intelligence is entering the world of work, and we can no longer ignore it.</description>
     </item>
     <item>
-      <title>"When Size Doesn't Matter": The Revolution of the HRM Model</title>
-      <link>https://&lt;YOUR_USERNAME&gt;.github.io/&lt;YOUR_REPO&gt;/en/articolo_hrm_en.html</link>
-      <description>by Dario Ferrero (VerbaniaNotizie.it)
-</description>
+      <title>Kimi K2: The Chinese Artificial Intelligence That Challenges the Coding Giants</title>
+      <link>https://ianotizie.netlify.app/en/kimi_k2_article_en.html</link>
+      <description>If artificial intelligence were a Netflix series, we'd say we've reached the moment when the undisputed protagonist faces a new, unexpected rival. After years of American dominance in the AI sector, with OpenAI and Anthropic ruling the roost, a challenger emerges from the East that promises to reshuffle the deck: Kimi K2, the latest creation from Moonshot AI.</description>
+    </item>
+    <item>
+      <title>When Artificial Intelligence Makes Music: The Phenomenon of The Velvet Sundown and Iam Between Technology and Ethics</title>
+      <link>https://ianotizie.netlify.app/en/AI_Musica_Copyright_en.html</link>
+      <description>Imagine discovering that your favorite song, the one that has accompanied you for months, the one you shared with friends and that has garnered millions of listens, was never played by human hands. There is no singer who performed it with their voice, no guitarist who found those perfect chords, no musicians who gathered in a studio to create that sonic alchemy. Everything was born from algorithms, neural networks, and artificial intelligence.</description>
+    </item>
+    <item>
+      <title>Uncontrolled Artificial Intelligence: Big Tech Companies Fail on Safety (Part Two)</title>
+      <link>https://ianotizie.netlify.app/en/Giganti_Ai_Bocciati_seconda_puntata_en.html</link>
+      <description>Resuming the analysis of the independent report from the Future of Life Institute, in this second part, we delve deeper into the themes of safety in AI development, the regulatory and technical urgency to set limits, ethical aspects, and future prospects.</description>
+    </item>
+    <item>
+      <title>Uncontrolled Artificial Intelligence: Big Tech Companies Fail on Safety (Part One)</title>
+      <link>https://ianotizie.netlify.app/en/Giganti_Ai_Bocciati_prima_puntata_en.html</link>
+      <description>An independent report reveals that major technology companies are not prepared to manage the risks of artificial general intelligence.</description>
+    </item>
+    <item>
+      <title>Evaluating Artificial Intelligence: When Numbers Meet Ethics</title>
+      <link>https://ianotizie.netlify.app/en/AI_Valutazione_ed_etica_en.html</link>
+      <description>In the past five articles, we have explored the world of artificial intelligence together, starting from its historical roots and technological foundations, and then delving into the complexities of machine learning and deep learning. We have seen how AI is transforming the world of work and study, discovered the wonders of generative AI that creates images, texts, and videos, and analyzed the landscape of companies and tools shaping this sector.</description>
+    </item>
+    <item>
+      <title>The Artificial Intelligence Landscape: Tech Giants, Competitive Challenges, and the Tools Democratizing AI</title>
+      <link>https://ianotizie.netlify.app/en/IA_Aziende_e_Servizi_en.html</link>
+      <description>After exploring in previous articles the theoretical foundations of artificial intelligence, the techniques that power it, its applications in the world of work and study, and the incredible possibilities of generative AI, it is time to turn our gaze towards the beating heart of this revolution: the companies that are shaping the future of AI and the tools that make it accessible to all of us.</description>
+    </item>
+    <item>
+      <title>AI and Content Creation: The Present and Future of Digital Creativity</title>
+      <link>https://ianotizie.netlify.app/en/AI_Creazione_Contenuti_en.html</link>
+      <description>After exploring the applications of artificial intelligence in the most diverse sectors, from healthcare to finance, from automotive to agriculture, it is natural to turn our gaze towards one of the fields where AI is demonstrating the most revolutionary potential: content creation. Here, artificial intelligence is not limited to automating existing processes, but is literally redefining what it means to be creative, offering tools that allow anyone to produce professional-quality content. From photorealistic images generated by a simple text description, to videos created from an idea, to music composed by algorithms: we are facing an unprecedented democratization of creativity.</description>
+    </item>
+    <item>
+      <title>Artificial Intelligence Today: From Consolidated Applications to Future Frontiers</title>
+      <link>https://ianotizie.netlify.app/en/Dalle%20Applicazioni%20Consolidate%20alle%20Frontiere%20del%20Futuro_en.html</link>
+      <description>After exploring the theoretical and historical foundations of artificial intelligence in the first two articles of our series, it is time to dive into the beating heart of this technological revolution: its concrete applications in the real world. If in past years AI seemed confined to research laboratories and science fiction films, today it has become a constant and often invisible presence in our daily lives, transforming sectors ranging from medicine to entertainment, from finance to robotics.</description>
+    </item>
+    <item>
+      <title>Machine Learning, Deep Learning, and Generative Algorithms: The Beating Heart of Modern Artificial Intelligence</title>
+      <link>https://ianotizie.netlify.app/en/Machine%20Learning%2C%20Deep%20Learning%20e%20Algoritmi%20Generativi%20Il%20Cuore%20Pulsante%20dell%27Intelligenza%20Artificiale%20Moderna_en.html</link>
+      <description>After exploring the historical and technical foundations of Artificial Intelligence in our previous article, we now delve into the technologies that are truly revolutionizing our world: Machine Learning, Deep Learning, and generative algorithms. These tools are no longer science fiction, but everyday realities shaping the way we work, communicate, and create.</description>
+    </item>
+    <item>
+      <title>Artificial Intelligence: A Journey into the Technology That is Redefining Our World</title>
+      <link>https://ianotizie.netlify.app/en/L%27Intelligenza%20Artificiale%20-%20Un%20Viaggio%20nella%20Tecnologia%20Che%20Sta%20Ridefinendo%20il%20Nostro%20Mondo_en.html</link>
+      <description>If you're wondering what Artificial Intelligence really is and why it's talked about so much, you're not alone. At this moment in history, we are witnessing a silent but powerful revolution that is changing the way we work, learn, and interact with the digital world. Artificial Intelligence (AI) is no longer science fiction: it's here, now, and you're probably already using it without even realizing it.</description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizie IA</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dddfe2;
+            position: relative;
+        }
+        #language-selector-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #language-selector {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            background-color: #f0f2f5;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            #language-selector-container {
+                position: static;
+                margin-bottom: 15px;
+            }
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #000;
+        }
+        header h2 {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: normal;
+            color: #606770;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .article-card-content {
+            padding: 15px;
+        }
+        .article-card-content h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .article-card-content p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #606770;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #article-view {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #article-view img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #article-view h1 {
+            font-size: 2.2em;
+        }
+        #article-view p {
+            line-height: 1.6;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .footer-back-button {
+            margin-top: 30px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-top: 1px solid #dddfe2;
+            color: #606770;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .subscribe-link {
+            font-size: 0.8em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #1877f2;
+            background-color: #e7f3ff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .subscribe-link:hover {
+            background-color: #dcebff;
+            text-decoration: none;
+        }
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .pagination-controls a {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #1c1e21;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .pagination-controls a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            text-decoration: none;
+        }
+        /* Styles for thank-you and newsletter pages */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em; align-items: center;">
+            <a href="newsletter.html" class="subscribe-link">S'abonner</a>
+            <span class="separator" style="border-left: 1px solid #dddfe2; height: 20px;"></span>
+            <a href="../it/index.html" title="Italiano">🇮🇹</a>
+            <a href="../en/index.html" title="English">🇬🇧</a>
+            <a href="../es/index.html" title="Español">🇪🇸</a>
+            <a href="../fr/index.html" title="Français">🇫🇷</a>
+            <a href="../de/index.html" title="Deutsch">🇩🇪</a>
+        </div>
+        <a href="index.html"><img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
+        <h2 id="subtitle">Actualités et analyses sur l'intelligence artificielle</h2>
+    </header>
+    <main>
+        <div class="container">
+<h1>Merci!</h1>
+<p>Votre inscription à la newsletter a été confirmée.</p>
+<a class="back-button" href="index.html">Retour à l'accueil</a>
+</div>
+<!-- Netlify form handling -->
+<form action="/fr/thank-you.html" data-netlify="true" hidden="" method="POST" name="newsletter-fr">
+<p>
+<label>Name</label>
+<input name="name" type="text"/>
+</p>
+<p>
+<label>Email</label>
+<input name="email" type="email"/>
+</p>
+<input name="language" type="hidden"/>
+<p>
+<button type="submit">Subscribe</button>
+</p>
+<input name="form-name" type="hidden" value="newsletter-fr"/></form>
+
+        <div class="pagination-controls">
+
+        </div>
+    </main>
+    <footer>
+        <p>Édité par <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></p>
+        <p>
+            <a href="mailto:info@verbanianotizie.it">Contacts</a> |
+            <a href="#">Cookie</a> |
+            <a href="#">Privacy Policy</a>
+        </p>
+    </footer>
+</body>
+</html>

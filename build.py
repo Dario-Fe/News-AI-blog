@@ -19,99 +19,135 @@ TRANSLATIONS = {
     "subtitle": {
         "it": "Notizie ed analisi sull'Intelligenza Artificiale",
         "en": "News and analysis on Artificial Intelligence",
-        "es": "Noticias y análisis sobre Inteligencia Artificial"
+        "es": "Noticias y análisis sobre Inteligencia Artificial",
+        "fr": "Actualités et analyses sur l'intelligence artificielle",
+        "de": "Nachrichten und Analysen zur Künstlichen Intelligenz"
     },
     "subscribe": {
         "it": "Iscriviti",
         "en": "Subscribe",
-        "es": "Suscríbete"
+        "es": "Suscríbete",
+        "fr": "S'abonner",
+        "de": "Abonnieren"
     },
     "newsletter_page": {
         "title": {
             "it": "Iscriviti alla nostra Newsletter",
             "en": "Subscribe to our Newsletter",
-            "es": "Suscríbete a nuestro boletín"
+            "es": "Suscríbete a nuestro boletín",
+            "fr": "Abonnez-vous à notre newsletter",
+            "de": "Abonnieren Sie unseren Newsletter"
         },
         "description": {
             "it": "Rimani aggiornato con le ultime notizie e analisi sull'Intelligenza Artificiale. Inserisci i tuoi dati qui sotto per non perdere neanche un articolo.",
             "en": "Stay updated with the latest news and analysis on Artificial Intelligence. Enter your details below to not miss a single article.",
-            "es": "Mantente actualizado con las últimas noticias y análisis sobre Inteligencia Artificial. Ingresa tus datos a continuación para no perderte ni un solo artículo."
+            "es": "Mantente actualizado con las últimas noticias y análisis sobre Inteligencia Artificial. Ingresa tus datos a continuación para no perderte ni un solo artículo.",
+            "fr": "Restez à jour avec les dernières nouvelles et analyses sur l'Intelligence Artificielle. Entrez vos coordonnées ci-dessous pour ne manquer aucun article.",
+            "de": "Bleiben Sie auf dem Laufenden mit den neuesten Nachrichten und Analysen zur Künstlichen Intelligenz. Geben Sie unten Ihre Daten ein, um keinen Artikel zu verpassen."
         },
         "label_name": {
             "it": "Nome:",
             "en": "Name:",
-            "es": "Nombre:"
+            "es": "Nombre:",
+            "fr": "Nom:",
+            "de": "Name:"
         },
         "placeholder_name": {
             "it": "Il tuo nome",
             "en": "Your name",
-            "es": "Tu nombre"
+            "es": "Tu nombre",
+            "fr": "Votre nom",
+            "de": "Ihr Name"
         },
         "label_email": {
             "it": "Email:",
             "en": "Email:",
-            "es": "Correo electrónico:"
+            "es": "Correo electrónico:",
+            "fr": "Email:",
+            "de": "E-Mail:"
         },
         "placeholder_email": {
             "it": "La tua email",
             "en": "Your email",
-            "es": "Tu correo electrónico"
+            "es": "Tu correo electrónico",
+            "fr": "Votre e-mail",
+            "de": "Ihre E-Mail"
         },
         "button_text": {
             "it": "Iscriviti Ora",
             "en": "Subscribe Now",
-            "es": "Suscríbete Ahora"
+            "es": "Suscríbete Ahora",
+            "fr": "Abonnez-vous maintenant",
+            "de": "Jetzt abonnieren"
         },
         "privacy_note": {
             "it": "Rispettiamo la tua privacy. I tuoi dati non saranno condivisi con terze parti.",
             "en": "We respect your privacy. Your data will not be shared with third parties.",
-            "es": "Respetamos tu privacidad. Tus datos no serán compartidos con terceros."
+            "es": "Respetamos tu privacidad. Tus datos no serán compartidos con terceros.",
+            "fr": "Nous respectons votre vie privée. Vos données ne seront pas partagées avec des tiers.",
+            "de": "Wir respektieren Ihre Privatsphäre. Ihre Daten werden nicht an Dritte weitergegeben."
         }
     },
     "thank_you_page": {
         "title": {
             "it": "Grazie per l'iscrizione!",
             "en": "Thanks for subscribing!",
-            "es": "¡Gracias por suscribirte!"
+            "es": "¡Gracias por suscribirte!",
+            "fr": "Merci de votre inscription!",
+            "de": "Vielen Dank für Ihre Anmeldung!"
         },
         "heading": {
             "it": "Grazie!",
             "en": "Thank You!",
-            "es": "¡Gracias!"
+            "es": "¡Gracias!",
+            "fr": "Merci!",
+            "de": "Danke!"
         },
         "paragraph": {
             "it": "La tua iscrizione alla newsletter è stata confermata.",
             "en": "Your subscription to the newsletter has been confirmed.",
-            "es": "Tu suscripción al boletín ha sido confirmada."
+            "es": "Tu suscripción al boletín ha sido confirmada.",
+            "fr": "Votre inscription à la newsletter a été confirmée.",
+            "de": "Ihre Anmeldung für den Newsletter wurde bestätigt."
         },
         "button_text": {
             "it": "Torna alla Home",
             "en": "Back to Home",
-            "es": "Volver al Inicio"
+            "es": "Volver al Inicio",
+            "fr": "Retour à l'accueil",
+            "de": "Zurück zur Startseite"
         }
     },
     "footer": {
         "curated_by": {
             "it": "A cura di",
             "en": "Curated by",
-            "es": "A cargo de"
+            "es": "A cargo de",
+            "fr": "Édité par",
+            "de": "Kuratiert von"
         },
         "contacts": {
             "it": "Contatti",
             "en": "Contacts",
-            "es": "Contacto"
+            "es": "Contacto",
+            "fr": "Contacts",
+            "de": "Kontakt"
         }
     },
     "pagination": {
         "next": {
             "it": "Articoli Successivi &rarr;",
             "en": "Next Articles &rarr;",
-            "es": "Artículos Siguientes &rarr;"
+            "es": "Artículos Siguientes &rarr;",
+            "fr": "Articles suivants &rarr;",
+            "de": "Nächste Artikel &rarr;"
         },
         "prev": {
             "it": "&larr; Articoli Precedenti",
             "en": "&larr; Previous Articles",
-            "es": "&larr; Artículos Anteriores"
+            "es": "&larr; Artículos Anteriores",
+            "fr": "&larr; Articles précédents",
+            "de": "&larr; Vorherige Artikel"
         }
     }
 }
@@ -121,6 +157,18 @@ TRANSLATIONS = {
 # For local development: export GITHUB_TOKEN='your_token_here'
 # In GitHub Actions, this can be set as a secret.
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+
+LANGUAGES = ["it", "en", "es", "fr", "de"]
+
+def get_language_links(depth):
+    """
+    Generates a dictionary of relative language links based on page depth.
+    """
+    links = {}
+    path_prefix = "../" * depth
+    for lang in LANGUAGES:
+        links[f"{lang}_link"] = f"{path_prefix}{lang}/index.html"
+    return links
 
 def get_all_repo_files():
     """
@@ -165,6 +213,10 @@ def structure_articles_by_language(all_files):
                     lang = 'en'
                 elif filename.endswith('_es.md'):
                     lang = 'es'
+                elif filename.endswith('_fr.md'):
+                    lang = 'fr'
+                elif filename.endswith('_de.md'):
+                    lang = 'de'
                 elif filename.endswith('.md'):
                     # This is Italian only if no other lang suffix is present
                     is_base_file = not any(s in filename for s in ['_en.md', '_es.md', '_fr.md', '_de.md'])
@@ -370,6 +422,7 @@ def generate_article_pages(articles, output_dir, lang='it'):
         # Path for pages at root level of language dir
         home_link = "index.html"
         logo_path = "logo_vn_ia.png"
+        lang_links = get_language_links(depth=1)
 
         temp_html = base_template.replace("{{subtitle}}", subtitle)
         temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
@@ -378,6 +431,11 @@ def generate_article_pages(articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{home_link}}", home_link)
         temp_html = temp_html.replace("{{logo_path}}", logo_path)
         temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on article pages
+
+        # Replace language links
+        for link_placeholder, link_url in lang_links.items():
+            temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
+
         final_page_html = temp_html.replace("{{content}}", article_view_html)
 
         with open(os.path.join(output_dir, article['path']), "w") as f:
@@ -437,9 +495,11 @@ def generate_index_page(articles, output_dir, lang='it'):
         if page_num == 1:
             home_link = "index.html"
             logo_path = "logo_vn_ia.png"
+            lang_links = get_language_links(depth=1)
         else:
             home_link = "../../index.html"
             logo_path = "../../logo_vn_ia.png"
+            lang_links = get_language_links(depth=2)
 
         temp_html = base_template.replace("{{subtitle}}", subtitle)
         temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
@@ -448,7 +508,13 @@ def generate_index_page(articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{home_link}}", home_link)
         temp_html = temp_html.replace("{{logo_path}}", logo_path)
         temp_html = temp_html.replace("{{content}}", grid_html)
-        final_page_html = temp_html.replace("{{pagination_controls}}", pagination_html)
+        temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
+
+        # Replace language links
+        for link_placeholder, link_url in lang_links.items():
+            temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
+
+        final_page_html = temp_html
 
         # Determine output path
         if page_num == 1:
@@ -492,6 +558,7 @@ def generate_local_pages(output_dir, lang='it'):
             # Path for pages at root level of language dir
             home_link = "index.html"
             logo_path = "logo_vn_ia.png"
+            lang_links = get_language_links(depth=1)
 
             temp_html = base_template.replace("{{subtitle}}", subtitle)
             temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
@@ -500,6 +567,10 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{home_link}}", home_link)
             temp_html = temp_html.replace("{{logo_path}}", logo_path)
             temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on local pages
+
+            # Replace language links
+            for link_placeholder, link_url in lang_links.items():
+                temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
 
             # Replace placeholders in the page content itself
             final_content = page_content

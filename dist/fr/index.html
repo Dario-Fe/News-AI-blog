@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizie IA</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dddfe2;
+            position: relative;
+        }
+        #language-selector-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #language-selector {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #dddfe2;
+            background-color: #f0f2f5;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            #language-selector-container {
+                position: static;
+                margin-bottom: 15px;
+            }
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #000;
+        }
+        header h2 {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: normal;
+            color: #606770;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .article-card-content {
+            padding: 15px;
+        }
+        .article-card-content h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .article-card-content p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #606770;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        #article-view {
+            background-color: #ffffff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #article-view img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #article-view h1 {
+            font-size: 2.2em;
+        }
+        #article-view p {
+            line-height: 1.6;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .footer-back-button {
+            margin-top: 30px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-top: 1px solid #dddfe2;
+            color: #606770;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .subscribe-link {
+            font-size: 0.8em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #1877f2;
+            background-color: #e7f3ff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .subscribe-link:hover {
+            background-color: #dcebff;
+            text-decoration: none;
+        }
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .pagination-controls a {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #1c1e21;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .pagination-controls a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            text-decoration: none;
+        }
+        /* Styles for thank-you and newsletter pages */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em; align-items: center;">
+            <a href="newsletter.html" class="subscribe-link">S'abonner</a>
+            <span class="separator" style="border-left: 1px solid #dddfe2; height: 20px;"></span>
+            <a href="../it/index.html" title="Italiano">🇮🇹</a>
+            <a href="../en/index.html" title="English">🇬🇧</a>
+            <a href="../es/index.html" title="Español">🇪🇸</a>
+            <a href="../fr/index.html" title="Français">🇫🇷</a>
+            <a href="../de/index.html" title="Deutsch">🇩🇪</a>
+        </div>
+        <a href="index.html"><img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
+        <h2 id="subtitle">Actualités et analyses sur l'intelligence artificielle</h2>
+    </header>
+    <main>
+        <div id="articles-grid">
+
+            <a href="articolo_hrm_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/11 - AI La rivoluzione HRM /hrm_le_dimensioni_non_contano.jpg" alt=""Quand la Taille n'a pas d'Importance" : La Révolution du Modèle HRM" loading="lazy">
+                <div class="article-card-content">
+                    <h3>"Quand la Taille n'a pas d'Importance" : La Révolution du Modèle HRM</h3>
+                    <p>La plus grande révolution de l'intelligence artificielle de ces dernières années ne vient pas des laboratoires d'OpenAI ou de Google, mais d'une petite startup de Singapour appelée Sapient Intelligence.</p>
+                </div>
+            </a>
+
+            <a href="articolo_ai_lavoro_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/10 - AI Posti di Lavoro/work_wrestling.jpg" alt="L'Intelligence Artificielle et l'Avenir du Travail" loading="lazy">
+                <div class="article-card-content">
+                    <h3>L'Intelligence Artificielle et l'Avenir du Travail</h3>
+                    <p>Comme dans Matrix, nous sommes face à un choix : pilule rouge ou pilule bleue ? L'intelligence artificielle arrive dans le monde du travail et nous ne pouvons plus l'ignorer.</p>
+                </div>
+            </a>
+
+            <a href="kimi_k2_article_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/09 - AI Kimi K2 il nuovo sfidante/DavideGolia_IA.jpg" alt="Kimi K2 : L'Intelligence Artificielle Chinoise qui Défie les Géants du Codage" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Kimi K2 : L'Intelligence Artificielle Chinoise qui Défie les Géants du Codage</h3>
+                    <p>Si l'intelligence artificielle était une série Netflix, nous dirions que nous sommes arrivés au moment où le protagoniste incontesté se retrouve face à un nouveau rival que personne n'attendait. Après des années de domination américaine dans le secteur de l'IA, avec OpenAI et Anthropic en tête, un challenger venu de l'Est promet de rebattre les cartes : Kimi K2, la dernière création de Moonshot AI.</p>
+                </div>
+            </a>
+
+            <a href="AI_Musica_Copyright_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/08-AI Musica e Copyright/Band_AI.jpg" alt="Quand l'Intelligence Artificielle fait de la musique : le phénomène The Velvet Sundown et Iam entre technologie et éthique" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Quand l'Intelligence Artificielle fait de la musique : le phénomène The Velvet Sundown et Iam entre technologie et éthique</h3>
+                    <p>Imaginez découvrir que votre chanson préférée, celle qui vous a accompagné pendant des mois, que vous avez partagée avec des amis et qui a totalisé des millions d'écoutes, n'a jamais été jouée par des mains humaines. Il n'y a pas de chanteur qui l'a interprétée avec sa voix, pas de guitariste qui a trouvé ces accords parfaits, pas de musiciens qui se sont réunis en studio pour créer cette alchimie sonore. Tout est né d'algorithmes, de réseaux de neurones et d'intelligence artificielle.</p>
+                </div>
+            </a>
+
+            <a href="Giganti_AI_Bocciati_seconda_puntata_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg" alt="L'intelligence artificielle sans contrôle : les géants de la tech recalés en matière de sécurité (Deuxième Partie)" loading="lazy">
+                <div class="article-card-content">
+                    <h3>L'intelligence artificielle sans contrôle : les géants de la tech recalés en matière de sécurité (Deuxième Partie)</h3>
+                    <p>Reprenant l'analyse du rapport indépendant du Future of Life Institute, dans cette deuxième partie, nous approfondissons les thèmes de la sécurité dans le développement des IA, l'urgence réglementaire et technique de poser des limites, les aspects éthiques et les perspectives futures.</p>
+                </div>
+            </a>
+
+            <a href="Giganti_Ai_Bocciati_prima_puntata_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg" alt="L'intelligence artificielle sans contrôle : les géants de la tech recalés en matière de sécurité (Première Partie)" loading="lazy">
+                <div class="article-card-content">
+                    <h3>L'intelligence artificielle sans contrôle : les géants de la tech recalés en matière de sécurité (Première Partie)</h3>
+                    <p>Un rapport indépendant révèle que les principales entreprises technologiques ne sont pas prêtes à gérer les risques de l'intelligence artificielle générale</p>
+                </div>
+            </a>
+
+            <a href="AI_Valutazione_ed_etica_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/06-AI Valutazione ed Etica/Leonardo_Phoenix_An_ethically_charged_portrait_of_AIs_challeng_0.jpg" alt="Évaluer l'Intelligence Artificielle : Quand les Chiffres Rencontrent l'Éthique" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Évaluer l'Intelligence Artificielle : Quand les Chiffres Rencontrent l'Éthique</h3>
+                    <p>Au cours des cinq articles précédents, nous avons exploré ensemble le monde de l'intelligence artificielle, en partant de ses racines historiques et de ses fondements technologiques, pour ensuite nous aventurer dans les complexités de l'apprentissage automatique et de l'apprentissage profond. Nous avons vu comment l'IA transforme le monde du travail et des études, découvert les merveilles de l'IA générative qui crée des images, des textes et des vidéos, et analysé le paysage des entreprises et des outils qui façonnent ce secteur.</p>
+                </div>
+            </a>
+
+            <a href="IA_Aziende_e_Servizi _fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/05-AI Aziende e Servizi/Leonardo_Phoenix_10_A_fiercely_competitive_scene_in_the_world_1.jpg" alt="Le Paysage de l'Intelligence Artificielle : Géants Technologiques, Défis Concurrentiels et les Outils qui Démocratisent l'IA" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Le Paysage de l'Intelligence Artificielle : Géants Technologiques, Défis Concurrentiels et les Outils qui Démocratisent l'IA</h3>
+                    <p>Après avoir exploré dans les articles précédents les bases théoriques de l'intelligence artificielle, les techniques qui l'alimentent, ses applications dans le monde du travail et des études, et les incroyables possibilités de l'IA générative, il est temps de se tourner vers le cœur battant de cette révolution : les entreprises qui façonnent l'avenir de l'IA et les outils qui la rendent accessible à tous.</p>
+                </div>
+            </a>
+
+            <a href="AI_Creazione_Contenuti_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/04-AI_Creazione_Contenuti/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_whimsical_arti_1.jpg" alt="IA et Création de Contenu : Le Présent et l'Avenir de la Créativité Numérique" loading="lazy">
+                <div class="article-card-content">
+                    <h3>IA et Création de Contenu : Le Présent et l'Avenir de la Créativité Numérique</h3>
+                    <p>Après avoir exploré les applications de l'intelligence artificielle dans les secteurs les plus variés, de la santé à la finance, de l'automobile à l'agriculture, il est naturel de se tourner vers l'un des domaines où l'IA démontre le potentiel le plus révolutionnaire : la création de contenu. Ici, l'intelligence artificielle ne se limite pas à automatiser des processus existants, mais redéfinit littéralement ce que signifie être créatif, offrant des outils qui permettent à quiconque de produire du contenu de qualité professionnelle. Des images photoréalistes générées à partir d'une simple description textuelle, aux vidéos créées à partir d'une idée, en passant par la musique composée par des algorithmes : nous sommes face à une démocratisation de la créativité sans précédent.</p>
+                </div>
+            </a>
+
+            <a href="Dalle Applicazioni Consolidate alle Frontiere del Futuro_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/03-Dalle Applicazioni Consolidate alle Frontiere del Futuro/fotocopertina2.jpg" alt="L'Intelligence Artificielle Aujourd'hui : Des Applications Consolidées aux Frontières du Futur" loading="lazy">
+                <div class="article-card-content">
+                    <h3>L'Intelligence Artificielle Aujourd'hui : Des Applications Consolidées aux Frontières du Futur</h3>
+                    <p>Après avoir exploré les fondements théoriques et historiques de l'intelligence artificielle dans les deux premiers articles de notre série, il est temps de nous immerger au cœur battant de cette révolution technologique : ses applications concrètes dans le monde réel. Si, par le passé, l'IA semblait confinée aux laboratoires de recherche et aux films de science-fiction, elle est aujourd'hui devenue une présence constante et souvent invisible dans notre vie quotidienne, transformant des secteurs allant de la médecine au divertissement, de la finance à la robotique.</p>
+                </div>
+            </a>
+
+            <a href="Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/02-Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_2.jpg" alt="Apprentissage Automatique, Apprentissage Profond et Algorithmes Génératifs : Le Cœur Battant de l'Intelligence Artificielle Moderne" loading="lazy">
+                <div class="article-card-content">
+                    <h3>Apprentissage Automatique, Apprentissage Profond et Algorithmes Génératifs : Le Cœur Battant de l'Intelligence Artificielle Moderne</h3>
+                    <p>Après avoir exploré les fondations historiques et techniques de l'Intelligence Artificielle dans notre article précédent, nous approfondissons maintenant les technologies qui révolutionnent réellement notre monde : l'Apprentissage Automatique, l'Apprentissage Profond et les algorithmes génératifs. Ces outils ne sont plus de la science-fiction, mais une réalité quotidienne qui façonne la manière dont nous travaillons, communiquons et créons.</p>
+                </div>
+            </a>
+
+            <a href="L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo_fr.html" class="article-card">
+                <img src="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/01-L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_1.jpg" alt="L'Intelligence Artificielle : Un Voyage dans la Technologie Qui Redéfinit Notre Monde" loading="lazy">
+                <div class="article-card-content">
+                    <h3>L'Intelligence Artificielle : Un Voyage dans la Technologie Qui Redéfinit Notre Monde</h3>
+                    <p>Si vous vous demandez ce qu'est réellement l'Intelligence Artificielle et pourquoi on en parle autant, vous n'êtes pas seul. À ce moment historique, nous assistons à une révolution silencieuse mais extrêmement puissante qui change la façon dont nous travaillons, apprenons et interagissons avec le monde numérique. L'Intelligence Artificielle (IA) n'est plus de la science-fiction : elle est là, maintenant, et vous l'utilisez probablement déjà sans vous en rendre compte.</p>
+                </div>
+            </a>
+            </div>
+        <div class="pagination-controls">
+
+        </div>
+    </main>
+    <footer>
+        <p>Édité par <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></p>
+        <p>
+            <a href="mailto:info@verbanianotizie.it">Contacts</a> |
+            <a href="#">Cookie</a> |
+            <a href="#">Privacy Policy</a>
+        </p>
+    </footer>
+</body>
+</html>

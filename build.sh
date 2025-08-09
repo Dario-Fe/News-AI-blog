@@ -15,7 +15,7 @@ cp forms.html dist/forms.html
 
 # 3. Build the site for each language
 echo "2. Building site for each language..."
-for lang in it en es; do
+for lang in it en es fr de; do
   echo "--- Building for $lang ---"
   python3 build.py --lang "$lang"
 done

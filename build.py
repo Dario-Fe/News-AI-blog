@@ -7,10 +7,11 @@ from feedgen.feed import FeedGenerator
 from bs4 import BeautifulSoup
 import markdown2
 import math
+from urllib.parse import quote
 
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
-SITE_URL = "https://<YOUR_USERNAME>.github.io/<YOUR_REPO>/" # We will replace this later
+SITE_URL = "https://ianotizie.netlify.app/"
 BASE_OUTPUT_DIR = "dist"
 
 # Translations
@@ -304,9 +305,12 @@ def process_article(md_file):
         title = soup.h1.get_text() if soup.h1 else "Titolo non disponibile"
 
         summary = ""
-        first_p = soup.find('p')
-        if first_p:
-            summary = first_p.get_text()
+        all_paragraphs = soup.find_all('p')
+        for p in all_paragraphs:
+            # Check if the paragraph has text and does not contain an image.
+            if p.get_text(strip=True) and not p.find('img'):
+                summary = p.get_text()
+                break # Found the first valid summary paragraph, so we stop.
 
         # Rewrite image paths to be absolute
         for img in soup.find_all('img'):
@@ -561,10 +565,12 @@ def generate_rss_feed(articles, output_dir, lang='it'):
     fg.description('Le ultime notizie e approfondimenti sull\'intelligenza artificiale, a cura di Verbania Notizie.')
     fg.language(lang)
 
-    for article in articles:
+    for article in reversed(articles):
         fe = fg.add_entry()
         fe.title(article['title'])
-        fe.link(href=f"{SITE_URL}{lang}/{article['path']}")
+        # URL encode the path to handle spaces and special characters
+        encoded_path = quote(article['path'])
+        fe.link(href=f"{SITE_URL}{lang}/{encoded_path}")
         fe.description(article['summary'])
         # fe.pubDate() # We could add pubDate if we can parse it from the article name or metadata
 

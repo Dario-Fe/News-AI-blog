@@ -29,7 +29,7 @@ Il sito viene generato tramite lo script `build.sh`, che esegue i seguenti passa
 
 1.  **Pulizia**: Cancella la cartella `dist/` per assicurare un build pulito.
 2.  **Copia Asset Statici**: Copia tutti i file statici (immagini, CSS, JS, e file HTML statici come `thank-you.html`) dalla root del progetto alla cartella `dist/`.
-3.  **Build Multilingua**: Esegue un ciclo per ogni lingua supportata (`it`, `en`, `es`). Per ogni lingua:
+3.  **Build Multilingua**: Esegue un ciclo per ogni lingua supportata (`it`, `en`, `es`, `fr`, `de`). Per ogni lingua:
     a. **Recupera Articoli**: Contatta le API di GitHub per scaricare gli ultimi articoli dal repository esterno.
     b. **Genera Pagine Articoli**: Crea una pagina HTML per ogni singolo articolo.
     c. **Genera Pagine Locali**: Crea pagine HTML basate sui file presenti nella cartella `pages/` (es. `newsletter.html`).
@@ -39,7 +39,7 @@ Il sito viene generato tramite lo script `build.sh`, che esegue i seguenti passa
 
 ## Funzionalità Principali
 - **Generazione di Sito Statico**: Il sito è pre-renderizzato in file HTML, garantendo velocità di caricamento massime per l'utente finale.
-- **Supporto Multilingua Completo**: Il sito è generato in Italiano, Inglese e Spagnolo. L'interfaccia, inclusi i link, i sottotitoli e le pagine, è completamente tradotta grazie a un sistema di traduzione centralizzato in `build.py`.
+- **Supporto Multilingua Completo**: Il sito è generato in Italiano, Inglese, Spagnolo, Francese e Tedesco. L'interfaccia, inclusi i link, i sottotitoli e le pagine, è completamente tradotta grazie a un sistema di traduzione centralizzato in `build.py`.
 - **Form per Newsletter (Netlify-Ready)**: Include una pagina di iscrizione alla newsletter con un form HTML pronto per essere gestito da Netlify Forms, eliminando la necessità di un backend dedicato.
 - **Build e Deployment Automatizzati**: Grazie a GitHub Actions, il sito viene ricostruito e pubblicato automaticamente due volte al giorno per recuperare i nuovi articoli e ad ogni modifica del codice sorgente.
 

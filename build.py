@@ -149,6 +149,15 @@ TRANSLATIONS = {
             "fr": "&larr; Articles précédents",
             "de": "&larr; Vorherige Artikel"
         }
+    },
+    "article_page": {
+        "back_button": {
+            "it": "Torna indietro",
+            "en": "Go back",
+            "es": "Volver",
+            "fr": "Retour",
+            "de": "Zurück"
+        }
     }
 }
 
@@ -402,13 +411,16 @@ def generate_article_pages(articles, output_dir, lang='it'):
     for article in articles:
         print(f"  - {article['path']}")
 
+        # Get translation for the back button
+        back_button_text = TRANSLATIONS["article_page"]["back_button"].get(lang, TRANSLATIONS["article_page"]["back_button"]["it"])
+
         # Create a simple view for the article content
         article_view_html = f"""
         <div id="article-view">
-            <a href="index.html" class="back-button">Torna indietro</a>
+            <a href="index.html" class="back-button">{back_button_text}</a>
             {article['html_content']}
             <div class="footer-back-button">
-                <a href="index.html" class="back-button">Torna indietro</a>
+                <a href="index.html" class="back-button">{back_button_text}</a>
             </div>
         </div>
         """

@@ -7,66 +7,84 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>es</language>
-    <lastBuildDate>Sat, 09 Aug 2025 16:12:13 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Aug 2025 16:23:10 +0000</lastBuildDate>
+    <item>
+      <title>El enemigo en casa: cuando la IA se convierte en cómplice de los hackers</title>
+      <link>https://ianotizie.netlify.app/es/AI_coding_security_es.html</link>
+      <description>La historia comienza como muchas otras en la comunidad de código abierto: una pull request anónima, unas pocas líneas de código, un plugin que promete "formatear mejor" el espacio de trabajo.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/12 - AI Coding Security/Ai_traditrice.jpg" length="0" type="image/jpeg"/>
+    </item>
     <item>
       <title>"Cuando el tamaño no importa": La revolución del modelo HRM</title>
       <link>https://ianotizie.netlify.app/es/articolo_hrm_es.html</link>
       <description>La mayor revolución en inteligencia artificial de los últimos años no proviene de los laboratorios de OpenAI o Google, sino de una pequeña startup de Singapur llamada Sapient Intelligence.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/11 - AI La rivoluzione HRM /hrm_le_dimensioni_non_contano.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Inteligencia Artificial y el Futuro del Trabajo</title>
       <link>https://ianotizie.netlify.app/es/articolo_ai_lavoro_es.html</link>
       <description>Como en Matrix, nos enfrentamos a una elección: ¿píldora roja o azul? La inteligencia artificial está llegando al mundo laboral y ya no podemos ignorarla.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/10 - AI Posti di Lavoro/work_wrestling.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Kimi K2: La Inteligencia Artificial China que Desafía a los Gigantes de la Programación</title>
       <link>https://ianotizie.netlify.app/es/kimi_k2_article_es.html</link>
       <description>Si la inteligencia artificial fuera una serie de Netflix, diríamos que hemos llegado al momento en que el protagonista indiscutible se enfrenta a un nuevo rival que nadie esperaba. Después de años de dominio estadounidense en el sector de la IA, con OpenAI y Anthropic a la cabeza, desde Oriente llega un retador que promete barajar de nuevo las cartas: Kimi K2, la última creación de Moonshot AI.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/09 - AI Kimi K2 il nuovo sfidante/DavideGolia_IA.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Cuando la Inteligencia Artificial Hace Música: El Fenómeno de The Velvet Sundown e Iam Entre Tecnología y Ética</title>
       <link>https://ianotizie.netlify.app/es/AI_Musica_Copyright_es.html</link>
       <description>Imagina descubrir que tu canción favorita, la que te ha acompañado durante meses, la que compartiste con amigos y que ha acumulado millones de escuchas, nunca fue tocada por manos humanas. No hay un cantante que la haya interpretado con su voz, no hay un guitarrista que haya encontrado esos acordes perfectos, no hay músicos que se hayan reunido en un estudio para crear esa alquimia sonora. Todo nació de algoritmos, redes neuronales e inteligencia artificial.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/08-AI Musica e Copyright/Band_AI.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Segunda Parte)</title>
       <link>https://ianotizie.netlify.app/es/Giganti_Ai_Bocciati_seconda_puntata_es.html</link>
       <description>Retomando el análisis del informe independiente del Future of Life Institute, en esta segunda parte profundizamos en los temas de seguridad en el desarrollo de la IA, la urgencia regulatoria y técnica de establecer límites, los aspectos éticos y las perspectivas futuras.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Inteligencia Artificial sin Control: Las Grandes Empresas Tecnológicas Reprueban en Seguridad (Primera Parte)</title>
       <link>https://ianotizie.netlify.app/es/Giganti_Ai_Bocciati_prima_puntata_es.html</link>
       <description>Un informe independiente revela que las principales empresas tecnológicas no están preparadas para gestionar los riesgos de la inteligencia artificial general.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/07-AI Bocciati i Giganti/GigantiTechAsini.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Evaluar la Inteligencia Artificial: Cuando los Números se Encuentran con la Ética</title>
       <link>https://ianotizie.netlify.app/es/AI_Valutazione_ed_etica_es.html</link>
       <description>En los últimos cinco artículos hemos explorado juntos el mundo de la inteligencia artificial, comenzando por sus raíces históricas y fundamentos tecnológicos, para luego adentrarnos en las complejidades del machine learning y el deep learning. Hemos visto cómo la IA está transformando el mundo del trabajo y el estudio, descubierto las maravillas de la IA generativa que crea imágenes, textos y videos, y analizado el panorama de las empresas y herramientas que están dando forma a este sector.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/06-AI Valutazione ed Etica/Leonardo_Phoenix_An_ethically_charged_portrait_of_AIs_challeng_0.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>El Panorama de la Inteligencia Artificial: Gigantes Tecnológicos, Desafíos Competitivos y las Herramientas que Democratizan la IA</title>
       <link>https://ianotizie.netlify.app/es/IA_Aziende_e_Servizi_es.html</link>
       <description>Después de explorar en artículos anteriores los fundamentos teóricos de la inteligencia artificial, las técnicas que la impulsan, sus aplicaciones en el mundo laboral y de estudio, y las increíbles posibilidades de la IA generativa, es momento de dirigir nuestra mirada hacia el corazón palpitante de esta revolución: las empresas que están moldeando el futuro de la IA y las herramientas que la hacen accesible para todos nosotros.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/05-AI Aziende e Servizi/Leonardo_Phoenix_10_A_fiercely_competitive_scene_in_the_world_1.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>IA y Creación de Contenidos: El Presente y el Futuro de la Creatividad Digital</title>
       <link>https://ianotizie.netlify.app/es/AI_Creazione_Contenuti_es.html</link>
       <description>Después de explorar las aplicaciones de la inteligencia artificial en los sectores más dispares, desde la sanidad hasta las finanzas, desde la automoción hasta la agricultura, es natural dirigir la mirada hacia uno de los campos en los que la IA está demostrando el potencial más revolucionario: la creación de contenidos. Aquí, la inteligencia artificial no se limita a automatizar procesos existentes, sino que está literalmente redefiniendo lo que significa ser creativo, ofreciendo herramientas que permiten a cualquiera producir contenidos de calidad profesional. Desde imágenes fotorrealistas generadas por una simple descripción textual, hasta vídeos creados a partir de una idea, pasando por música compuesta por algoritmos: nos enfrentamos a una democratización de la creatividad sin precedentes.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/04-AI_Creazione_Contenuti/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_whimsical_arti_1.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Inteligencia Artificial Hoy: De las Aplicaciones Consolidadas a las Fronteras del Futuro</title>
       <link>https://ianotizie.netlify.app/es/Dalle%20Applicazioni%20Consolidate%20alle%20Frontiere%20del%20Futuro_es.html</link>
       <description>Después de explorar los fundamentos teóricos e históricos de la inteligencia artificial en los dos primeros artículos de nuestra serie, ha llegado el momento de sumergirnos en el corazón palpitante de esta revolución tecnológica: sus aplicaciones concretas en el mundo real. Si en años pasados la IA parecía confinada a los laboratorios de investigación y a las películas de ciencia ficción, hoy se ha convertido en una presencia constante y a menudo invisible en nuestra vida cotidiana, transformando sectores que van desde la medicina al entretenimiento, desde las finanzas a la robótica.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/03-Dalle Applicazioni Consolidate alle Frontiere del Futuro/fotocopertina2.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Machine Learning, Deep Learning y Algoritmos Generativos: El Corazón Palpitante de la Inteligencia Artificial Moderna</title>
       <link>https://ianotizie.netlify.app/es/Machine%20Learning%2C%20Deep%20Learning%20e%20Algoritmi%20Generativi%20Il%20Cuore%20Pulsante%20dell%27Intelligenza%20Artificiale%20Moderna_es.html</link>
       <description>Después de explorar los fundamentos históricos y técnicos de la Inteligencia Artificial en nuestro artículo anterior, profundizamos ahora en las tecnologías que están realmente revolucionando nuestro mundo: el Machine Learning, el Deep Learning y los algoritmos generativos. Estas herramientas ya no son ciencia ficción, sino realidades cotidianas que moldean la forma en que trabajamos, comunicamos y creamos.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/02-Machine Learning, Deep Learning e Algoritmi Generativi Il Cuore Pulsante dell'Intelligenza Artificiale Moderna/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_2.jpg" length="0" type="image/jpeg"/>
     </item>
     <item>
       <title>Inteligencia Artificial: Un Viaje a la Tecnología Que Está Redefiniendo Nuestro Mundo</title>
       <link>https://ianotizie.netlify.app/es/L%27Intelligenza%20Artificiale%20-%20Un%20Viaggio%20nella%20Tecnologia%20Che%20Sta%20Ridefinendo%20il%20Nostro%20Mondo_es.html</link>
       <description>Si te estás preguntando qué es realmente la Inteligencia Artificial y por qué se habla tanto de ella, no estás solo. En este momento histórico, estamos asistiendo a una revolución silenciosa pero potentísima que está cambiando la forma en que trabajamos, aprendemos e interactuamos con el mundo digital. La Inteligencia Artificial (IA) ya no es ciencia ficción: está aquí, ahora, y probablemente ya la estés usando sin darte cuenta.</description>
+      <enclosure url="https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/01-L'Intelligenza Artificiale - Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo/Leonardo_Phoenix_10_Create_a_thumbnail_to_accompany_the_journa_1.jpg" length="0" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

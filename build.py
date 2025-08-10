@@ -655,6 +655,15 @@ def generate_rss_feed(articles, output_dir, lang='it'):
         encoded_path = quote(article['path'])
         fe.link(href=f"{SITE_URL}{lang}/{encoded_path}")
         fe.description(article['summary'])
+
+        # Add the article image as an enclosure
+        if article.get('image_url'):
+            # It's better to assume the MIME type from the extension if possible,
+            # but for now, we'll default to jpeg.
+            # The length is often required, but many readers are lenient.
+            # Setting to '0' is a common practice when the size is unknown.
+            fe.enclosure(url=article['image_url'], length='0', type='image/jpeg')
+
         # fe.pubDate() # We could add pubDate if we can parse it from the article name or metadata
 
     fg.rss_file(os.path.join(output_dir, 'rss.xml'), pretty=True)

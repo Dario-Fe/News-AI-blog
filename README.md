@@ -71,4 +71,7 @@ python -m http.server
 Il sito sarà quindi accessibile all'indirizzo `http://localhost:8000`.
 
 ## Deployment
-Il deployment è gestito automaticamente da GitHub Actions. Il workflow è configurato per la pubblicazione su **Netlify**. È necessario configurare il progetto su Netlify per usare il comando di build `./build.sh` e la cartella di pubblicazione `dist`.
+Il deployment è gestito automaticamente da GitHub Actions. Il workflow è configurato per una pubblicazione **duale** sia su **GitHub Pages** che su **Netlify**.
+Ad ogni build, il sito viene inviato a entrambe le piattaforme:
+- **GitHub Pages**: Utile come ambiente di test o di backup.
+- **Netlify**: Usato come ambiente di produzione principale, gestisce anche i form della newsletter.

@@ -1,16 +1,16 @@
 name: Build and Deploy Site
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the default branch (for changes to the site itself)
   push:
     branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-  # Runs on a schedule (e.g., at 06:00 and 18:00 UTC daily)
-  schedule:
-    - cron: '0 6,18 * * *'
+  # Allows this workflow to be triggered by a remote repository
+  repository_dispatch:
+    types: [update-articles]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

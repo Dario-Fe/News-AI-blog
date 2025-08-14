@@ -158,6 +158,115 @@ TRANSLATIONS = {
             "fr": "Retour",
             "de": "Zurück"
         }
+    },
+    "cookie_page": {
+        "title": {
+            "it": "La nostra No Cookie Policy",
+            "en": "Our No Cookie Policy",
+            "es": "Nuestra política de no cookies",
+            "fr": "Notre politique de non-utilisation de cookies",
+            "de": "Unsere Keine-Cookies-Richtlinie"
+        },
+        "p1": {
+            "it": "Ci asteniamo volutamente dall'usare cookie di qualsiasi genere: di tracciamento, marketing o tecnici.",
+            "en": "We deliberately refrain from using cookies of any kind: tracking, marketing, or technical.",
+            "es": "Nos abstenemos deliberadamente de utilizar cookies de cualquier tipo: de seguimiento, de marketing o técnicas.",
+            "fr": "Nous nous abstenons délibérément d'utiliser des cookies de quelque nature que ce soit : de suivi, de marketing ou techniques.",
+            "de": "Wir verzichten bewusst auf den Einsatz von Cookies jeglicher Art: Tracking-, Marketing- oder technische Cookies."
+        },
+        "p2": {
+            "it": "Per questo aderiamo alla \"No Cookie Policy\": non serve raccogliere dei cookie per dare un buon servizio.",
+            "en": "This is why we adhere to the \"No Cookie Policy\": it is not necessary to collect cookies to provide a good service.",
+            "es": "Por eso nos adherimos a la \"Política de no cookies\": no es necesario recopilar cookies para dar un buen servicio.",
+            "fr": "C'est pourquoi nous adhérons à la « No Cookie Policy » : il n'est pas nécessaire de collecter des cookies pour fournir un bon service.",
+            "de": "Deshalb halten wir uns an die „Keine-Cookies-Richtlinie“: Es ist nicht notwendig, Cookies zu sammeln, um einen guten Service zu bieten."
+        },
+        "p3": {
+            "it": "Per questa ragione la tua visita al nostro sito web non viene monitorata in nessun modo.",
+            "en": "For this reason, your visit to our website is not monitored in any way.",
+            "es": "Por esta razón, su visita a nuestro sitio web no es monitoreada de ninguna manera.",
+            "fr": "Pour cette raison, votre visite sur notre site web n'est en aucun cas surveillée.",
+            "de": "Aus diesem Grund wird Ihr Besuch auf unserer Website in keiner Weise überwacht."
+        },
+        "p4": {
+            "it": "Riportiamo dal sito del Garante della Privacy la definizione di cookie.",
+            "en": "We report the definition of cookies from the Privacy Guarantor's website.",
+            "es": "Reportamos la definición de cookies del sitio web del Garante de la Privacidad.",
+            "fr": "Nous rapportons la définition des cookies du site de l'Autorité de protection de la vie privée.",
+            "de": "Wir berichten über die Definition von Cookies von der Website der Datenschutzbehörde."
+        },
+        "quote": {
+            "it": "I cookie sono stringhe di testo che i siti web visitati dagli utenti (cd. Publisher, o \"prime parti\") ovvero siti o web server diversi (cd. \"terze parti\") posizionano ed archiviano all'interno del dispositivo terminale dell'utente medesimo, perché siano poi ritrasmessi agli stessi siti alla visita successiva.",
+            "en": "Cookies are text strings that websites visited by users (so-called Publishers, or \"first parties\") or different sites or web servers (so-called \"third parties\") place and store within the user's terminal device, to be then retransmitted to the same sites on the next visit.",
+            "es": "Las cookies son cadenas de texto que los sitios web visitados por los usuarios (los llamados Editores, o \"primeras partes\") o diferentes sitios o servidores web (los llamados \"terceras partes\") colocan y almacenan en el dispositivo terminal del usuario, para ser luego retransmitidas a los mismos sitios en la siguiente visita.",
+            "fr": "Les cookies sont des chaînes de texte que les sites web visités par les utilisateurs (appelés Éditeurs, ou « premières parties ») ou des sites ou serveurs web différents (appelés « tierces parties ») placent et stockent dans le terminal de l'utilisateur, pour être ensuite retransmis aux mêmes sites lors d'une visite ultérieure.",
+            "de": "Cookies sind Textzeichenfolgen, die von den von den Benutzern besuchten Websites (sog. Publisher oder „Erstanbieter“) oder verschiedenen Websites oder Webservern (sog. „Drittanbieter“) auf dem Endgerät des Benutzers platziert und gespeichert werden, um dann bei einem späteren Besuch an dieselben Websites zurückgesendet zu werden."
+        },
+        "p5": {
+            "it": "Esiste un solo modo in cui possiamo sapere se hai visitato il nostro sito: se ci contatti per conoscerci.",
+            "en": "There is only one way we can know if you have visited our site: if you contact us to get to know us.",
+            "es": "Solo hay una forma de saber si ha visitado nuestro sitio: si se pone en contacto con nosotros para conocernos.",
+            "fr": "Il n'y a qu'une seule façon pour nous de savoir si vous avez visité notre site : si vous nous contactez pour faire connaissance.",
+            "de": "Es gibt nur eine Möglichkeit, wie wir wissen können, ob Sie unsere Seite besucht haben: wenn Sie uns kontaktieren, um uns kennenzulernen."
+        },
+        "link_text": {
+            "it": "Verifica l'assenza di cookie dal nostro sito",
+            "en": "Verify the absence of cookies from our site",
+            "es": "Verifique la ausencia de cookies en nuestro sitio",
+            "fr": "Vérifiez l'absence de cookies sur notre site",
+            "de": "Überprüfen Sie das Nichtvorhandensein von Cookies auf unserer Website"
+        },
+        "link_url": {
+            "it": "https://www.cookieserve.com/it/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fit%2F",
+            "en": "https://www.cookieserve.com/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fen%2F",
+            "es": "https://www.cookieserve.com/es/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fes%2F",
+            "fr": "https://www.cookieserve.com/fr/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Ffr%2F",
+            "de": "https://www.cookieserve.com/de/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fde%2F"
+        }
+    },
+    "privacy_page": {
+        "title": {
+            "it": "Privacy Policy",
+            "en": "Privacy Policy",
+            "es": "Política de privacidad",
+            "fr": "Politique de confidentialité",
+            "de": "Datenschutz-Bestimmungen"
+        },
+        "p1": {
+            "it": "Questo sito non raccoglie dati personali di alcun tipo, ad eccezione del nome e dell'indirizzo email forniti volontariamente dagli utenti che si iscrivono alla nostra newsletter. Il nostro obiettivo non è raccogliere informazioni su di voi, ma condividere la passione per l'intelligenza artificiale e il mondo tech.",
+            "en": "This site does not collect personal data of any kind, except for the name and email address voluntarily provided by users who subscribe to our newsletter. Our goal is not to collect information about you, but to share the passion for artificial intelligence and the tech world.",
+            "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nombre y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la pasión por la inteligencia artificial y el mundo de la tecnología.",
+            "fr": "Ce site ne collecte aucune donnée personnelle, à l'exception du nom et de l'adresse e-mail fournis volontairement par les utilisateurs qui s'abonnent à notre newsletter. Notre objectif n'est pas de collecter des informations sur vous, mais de partager la passion pour l'intelligence artificielle et le monde de la technologie.",
+            "de": "Diese Website sammelt keinerlei personenbezogene Daten, mit Ausnahme des Namens und der E-Mail-Adresse, die von Benutzern, die unseren Newsletter abonnieren, freiwillig angegeben werden. Unser Ziel ist es nicht, Informationen über Sie zu sammeln, sondern die Leidenschaft für künstliche Intelligenz und die Tech-Welt zu teilen."
+        },
+        "p2": {
+            "it": "I dati forniti (nome ed email) vengono utilizzati esclusivamente per inviarti aggiornamenti, articoli e novità tramite la nostra newsletter. Non condivideremo mai queste informazioni con terze parti senza il tuo esplicito consenso.",
+            "en": "The data provided (name and email) are used exclusively to send you updates, articles, and news through our newsletter. We will never share this information with third parties without your explicit consent.",
+            "es": "Los datos proporcionados (nombre y correo electrónico) se utilizan exclusively para enviarle actualizaciones, artículos y noticias a través de nostro boletín. Nunca compartiremos esta información con terceros sin su consentimiento explícito.",
+            "fr": "Les données fournies (nom et e-mail) sont utilisées exclusively pour vous envoyer des mises à jour, des articles et des nouvelles via notre newsletter. Nous ne partagerons jamais ces informations avec des tiers sans votre consentement explicite.",
+            "de": "Die angegebenen Daten (Name und E-Mail) werden ausschließlich dazu verwendet, Ihnen über unseren Newsletter Updates, Artikel und Neuigkeiten zuzusenden. Wir werden diese Informationen niemals ohne Ihre ausdrückliche Zustimmung an Dritte weitergeben."
+        },
+        "p3_1": {
+            "it": "Il sito è ospitato su Netlify, che potrebbe raccogliere dati anonimi per scopi tecnici, come la protezione da attività dannose e la manutenzione del servizio. Per maggiori dettagli, puoi consultare l'",
+            "en": "The site is hosted on Netlify, which may collect anonymous data for technical purposes, such as protection against malicious activities and service maintenance. For more details, you can consult Netlify's ",
+            "es": "El sitio está alojado en Netlify, que puede recopilar datos anónimos con fines técnicos, como la protección contra actividades maliciosas y el mantenimiento del servicio. Para más detalles, puede consultar la ",
+            "fr": "Le site est hébergé sur Netlify, qui peut collecter des données anonymes à des fins techniques, telles que la protection contre les activités malveillantes et la maintenance du service. Pour plus de détails, vous pouvez consulter la ",
+            "de": "Die Website wird auf Netlify gehostet, das möglicherweise anonyme Daten für technische Zwecke sammelt, wie z. B. zum Schutz vor böswilligen Aktivitäten und zur Wartung des Dienstes. Weitere Informationen finden Sie in der "
+        },
+        "p3_link_text": {
+            "it": "Informativa sulla privacy di Netlify",
+            "en": "Netlify Privacy Policy",
+            "es": "Política de privacidad de Netlify",
+            "fr": "Politique de confidentialité de Netlify",
+            "de": "Datenschutzrichtlinie von Netlify"
+        },
+        "p4": {
+            "it": "Se desideri modificare, cancellare i tuoi dati o smettere di ricevere la newsletter, puoi contattarci in qualsiasi momento o utilizzare il link di cancellazione presente in ogni email.",
+            "en": "If you wish to modify, delete your data, or stop receiving the newsletter, you can contact us at any time or use the unsubscribe link present in every email.",
+            "es": "Si desea modificar, eliminar sus datos o dejar de recibir el boletín, puede contactarnos en cualquier momento o utilizar el enlace para cancelar la suscripción presente en cada correo electrónico.",
+            "fr": "Si vous souhaitez modifier, supprimer vos données ou ne plus recevoir la newsletter, vous pouvez nous contacter à tout momento ou utiliser le lien de désinscription présent dans chaque e-mail.",
+            "de": "Wenn Sie Ihre Daten ändern, löschen oder den Newsletter abbestellen möchten, können Sie uns jederzeit kontaktieren oder den in jeder E-Mail enthaltenen Abmeldelink verwenden."
+        }
     }
 }
 
@@ -595,6 +704,18 @@ def generate_local_pages(output_dir, lang='it'):
             if filename == "thank-you.html":
                 for key, trans_dict in TRANSLATIONS["thank_you_page"].items():
                     placeholder = f"{{{{thank_you_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
+
+            if filename == "cookie.html":
+                for key, trans_dict in TRANSLATIONS["cookie_page"].items():
+                    placeholder = f"{{{{cookie_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
+
+            if filename == "privacy.html":
+                for key, trans_dict in TRANSLATIONS["privacy_page"].items():
+                    placeholder = f"{{{{privacy_page_{key}}}}}"
                     translation = trans_dict.get(lang, trans_dict["it"])
                     final_content = final_content.replace(placeholder, translation)
 

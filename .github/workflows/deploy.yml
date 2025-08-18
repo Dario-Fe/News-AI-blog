@@ -58,11 +58,11 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Deploy to Netlify
-        uses: netlify/actions/cli@v2
-        with:
-          args: deploy --dir=dist --prod
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#      - name: Deploy to Netlify
+#        uses: netlify/actions/cli@v2
+#        with:
+#          args: deploy --dir=dist --prod
+#        env:
+#          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 

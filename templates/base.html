@@ -260,26 +260,58 @@
 
             const articleCards = document.querySelectorAll('.article-card');
 
+            function filterArticles(selectedTag) {
+                // Manage active state for buttons
+                filterButtons.forEach(btn => {
+                    if (btn.getAttribute('data-tag') === selectedTag) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                // Filter cards
+                articleCards.forEach(card => {
+                    const cardTags = card.getAttribute('data-tags');
+                    if (selectedTag === 'all' || (cardTags && cardTags.includes(selectedTag))) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Add click listeners to buttons
             filterButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent the link behavior on the anchor
-
-                    // Manage active state
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-
+                    e.preventDefault(); // Prevent default anchor behavior
                     const selectedTag = this.getAttribute('data-tag');
-
-                    articleCards.forEach(card => {
-                        const cardTags = card.getAttribute('data-tags');
-                        if (selectedTag === 'all' || (cardTags && cardTags.includes(selectedTag))) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+                    filterArticles(selectedTag);
+                    // Update URL hash for shareable links, without reloading the page
+                    if (history.pushState) {
+                        history.pushState(null, null, `#${selectedTag}`);
+                    } else {
+                        window.location.hash = `#${selectedTag}`;
+                    }
                 });
             });
+
+            // Function to apply filter based on the URL hash
+            function applyFilterFromHash() {
+                if (window.location.hash) {
+                    const tagFromHash = decodeURIComponent(window.location.hash.substring(1));
+                    const targetButton = document.querySelector(`.tag-filter-button[data-tag="${tagFromHash}"]`);
+                    if (targetButton) {
+                        filterArticles(tagFromHash);
+                    }
+                }
+            }
+
+            // Apply filter on initial page load
+            applyFilterFromHash();
+
+            // Also apply filter when the hash changes (e.g., back/forward buttons)
+            window.addEventListener('hashchange', applyFilterFromHash);
         });
     </script>
 </body>

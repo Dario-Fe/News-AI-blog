@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import markdown2
 import math
 from urllib.parse import quote
+import locale
 
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
@@ -387,13 +388,19 @@ def process_article(md_file):
         # Create a unique slug from the filename
         slug = os.path.splitext(md_file['name'])[0].strip()
 
+        # Get tags and date from frontmatter, with defaults
+        tags = post.metadata.get('tags', [])
+        date_obj = post.metadata.get('date', None)
+
         return {
             "title": title,
             "summary": summary,
             "image_url": main_image_url,
             "html_content": final_html_content,
             "slug": slug,
-            "path": f"{slug}.html"
+            "path": f"{slug}.html",
+            "tags": tags,
+            "date": date_obj
         }
 
     except Exception as e:
@@ -461,6 +468,31 @@ def generate_index_page(articles, output_dir, lang='it'):
     with open("templates/base.html", "r") as f:
         base_template = f.read()
 
+    # Set locale for date formatting
+    try:
+        if lang == 'it':
+            locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')
+        elif lang == 'en':
+            locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
+        elif lang == 'es':
+            locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+        elif lang == 'fr':
+            locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+        elif lang == 'de':
+            locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
+    except locale.Error:
+        print(f"Locale for {lang} not supported, using default.")
+        locale.setlocale(locale.LC_TIME, '')
+
+    # --- Create Tag Filter Bar ---
+    all_tags = sorted(list(set(tag for article in articles for tag in article.get('tags', []))))
+
+    filter_bar_html = '<div id="tag-filter-bar" style="margin-bottom: 20px; text-align: center; flex-wrap: wrap; display: flex; justify-content: center; gap: 10px;">'
+    filter_bar_html += '<button class="tag-filter-button active" data-tag="all">All</button>'
+    for tag in all_tags:
+        filter_bar_html += f'<button class="tag-filter-button" data-tag="{tag}">{tag}</button>'
+    filter_bar_html += '</div>'
+
     ARTICLES_PER_PAGE = 15
     total_pages = math.ceil(len(articles) / ARTICLES_PER_PAGE)
 
@@ -471,12 +503,30 @@ def generate_index_page(articles, output_dir, lang='it'):
 
         grid_html = '<div id="articles-grid">\n'
         for article in page_articles:
+            # --- Date Formatting ---
+            date_html = ""
+            if article.get('date'):
+                formatted_date = article['date'].strftime('%d %B %Y')
+                date_html = f'<p class="article-card-date">{formatted_date}</p>'
+
+            # --- Tags Formatting ---
+            tags_html = ""
+            if article.get('tags'):
+                tags_html = '<div class="article-card-tags">'
+                for tag in article['tags']:
+                    tags_html += f'<span class="tag">{tag}</span>'
+                tags_html += '</div>'
+
+            tags_data_attr = " ".join(article.get('tags', []))
+
             card_html = f"""
-            <a href="{article['path']}" class="article-card">
+            <a href="{article['path']}" class="article-card" data-tags="{tags_data_attr}">
                 <img src="{article['image_url'] if article['image_url'] else 'logo_vn_ia.png'}" alt="{article['title']}" loading="lazy">
                 <div class="article-card-content">
+                    {date_html}
                     <h3>{article['title']}</h3>
                     <p>{article['summary']}</p>
+                    {tags_html}
                 </div>
             </a>
             """
@@ -493,7 +543,6 @@ def generate_index_page(articles, output_dir, lang='it'):
         if page_num < total_pages:
             next_path = f"../page/{page_num + 1}/index.html"
             next_text = TRANSLATIONS["pagination"]["next"].get(lang, TRANSLATIONS["pagination"]["next"]["it"])
-            # Add a spacer if there's also a prev button
             spacer = '<div style="flex-grow: 1;"></div>' if page_num > 1 else ''
             pagination_html += f'{spacer}<a href="{next_path}" class="next-button">{next_text}</a>'
 
@@ -503,15 +552,19 @@ def generate_index_page(articles, output_dir, lang='it'):
         footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
         footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
 
-        # Set paths based on page depth
         if page_num == 1:
             home_link = "index.html"
             logo_path = "logo_vn_ia.png"
             lang_links = get_language_links(depth=1)
+            # Inject the filter bar only on the first page
+            content_with_filter = filter_bar_html + grid_html
         else:
             home_link = "../../index.html"
             logo_path = "../../logo_vn_ia.png"
             lang_links = get_language_links(depth=2)
+            # No filter bar on subsequent pages
+            content_with_filter = grid_html
+
 
         temp_html = base_template.replace("{{subtitle}}", subtitle)
         temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
@@ -519,16 +572,14 @@ def generate_index_page(articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
         temp_html = temp_html.replace("{{home_link}}", home_link)
         temp_html = temp_html.replace("{{logo_path}}", logo_path)
-        temp_html = temp_html.replace("{{content}}", grid_html)
+        temp_html = temp_html.replace("{{content}}", content_with_filter)
         temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
 
-        # Replace language links
         for link_placeholder, link_url in lang_links.items():
             temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
 
         final_page_html = temp_html
 
-        # Determine output path
         if page_num == 1:
             page_output_dir = output_dir
             output_path = os.path.join(page_output_dir, "index.html")

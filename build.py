@@ -421,13 +421,24 @@ def generate_article_pages(articles, output_dir, lang='it'):
         # Get translation for the back button
         back_button_text = TRANSLATIONS["article_page"]["back_button"].get(lang, TRANSLATIONS["article_page"]["back_button"]["it"])
 
+        # --- Tags Formatting ---
+        tags_html = ""
+        if article.get('tags'):
+            tags_html = '<div class="article-card-tags" style="margin-bottom: 20px;">'
+            for tag in article['tags']:
+                # The link will point to the homepage with a hash for the JS to pick up
+                tags_html += f'<a href="index.html#{tag}" class="tag">{tag}</a>'
+            tags_html += '</div>'
+
         # Create a simple view for the article content
         article_view_html = f"""
         <div id="article-view">
             <a href="index.html" class="back-button">{back_button_text}</a>
+            {tags_html}
             {article['html_content']}
             <div class="footer-back-button">
-                <a href="index.html" class="back-button">{back_button_text}</a>
+                {tags_html}
+                <a href="index.html" class="back-button" style="margin-top: 20px;">{back_button_text}</a>
             </div>
         </div>
         """

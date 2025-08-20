@@ -68,6 +68,8 @@
             transition: transform 0.2s, box-shadow 0.2s;
             text-decoration: none;
             color: inherit;
+            display: flex;
+            flex-direction: column;
         }
         .article-card:hover {
             transform: translateY(-5px);
@@ -80,6 +82,9 @@
         }
         .article-card-content {
             padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         .article-card-content h3 {
             margin: 0 0 10px;
@@ -93,6 +98,7 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            flex-grow: 1;
         }
         #article-view {
             background-color: #ffffff;
@@ -177,7 +183,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             text-decoration: none;
         }
-        /* Styles for thank-you and newsletter pages */
         .container {
             background-color: #ffffff;
             padding: 40px;
@@ -229,7 +234,7 @@
 <body>
     <header>
         <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em; align-items: center;">
-            <a href="newsletter.html" class="subscribe-link">{{subscribe_link_text}}</a>
+            <a href="/{{lang}}/newsletter.html" class="subscribe-link">{{subscribe_link_text}}</a>
             <span class="separator" style="border-left: 1px solid #dddfe2; height: 20px;"></span>
             <a href="{{it_link}}" title="Italiano">🇮🇹</a>
             <a href="{{en_link}}" title="English">🇬🇧</a>
@@ -250,8 +255,8 @@
         <p>{{footer_curated_by}} <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></p>
         <p>
             <a href="mailto:info@verbanianotizie.it">{{footer_contacts}}</a> |
-            <a href="#">Cookie</a> |
-            <a href="#">Privacy Policy</a>
+            <a href="/{{lang}}/cookie.html">Cookie</a> |
+            <a href="/{{lang}}/privacy.html">Privacy Policy</a>
         </p>
     </footer>
     <script>
@@ -275,7 +280,7 @@
                 articleCards.forEach(card => {
                     const cardTags = card.getAttribute('data-tags');
                     if (selectedTag === 'all' || (cardTags && cardTags.includes(selectedTag))) {
-                        card.style.display = 'block';
+                        card.style.display = 'flex'; // Use flex to match grid display
                     } else {
                         card.style.display = 'none';
                     }
@@ -285,10 +290,9 @@
             // Add click listeners to buttons
             filterButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent default anchor behavior
+                    e.preventDefault();
                     const selectedTag = this.getAttribute('data-tag');
                     filterArticles(selectedTag);
-                    // Update URL hash for shareable links, without reloading the page
                     if (history.pushState) {
                         history.pushState(null, null, `#${selectedTag}`);
                     } else {

@@ -35,7 +35,7 @@ TRANSLATIONS = {
         "title": {
             "it": "Iscriviti alla nostra Newsletter",
             "en": "Subscribe to our Newsletter",
-            "es": "Suscríbete a nuestro boletín",
+            "es": "Suscríbete a nostro boletín",
             "fr": "Abonnez-vous à notre newsletter",
             "de": "Abonnieren Sie unseren Newsletter"
         },
@@ -173,7 +173,6 @@ def get_language_links():
         links[f"{lang}_link"] = f"/{lang}/"
     return links
 
-# ... (rest of the functions up to generate_article_pages)
 def get_all_repo_files():
     print("Fetching file tree from GitHub...")
     repo_info_url = "https://api.github.com/repos/matteobaccan/CorsoAIBook"
@@ -347,7 +346,6 @@ def generate_index_page(articles, output_dir, lang='it'):
         with open(output_path, "w") as f:
             f.write(temp_html)
 
-# ... (rest of the file is the same)
 def generate_local_pages(output_dir, lang='it'):
     print("\nGenerating local pages...")
     pages_dir = "pages"
@@ -373,7 +371,6 @@ def generate_local_pages(output_dir, lang='it'):
                 f.write(page_html)
 
 def create_main_redirect():
-    # ... (this function is new, let's call it create_root_redirect to match the call in main)
     print("\nCreating root redirect...")
     html_content = """
 <!DOCTYPE html><html><head><title>Notizie IA</title><meta http-equiv="refresh" content="0; url=/it/" /></head>
@@ -405,8 +402,19 @@ def main():
         processed_articles = [p for p in (process_article(md) for md in md_files) if p]
 
         # This sort is now correct because None dates are handled by process_article
-        # But user wants original sorting, so we comment this out.
-        # processed_articles.sort(key=lambda x: x.get('date') or date.min, reverse=True)
+        # But user wants original sorting, so we leave it untouched.
+        # The original sorting is based on filename and happens in main() before this loop.
+        # Oops, the sorting was removed. I need to re-add the original sorting logic.
+
+        # I will re-add the original sorting here.
+        s1 = sorted(md_files, key=lambda x: x['name'].lower(), reverse=True)
+        sorted_md_files = sorted(s1, key=lambda x: x['parent_dir'], reverse=True)
+
+        processed_articles = []
+        for md_file in sorted_md_files:
+             article_data = process_article(md_file)
+             if article_data:
+                processed_articles.append(article_data)
 
         generate_article_pages(processed_articles, output_dir, lang)
         generate_index_page(processed_articles, output_dir, lang)

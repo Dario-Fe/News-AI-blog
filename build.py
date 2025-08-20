@@ -252,7 +252,7 @@ def generate_article_pages(articles, output_dir, lang='it'):
             for tag in article['tags']:
                 tags_html += f'<a href="/{lang}/index.html#{tag}" class="tag">{tag}</a>'
             tags_html += '</div>'
-        
+
         article_view_html = f"""
         <div id="article-view">
             <a href="/{lang}/" class="back-button">{back_button_text}</a>
@@ -264,20 +264,20 @@ def generate_article_pages(articles, output_dir, lang='it'):
             </div>
         </div>
         """
-        
+
         page_html = base_template.replace("{{content}}", article_view_html).replace("{{pagination_controls}}", "")
         # Replace other placeholders
         for key, value in TRANSLATIONS.items():
             if isinstance(value, dict):
                 for sub_key, sub_value in value.items():
                     page_html = page_html.replace(f"{{{{{key}_{sub_key}}}}}", sub_value.get(lang, sub_value.get("it", "")))
-        
+
         lang_links = get_language_links()
         for link_placeholder, link_url in lang_links.items():
             page_html = page_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
         page_html = page_html.replace("{{home_link}}", f"/{lang}/")
         page_html = page_html.replace("{{logo_path}}", "/logo_vn_ia.png")
-        
+
         with open(os.path.join(output_dir, article['path']), "w") as f:
             f.write(page_html)
 
@@ -285,7 +285,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     print("\nGenerating index pages...")
     with open("templates/base.html", "r") as f:
         base_template = f.read()
-    
+
     try:
         locale.setlocale(locale.LC_TIME, f"{lang}_{lang.upper()}.UTF-8" if lang != 'en' else 'en_US.UTF-8')
     except locale.Error:
@@ -326,15 +326,15 @@ def generate_index_page(articles, output_dir, lang='it'):
             next_path = f"/page/{page_num + 1}/"
             spacer = '<div style="flex-grow: 1;"></div>' if page_num > 1 else ''
             pagination_html += f'{spacer}<a href="/{lang}{next_path}" class="next-button">{TRANSLATIONS["pagination"]["next"].get(lang, "")}</a>'
-        
+
         content_with_filter = filter_bar_html + grid_html if page_num == 1 else grid_html
-        
+
         temp_html = base_template.replace("{{content}}", content_with_filter).replace("{{pagination_controls}}", pagination_html)
         for key, value in TRANSLATIONS.items():
             if isinstance(value, dict):
                 for sub_key, sub_value in value.items():
                     temp_html = temp_html.replace(f"{{{{{key}_{sub_key}}}}}", sub_value.get(lang, sub_value.get("it", "")))
-        
+
         lang_links = get_language_links()
         for link_placeholder, link_url in lang_links.items():
             temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
@@ -397,10 +397,10 @@ def main():
         output_dir = os.path.join(BASE_OUTPUT_DIR, lang)
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-        
+
         md_files = get_files_for_lang(articles_db, lang)
         processed_articles = [p for p in (process_article(md) for md in md_files) if p]
-        
+
         # This sort is now correct because None dates are handled by process_article
         # But user wants original sorting, so we leave it untouched.
         # The original sorting is based on filename and happens in main() before this loop.
@@ -409,7 +409,7 @@ def main():
         # I will re-add the original sorting here.
         s1 = sorted(md_files, key=lambda x: x['name'].lower(), reverse=True)
         sorted_md_files = sorted(s1, key=lambda x: x['parent_dir'], reverse=True)
-        
+
         processed_articles = []
         for md_file in sorted_md_files:
              article_data = process_article(md_file)

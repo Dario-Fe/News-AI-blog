@@ -187,6 +187,43 @@
             margin: 40px auto;
             text-align: center;
         }
+        .article-card-date {
+            font-size: 0.8em;
+            color: #606770;
+            margin-bottom: 10px;
+        }
+        .article-card-tags {
+            margin-top: 15px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e7f3ff;
+            color: #1877f2;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+        .tag-filter-button {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9em;
+        }
+        .tag-filter-button:hover {
+            background-color: #f0f2f5;
+        }
+        .tag-filter-button.active {
+            background-color: #1877f2;
+            color: white;
+            border-color: #1877f2;
+        }
     </style>
 </head>
 <body>
@@ -217,5 +254,66 @@
             <a href="#">Privacy Policy</a>
         </p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.tag-filter-button');
+            if (!filterButtons.length) return;
+
+            const articleCards = document.querySelectorAll('.article-card');
+
+            function filterArticles(selectedTag) {
+                // Manage active state for buttons
+                filterButtons.forEach(btn => {
+                    if (btn.getAttribute('data-tag') === selectedTag) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                // Filter cards
+                articleCards.forEach(card => {
+                    const cardTags = card.getAttribute('data-tags');
+                    if (selectedTag === 'all' || (cardTags && cardTags.includes(selectedTag))) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Add click listeners to buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor behavior
+                    const selectedTag = this.getAttribute('data-tag');
+                    filterArticles(selectedTag);
+                    // Update URL hash for shareable links, without reloading the page
+                    if (history.pushState) {
+                        history.pushState(null, null, `#${selectedTag}`);
+                    } else {
+                        window.location.hash = `#${selectedTag}`;
+                    }
+                });
+            });
+
+            // Function to apply filter based on the URL hash
+            function applyFilterFromHash() {
+                if (window.location.hash) {
+                    const tagFromHash = decodeURIComponent(window.location.hash.substring(1));
+                    const targetButton = document.querySelector(`.tag-filter-button[data-tag="${tagFromHash}"]`);
+                    if (targetButton) {
+                        filterArticles(tagFromHash);
+                    }
+                }
+            }
+
+            // Apply filter on initial page load
+            applyFilterFromHash();
+
+            // Also apply filter when the hash changes (e.g., back/forward buttons)
+            window.addEventListener('hashchange', applyFilterFromHash);
+        });
+    </script>
 </body>
 </html>

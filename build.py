@@ -457,7 +457,7 @@ def create_root_redirect():
 </body>
 </html>
 """
-    with open(os.path.join(BASE_OUTPUT_DIR, "index.html"), "w") as f:
+    with open(os.path.join(BASE_OUTPUT_DIR, "index.html"), "w", encoding='utf-8') as f:
         f.write(html_content)
     print("  - dist/index.html (redirect)")
 
@@ -528,7 +528,7 @@ def generate_article_pages(articles, output_dir, lang='it'):
     Generates an HTML page for each article.
     """
     print("\nGenerating article pages...")
-    with open("templates/base.html", "r") as f:
+    with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
     for article in articles:
@@ -584,7 +584,7 @@ def generate_article_pages(articles, output_dir, lang='it'):
 
         final_page_html = temp_html.replace("{{content}}", article_view_html)
 
-        with open(os.path.join(output_dir, article['path']), "w") as f:
+        with open(os.path.join(output_dir, article['path']), "w", encoding='utf-8') as f:
             f.write(final_page_html)
 
 def generate_index_page(articles, output_dir, lang='it'):
@@ -592,7 +592,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     Generates paginated index pages with a grid of articles.
     """
     print("\nGenerating index pages...")
-    with open("templates/base.html", "r") as f:
+    with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
     # Set locale for date formatting
@@ -663,12 +663,22 @@ def generate_index_page(articles, output_dir, lang='it'):
         # Generate pagination controls
         pagination_html = ''
         if page_num > 1:
-            prev_path = f"../page/{page_num - 1}/index.html" if page_num > 2 else "../index.html"
+            if page_num == 2:
+                # From page 2, go back to page 1 (index.html in language dir)
+                prev_path = "../../index.html"
+            else:
+                # From page N, go back to page N-1
+                prev_path = f"../../page/{page_num - 1}/index.html"
             prev_text = TRANSLATIONS["pagination"]["prev"].get(lang, TRANSLATIONS["pagination"]["prev"]["it"])
             pagination_html += f'<a href="{prev_path}" class="prev-button">{prev_text}</a>'
 
         if page_num < total_pages:
-            next_path = f"../page/{page_num + 1}/index.html"
+            if page_num == 1:
+                # From page 1, go to page 2
+                next_path = f"page/{page_num + 1}/index.html"
+            else:
+                # From page N, go to page N+1
+                next_path = f"../../page/{page_num + 1}/index.html"
             next_text = TRANSLATIONS["pagination"]["next"].get(lang, TRANSLATIONS["pagination"]["next"]["it"])
             spacer = '<div style="flex-grow: 1;"></div>' if page_num > 1 else ''
             pagination_html += f'{spacer}<a href="{next_path}" class="next-button">{next_text}</a>'
@@ -718,7 +728,7 @@ def generate_index_page(articles, output_dir, lang='it'):
             os.makedirs(page_output_dir)
 
         print(f"  - Generating page {page_num} at {output_path}")
-        with open(output_path, "w") as f:
+        with open(output_path, "w", encoding='utf-8') as f:
             f.write(final_page_html)
 
 def generate_local_pages(output_dir, lang='it'):
@@ -730,13 +740,13 @@ def generate_local_pages(output_dir, lang='it'):
     if not os.path.exists(pages_dir):
         return
 
-    with open("templates/base.html", "r") as f:
+    with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
     for filename in os.listdir(pages_dir):
         if filename.endswith(".html"):
             print(f"  - {filename}")
-            with open(os.path.join(pages_dir, filename), "r") as f:
+            with open(os.path.join(pages_dir, filename), "r", encoding='utf-8') as f:
                 page_content = f.read()
 
             # Replace placeholders in the base template
@@ -811,7 +821,7 @@ def generate_local_pages(output_dir, lang='it'):
 
             final_page_html = temp_html.replace("{{content}}", final_content)
 
-            with open(os.path.join(output_dir, filename), "w") as f:
+            with open(os.path.join(output_dir, filename), "w", encoding='utf-8') as f:
                 f.write(final_page_html)
 
 def copy_static_assets(output_dir):

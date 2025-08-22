@@ -9,6 +9,7 @@ import markdown2
 import math
 from urllib.parse import quote
 import locale
+import json
 
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
@@ -156,6 +157,13 @@ TRANSLATIONS = {
             "es": "&larr; Artículos Anteriores",
             "fr": "&larr; Articles précédents",
             "de": "&larr; Vorherige Artikel"
+        },
+        "view_more": {
+            "it": "Carica Altri Articoli",
+            "en": "Load More Articles",
+            "es": "Cargar más artículos",
+            "fr": "Charger plus d'articles",
+            "de": "Weitere Artikel laden"
         }
     },
     "article_page": {
@@ -381,12 +389,23 @@ def get_files_for_lang(articles_db, lang='it'):
 def main():
     """
     Main function to build the static site and RSS feed.
+    Can also be used to generate master files like sitemap and robots.txt.
     """
     parser = argparse.ArgumentParser(description="Build the static site for a specific language.")
-    parser.add_argument('--lang', default='it', help='Language to build (e.g., en, es)')
+    parser.add_argument('--lang', default=None, help='Language to build (e.g., en, es)')
+    parser.add_argument('--master-files', action='store_true', help='Generate only the master files (sitemap.xml, robots.txt).')
     args = parser.parse_args()
 
+    if args.master_files:
+        generate_sitemap_xml()
+        generate_robots_txt()
+        create_root_redirect() # This is also a master file
+        return
+
     lang = args.lang
+    if not lang:
+        print("Error: --lang is required unless generating master files with --master-files.")
+        return
     output_dir = os.path.join(BASE_OUTPUT_DIR, lang)
 
     print(f"Starting build process for language: '{lang}'...")
@@ -589,9 +608,10 @@ def generate_article_pages(articles, output_dir, lang='it'):
 
 def generate_index_page(articles, output_dir, lang='it'):
     """
-    Generates paginated index pages with a grid of articles.
+    Generates the index page with the first batch of articles and a JSON
+    file for the rest to be loaded dynamically.
     """
-    print("\nGenerating index pages...")
+    print("\nGenerating index page and JSON for dynamic loading...")
     with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
@@ -613,7 +633,6 @@ def generate_index_page(articles, output_dir, lang='it'):
 
     # --- Create Tag Filter Bar ---
     all_tags = sorted(list(set(tag for article in articles for tag in article.get('tags', []))))
-
     filter_bar_html = '<div id="tag-filter-bar" style="margin-bottom: 20px; text-align: center; flex-wrap: wrap; display: flex; justify-content: center; gap: 10px;">'
     filter_bar_html += '<button class="tag-filter-button active" data-tag="all">All</button>'
     for tag in all_tags:
@@ -621,32 +640,27 @@ def generate_index_page(articles, output_dir, lang='it'):
     filter_bar_html += '</div>'
 
     ARTICLES_PER_PAGE = 15
-    total_pages = math.ceil(len(articles) / ARTICLES_PER_PAGE)
+    articles_for_page1 = articles[:ARTICLES_PER_PAGE]
+    articles_for_json = articles[ARTICLES_PER_PAGE:]
 
-    for page_num in range(1, total_pages + 1):
-        start_index = (page_num - 1) * ARTICLES_PER_PAGE
-        end_index = start_index + ARTICLES_PER_PAGE
-        page_articles = articles[start_index:end_index]
+    # --- Generate HTML for the first page articles ---
+    grid_html = '<div id="articles-grid">\n'
+    for article in articles_for_page1:
+        date_html = ""
+        if article.get('date'):
+            formatted_date = article['date'].strftime('%d %B %Y')
+            date_html = f'<p class="article-card-date">{formatted_date}</p>'
 
-        grid_html = '<div id="articles-grid">\n'
-        for article in page_articles:
-            # --- Date Formatting ---
-            date_html = ""
-            if article.get('date'):
-                formatted_date = article['date'].strftime('%d %B %Y')
-                date_html = f'<p class="article-card-date">{formatted_date}</p>'
+        tags_html = ""
+        if article.get('tags'):
+            tags_html = '<div class="article-card-tags">'
+            for tag in article['tags']:
+                tags_html += f'<span class="tag">{tag}</span>'
+            tags_html += '</div>'
 
-            # --- Tags Formatting ---
-            tags_html = ""
-            if article.get('tags'):
-                tags_html = '<div class="article-card-tags">'
-                for tag in article['tags']:
-                    tags_html += f'<span class="tag">{tag}</span>'
-                tags_html += '</div>'
+        tags_data_attr = " ".join(article.get('tags', []))
 
-            tags_data_attr = " ".join(article.get('tags', []))
-
-            card_html = f"""
+        card_html = f"""
             <a href="{article['path']}" class="article-card" data-tags="{tags_data_attr}">
                 <img src="{article['image_url'] if article['image_url'] else 'logo_vn_ia.png'}" alt="{article['title']}" loading="lazy">
                 <div class="article-card-content">
@@ -657,79 +671,72 @@ def generate_index_page(articles, output_dir, lang='it'):
                 </div>
             </a>
             """
-            grid_html += card_html
-        grid_html += '</div>'
+        grid_html += card_html
+    grid_html += '</div>'
 
-        # Generate pagination controls
-        pagination_html = ''
-        if page_num > 1:
-            if page_num == 2:
-                # From page 2, go back to page 1 (index.html in language dir)
-                prev_path = "../../index.html"
+    # --- Generate JSON for the remaining articles ---
+    if articles_for_json:
+        json_output_path = os.path.join(output_dir, "articles.json")
+
+        # Create a serializable version of the articles
+        serializable_articles = []
+        for article in articles_for_json:
+            # Create a copy to avoid modifying the original list
+            article_copy = article.copy()
+            if 'date' in article_copy and article_copy['date'] is not None:
+                article_copy['date'] = article_copy['date'].isoformat()
             else:
-                # From page N, go back to page N-1
-                prev_path = f"../../page/{page_num - 1}/index.html"
-            prev_text = TRANSLATIONS["pagination"]["prev"].get(lang, TRANSLATIONS["pagination"]["prev"]["it"])
-            pagination_html += f'<a href="{prev_path}" class="prev-button">{prev_text}</a>'
+                article_copy['date'] = None
+            serializable_articles.append(article_copy)
 
-        if page_num < total_pages:
-            if page_num == 1:
-                # From page 1, go to page 2
-                next_path = f"page/{page_num + 1}/index.html"
-            else:
-                # From page N, go to page N+1
-                next_path = f"../../page/{page_num + 1}/index.html"
-            next_text = TRANSLATIONS["pagination"]["next"].get(lang, TRANSLATIONS["pagination"]["next"]["it"])
-            spacer = '<div style="flex-grow: 1;"></div>' if page_num > 1 else ''
-            pagination_html += f'{spacer}<a href="{next_path}" class="next-button">{next_text}</a>'
+        with open(json_output_path, "w", encoding='utf-8') as f:
+            json.dump(serializable_articles, f, ensure_ascii=False)
+        print(f"  - Generated articles.json with {len(articles_for_json)} articles.")
 
-        # Replace all placeholders
-        subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
-        subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
-        footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
-        footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
+    # --- Pagination Controls (will be a "View More" button handled by JS) ---
+    pagination_html = ''
+    if articles_for_json:
+        # The button itself will be added via JS in the template for easier translation.
+        # We just need a container for it.
+        pagination_html = '<div id="view-more-container"></div>'
 
-        if page_num == 1:
-            home_link = "index.html"
-            logo_path = "logo_vn_ia.png"
-            lang_links = get_language_links(depth=1)
-            # Inject the filter bar only on the first page
-            content_with_filter = filter_bar_html + grid_html
-        else:
-            home_link = "../../index.html"
-            logo_path = "../../logo_vn_ia.png"
-            lang_links = get_language_links(depth=2)
-            # No filter bar on subsequent pages
-            content_with_filter = grid_html
+    # --- Final HTML Generation for index.html ---
+    subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+    subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
+    footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
+    footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
+
+    # Paths and links for the root index.html
+    home_link = "index.html"
+    logo_path = "logo_vn_ia.png"
+    lang_links = get_language_links(depth=1)
+    content_with_filter = filter_bar_html + grid_html
+
+    temp_html = base_template.replace("{{subtitle}}", subtitle)
+    temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
+    temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
+    temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+    temp_html = temp_html.replace("{{home_link}}", home_link)
+    temp_html = temp_html.replace("{{logo_path}}", logo_path)
+    temp_html = temp_html.replace("{{content}}", content_with_filter)
+    temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
+
+    # Add data for the 'View More' script
+    view_more_text = TRANSLATIONS["pagination"]["view_more"].get(lang, TRANSLATIONS["pagination"]["view_more"]["it"])
+    temp_html = temp_html.replace("{{lang}}", lang)
+    temp_html = temp_html.replace("{{view_more_text}}", view_more_text.replace("'", "\\'"))
 
 
-        temp_html = base_template.replace("{{subtitle}}", subtitle)
-        temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
-        temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
-        temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
-        temp_html = temp_html.replace("{{home_link}}", home_link)
-        temp_html = temp_html.replace("{{logo_path}}", logo_path)
-        temp_html = temp_html.replace("{{content}}", content_with_filter)
-        temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
+    for link_placeholder, link_url in lang_links.items():
+        temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
 
-        for link_placeholder, link_url in lang_links.items():
-            temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
+    output_path = os.path.join(output_dir, "index.html")
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
-        final_page_html = temp_html
-
-        if page_num == 1:
-            page_output_dir = output_dir
-            output_path = os.path.join(page_output_dir, "index.html")
-        else:
-            page_output_dir = os.path.join(output_dir, "page", str(page_num))
-            output_path = os.path.join(page_output_dir, "index.html")
-
-        if not os.path.exists(page_output_dir):
-            os.makedirs(page_output_dir)
-
-        print(f"  - Generating page {page_num} at {output_path}")
-        with open(output_path, "w", encoding='utf-8') as f:
-            f.write(final_page_html)
+    print(f"  - Generating index.html at {output_path}")
+    with open(output_path, "w", encoding='utf-8') as f:
+        f.write(temp_html)
 
 def generate_local_pages(output_dir, lang='it'):
     """
@@ -870,6 +877,65 @@ def generate_rss_feed(articles, output_dir, lang='it'):
     print(f"  - rss.xml (for {lang})")
 
     print("Build process finished successfully!")
+
+
+def generate_sitemap_xml():
+    """
+    Generates a sitemap.xml for all articles in all languages.
+    This function is intended to be called once after all languages are built.
+    """
+    print("\nGenerating sitemap.xml...")
+
+    all_files = get_all_repo_files()
+    if not all_files:
+        print("  Could not fetch files for sitemap generation.")
+        return
+
+    articles_db = structure_articles_by_language(all_files)
+
+    urls = []
+    # Add base URLs for each language's index page
+    for lang in LANGUAGES:
+        urls.append(f"{SITE_URL}{lang}/")
+
+    # Add URLs for each article
+    for article_dir, languages in articles_db.items():
+        for lang, files in languages.items():
+            for file_info in files:
+                slug = os.path.splitext(file_info['name'])[0].strip()
+                path = f"{slug}.html"
+                # URL encode the path to handle spaces and special characters
+                encoded_path = quote(path)
+                urls.append(f"{SITE_URL}{lang}/{encoded_path}")
+
+    xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for url in sorted(urls):
+        xml_content += f"  <url>\n    <loc>{url}</loc>\n  </url>\n"
+    xml_content += '</urlset>'
+
+    sitemap_path = os.path.join(BASE_OUTPUT_DIR, "sitemap.xml")
+    with open(sitemap_path, "w", encoding='utf-8') as f:
+        f.write(xml_content)
+
+    print(f"  - sitemap.xml generated with {len(urls)} URLs.")
+
+
+def generate_robots_txt():
+    """
+    Generates a robots.txt file in the output directory.
+    """
+    print("\nGenerating robots.txt...")
+    content = (
+        "User-agent: *\n"
+        "Allow: /\n\n"
+        f"Sitemap: {SITE_URL}sitemap.xml"
+    )
+    robots_path = os.path.join(BASE_OUTPUT_DIR, "robots.txt")
+    with open(robots_path, "w", encoding='utf-8') as f:
+        f.write(content)
+    print("  - robots.txt generated.")
+
 
 if __name__ == "__main__":
     main()

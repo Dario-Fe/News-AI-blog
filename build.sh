@@ -20,8 +20,8 @@ for lang in it en es fr de; do
   python3 build.py --lang "$lang"
 done
 
-# 4. Create the root redirect file
-echo "4. Creating root redirect..."
-python3 -c "from build import create_root_redirect; create_root_redirect()"
+# 4. Generate master files (sitemap, robots.txt, root redirect)
+echo "4. Generating master files..."
+python3 build.py --master-files
 
 echo "--- BUILD PROCESS COMPLETE ---"

@@ -640,12 +640,12 @@ def generate_index_page(articles, output_dir, lang='it'):
     filter_bar_html += '</div>'
 
     ARTICLES_PER_PAGE = 15
-    articles_for_page1 = articles[:ARTICLES_PER_PAGE]
-    articles_for_json = articles[ARTICLES_PER_PAGE:]
+    initial_articles = articles[:ARTICLES_PER_PAGE]
+    all_articles_for_json = articles # All articles go into the JSON
 
     # --- Generate HTML for the first page articles ---
     grid_html = '<div id="articles-grid">\n'
-    for article in articles_for_page1:
+    for article in initial_articles:
         date_html = ""
         if article.get('date'):
             formatted_date = article['date'].strftime('%d %B %Y')
@@ -674,28 +674,28 @@ def generate_index_page(articles, output_dir, lang='it'):
         grid_html += card_html
     grid_html += '</div>'
 
-    # --- Generate JSON for the remaining articles ---
-    if articles_for_json:
-        json_output_path = os.path.join(output_dir, "articles.json")
+    # --- Generate JSON for all articles ---
+    json_output_path = os.path.join(output_dir, "articles.json")
 
-        # Create a serializable version of the articles
-        serializable_articles = []
-        for article in articles_for_json:
-            # Create a copy to avoid modifying the original list
-            article_copy = article.copy()
-            if 'date' in article_copy and article_copy['date'] is not None:
-                article_copy['date'] = article_copy['date'].isoformat()
-            else:
-                article_copy['date'] = None
-            serializable_articles.append(article_copy)
+    # Create a serializable version of all articles
+    serializable_articles = []
+    for article in all_articles_for_json:
+        article_copy = article.copy()
+        if 'date' in article_copy and article_copy['date'] is not None:
+            article_copy['date'] = article_copy['date'].isoformat()
+        else:
+            article_copy['date'] = None
+        serializable_articles.append(article_copy)
 
-        with open(json_output_path, "w", encoding='utf-8') as f:
-            json.dump(serializable_articles, f, ensure_ascii=False)
-        print(f"  - Generated articles.json with {len(articles_for_json)} articles.")
+    with open(json_output_path, "w", encoding='utf-8') as f:
+        json.dump(serializable_articles, f, ensure_ascii=False)
+    print(f"  - Generated articles.json with {len(all_articles_for_json)} articles.")
+
 
     # --- Pagination Controls (will be a "View More" button handled by JS) ---
     pagination_html = ''
-    if articles_for_json:
+    # The button is shown if there are more articles than initially displayed
+    if len(articles) > ARTICLES_PER_PAGE:
         # The button itself will be added via JS in the template for easier translation.
         # We just need a container for it.
         pagination_html = '<div id="view-more-container"></div>'

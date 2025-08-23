@@ -371,7 +371,82 @@
                 button.textContent = window.APP_CONFIG.viewMoreText;
                 viewMoreContainer.appendChild(button);
 
+                let allArticles = [];
+                let articlesLoaded = false;
+                const articlesPerPage = 15;
+                // Starts at 1 because page 0 is the initial articles in the HTML
+                let currentPage = 1;
+
+                const renderNextPage = () => {
+                    const lang = window.APP_CONFIG.lang;
+                    const localeMap = {
+                        'it': 'it-IT', 'en': 'en-GB', 'es': 'es-ES',
+                        'fr': 'fr-FR', 'de': 'de-DE'
+                    };
+                    const locale = localeMap[lang] || lang;
+                    const activeTag = document.querySelector('.tag-filter-button.active')?.dataset.tag || 'all';
+
+                    const start = currentPage * articlesPerPage;
+                    const end = start + articlesPerPage;
+                    const articlesToRender = allArticles.slice(start, end);
+
+                    articlesToRender.forEach(article => {
+                        let dateHtml = '';
+                        if (article.date) {
+                            const date = new Date(article.date);
+                            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                            const formattedDate = date.toLocaleDateString(locale, options);
+                            dateHtml = `<p class="article-card-date">${formattedDate}</p>`;
+                        }
+
+                        let tagsHtml = '';
+                        if (article.tags && article.tags.length > 0) {
+                            tagsHtml = '<div class="article-card-tags">';
+                            article.tags.forEach(tag => {
+                                tagsHtml += `<span class="tag">${tag}</span>`;
+                            });
+                            tagsHtml += '</div>';
+                        }
+
+                        const tagsDataAttr = article.tags ? article.tags.join(' ') : '';
+                        const imageUrl = article.image_url ? article.image_url : 'logo_vn_ia.png';
+
+                        const card = document.createElement('a');
+                        card.href = article.path;
+                        card.className = 'article-card';
+                        card.setAttribute('data-tags', tagsDataAttr);
+                        card.innerHTML = `
+                            <img src="${imageUrl}" alt="${article.title}" loading="lazy">
+                            <div class="article-card-content">
+                                ${dateHtml}
+                                <h3>${article.title}</h3>
+                                <p>${article.summary}</p>
+                                ${tagsHtml}
+                            </div>
+                        `;
+
+                        const isVisible = activeTag === 'all' || (article.tags && article.tags.includes(activeTag));
+                        if (!isVisible) {
+                            card.style.display = 'none';
+                        }
+
+                        grid.appendChild(card);
+                    });
+
+                    currentPage++;
+
+                    // Hide button if there are no more articles to show
+                    if (currentPage * articlesPerPage >= allArticles.length) {
+                        viewMoreContainer.remove();
+                    }
+                };
+
                 button.addEventListener('click', async () => {
+                    if (articlesLoaded) {
+                        renderNextPage();
+                        return;
+                    }
+
                     try {
                         button.disabled = true;
                         button.textContent = 'Loading...';
@@ -380,62 +455,15 @@
                         if (!response.ok) {
                             throw new Error(`HTTP error! status: ${response.status}`);
                         }
-                        const articles = await response.json();
+                        allArticles = await response.json();
+                        articlesLoaded = true;
 
-                        const lang = window.APP_CONFIG.lang;
-                        const localeMap = {
-                            'it': 'it-IT', 'en': 'en-GB', 'es': 'es-ES',
-                            'fr': 'fr-FR', 'de': 'de-DE'
-                        };
-                        const locale = localeMap[lang] || lang;
+                        // The initial HTML already contains the first page (page 0),
+                        // so we start rendering from page 1.
+                        renderNextPage();
 
-                        const activeTag = document.querySelector('.tag-filter-button.active')?.dataset.tag;
-
-                        articles.forEach(article => {
-                            let dateHtml = '';
-                            if (article.date) {
-                                const date = new Date(article.date);
-                                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                                const formattedDate = date.toLocaleDateString(locale, options);
-                                dateHtml = `<p class="article-card-date">${formattedDate}</p>`;
-                            }
-
-                            let tagsHtml = '';
-                            if (article.tags && article.tags.length > 0) {
-                                tagsHtml = '<div class="article-card-tags">';
-                                article.tags.forEach(tag => {
-                                    tagsHtml += `<span class="tag">${tag}</span>`;
-                                });
-                                tagsHtml += '</div>';
-                            }
-
-                            const tagsDataAttr = article.tags ? article.tags.join(' ') : '';
-                            const imageUrl = article.image_url ? article.image_url : 'logo_vn_ia.png';
-
-                            const card = document.createElement('a');
-                            card.href = article.path;
-                            card.className = 'article-card';
-                            card.setAttribute('data-tags', tagsDataAttr);
-                            card.innerHTML = `
-                                <img src="${imageUrl}" alt="${article.title}" loading="lazy">
-                                <div class="article-card-content">
-                                    ${dateHtml}
-                                    <h3>${article.title}</h3>
-                                    <p>${article.summary}</p>
-                                    ${tagsHtml}
-                                </div>
-                            `;
-
-                            // Newly loaded cards should respect the active filter
-                            const isVisible = !activeTag || activeTag === 'all' || (article.tags && article.tags.includes(activeTag));
-                            if (!isVisible) {
-                                card.style.display = 'none';
-                            }
-
-                            grid.appendChild(card);
-                        });
-
-                        viewMoreContainer.remove();
+                        button.disabled = false;
+                        button.textContent = window.APP_CONFIG.viewMoreText;
 
                     } catch (error) {
                         console.error('Could not load more articles:', error);

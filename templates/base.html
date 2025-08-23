@@ -290,189 +290,150 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- State Management ---
+            let allArticles = [];
+            let currentFilteredArticles = [];
+            let currentPage = 0;
+            const articlesPerPage = 15;
+            let activeTag = 'all';
+
+            // --- DOM Elements ---
+            const grid = document.getElementById('articles-grid');
+            const viewMoreContainer = document.getElementById('view-more-container');
             const filterButtons = document.querySelectorAll('.tag-filter-button');
 
-            function filterArticles(selectedTag) {
-                const articleCards = document.querySelectorAll('.article-card');
-                const viewMoreContainer = document.getElementById('view-more-container');
+            // --- Core Functions ---
 
-                // Manage active state for buttons
-                filterButtons.forEach(btn => {
-                    if (btn.getAttribute('data-tag') === selectedTag) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
+            /**
+             * Renders a page of articles to the grid.
+             * @param {Array} articlesToRender - The array of article objects to render.
+             */
+            const renderArticles = (articlesToRender) => {
+                const lang = window.APP_CONFIG.lang;
+                const localeMap = { 'it': 'it-IT', 'en': 'en-GB', 'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE' };
+                const locale = localeMap[lang] || lang;
+
+                articlesToRender.forEach(article => {
+                    let dateHtml = '';
+                    if (article.date) {
+                        const date = new Date(article.date);
+                        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                        dateHtml = `<p class="article-card-date">${date.toLocaleDateString(locale, options)}</p>`;
                     }
+
+                    let tagsHtml = '';
+                    if (article.tags && article.tags.length > 0) {
+                        tagsHtml = '<div class="article-card-tags">' + article.tags.map(tag => `<span class="tag">${tag}</span>`).join('') + '</div>';
+                    }
+
+                    const tagsDataAttr = article.tags ? article.tags.join(' ') : '';
+                    const imageUrl = article.image_url || 'logo_vn_ia.png';
+
+                    const card = document.createElement('a');
+                    card.href = article.path;
+                    card.className = 'article-card';
+                    card.setAttribute('data-tags', tagsDataAttr);
+                    card.innerHTML = `
+                        <img src="${imageUrl}" alt="${article.title}" loading="lazy">
+                        <div class="article-card-content">
+                            ${dateHtml}<h3>${article.title}</h3><p>${article.summary}</p>${tagsHtml}
+                        </div>`;
+                    grid.appendChild(card);
                 });
+            };
 
-                // Filter cards based on the selected tag
-                articleCards.forEach(card => {
-                    const cardTags = card.getAttribute('data-tags');
-                    if (selectedTag === 'all' || (cardTags && cardTags.includes(selectedTag))) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-
-                // Show/hide the "View More" button based on the filter
-                if (viewMoreContainer) {
-                    if (selectedTag === 'all') {
-                        viewMoreContainer.style.display = 'flex';
-                    } else {
-                        viewMoreContainer.style.display = 'none';
-                    }
-                }
-            }
-
-            if (filterButtons.length > 0) {
-                // Add click listeners to filter buttons
-                filterButtons.forEach(button => {
-                    button.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const selectedTag = this.getAttribute('data-tag');
-                        if (history.pushState) {
-                            history.pushState(null, null, `#${selectedTag}`);
-                        } else {
-                            window.location.hash = `#${selectedTag}`;
-                        }
-                        filterArticles(selectedTag);
-                    });
-                });
-
-                // Function to apply filter based on the URL hash on page load
-                function applyFilterFromHash() {
-                    let tagFromHash = 'all';
-                    if (window.location.hash) {
-                        const decodedHash = decodeURIComponent(window.location.hash.substring(1));
-                        if (document.querySelector(`.tag-filter-button[data-tag="${decodedHash}"]`)) {
-                            tagFromHash = decodedHash;
-                        }
-                    }
-                    filterArticles(tagFromHash);
-                }
-
-                // Apply filter on initial page load and on hash change
-                applyFilterFromHash();
-                window.addEventListener('hashchange', applyFilterFromHash);
-            }
-
-            // --- "View More" Button Logic ---
-            function initViewMore() {
-                const viewMoreContainer = document.getElementById('view-more-container');
+            /**
+             * Updates the visibility of the "View More" button.
+             */
+            const updateViewMoreButton = () => {
                 if (!viewMoreContainer) return;
+                const moreArticlesExist = (currentPage * articlesPerPage) < currentFilteredArticles.length;
+                viewMoreContainer.style.display = moreArticlesExist ? 'flex' : 'none';
+            };
+            
+            /**
+             * Renders the next page of articles from the current filtered list.
+             */
+            const renderNextPage = () => {
+                const start = currentPage * articlesPerPage;
+                const end = start + articlesPerPage;
+                const articlesToRender = currentFilteredArticles.slice(start, end);
+                
+                renderArticles(articlesToRender);
+                currentPage++;
+                updateViewMoreButton();
+            };
 
-                const grid = document.getElementById('articles-grid');
-                if (!grid) return;
-
-                const button = document.createElement('button');
-                button.id = 'view-more-button';
-                button.className = 'view-more-button';
-                button.textContent = window.APP_CONFIG.viewMoreText;
-                viewMoreContainer.appendChild(button);
-
-                let allArticles = [];
-                let articlesLoaded = false;
-                const articlesPerPage = 15;
-                // Starts at 1 because page 0 is the initial articles in the HTML
-                let currentPage = 1;
-
-                const renderNextPage = () => {
-                    const lang = window.APP_CONFIG.lang;
-                    const localeMap = {
-                        'it': 'it-IT', 'en': 'en-GB', 'es': 'es-ES',
-                        'fr': 'fr-FR', 'de': 'de-DE'
-                    };
-                    const locale = localeMap[lang] || lang;
-                    const activeTag = document.querySelector('.tag-filter-button.active')?.dataset.tag || 'all';
-
-                    const start = currentPage * articlesPerPage;
-                    const end = start + articlesPerPage;
-                    const articlesToRender = allArticles.slice(start, end);
-
-                    articlesToRender.forEach(article => {
-                        let dateHtml = '';
-                        if (article.date) {
-                            const date = new Date(article.date);
-                            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                            const formattedDate = date.toLocaleDateString(locale, options);
-                            dateHtml = `<p class="article-card-date">${formattedDate}</p>`;
-                        }
-
-                        let tagsHtml = '';
-                        if (article.tags && article.tags.length > 0) {
-                            tagsHtml = '<div class="article-card-tags">';
-                            article.tags.forEach(tag => {
-                                tagsHtml += `<span class="tag">${tag}</span>`;
-                            });
-                            tagsHtml += '</div>';
-                        }
-
-                        const tagsDataAttr = article.tags ? article.tags.join(' ') : '';
-                        const imageUrl = article.image_url ? article.image_url : 'logo_vn_ia.png';
-
-                        const card = document.createElement('a');
-                        card.href = article.path;
-                        card.className = 'article-card';
-                        card.setAttribute('data-tags', tagsDataAttr);
-                        card.innerHTML = `
-                            <img src="${imageUrl}" alt="${article.title}" loading="lazy">
-                            <div class="article-card-content">
-                                ${dateHtml}
-                                <h3>${article.title}</h3>
-                                <p>${article.summary}</p>
-                                ${tagsHtml}
-                            </div>
-                        `;
-
-                        const isVisible = activeTag === 'all' || (article.tags && article.tags.includes(activeTag));
-                        if (!isVisible) {
-                            card.style.display = 'none';
-                        }
-
-                        grid.appendChild(card);
-                    });
-
-                    currentPage++;
-
-                    // Hide button if there are no more articles to show
-                    if (currentPage * articlesPerPage >= allArticles.length) {
-                        viewMoreContainer.remove();
-                    }
-                };
-
-                button.addEventListener('click', async () => {
-                    if (articlesLoaded) {
-                        renderNextPage();
-                        return;
-                    }
-
-                    try {
-                        button.disabled = true;
-                        button.textContent = 'Loading...';
-
-                        const response = await fetch('articles.json');
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        allArticles = await response.json();
-                        articlesLoaded = true;
-
-                        // The initial HTML already contains the first page (page 0),
-                        // so we start rendering from page 1.
-                        renderNextPage();
-
-                        button.disabled = false;
-                        button.textContent = window.APP_CONFIG.viewMoreText;
-
-                    } catch (error) {
-                        console.error('Could not load more articles:', error);
-                        button.disabled = false;
-                        button.textContent = 'Error. Try again?';
-                    }
+            /**
+             * Applies a tag filter, clears the grid, and renders the first page of results.
+             * @param {string} tag - The tag to filter by.
+             */
+            const applyFilter = (tag) => {
+                activeTag = tag;
+                currentPage = 0;
+                
+                // Update active button UI
+                filterButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-tag') === tag);
                 });
-            }
-            initViewMore();
+
+                // Get the new filtered list
+                if (tag === 'all') {
+                    currentFilteredArticles = [...allArticles];
+                } else {
+                    currentFilteredArticles = allArticles.filter(a => a.tags && a.tags.includes(tag));
+                }
+
+                // Render the new view
+                grid.innerHTML = ''; // Clear the grid
+                renderNextPage(); // Render page 0 of the new list
+            };
+
+            /**
+             * Initializes the entire application.
+             */
+            const initialize = async () => {
+                // Setup UI listeners
+                if (viewMoreContainer) {
+                    const button = document.createElement('button');
+                    button.id = 'view-more-button';
+                    button.className = 'view-more-button';
+                    button.textContent = window.APP_CONFIG.viewMoreText;
+                    button.addEventListener('click', renderNextPage);
+                    viewMoreContainer.innerHTML = '';
+                    viewMoreContainer.appendChild(button);
+                }
+
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const tag = button.getAttribute('data-tag');
+                        window.location.hash = tag; // This will trigger the hashchange listener
+                    });
+                });
+                
+                window.addEventListener('hashchange', () => {
+                    const tag = window.location.hash.substring(1) || 'all';
+                    applyFilter(decodeURIComponent(tag));
+                });
+
+                // Fetch data and perform initial render
+                try {
+                    const response = await fetch('articles.json');
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    allArticles = await response.json();
+                    
+                    // Trigger initial filter based on current URL hash
+                    const initialTag = window.location.hash.substring(1) || 'all';
+                    applyFilter(decodeURIComponent(initialTag));
+
+                } catch (error) {
+                    console.error('Failed to load articles:', error);
+                    if (grid) grid.innerHTML = '<p>Error loading articles. Please try again later.</p>';
+                }
+            };
+
+            initialize();
         });
     </script>
 </body>

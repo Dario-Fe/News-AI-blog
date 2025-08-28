@@ -16,7 +16,7 @@ from io import BytesIO
 
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
-SITE_URL = "https://ianotizie.netlify.app/"
+SITE_URL = "https://aitalk.it/"
 BASE_OUTPUT_DIR = "dist"
 IMAGE_ASSETS_DIR = "assets/images"
 

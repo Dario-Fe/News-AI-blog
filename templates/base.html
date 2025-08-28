@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{page_title}}</title>
     <meta name="description" content="{{meta_description}}">
+    <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="favicon.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -276,7 +277,12 @@
             <a href="{{fr_link}}" title="Français">🇫🇷</a>
             <a href="{{de_link}}" title="Deutsch">🇩🇪</a>
         </div>
-        <a href="{{home_link}}"><img src="{{logo_path}}" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
+        <a href="{{home_link}}">
+          <picture>
+            <source srcset="logo_vn_ia.webp" type="image/webp">
+            <img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;">
+          </picture>
+        </a>
         <h1 class="visually-hidden">AITalk</h1>
         <p id="subtitle">{{subtitle}}</p>
     </header>
@@ -340,14 +346,25 @@
                     }
 
                     const tagsDataAttr = article.tags ? article.tags.join(' ') : '';
-                    const imageUrl = article.image_url || 'logo_vn_ia.png';
+                    
+                    let imageHtml = '';
+                    if (article.image_paths) {
+                        imageHtml = `
+                            <picture>
+                                <source srcset="${article.image_paths.thumb_webp}" type="image/webp">
+                                <source srcset="${article.image_paths.thumb_jpeg}" type="image/jpeg">
+                                <img src="${article.image_paths.thumb_jpeg}" alt="${article.title}" loading="lazy">
+                            </picture>`;
+                    } else {
+                        imageHtml = `<img src="logo_vn_ia.png" alt="${article.title}" loading="lazy">`;
+                    }
 
                     const card = document.createElement('a');
                     card.href = article.path;
                     card.className = 'article-card';
                     card.setAttribute('data-tags', tagsDataAttr);
                     card.innerHTML = `
-                        <img src="${imageUrl}" alt="${article.title}" loading="lazy">
+                        ${imageHtml}
                         <div class="article-card-content">
                             ${dateHtml}<h3>${article.title}</h3><p>${article.summary}</p>${tagsHtml}
                         </div>`;

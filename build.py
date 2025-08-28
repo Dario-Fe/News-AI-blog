@@ -7,14 +7,89 @@ from feedgen.feed import FeedGenerator
 from bs4 import BeautifulSoup
 import markdown2
 import math
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 import locale
 import json
+from PIL import Image
+import hashlib
+from io import BytesIO
 
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
 SITE_URL = "https://ianotizie.netlify.app/"
 BASE_OUTPUT_DIR = "dist"
+IMAGE_ASSETS_DIR = "assets/images"
+
+# --- Image Processing Helpers ---
+
+def process_and_save_image(image_url, output_dir_base, lang):
+    """
+    Downloads an image, creates two sizes (thumbnail and full),
+    saves them in WebP and JPEG formats, and returns their paths.
+    """
+    if not image_url:
+        return None
+
+    try:
+        response = requests.get(image_url, timeout=15)
+        response.raise_for_status()
+        image_bytes = response.content
+    except requests.exceptions.RequestException as e:
+        print(f"  - WARN: Could not download image {image_url}. Error: {e}")
+        return None
+
+    try:
+        # Create a unique filename based on the image URL to avoid collisions
+        url_hash = hashlib.sha1(image_url.encode()).hexdigest()[:10]
+        original_filename = os.path.splitext(os.path.basename(urlparse(image_url).path))[0]
+        base_filename = f"{original_filename}-{url_hash}"
+
+        img = Image.open(BytesIO(image_bytes))
+        img = img.convert("RGB") # Convert to RGB to ensure JPEG saving works
+
+        # Define output directory for this language's images
+        output_dir_images = os.path.join(output_dir_base, lang, IMAGE_ASSETS_DIR)
+        if not os.path.exists(output_dir_images):
+            os.makedirs(output_dir_images)
+
+        image_paths = {}
+
+        # --- Process Thumbnail (for cards) ---
+        thumb_filename_webp = f"{base_filename}-thumb.webp"
+        thumb_filename_jpeg = f"{base_filename}-thumb.jpeg"
+        
+        thumb = img.copy()
+        thumb.thumbnail((400, 400)) # Resize to 400px width, maintaining aspect ratio
+        
+        thumb_path_webp = os.path.join(output_dir_images, thumb_filename_webp)
+        thumb.save(thumb_path_webp, "webp", quality=80)
+        
+        thumb_path_jpeg = os.path.join(output_dir_images, thumb_filename_jpeg)
+        thumb.save(thumb_path_jpeg, "jpeg", quality=80)
+        
+        image_paths['thumb_webp'] = f"{IMAGE_ASSETS_DIR}/{thumb_filename_webp}"
+        image_paths['thumb_jpeg'] = f"{IMAGE_ASSETS_DIR}/{thumb_filename_jpeg}"
+        
+        # --- Process Full Size (for articles) ---
+        full_filename_webp = f"{base_filename}-full.webp"
+        full_filename_jpeg = f"{base_filename}-full.jpeg"
+
+        full = img.copy()
+        # The 'full' version is no longer resized to preserve original dimensions
+        # if full.width > 800:
+        #     full.thumbnail((800, 800)) # Resize to 800px width if it's larger
+        
+        full.save(os.path.join(output_dir_images, full_filename_webp), "webp", quality=85)
+        full.save(os.path.join(output_dir_images, full_filename_jpeg), "jpeg", quality=85)
+
+        image_paths['full_webp'] = f"{IMAGE_ASSETS_DIR}/{full_filename_webp}"
+        image_paths['full_jpeg'] = f"{IMAGE_ASSETS_DIR}/{full_filename_jpeg}"
+        
+        return image_paths
+
+    except Exception as e:
+        print(f"  - WARN: Could not process image {image_url}. Error: {e}")
+        return None
 
 # Translations
 TRANSLATIONS = {
@@ -283,6 +358,36 @@ TRANSLATIONS = {
             "fr": "Si vous souhaitez modifier, supprimer vos données ou ne plus recevoir la newsletter, vous pouvez nous contacter à tout momento ou utiliser le lien de désinscription présent dans chaque e-mail.",
             "de": "Wenn Sie Ihre Daten ändern, löschen oder den Newsletter abbestellen möchten, können Sie uns jederzeit kontaktieren oder den in jeder E-Mail enthaltenen Abmeldelink verwenden."
         }
+    },
+    "not_found_page": {
+        "title": {
+            "it": "Pagina Non Trovata",
+            "en": "Page Not Found",
+            "es": "Página no encontrada",
+            "fr": "Page non trouvée",
+            "de": "Seite nicht gefunden"
+        },
+        "heading": {
+            "it": "Oops! Pagina non trovata.",
+            "en": "Oops! Page not found.",
+            "es": "¡Vaya! Página no encontrada.",
+            "fr": "Oups! Page non trouvée.",
+            "de": "Hoppla! Seite nicht gefunden."
+        },
+        "paragraph": {
+            "it": "La pagina che stai cercando potrebbe essere stata rimossa, rinominata o non essere mai esistita.",
+            "en": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+            "es": "La página que busca podría haber sido eliminada, haber cambiado de nombre o no estar disponible temporalmente.",
+            "fr": "La page que vous recherchez a peut-être été supprimée, renommée ou est temporairement indisponible.",
+            "de": "Die von Ihnen gesuchte Seite wurde möglicherweise entfernt, umbenannt oder ist vorübergehend nicht verfügbar."
+        },
+        "button_text": {
+            "it": "Torna alla Home",
+            "en": "Back to Home",
+            "es": "Volver al Inicio",
+            "fr": "Retour à l'accueil",
+            "de": "Zurück zur Startseite"
+        }
     }
 }
 
@@ -413,6 +518,10 @@ def main():
     # Create language-specific output directory if it doesn't exist
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+    
+    # Create assets directory for images
+    image_dir = os.path.join(output_dir, IMAGE_ASSETS_DIR)
+    os.makedirs(image_dir, exist_ok=True)
 
     # This is now a global database fetched only once if the script were to run
     # for multiple languages in one go. For now, it's fetched for each run.
@@ -437,7 +546,7 @@ def main():
     sorted_md_files = sorted(s1, key=lambda x: x['parent_dir'], reverse=True)
 
     for md_file in sorted_md_files:
-        article_data = process_article(md_file)
+        article_data = process_article(md_file, BASE_OUTPUT_DIR, lang)
         if article_data:
             processed_articles.append(article_data)
 
@@ -453,7 +562,10 @@ def main():
     # 7. Generate local pages (like newsletter)
     generate_local_pages(output_dir, lang)
 
-    # 8. Copy static assets
+    # 8. Generate 404 page
+    generate_404_page(output_dir, lang)
+
+    # 9. Copy static assets
     copy_static_assets(output_dir)
 
 def create_root_redirect():
@@ -481,9 +593,9 @@ def create_root_redirect():
     print("  - dist/index.html (redirect)")
 
 
-def process_article(md_file):
+def process_article(md_file, output_dir_base, lang):
     """
-    Fetches the content of a single markdown file, parses it, and returns a dict.
+    Fetches markdown, processes it, optimizes all images, and returns a dict.
     """
     print(f"Processing file: {md_file['name']} in {md_file['parent_dir']}...")
 
@@ -504,38 +616,76 @@ def process_article(md_file):
         summary = ""
         all_paragraphs = soup.find_all('p')
         for p in all_paragraphs:
-            # Check if the paragraph has text and does not contain an image.
             if p.get_text(strip=True) and not p.find('img'):
                 summary = p.get_text()
-                break # Found the first valid summary paragraph, so we stop.
+                break
 
-        # Rewrite image paths to be absolute
+        # Process all images within the article body
         for img in soup.find_all('img'):
-            if img['src'] and not img['src'].startswith('http'):
-                img['src'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{md_file['parent_dir']}/{img['src']}"
+            original_src = img.get('src')
+            if not original_src:
+                continue
 
-        # Get the first image for the summary card
-        main_image_url = soup.find('img')['src'] if soup.find('img') else None
+            # Make image src absolute before downloading
+            if not original_src.startswith('http'):
+                absolute_src = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{md_file['parent_dir']}/{original_src}"
+            else:
+                absolute_src = original_src
 
-        # Get the final HTML content after modifications
+            # Download, resize, and save the image
+            processed_paths = process_and_save_image(absolute_src, output_dir_base, lang)
+
+            if processed_paths:
+                # Create a <picture> tag to replace the <img> tag
+                picture_tag = soup.new_tag("picture")
+                
+                source_webp = soup.new_tag("source", attrs={"srcset": processed_paths['full_webp'], "type": "image/webp"})
+                source_jpeg = soup.new_tag("source", attrs={"srcset": processed_paths['full_jpeg'], "type": "image/jpeg"})
+                
+                # Create a new fallback <img> tag
+                fallback_img = soup.new_tag("img", attrs={
+                    "src": processed_paths['full_jpeg'],
+                    "alt": img.get('alt', 'Article image'),
+                    "loading": "lazy"
+                })
+
+                picture_tag.append(source_webp)
+                picture_tag.append(source_jpeg)
+                picture_tag.append(fallback_img)
+                
+                # Replace the original img tag with the new picture tag
+                img.replace_with(picture_tag)
+
+        # Get the first image for the summary card (after processing)
+        # We need to find the *original* first image URL for this.
+        # Re-parsing the original content is one way.
+        temp_soup = BeautifulSoup(markdown2.markdown(post.content), 'html.parser')
+        first_img_tag = temp_soup.find('img')
+        main_image_url = None
+        if first_img_tag and first_img_tag.get('src'):
+            src = first_img_tag['src']
+            if not src.startswith('http'):
+                main_image_url = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{md_file['parent_dir']}/{src}"
+            else:
+                main_image_url = src
+        
+        main_image_paths = process_and_save_image(main_image_url, output_dir_base, lang)
+
         final_html_content = str(soup)
-
-        # Create a unique slug from the filename, replacing underscores with hyphens
         slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
-
-        # Get tags and date from frontmatter, with defaults
         tags = post.metadata.get('tags', [])
         date_obj = post.metadata.get('date', None)
 
         return {
             "title": title,
             "summary": summary,
-            "image_url": main_image_url,
+            "image_paths": main_image_paths, # New field for optimized paths
             "html_content": final_html_content,
             "slug": slug,
             "path": f"{slug}.html",
             "tags": tags,
-            "date": date_obj
+            "date": date_obj,
+            "image_url": main_image_url # Keep original for RSS feed
         }
 
     except Exception as e:
@@ -663,12 +813,25 @@ def generate_index_page(articles, output_dir, lang='it'):
             for tag in article['tags']:
                 tags_html += f'<span class="tag">{tag}</span>'
             tags_html += '</div>'
+        
+        image_html = ''
+        if article.get('image_paths'):
+            paths = article['image_paths']
+            image_html = f"""
+                <picture>
+                    <source srcset="{paths['thumb_webp']}" type="image/webp">
+                    <source srcset="{paths['thumb_jpeg']}" type="image/jpeg">
+                    <img src="{paths['thumb_jpeg']}" alt="{article['title']}" loading="lazy">
+                </picture>
+            """
+        else:
+            image_html = f'<img src="logo_vn_ia.png" alt="{article['title']}" loading="lazy">'
 
         tags_data_attr = " ".join(article.get('tags', []))
 
         card_html = f"""
             <a href="{article['path']}" class="article-card" data-tags="{tags_data_attr}">
-                <img src="{article['image_url'] if article['image_url'] else 'logo_vn_ia.png'}" alt="{article['title']}" loading="lazy">
+                {image_html}
                 <div class="article-card-content">
                     {date_html}
                     <h3>{article['title']}</h3>
@@ -868,12 +1031,69 @@ def generate_local_pages(output_dir, lang='it'):
             with open(os.path.join(output_dir, filename), "w", encoding='utf-8') as f:
                 f.write(final_page_html)
 
+def generate_404_page(output_dir, lang='it'):
+    """
+    Generates a localized 404.html page.
+    """
+    print("\nGenerating 404 page...")
+    with open("templates/base.html", "r", encoding='utf-8') as f:
+        base_template = f.read()
+    with open("templates/404.html", "r", encoding='utf-8') as f:
+        page_content = f.read()
+
+    # Replace placeholders in the base template
+    subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+    subscribe_text = TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"])
+    footer_curated_by = TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"])
+    footer_contacts = TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"])
+    
+    # Path for pages at root level of language dir
+    home_link = "index.html"
+    logo_path = "logo_vn_ia.png" # This is now a fallback, but we keep the variable for consistency
+    lang_links = get_language_links(depth=1)
+
+    temp_html = base_template.replace("{{subtitle}}", subtitle)
+    temp_html = temp_html.replace("{{subscribe_link_text}}", subscribe_text)
+    temp_html = temp_html.replace("{{footer_curated_by}}", footer_curated_by)
+    temp_html = temp_html.replace("{{footer_contacts}}", footer_contacts)
+    temp_html = temp_html.replace("{{home_link}}", home_link)
+    # The logo path is now hardcoded in the <picture> element in base.html, so this replace does nothing.
+    temp_html = temp_html.replace("{{logo_path}}", logo_path) 
+    temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on 404 page
+
+    # SEO for 404 page
+    title = TRANSLATIONS["not_found_page"]["title"].get(lang, TRANSLATIONS["not_found_page"]["title"]["it"])
+    page_title = f"{title} - AITalk"
+    # A generic description for 404 page
+    meta_description = TRANSLATIONS["not_found_page"]["paragraph"].get(lang, TRANSLATIONS["not_found_page"]["paragraph"]["it"])
+    temp_html = temp_html.replace("{{page_title}}", page_title)
+    temp_html = temp_html.replace("{{meta_description}}", meta_description)
+
+    # Replace language links
+    for link_placeholder, link_url in lang_links.items():
+        temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
+
+    # Replace placeholders in the 404 page content itself
+    final_content = page_content
+    for key, trans_dict in TRANSLATIONS["not_found_page"].items():
+        placeholder = f"{{{{not_found_page_{key}}}}}"
+        translation = trans_dict.get(lang, trans_dict["it"])
+        final_content = final_content.replace(placeholder, translation)
+    
+    final_page_html = temp_html.replace("{{content}}", final_content)
+
+    output_path = os.path.join(output_dir, "404.html")
+    with open(output_path, "w", encoding='utf-8') as f:
+        f.write(final_page_html)
+    print(f"  - {output_path}")
+
+
 def copy_static_assets(output_dir):
     """
     Copies static assets from the root to the output directory.
     """
     print("\nCopying static assets...")
-    static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html']
+    static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html', '.webp', '.ico']
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
             # Let's avoid copying the template files themselves if they are in the root

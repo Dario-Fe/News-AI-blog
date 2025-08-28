@@ -1,0 +1,31 @@
+# Istruzioni per il reindirizzamento per le pagine 404
+
+# Regola per l'italiano
+[[redirects]]
+  from = "/it/*"
+  to = "/it/404.html"
+  status = 404
+
+# Regola per l'inglese
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404.html"
+  status = 404
+
+# Regola per lo spagnolo
+[[redirects]]
+  from = "/es/*"
+  to = "/es/404.html"
+  status = 404
+
+# Regola per il francese
+[[redirects]]
+  from = "/fr/*"
+  to = "/fr/404.html"
+  status = 404
+
+# Regola per il tedesco
+[[redirects]]
+  from = "/de/*"
+  to = "/de/404.html"
+  status = 404

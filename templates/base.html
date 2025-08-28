@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AITalk</title>
+    <title>{{page_title}}</title>
+    <meta name="description" content="{{meta_description}}">
     <link rel="icon" href="favicon.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -44,11 +45,21 @@
             font-size: 2.5em;
             color: #000;
         }
-        header h2 {
+        header #subtitle {
             margin: 5px 0 0;
             font-size: 1.2em;
             font-weight: normal;
             color: #606770;
+        }
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
         main {
             padding: 20px;
@@ -266,7 +277,8 @@
             <a href="{{de_link}}" title="Deutsch">🇩🇪</a>
         </div>
         <a href="{{home_link}}"><img src="{{logo_path}}" alt="Notizie IA Logo" style="max-width: 100%; height: auto;"></a>
-        <h2 id="subtitle">{{subtitle}}</h2>
+        <h1 class="visually-hidden">AITalk</h1>
+        <p id="subtitle">{{subtitle}}</p>
     </header>
     <main>
         {{content}}

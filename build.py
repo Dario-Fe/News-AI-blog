@@ -252,14 +252,14 @@ TRANSLATIONS = {
             "it": "Questo sito non raccoglie dati personali di alcun tipo, ad eccezione del nome e dell'indirizzo email forniti volontariamente dagli utenti che si iscrivono alla nostra newsletter. Il nostro obiettivo non è raccogliere informazioni su di voi, ma condividere la passione per l'intelligenza artificiale e il mondo tech.",
             "en": "This site does not collect personal data of any kind, except for the name and email address voluntarily provided by users who subscribe to our newsletter. Our goal is not to collect information about you, but to share the passion for artificial intelligence and the tech world.",
             "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nombre y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la pasión por la inteligencia artificial y el mundo de la tecnología.",
-            "fr": "Ce site ne collecte aucune donnée personnelle, à l'exception du nom et de l'adresse e-mail fournis volontairement par les utilisateurs qui s'abonnent à notre newsletter. Notre objectif n'est pas de collecter des informations sur vous, mais de partager la passion pour l'intelligence artificielle et le monde de la technologie.",
+            "fr": "Ce site ne collecte aucune donnée personnelle, à l'exception du nom et de l'adresse e-mail fournis volontariamente par les utilisateurs qui s'abonnent à notre newsletter. Notre objectif n'est pas de collecter des informations sur vous, mais de partager la passion pour l'intelligence artificielle et le monde de la technologie.",
             "de": "Diese Website sammelt keinerlei personenbezogene Daten, mit Ausnahme des Namens und der E-Mail-Adresse, die von Benutzern, die unseren Newsletter abonnieren, freiwillig angegeben werden. Unser Ziel ist es nicht, Informationen über Sie zu sammeln, sondern die Leidenschaft für künstliche Intelligenz und die Tech-Welt zu teilen."
         },
         "p2": {
             "it": "I dati forniti (nome ed email) vengono utilizzati esclusivamente per inviarti aggiornamenti, articoli e novità tramite la nostra newsletter. Non condivideremo mai queste informazioni con terze parti senza il tuo esplicito consenso.",
             "en": "The data provided (name and email) are used exclusively to send you updates, articles, and news through our newsletter. We will never share this information with third parties without your explicit consent.",
-            "es": "Los datos proporcionados (nombre y correo electrónico) se utilizan exclusively para enviarle actualizaciones, artículos y noticias a través de nostro boletín. Nunca compartiremos esta información con terceros sin su consentimiento explícito.",
-            "fr": "Les données fournies (nom et e-mail) sont utilisées exclusively pour vous envoyer des mises à jour, des articles et des nouvelles via notre newsletter. Nous ne partagerons jamais ces informations avec des tiers sans votre consentement explicite.",
+            "es": "Los datos proporcionados (nombre y correo electrónico) se utilizan exclusivamente para enviarle actualizaciones, artículos y noticias a través de nuestro boletín. Nunca compartiremos esta información con terceros sin su consentimiento explícito.",
+            "fr": "Les données fournies (nom et e-mail) sont utilisées exclusivamente pour vous envoyer des mises à jour, des articles et des nouvelles via notre newsletter. Nous ne partagerons jamais ces informations avec des tiers sans votre consentement explicite.",
             "de": "Die angegebenen Daten (Name und E-Mail) werden ausschließlich dazu verwendet, Ihnen über unseren Newsletter Updates, Artikel und Neuigkeiten zuzusenden. Wir werden diese Informationen niemals ohne Ihre ausdrückliche Zustimmung an Dritte weitergeben."
         },
         "p3_1": {
@@ -520,8 +520,8 @@ def process_article(md_file):
         # Get the final HTML content after modifications
         final_html_content = str(soup)
 
-        # Create a unique slug from the filename
-        slug = os.path.splitext(md_file['name'])[0].strip()
+        # Create a unique slug from the filename, replacing underscores with hyphens
+        slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
 
         # Get tags and date from frontmatter, with defaults
         tags = post.metadata.get('tags', [])
@@ -596,6 +596,12 @@ def generate_article_pages(articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{home_link}}", home_link)
         temp_html = temp_html.replace("{{logo_path}}", logo_path)
         temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on article pages
+
+        # SEO
+        page_title = f"{article['title']} - AITalk"
+        meta_description = article['summary']
+        temp_html = temp_html.replace("{{page_title}}", page_title)
+        temp_html = temp_html.replace("{{meta_description}}", meta_description)
 
         # Replace language links
         for link_placeholder, link_url in lang_links.items():
@@ -726,6 +732,11 @@ def generate_index_page(articles, output_dir, lang='it'):
     temp_html = temp_html.replace("{{lang}}", lang)
     temp_html = temp_html.replace("{{view_more_text}}", view_more_text.replace("'", "\\'"))
 
+    # SEO
+    page_title = f"AITalk - {subtitle}"
+    meta_description = subtitle
+    temp_html = temp_html.replace("{{page_title}}", page_title)
+    temp_html = temp_html.replace("{{meta_description}}", meta_description)
 
     for link_placeholder, link_url in lang_links.items():
         temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
@@ -742,6 +753,25 @@ def generate_local_pages(output_dir, lang='it'):
     """
     Generates standalone pages from the /pages directory.
     """
+    # SEO Metadata for local pages
+    local_pages_meta = {
+        "newsletter.html": {
+            "title": TRANSLATIONS["newsletter_page"]["title"].get(lang, TRANSLATIONS["newsletter_page"]["title"]["it"]),
+            "description": TRANSLATIONS["newsletter_page"]["description"].get(lang, TRANSLATIONS["newsletter_page"]["description"]["it"])
+        },
+        "thank-you.html": {
+            "title": TRANSLATIONS["thank_you_page"]["title"].get(lang, TRANSLATIONS["thank_you_page"]["title"]["it"]),
+            "description": TRANSLATIONS["thank_you_page"]["paragraph"].get(lang, TRANSLATIONS["thank_you_page"]["paragraph"]["it"])
+        },
+        "cookie.html": {
+            "title": TRANSLATIONS["cookie_page"]["title"].get(lang, TRANSLATIONS["cookie_page"]["title"]["it"]),
+            "description": TRANSLATIONS["cookie_page"]["p1"].get(lang, TRANSLATIONS["cookie_page"]["p1"]["it"])
+        },
+        "privacy.html": {
+            "title": TRANSLATIONS["privacy_page"]["title"].get(lang, TRANSLATIONS["privacy_page"]["title"]["it"]),
+            "description": TRANSLATIONS["privacy_page"]["p1"].get(lang, TRANSLATIONS["privacy_page"]["p1"]["it"])
+        }
+    }
     print("\nGenerating local pages...")
     pages_dir = "pages"
     if not os.path.exists(pages_dir):
@@ -774,6 +804,13 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{home_link}}", home_link)
             temp_html = temp_html.replace("{{logo_path}}", logo_path)
             temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on local pages
+
+            # SEO
+            meta_info = local_pages_meta.get(filename, {"title": "AITalk", "description": subtitle})
+            page_title = f"{meta_info['title']} - AITalk"
+            meta_description = meta_info['description']
+            temp_html = temp_html.replace("{{page_title}}", page_title)
+            temp_html = temp_html.replace("{{meta_description}}", meta_description)
 
             # Replace language links
             for link_placeholder, link_url in lang_links.items():

@@ -825,7 +825,7 @@ def generate_index_page(articles, output_dir, lang='it'):
                 </picture>
             """
         else:
-            image_html = f'<img src="logo_vn_ia.png" alt="{article['title']}" loading="lazy">'
+            image_html = f'<img src="logo_vn_ia.png" alt="{article["title"]}" loading="lazy">'
 
         tags_data_attr = " ".join(article.get('tags', []))
 

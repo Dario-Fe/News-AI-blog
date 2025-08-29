@@ -308,11 +308,11 @@ TRANSLATIONS = {
             "de": "Überprüfen Sie das Nichtvorhandensein von Cookies auf unserer Website"
         },
         "link_url": {
-            "it": "https://www.cookieserve.com/it/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fit%2F",
-            "en": "https://www.cookieserve.com/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fen%2F",
-            "es": "https://www.cookieserve.com/es/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fes%2F",
-            "fr": "https://www.cookieserve.com/fr/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Ffr%2F",
-            "de": "https://www.cookieserve.com/de/scan-summary/?url=https%3A%2F%2Fianotizie.netlify.app%2Fde%2F"
+            "it": "https://www.cookieserve.com/it/scan-summary/?url=https%3A%2F%2Faitalk.it%2Fit%2F",
+            "en": "https://www.cookieserve.com/scan-summary/?url=https%3A%2F%2Faitalk.it%2Fen%2F",
+            "es": "https://www.cookieserve.com/es/scan-summary/?url=https%3A%2F%2Faitalk.it%2Fes%2F",
+            "fr": "https://www.cookieserve.com/fr/scan-summary/?url=https%3A%2F%2Faitalk.it%2Ffr%2F",
+            "de": "https://www.cookieserve.com/de/scan-summary/?url=https%3A%2F%2Faitalk.it%2Fde%2F"
         }
     },
     "privacy_page": {
@@ -721,6 +721,16 @@ def generate_article_pages(articles, output_dir, lang='it'):
             <a href="index.html" class="back-button">{back_button_text}</a>
             {tags_html}
             {article['html_content']}
+            
+            <!-- AddToAny Share Buttons -->
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" style="margin-top: 30px; text-align: center;">
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_pinterest"></a>
+                <a class="a2a_button_email"></a>
+                <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+            </div>
+
             <div class="footer-back-button">
                 {tags_html}
                 <a href="index.html" class="back-button" style="margin-top: 20px;">{back_button_text}</a>
@@ -750,8 +760,14 @@ def generate_article_pages(articles, output_dir, lang='it'):
         # SEO
         page_title = f"{article['title']} - AITalk"
         meta_description = article['summary']
+        og_url = f"{SITE_URL}{lang}/{article['path']}"
+        og_image = article.get('image_url', f"{SITE_URL}logo_vn_ia.png") # Fallback to logo
         temp_html = temp_html.replace("{{page_title}}", page_title)
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
+        temp_html = temp_html.replace("{{og_url}}", og_url)
+        temp_html = temp_html.replace("{{og_image}}", og_image)
+        # For articles, we can be more specific with the OG type
+        temp_html = temp_html.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">')
 
         # Replace language links
         for link_placeholder, link_url in lang_links.items():
@@ -898,8 +914,12 @@ def generate_index_page(articles, output_dir, lang='it'):
     # SEO
     page_title = f"AITalk - {subtitle}"
     meta_description = subtitle
+    og_url = f"{SITE_URL}{lang}/index.html"
+    og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo for the index page
     temp_html = temp_html.replace("{{page_title}}", page_title)
     temp_html = temp_html.replace("{{meta_description}}", meta_description)
+    temp_html = temp_html.replace("{{og_url}}", og_url)
+    temp_html = temp_html.replace("{{og_image}}", og_image)
 
     for link_placeholder, link_url in lang_links.items():
         temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
@@ -972,8 +992,13 @@ def generate_local_pages(output_dir, lang='it'):
             meta_info = local_pages_meta.get(filename, {"title": "AITalk", "description": subtitle})
             page_title = f"{meta_info['title']} - AITalk"
             meta_description = meta_info['description']
+            og_url = f"{SITE_URL}{lang}/{filename}"
+            og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo
             temp_html = temp_html.replace("{{page_title}}", page_title)
             temp_html = temp_html.replace("{{meta_description}}", meta_description)
+            temp_html = temp_html.replace("{{og_url}}", og_url)
+            temp_html = temp_html.replace("{{og_image}}", og_image)
+
 
             # Replace language links
             for link_placeholder, link_url in lang_links.items():
@@ -1066,8 +1091,12 @@ def generate_404_page(output_dir, lang='it'):
     page_title = f"{title} - AITalk"
     # A generic description for 404 page
     meta_description = TRANSLATIONS["not_found_page"]["paragraph"].get(lang, TRANSLATIONS["not_found_page"]["paragraph"]["it"])
+    og_url = f"{SITE_URL}{lang}/404.html"
+    og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo
     temp_html = temp_html.replace("{{page_title}}", page_title)
     temp_html = temp_html.replace("{{meta_description}}", meta_description)
+    temp_html = temp_html.replace("{{og_url}}", og_url)
+    temp_html = temp_html.replace("{{og_image}}", og_image)
 
     # Replace language links
     for link_placeholder, link_url in lang_links.items():

@@ -248,6 +248,13 @@ TRANSLATIONS = {
             "es": "Volver",
             "fr": "Retour",
             "de": "Zurück"
+        },
+        "author_by": {
+            "it": "di",
+            "en": "by",
+            "es": "por",
+            "fr": "par",
+            "de": "von"
         }
     },
     "cookie_page": {
@@ -326,7 +333,7 @@ TRANSLATIONS = {
         "p1": {
             "it": "Questo sito non raccoglie dati personali di alcun tipo, ad eccezione del nome e dell'indirizzo email forniti volontariamente dagli utenti che si iscrivono alla nostra newsletter. Il nostro obiettivo non è raccogliere informazioni su di voi, ma condividere la passione per l'intelligenza artificiale e il mondo tech.",
             "en": "This site does not collect personal data of any kind, except for the name and email address voluntarily provided by users who subscribe to our newsletter. Our goal is not to collect information about you, but to share the passion for artificial intelligence and the tech world.",
-            "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nombre y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la pasión por la inteligencia artificial y el mundo de la tecnología.",
+            "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nombre y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la passione por la inteligencia artificial y el mundo de la tecnología.",
             "fr": "Ce site ne collecte aucune donnée personnelle, à l'exception du nom et de l'adresse e-mail fournis volontariamente par les utilisateurs qui s'abonnent à notre newsletter. Notre objectif n'est pas de collecter des informations sur vous, mais de partager la passion pour l'intelligence artificielle et le monde de la technologie.",
             "de": "Diese Website sammelt keinerlei personenbezogene Daten, mit Ausnahme des Namens und der E-Mail-Adresse, die von Benutzern, die unseren Newsletter abonnieren, freiwillig angegeben werden. Unser Ziel ist es nicht, Informationen über Sie zu sammeln, sondern die Leidenschaft für künstliche Intelligenz und die Tech-Welt zu teilen."
         },
@@ -675,6 +682,7 @@ def process_article(md_file, output_dir_base, lang):
         slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
         tags = post.metadata.get('tags', [])
         date_obj = post.metadata.get('date', None)
+        author = post.metadata.get('author', None)
 
         return {
             "title": title,
@@ -685,6 +693,7 @@ def process_article(md_file, output_dir_base, lang):
             "path": f"{slug}.html",
             "tags": tags,
             "date": date_obj,
+            "author": author,
             "image_url": main_image_url # Keep original for RSS feed
         }
 
@@ -715,11 +724,18 @@ def generate_article_pages(articles, output_dir, lang='it'):
                 tags_html += f'<a href="index.html#{tag}" class="tag">{tag}</a>'
             tags_html += '</div>'
 
+        # --- Author Formatting ---
+        author_html = ""
+        if article.get('author'):
+            author_prefix = TRANSLATIONS["article_page"]["author_by"].get(lang, TRANSLATIONS["article_page"]["author_by"]["it"])
+            author_html = f'<div class="post-author">{author_prefix} {article["author"]}</div>'
+
         # Create a simple view for the article content
         article_view_html = f"""
         <div id="article-view">
             <a href="index.html" class="back-button">{back_button_text}</a>
             {tags_html}
+            {author_html}
             {article['html_content']}
             
             <!-- AddToAny Share Buttons -->

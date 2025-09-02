@@ -20,8 +20,8 @@
     <meta property="twitter:description" content="{{meta_description}}">
     <meta property="twitter:image" content="{{og_image}}">
 
-    <link rel="icon" href="favicon.ico" sizes="any">
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="{{favicon_ico_path}}" sizes="any">
+    <link rel="icon" href="{{favicon_png_path}}" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- Critical CSS for fast initial paint -->
     <style>
@@ -60,13 +60,13 @@
         }
     </style>
     <!-- Asynchronously load the full stylesheet -->
-    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <link rel="preload" href="{{css_path}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{css_path}}"></noscript>
 </head>
 <body>
     <header>
         <div id="language-selector-container" style="display: flex; gap: 10px; font-size: 1.2em; align-items: center;">
-            <a href="newsletter.html" class="subscribe-link">{{subscribe_link_text}}</a>
+            <a href="{{newsletter_link}}" class="subscribe-link">{{subscribe_link_text}}</a>
             <span class="separator" style="border-left: 1px solid #dddfe2; height: 20px;"></span>
             <a href="{{it_link}}" title="Italiano">🇮🇹</a>
             <a href="{{en_link}}" title="English">🇬🇧</a>
@@ -76,8 +76,8 @@
         </div>
         <a href="{{home_link}}">
           <picture>
-            <source srcset="logo_vn_ia.webp" type="image/webp">
-            <img src="logo_vn_ia.png" alt="Notizie IA Logo" style="max-width: 100%; height: auto;">
+            <source srcset="{{logo_path_webp}}" type="image/webp">
+            <img src="{{logo_path_png}}" alt="Notizie IA Logo" style="max-width: 100%; height: auto;">
           </picture>
         </a>
         <h1 class="visually-hidden">AITalk</h1>
@@ -93,15 +93,16 @@
         <p>{{footer_curated_by}} <a href="https://www.verbanianotizie.it/" target="_blank" rel="noopener noreferrer">Verbania Notizie</a></p>
         <p>
             <a href="mailto:info@verbanianotizie.it">{{footer_contacts}}</a> |
-            <a href="cookie.html">Cookie</a> |
-            <a href="privacy.html">Privacy Policy</a>
+            <a href="{{cookie_link}}">Cookie</a> |
+            <a href="{{privacy_link}}">Privacy Policy</a>
         </p>
     </footer>
     <script>
       // This will be populated by the build script
       window.APP_CONFIG = {
         lang: '{{lang}}',
-        viewMoreText: '{{view_more_text}}'
+        viewMoreText: '{{view_more_text}}',
+        placeholderImage: '{{placeholder_image_path}}'
       };
     </script>
     <script>
@@ -153,7 +154,7 @@
                                 <img src="${article.image_paths.thumb_jpeg}" alt="${article.title}" loading="lazy">
                             </picture>`;
                     } else {
-                        imageHtml = `<img src="logo_vn_ia.png" alt="${article.title}" loading="lazy">`;
+                        imageHtml = `<img src="${window.APP_CONFIG.placeholderImage}" alt="${article.title}" loading="lazy">`;
                     }
 
                     const card = document.createElement('a');

@@ -1,0 +1,27 @@
+<div id="author-view" style="max-width: 800px; margin: auto; padding: 20px;">
+    <a href="../index.html" class="back-button" style="display: inline-block; margin-bottom: 20px;">{{back_button_text}}</a>
+
+    <header class="author-header" style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 30px;">
+        <div class="author-photo" style="flex-shrink: 0;">
+            {{author_photo_picture_tag}}
+        </div>
+        <div class="author-info">
+            <h1 class="author-name" style="margin: 0; font-size: 2.5em;">{{author_name}}</h1>
+            <div class="author-links" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+                {{author_links_html}}
+            </div>
+        </div>
+    </header>
+
+    <section class="author-bio">
+        <h2 style="border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 30px;">{{biography_title}}</h2>
+        {{author_bio_html}}
+    </section>
+
+    <section class="author-articles" style="margin-top: 40px;">
+        <h2 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">{{latest_articles_title}}</h2>
+        <div class="articles-list" style="display: flex; flex-direction: column; gap: 15px;">
+            {{article_list_html}}
+        </div>
+    </section>
+</div>

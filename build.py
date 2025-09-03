@@ -491,6 +491,15 @@ TRANSLATIONS = {
             "fr": "Retour à l'accueil",
             "de": "Zurück zur Startseite"
         }
+    },
+    "index_page": {
+        "articles_heading": {
+            "it": "Ultimi Articoli dal mondo dell'Intelligenza Artificiale",
+            "en": "Latest Articles from the world of Artificial Intelligence",
+            "es": "Últimos Artículos del mundo de la Inteligencia Artificial",
+            "fr": "Derniers Articles du monde de l'Intelligence Artificielle",
+            "de": "Neueste Artikel aus der Welt der Künstlichen Intelligenz"
+        }
     }
 }
 
@@ -1193,7 +1202,9 @@ def generate_index_page(articles, output_dir, lang='it'):
         pagination_html = '<div id="view-more-container"></div>'
 
     # --- Final HTML Generation for index.html ---
-    content_with_filter = filter_bar_html + grid_html
+    articles_heading_text = TRANSLATIONS["index_page"]["articles_heading"].get(lang, TRANSLATIONS["index_page"]["articles_heading"]["it"])
+    articles_heading_html = f'<h2 class="visually-hidden">{articles_heading_text}</h2>'
+    content_with_filter = filter_bar_html + articles_heading_html + grid_html
     temp_html = base_template.replace("{{content}}", content_with_filter)
     temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
 

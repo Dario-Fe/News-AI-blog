@@ -404,11 +404,11 @@ TRANSLATIONS = {
             "de": "Es gibt nur eine Möglichkeit, wie wir wissen können, ob Sie unsere Seite besucht haben: wenn Sie uns kontaktieren, um uns kennenzulernen."
         },
         "link_text": {
-            "it": "Verifica l'assenza di cookie dal nostro sito",
-            "en": "Verify the absence of cookies from our site",
-            "es": "Verifique la ausencia de cookies en nuestro sitio",
-            "fr": "Vérifiez l'absence de cookies sur notre site",
-            "de": "Überprüfen Sie das Nichtvorhandensein von Cookies auf unserer Website"
+            "it": "Verifica Assenza Cookie",
+            "en": "Verify Cookie Absence",
+            "es": "Verificar Ausencia de Cookies",
+            "fr": "Vérifier l'Absence de Cookies",
+            "de": "Cookie-Abwesenheit prüfen"
         },
         "link_url": {
             "it": "https://www.cookieserve.com/it/scan-summary/?url=https%3A%2F%2Faitalk.it%2Fit%2F",

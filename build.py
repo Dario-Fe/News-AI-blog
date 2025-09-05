@@ -1458,6 +1458,7 @@ def generate_rss_feed(articles, output_dir, lang='it'):
     fg = FeedGenerator()
     fg.title(f'Notizie IA - Aggiornamenti e Analisi ({lang})')
     fg.link(href=f"{SITE_URL}{lang}/", rel='alternate')
+    fg.link(href=f"{SITE_URL}{lang}/rss.xml", rel='self', type='application/rss+xml')
     fg.description('Le ultime notizie e approfondimenti sull\'intelligenza artificiale, a cura di Verbania Notizie.')
     fg.language(lang)
 
@@ -1497,12 +1498,14 @@ def generate_rss_feed(articles, output_dir, lang='it'):
                 fe.pubDate(dt_obj)
 
         # Add the article image as an enclosure
-        if article.get('image_url'):
+        if article.get('image_paths') and article['image_paths'].get('full_jpeg'):
+            # Construct the full, public-facing URL for the image
+            enclosure_url = f"{SITE_URL}{lang}/{article['image_paths']['full_jpeg']}"
             # It's better to assume the MIME type from the extension if possible,
             # but for now, we'll default to jpeg.
             # The length is often required, but many readers are lenient.
             # Setting to '0' is a common practice when the size is unknown.
-            fe.enclosure(url=article['image_url'], length='0', type='image/jpeg')
+            fe.enclosure(url=enclosure_url, length='0', type='image/jpeg')
 
     fg.rss_file(os.path.join(output_dir, 'rss.xml'), pretty=True)
     print(f"  - rss.xml (for {lang})")

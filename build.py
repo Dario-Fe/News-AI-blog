@@ -14,6 +14,7 @@ import re
 from PIL import Image
 import hashlib
 from io import BytesIO
+from datetime import datetime, date, timezone
 
 # Constants
 GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
@@ -1465,8 +1466,35 @@ def generate_rss_feed(articles, output_dir, lang='it'):
         fe.title(article['title'])
         # URL encode the path to handle spaces and special characters
         encoded_path = quote(article['path'])
-        fe.link(href=f"{SITE_URL}{lang}/{encoded_path}")
+        full_url = f"{SITE_URL}{lang}/{encoded_path}"
+        
+        fe.link(href=full_url)
         fe.description(article['summary'])
+        
+        # Add guid and pubDate, which are essential for RSS readers and automation
+        fe.guid(full_url, permalink=True)
+        
+        pub_date_val = article.get('date')
+        if pub_date_val:
+            dt_obj = None
+            if isinstance(pub_date_val, datetime):
+                dt_obj = pub_date_val
+            elif isinstance(pub_date_val, date):
+                dt_obj = datetime.combine(pub_date_val, datetime.min.time())
+            elif isinstance(pub_date_val, str):
+                try:
+                    dt_obj = datetime.fromisoformat(pub_date_val.replace('Z', '+00:00'))
+                except ValueError:
+                    try:
+                        dt_obj = datetime.strptime(pub_date_val, '%Y-%m-%d')
+                    except ValueError:
+                        print(f"  - WARN: Could not parse date string '{pub_date_val}' for article '{article['title']}'.")
+
+            if dt_obj:
+                # Ensure the datetime is timezone-aware (UTC)
+                if dt_obj.tzinfo is None:
+                    dt_obj = dt_obj.replace(tzinfo=timezone.utc)
+                fe.pubDate(dt_obj)
 
         # Add the article image as an enclosure
         if article.get('image_url'):
@@ -1475,8 +1503,6 @@ def generate_rss_feed(articles, output_dir, lang='it'):
             # The length is often required, but many readers are lenient.
             # Setting to '0' is a common practice when the size is unknown.
             fe.enclosure(url=article['image_url'], length='0', type='image/jpeg')
-
-        # fe.pubDate() # We could add pubDate if we can parse it from the article name or metadata
 
     fg.rss_file(os.path.join(output_dir, 'rss.xml'), pretty=True)
     print(f"  - rss.xml (for {lang})")

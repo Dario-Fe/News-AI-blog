@@ -10,7 +10,7 @@ La sua carriera nel mondo dell'informatica inizia con la programmazione in Basic
 
 Come formatore, ha condotto corsi sull'uso consapevole di Internet e preparato candidati all'ottenimento della Patente Europea di Guida del Computer (ECDL). È autore del libro "Patente Europea per il Computer: Strategie Pratiche ed Esercizi per Superare Facilmente l'Esame ECDL", pubblicato da Bruno Editore, che sintetizza la sua esperienza didattica in una guida pratica e accessibile.
 
-A recentemente pubblicato come co-autore "Guida partica all'uso delle Intelligenze Artificiali", un e-book gratuito che rappresenta un viaggio dalle basi ai giorni d'oggi, di questa nova tecnologia. Parallelamente ha condotto corsi pratici e teorici sulle Intelligenze Artificiali.
+Ha recentemente pubblicato come co-autore "Guida pratica all'uso delle Intelligenze Artificiali", un e-book gratuito che rappresenta un viaggio dalle basi ai giorni d'oggi, di questa nova tecnologia. Parallelamente ha condotto corsi pratici e teorici sulle Intelligenze Artificiali.
 
 Come co-fondatore e gestore di verbanianotizie.it, ha creato una piattaforma di informazione online che, con oltre 2 milioni di visitatori dal 2012, è diventata un punto di riferimento per eventi, politica e cronaca di Verbania e provincia. Il portale si distingue per l'attenzione particolare alle voci dei cittadini e alle loro istanze, collaborando con diverse figure professionali per lo sviluppo di rubriche tematiche.
 

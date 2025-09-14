@@ -1,69 +1,89 @@
-# Notizie IA - Static Site Generator
+# AITalk - Generatore di Sito Statico
 
-Questa repository contiene il codice sorgente per il sito web di Notizie IA, un'applicazione web moderna e performante costruita come generatore di sito statico (Static Site Generator - SSG).
+Questa repository contiene il codice sorgente e lo script di build per il sito di AITalk, un sito web statico e multilingua dedicato a notizie e analisi sull'Intelligenza Artificiale.
 
-Il sito recupera dinamicamente gli articoli dal repository [CorsoAIBook](https://github.com/matteobaccan/CorsoAIBook) durante un processo di build e genera un sito HTML statico, veloce e multilingua.
-
-## Core Technologies
-- **Python**: Per la logica di build principale.
-- **Static Site Generation (SSG)**: Per la massima performance e affidabilità.
-- **GitHub Actions**: Per l'automazione del processo di build e deployment (CI/CD).
-- **Netlify**: Piattaforma di hosting e gestione form "serverless".
-
-## Struttura del Progetto
-```
-.
-├── .github/workflows/      # Configurazione di GitHub Actions per il CI/CD
-├── dist/                   # Cartella di output del sito generato (non versionata)
-├── pages/                  # Pagine HTML locali (es. newsletter) da includere nel build
-├── templates/              # Contiene il template base (base.html)
-├── build.py                # Lo script Python principale che contiene la logica di build
-├── build.sh                # Lo script shell che orchestra l'intero processo di build
-├── requirements.txt        # Le dipendenze Python del progetto
-├── README.md               # Questo file
-└── ...                     # Altri file statici (logo, etc.)
-```
-
-## Come Funziona: Il Processo di Build
-Il sito viene generato tramite lo script `build.sh`, che esegue i seguenti passaggi:
-
-1.  **Pulizia**: Cancella la cartella `dist/` per assicurare un build pulito.
-2.  **Copia Asset Statici**: Copia tutti i file statici (immagini, CSS, JS, e file HTML statici come `thank-you.html`) dalla root del progetto alla cartella `dist/`.
-3.  **Build Multilingua**: Esegue un ciclo per ogni lingua supportata (`it`, `en`, `es`, `fr`, `de`). Per ogni lingua:
-    a. **Recupera Articoli**: Contatta le API di GitHub per scaricare gli ultimi articoli dal repository esterno.
-    b. **Genera Pagine Articoli**: Crea una pagina HTML per ogni singolo articolo.
-    c. **Genera Pagine Locali**: Crea pagine HTML basate sui file presenti nella cartella `pages/` (es. `newsletter.html`).
-    d. **Genera Pagine Indice**: Crea la pagina `index.html` per la lingua corrente, con la lista di tutti gli articoli.
-    e. **Genera Feed RSS**: Crea un file `rss.xml` per la lingua corrente.
-4.  **Crea Redirect Principale**: Genera il file `index.html` nella root di `dist/` che reindirizza automaticamente alla versione italiana del sito.
+Il sito recupera dinamicamente gli articoli dal repository [CorsoAIBook](https://github.com/matteobaccan/CorsoAIBook) durante il processo di build e genera un sito HTML statico, veloce e performante.
 
 ## Funzionalità Principali
-- **Generazione di Sito Statico**: Il sito è pre-renderizzato in file HTML, garantendo velocità di caricamento massime per l'utente finale.
-- **Supporto Multilingua Completo**: Il sito è generato in Italiano, Inglese, Spagnolo, Francese e Tedesco. L'interfaccia, inclusi i link, i sottotitoli e le pagine, è completamente tradotta grazie a un sistema di traduzione centralizzato in `build.py`.
-- **Form per Newsletter (Netlify-Ready)**: Include una pagina di iscrizione alla newsletter con un form HTML pronto per essere gestito da Netlify Forms, eliminando la necessità di un backend dedicato.
-- **Build e Deployment Automatizzati**: Grazie a GitHub Actions, il sito viene ricostruito e pubblicato automaticamente due volte al giorno per recuperare i nuovi articoli e ad ogni modifica del codice sorgente.
 
-## Sviluppo Locale
-Per eseguire il progetto in locale, segui questi passaggi.
+- **Generazione di Sito Statico**: Costruito con un semplice script Python (`build.py`), senza la necessità di framework complessi, per garantire massime performance.
+- **Contenuti in Markdown**: Gli articoli sono scritti in formato Markdown, rendendo la gestione dei contenuti semplice e intuitiva.
+- **Supporto Multilingua**: Il sito è generato in Italiano (default), Inglese, Spagnolo, Francese e Tedesco. L'interfaccia e i template sono completamente tradotti.
+- **Pagine Autore**: Genera automaticamente una pagina dedicata per ogni autore con biografia e lista degli articoli pubblicati.
+- **Integrazione Podcast**: Rileva e integra automaticamente file audio `.mp3` specifici per ogni lingua, mostrando un player dedicato nelle pagine degli articoli.
+- **Ottimizzazione Immagini**: Scarica e processa le immagini degli articoli, creando formati ottimizzati (WebP e JPEG) per migliorare i tempi di caricamento.
+- **Feed RSS**: Genera un feed RSS separato per ogni lingua, per permettere agli utenti di seguire gli aggiornamenti.
+- **Form "Serverless"**: Utilizza Netlify Forms per la gestione delle iscrizioni alla newsletter, senza bisogno di un backend.
 
-**Prerequisiti**:
+## Struttura del Progetto
+
+- `build.py`: Lo script Python principale che contiene tutta la logica di build.
+- `build.sh`: Uno script di supporto per avviare la compilazione di tutte le lingue con un solo comando.
+- `content/`: Contiene i dati che non risiedono nel repository esterno degli articoli.
+  - `authors/`: File Markdown con le biografie degli autori (es. `dario-ferrero.md`, `dario-ferrero_en.md`).
+- `templates/`: Contiene i template HTML per la struttura delle pagine (es. `base.html`, `author.html`).
+- `pages/`: Contiene pagine HTML quasi-statiche come la privacy policy e la pagina di iscrizione alla newsletter.
+- `public/`: Contiene asset statici (come immagini e font) che vengono copiati direttamente nella cartella di build.
+  - `flags/`: Immagini SVG delle bandiere per il selettore della lingua.
+- `style.css`: Il foglio di stile principale del sito.
+- `requirements.txt`: Le dipendenze Python necessarie per eseguire lo script di build.
+- `dist/`: La cartella di output dove viene salvato il sito generato (non è tracciata da Git).
+- **Contenuti Articoli**: I contenuti principali (articoli, immagini associate e podcast) vengono recuperati dalla cartella `articoli/` del repository [matteobaccan/CorsoAIBook](https://github.com/matteobaccan/CorsoAIBook).
+
+## Gestione dei Contenuti
+
+### Articoli
+
+Per aggiungere o modificare un articolo, è necessario creare o modificare i file nel repository `CorsoAIBook`. Ogni articolo deve avere una propria cartella all'interno della directory `articoli/`.
+- **File Markdown**: Il file per la lingua italiana non ha suffisso (es. `mio-articolo.md`). Le traduzioni devono avere il suffisso della lingua (es. `mio-articolo_en.md` per l'inglese).
+- **Immagini**: Le immagini relative a un articolo vanno inserite nella stessa cartella.
+
+### Podcast
+
+Per associare un podcast a un articolo, inserire un file `.mp3` nella stessa cartella dell'articolo nel repository `CorsoAIBook`. Il file audio **deve avere lo stesso nome base** del file Markdown a cui si riferisce.
+- Per `mio-articolo.md` (Italiano), il file audio deve chiamarsi `mio-articolo.mp3`.
+- Per `mio-articolo_en.md` (Inglese), il file audio deve chiamarsi `mio-articolo_en.mp3`.
+
+Lo script di build rileverà automaticamente il file audio e mostrerà il player nella pagina dell'articolo corrispondente.
+
+### Autori
+
+Per aggiungere o modificare un autore, creare o modificare i file Markdown presenti nella cartella `content/authors/` di questa repository.
+
+## Sviluppo e Build in Locale
+
+### Prerequisiti
+
 - Python 3.x
+- `pip`
 
-**Installazione**:
-1. Clona la repository.
-2. Installa le dipendenze Python:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Setup
 
-**Esecuzione del Build**:
-Per generare il sito nella cartella `dist/`, esegui:
+1.  Clonare la repository.
+2.  Installare le dipendenze Python:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  (Opzionale ma Raccomandato) Per evitare di raggiungere i limiti di richieste alle API di GitHub, è consigliabile creare un [Personal Access Token (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) con scope `repo` ed esportarlo come variabile d'ambiente:
+    ```bash
+    export GITHUB_TOKEN='tuo_token_qui'
+    ```
+
+### Esecuzione del Build
+
+Per compilare il sito per tutte le lingue supportate, eseguire lo script:
 ```bash
 ./build.sh
 ```
+Per compilare una singola lingua (es. italiano):
+```bash
+python build.py --lang it
+```
+Il sito generato si troverà nella cartella `dist/`.
 
-**Visualizzazione**:
-Per visualizzare il sito generato, puoi avviare un semplice server web locale dalla cartella `dist`:
+### Visualizzazione in Locale
+
+Per visualizzare il sito generato, è possibile avviare un semplice server web locale dalla cartella `dist/`:
 ```bash
 cd dist
 python -m http.server
@@ -71,7 +91,5 @@ python -m http.server
 Il sito sarà quindi accessibile all'indirizzo `http://localhost:8000`.
 
 ## Deployment
-Il deployment è gestito automaticamente da GitHub Actions. Il workflow è configurato per una pubblicazione **duale** sia su **GitHub Pages** che su **Netlify**.
-Ad ogni build, il sito viene inviato a entrambe le piattaforme:
-- **GitHub Pages**: Utile come ambiente di test o di backup.
-- **Netlify**: Usato come ambiente di produzione principale, gestisce anche i form della newsletter.
+
+Il deployment è gestito automaticamente tramite GitHub Actions e avviene su Netlify.

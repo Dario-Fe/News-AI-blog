@@ -21,6 +21,7 @@ GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents
 SITE_URL = "https://aitalk.it/"
 BASE_OUTPUT_DIR = "dist"
 IMAGE_ASSETS_DIR = "assets/images"
+AUDIO_ASSETS_DIR = "assets/audio"
 
 # --- Image Processing Helpers ---
 
@@ -156,6 +157,50 @@ def process_author_photo(photo_path, output_dir_base, lang):
 
     except Exception as e:
         print(f"  - WARN: Could not process author image {photo_path}. Error: {e}")
+        return None
+
+def process_audio(audio_url, output_dir_base, lang):
+    """
+    Downloads an audio file and saves it, returning its relative path.
+    """
+    if not audio_url:
+        return None
+
+    try:
+        # Use a longer timeout for potentially larger audio files
+        response = requests.get(audio_url, timeout=60)
+        response.raise_for_status()
+        audio_bytes = response.content
+    except requests.exceptions.RequestException as e:
+        print(f"  - WARN: Could not download audio {audio_url}. Error: {e}")
+        return None
+
+    try:
+        # Create a unique filename based on the URL to avoid collisions
+        url_hash = hashlib.sha1(audio_url.encode()).hexdigest()[:10]
+        original_filename = os.path.basename(urlparse(audio_url).path)
+        # Sanitize filename and create a base name
+        base_name, ext = os.path.splitext(original_filename)
+        sanitized_base_name = re.sub(r'[^a-zA-Z0-9_-]', '', base_name)
+        base_filename = f"{sanitized_base_name}-{url_hash}{ext}"
+
+        # Define output directory for this language's audio
+        output_dir_audio = os.path.join(output_dir_base, lang, AUDIO_ASSETS_DIR)
+        os.makedirs(output_dir_audio, exist_ok=True)
+
+        audio_path = os.path.join(output_dir_audio, base_filename)
+        with open(audio_path, "wb") as f:
+            f.write(audio_bytes)
+        
+        # The path must be relative to the HTML file that will reference it.
+        # Since HTML files are at the root of the language folder (e.g., /it/article.html),
+        # the relative path is straightforward.
+        relative_path = f"{AUDIO_ASSETS_DIR}/{base_filename}"
+        print(f"  - Saved audio to {relative_path}")
+        return relative_path
+
+    except Exception as e:
+        print(f"  - WARN: Could not process audio {audio_url}. Error: {e}")
         return None
 
 # Translations
@@ -322,6 +367,13 @@ TRANSLATIONS = {
             "es": "por",
             "fr": "par",
             "de": "von"
+        },
+        "listen_to_podcast": {
+            "it": "Ascolta il podcast articolo",
+            "en": "Listen to the article podcast",
+            "es": "Escuchar el podcast del artículo",
+            "fr": "Écouter le podcast de l'article",
+            "de": "Den Artikel-Podcast anhören"
         }
     },
     "author_page": {
@@ -430,8 +482,8 @@ TRANSLATIONS = {
         "p1": {
             "it": "Questo sito non raccoglie dati personali di alcun tipo, ad eccezione del nome e dell'indirizzo email forniti volontariamente dagli utenti che si iscrivono alla nostra newsletter. Il nostro obiettivo non è raccogliere informazioni su di voi, ma condividere la passione per l'intelligenza artificiale e il mondo tech.",
             "en": "This site does not collect personal data of any kind, except for the name and email address voluntarily provided by users who subscribe to our newsletter. Our goal is not to collect information about you, but to share the passion for artificial intelligence and the tech world.",
-            "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nombre y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la passione por la inteligencia artificial y el mundo de la tecnología.",
-            "fr": "Ce site ne collecte aucune donnée personnelle, à l'exception du nom et de l'adresse e-mail fournis volontariamente par les utilisateurs qui s'abonnent à notre newsletter. Notre objectif n'est pas de collecter des informations sur vous, mais de partager la passion pour l'intelligence artificielle et le monde de la technologie.",
+            "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nome y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la passione por la inteligencia artificial y el mundo de la tecnología.",
+            "fr": "Ce site ne collecte aucune donnée personnelle, à l'exception du nom et de l'adresse e-mail fournis volontariamente par les utilisateurs qui s'abonnent à notre newsletter. Notre obiettivo n'est pas de collecter des informations sur vous, mais de partager la passion pour l'intelligence artificielle et le monde de la technologie.",
             "de": "Diese Website sammelt keinerlei personenbezogene Daten, mit Ausnahme des Namens und der E-Mail-Adresse, die von Benutzern, die unseren Newsletter abonnieren, freiwillig angegeben werden. Unser Ziel ist es nicht, Informationen über Sie zu sammeln, sondern die Leidenschaft für künstliche Intelligenz und die Tech-Welt zu teilen."
         },
         "p2": {
@@ -564,49 +616,74 @@ def get_all_repo_files():
 
 def structure_articles_by_language(all_files):
     """
-    Structures all markdown files by their article group and language.
+    Structures all markdown and audio files by their article group, matching
+    markdown files to their language-specific audio files.
     """
-    articles_db = {}
+    # First pass: group all md and mp3 files by their parent directory.
+    file_groups = {}
     for file_info in all_files:
         path = file_info['path']
-        if path.startswith('articoli/') and path.endswith('.md'):
-            parts = path.split('/')
-            if len(parts) == 3: # articoli/DIR/file.md
-                article_dir = parts[1]
-                filename = parts[2]
+        if not path.startswith('articoli/'):
+            continue
+        
+        parts = path.split('/')
+        if len(parts) != 3:
+            continue
 
-                if article_dir not in articles_db:
-                    articles_db[article_dir] = {}
+        article_dir = parts[1]
+        # The 'name' key is not guaranteed in the GitHub API response for trees,
+        # so we derive it from the path.
+        filename = os.path.basename(path)
+        file_info['name'] = filename
 
-                # Determine language
-                if filename.endswith('_en.md'):
-                    lang = 'en'
-                elif filename.endswith('_es.md'):
-                    lang = 'es'
-                elif filename.endswith('_fr.md'):
-                    lang = 'fr'
-                elif filename.endswith('_de.md'):
-                    lang = 'de'
-                elif filename.endswith('.md'):
-                    # This is Italian only if no other lang suffix is present
-                    is_base_file = not any(s in filename for s in ['_en.md', '_es.md', '_fr.md', '_de.md'])
-                    if is_base_file:
-                        lang = 'it'
-                    else:
-                        continue # Skip other languages like _fr, _de for now
-                else:
-                    continue
+        if article_dir not in file_groups:
+            file_groups[article_dir] = {'md': [], 'mp3': []}
 
-                if lang not in articles_db[article_dir]:
-                    articles_db[article_dir][lang] = []
+        if filename.endswith('.md'):
+            file_groups[article_dir]['md'].append(file_info)
+        elif filename.endswith('.mp3'):
+            file_groups[article_dir]['mp3'].append(file_info)
 
-                # Add file info needed for processing
-                file_info['name'] = filename
-                file_info['parent_dir'] = article_dir
-                file_info['download_url'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/{path}"
-                articles_db[article_dir][lang].append(file_info)
+    # Second pass: build the final DB, associating md files with their mp3s.
+    articles_db = {}
+    for article_dir, files in file_groups.items():
+        # Create a quick lookup for mp3 files by their base name (e.g., 'article_en').
+        mp3_lookup = {os.path.splitext(f['name'])[0]: f for f in files['mp3']}
 
+        for md_file in files['md']:
+            md_basename = os.path.splitext(md_file['name'])[0]
+
+            # Determine language from the markdown filename suffix.
+            lang = 'it' # Default language
+            if md_basename.endswith('_en'): lang = 'en'
+            elif md_basename.endswith('_es'): lang = 'es'
+            elif md_basename.endswith('_fr'): lang = 'fr'
+            elif md_basename.endswith('_de'): lang = 'de'
+
+            # Check for a matching mp3 file using the same base name.
+            matching_mp3_info = mp3_lookup.get(md_basename)
+            if matching_mp3_info:
+                # Attach audio file info directly to the markdown file's dictionary.
+                md_file['audio_file'] = {
+                    'name': matching_mp3_info['name'],
+                    'download_url': f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/{matching_mp3_info['path']}",
+                    'parent_dir': article_dir
+                }
+            
+            # Populate the final articles_db structure.
+            if article_dir not in articles_db:
+                articles_db[article_dir] = {}
+            if lang not in articles_db[article_dir]:
+                articles_db[article_dir][lang] = []
+            
+            # Ensure other necessary info is present in the md_file dict.
+            md_file['parent_dir'] = article_dir
+            md_file['download_url'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/{md_file['path']}"
+
+            articles_db[article_dir][lang].append(md_file)
+            
     return articles_db
+
 
 def get_files_for_lang(articles_db, lang='it'):
     """
@@ -870,6 +947,13 @@ def process_article(md_file, output_dir_base, lang):
         
         main_image_paths = process_and_save_image(main_image_url, output_dir_base, lang)
 
+        # --- Process Audio File ---
+        audio_path = None
+        if md_file.get('audio_file'):
+            audio_info = md_file['audio_file']
+            print(f"  - Found audio file: {audio_info['name']}")
+            audio_path = process_audio(audio_info['download_url'], output_dir_base, lang)
+
         final_html_content = str(soup)
         slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
         tags = post.metadata.get('tags', [])
@@ -886,7 +970,8 @@ def process_article(md_file, output_dir_base, lang):
             "tags": tags,
             "date": date_obj,
             "author": author,
-            "image_url": main_image_url # Keep original for RSS feed
+            "image_url": main_image_url, # Keep original for RSS feed
+            "audio_path": audio_path
         }
 
     except Exception as e:
@@ -932,12 +1017,47 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
                 # Fallback to plain text if no author page is found
                 author_html = f'<div class="post-author">{author_prefix} {author_name}</div>'
 
+        # --- Podcast Player Formatting ---
+        podcast_html = ""
+        if article.get("audio_path"):
+            podcast_button_text = TRANSLATIONS["article_page"]["listen_to_podcast"].get(lang, TRANSLATIONS["article_page"]["listen_to_podcast"]["it"])
+            
+            # Headset icon SVG
+            headset_icon_svg = """
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3z"></path>
+                <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3z"></path>
+            </svg>
+            """
+
+            podcast_html = f"""
+            <div class="podcast-container">
+                <button id="podcast-button" class="podcast-button">
+                    {headset_icon_svg}
+                    <span>{podcast_button_text}</span>
+                </button>
+                <div id="podcast-player-wrapper" class="podcast-player-wrapper" style="display: none;">
+                    <audio id="podcast-player" controls src="{article['audio_path']}">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+            """
+        
+        author_and_podcast_container_html = f"""
+        <div class="author-podcast-container">
+            {author_html}
+            {podcast_html}
+        </div>
+        """
+
         # Create a simple view for the article content
         article_view_html = f"""
         <div id="article-view">
             <a href="index.html" class="back-button">{back_button_text}</a>
             {tags_html}
-            {author_html}
+            {author_and_podcast_container_html}
             {article['html_content']}
             
             <!-- AddToAny Share Buttons -->
@@ -1439,16 +1559,25 @@ def generate_404_page(output_dir, lang='it'):
 
 def copy_static_assets(output_dir):
     """
-    Copies static assets from the root to the output directory.
+    Copies static assets from the root and the public directory to the output directory.
     """
     print("\nCopying static assets...")
+    
+    # Copy root files
     static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html', '.webp', '.ico']
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
-            # Let's avoid copying the template files themselves if they are in the root
-            if item not in ["base.html", "forms.html"]: # Simple exclusion for templates
-                 print(f"  - {item}")
-                 shutil.copy(item, os.path.join(output_dir, item))
+            if item not in ["base.html", "forms.html"]:
+                print(f"  - {item}")
+                shutil.copy(item, os.path.join(output_dir, item))
+
+    # Copy public directory contents recursively
+    public_dir = 'public'
+    if os.path.exists(public_dir):
+        print(f"  - Copying '{public_dir}' directory...")
+        # shutil.copytree is the right tool, ensuring destination exists and is a dir.
+        # We use dirs_exist_ok=True to merge into the existing output_dir.
+        shutil.copytree(public_dir, output_dir, dirs_exist_ok=True)
 
 def generate_rss_feed(articles, output_dir, lang='it'):
     """

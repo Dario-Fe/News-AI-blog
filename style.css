@@ -30,6 +30,13 @@ body {
                 margin-bottom: 15px;
             }
         }
+        .language-flag {
+            height: 0.85em;
+            width: 1.275em; /* Keep 3:2 ratio */
+            vertical-align: middle;
+            border-radius: 2px;
+            object-fit: cover; /* Prevents distortion */
+        }
         header h1 {
             margin: 0;
             font-size: 2.5em;
@@ -345,4 +352,59 @@ body {
 .author-social-link:not([href*="linkedin.com"]):not([href*="github.com"])::before {
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72'%3E%3C/path%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72'%3E%3C/path%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72'%3E%3C/path%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* Podcast Styles */
+#article-view .author-podcast-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #dddfe2;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#article-view .post-author {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#article-view .podcast-container {
+    text-align: right;
+    flex-shrink: 0;
+    width: 45%;
+    max-width: 500px;
+}
+
+#article-view .podcast-button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+#article-view .podcast-button:hover {
+    background-color: #166fe5;
+}
+
+#article-view .podcast-button .feather-headphones {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+#article-view .podcast-player-wrapper {
+    margin-top: 15px;
+    width: 100%;
+}
+
+#article-view #podcast-player {
+    width: 100%;
 }

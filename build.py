@@ -369,11 +369,11 @@ TRANSLATIONS = {
             "de": "von"
         },
         "listen_to_podcast": {
-            "it": "Ascolta il podcast articolo",
-            "en": "Listen to the article podcast",
-            "es": "Escuchar el podcast del artículo",
-            "fr": "Écouter le podcast de l'article",
-            "de": "Den Artikel-Podcast anhören"
+            "it": "Versione podcast",
+            "en": "Podcast version",
+            "es": "Versión podcast",
+            "fr": "Version podcast",
+            "de": "Podcast-Version"
         }
     },
     "author_page": {
@@ -578,8 +578,8 @@ def get_base_template_data(depth):
     """
     Generates a dictionary of common, relative-path-based data for the base template.
     """
-    prefix = "../" * (depth -1) if depth > 1 else ""
-    return {
+    prefix = "../" * (depth - 1) if depth > 1 else ""
+    data = {
         "{{css_path}}": f"{prefix}style.css",
         "{{favicon_ico_path}}": f"{prefix}favicon.ico",
         "{{favicon_png_path}}": f"{prefix}favicon.png",
@@ -591,6 +591,13 @@ def get_base_template_data(depth):
         "{{privacy_link}}": f"{prefix}privacy.html",
         "{{home_link}}": f"{prefix}index.html" if prefix else "index.html"
     }
+    # Add dynamic paths for flag images
+    data["{{it_flag_path}}"] = f"{prefix}flags/it.svg"
+    data["{{gb_flag_path}}"] = f"{prefix}flags/gb.svg"
+    data["{{es_flag_path}}"] = f"{prefix}flags/es.svg"
+    data["{{fr_flag_path}}"] = f"{prefix}flags/fr.svg"
+    data["{{de_flag_path}}"] = f"{prefix}flags/de.svg"
+    return data
 
 def get_all_repo_files():
     """
@@ -992,45 +999,33 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
     for article in articles:
         print(f"  - {article['path']}")
 
-        # Get translation for the back button
+        # --- Translations ---
         back_button_text = TRANSLATIONS["article_page"]["back_button"].get(lang, TRANSLATIONS["article_page"]["back_button"]["it"])
 
-        # --- Tags Formatting ---
+        # --- Tags ---
         tags_html = ""
         if article.get('tags'):
             tags_html = '<div class="article-card-tags" style="margin-bottom: 20px;">'
             for tag in article['tags']:
-                # The link will point to the homepage with a hash for the JS to pick up
                 tags_html += f'<a href="index.html#{tag}" class="tag">{tag}</a>'
             tags_html += '</div>'
 
-        # --- Author Formatting ---
+        # --- Author ---
         author_html = ""
         author_name = article.get('author')
         if author_name:
             author_prefix = TRANSLATIONS["article_page"]["author_by"].get(lang, TRANSLATIONS["article_page"]["author_by"]["it"])
             author_slug = author_name_to_slug.get(author_name)
             if author_slug:
-                # Link to the author's page
                 author_html = f'<div class="post-author">{author_prefix} <a href="authors/{author_slug}.html">{author_name}</a></div>'
             else:
-                # Fallback to plain text if no author page is found
                 author_html = f'<div class="post-author">{author_prefix} {author_name}</div>'
 
-        # --- Podcast Player Formatting ---
+        # --- Podcast Player ---
         podcast_html = ""
         if article.get("audio_path"):
             podcast_button_text = TRANSLATIONS["article_page"]["listen_to_podcast"].get(lang, TRANSLATIONS["article_page"]["listen_to_podcast"]["it"])
-            
-            # Headset icon SVG
-            headset_icon_svg = """
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones">
-                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3z"></path>
-                <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3z"></path>
-            </svg>
-            """
-
+            headset_icon_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3z"></path><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3z"></path></svg>"""
             podcast_html = f"""
             <div class="podcast-container">
                 <button id="podcast-button" class="podcast-button">
@@ -1044,20 +1039,14 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
                 </div>
             </div>
             """
-        
-        author_and_podcast_container_html = f"""
-        <div class="author-podcast-container">
-            {author_html}
-            {podcast_html}
-        </div>
-        """
 
-        # Create a simple view for the article content
+        # --- Main Article View ---
         article_view_html = f"""
         <div id="article-view">
             <a href="index.html" class="back-button">{back_button_text}</a>
             {tags_html}
-            {author_and_podcast_container_html}
+            {author_html}
+            {podcast_html}
             {article['html_content']}
             
             <!-- AddToAny Share Buttons -->

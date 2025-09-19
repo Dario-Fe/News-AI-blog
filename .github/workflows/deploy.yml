@@ -39,6 +39,12 @@ jobs:
         with:
           python-version: '3.10' # Or your desired version
 
+      - name: Install locales
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y language-pack-it language-pack-es language-pack-fr language-pack-de
+          sudo locale-gen it_IT.UTF-8 en_US.UTF-8 es_ES.UTF-8 fr_FR.UTF-8 de_DE.UTF-8
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -46,8 +52,6 @@ jobs:
 
       - name: Build the site
         run: ./build.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

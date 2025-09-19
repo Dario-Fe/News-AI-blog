@@ -17,100 +17,103 @@ from io import BytesIO
 from datetime import datetime, date, timezone
 
 # Constants
-GITHUB_API_URL = "https://api.github.com/repos/matteobaccan/CorsoAIBook/contents/articoli"
 SITE_URL = "https://aitalk.it/"
 BASE_OUTPUT_DIR = "dist"
+ARTICLES_DIR = "articoli" # New constant for local articles path
 IMAGE_ASSETS_DIR = "assets/images"
 AUDIO_ASSETS_DIR = "assets/audio"
 
-# --- Image Processing Helpers ---
+# --- Media Processing Helpers ---
 
-def process_and_save_image(image_url, output_dir_base, lang):
+def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
     """
-    Downloads an image, creates two sizes (thumbnail and full),
+    Downloads or copies an image, creates two sizes (thumbnail and full),
     saves them in WebP and JPEG formats, and returns their paths.
+    'image_source' can be a URL or a local file path.
     """
-    if not image_url:
+    if not image_source:
+        return None
+
+    image_bytes = None
+    source_filename = ""
+    
+    if image_source.startswith("http"):
+        try:
+            response = requests.get(image_source, timeout=15)
+            response.raise_for_status()
+            image_bytes = response.content
+            source_filename = os.path.basename(urlparse(image_source).path)
+        except requests.exceptions.RequestException as e:
+            print(f"  - WARN: Could not download image {image_source}. Error: {e}")
+            return None
+    else: # It's a local file
+        local_path = os.path.join(ARTICLES_DIR, article_dir, image_source)
+        if os.path.exists(local_path):
+            with open(local_path, "rb") as f:
+                image_bytes = f.read()
+            source_filename = os.path.basename(local_path)
+        else:
+            print(f"  - WARN: Could not find local image {local_path}.")
+            return None
+
+    if not image_bytes:
         return None
 
     try:
-        response = requests.get(image_url, timeout=15)
-        response.raise_for_status()
-        image_bytes = response.content
-    except requests.exceptions.RequestException as e:
-        print(f"  - WARN: Could not download image {image_url}. Error: {e}")
-        return None
-
-    try:
-        # Create a unique filename based on the image URL to avoid collisions
-        url_hash = hashlib.sha1(image_url.encode()).hexdigest()[:10]
-        original_filename = os.path.splitext(os.path.basename(urlparse(image_url).path))[0]
-        base_filename = f"{original_filename}-{url_hash}"
+        # Create a unique filename based on the content to avoid collisions and handle updates
+        content_hash = hashlib.sha1(image_bytes).hexdigest()[:10]
+        base_name, _ = os.path.splitext(source_filename)
+        base_filename = f"{base_name}-{content_hash}"
 
         img = Image.open(BytesIO(image_bytes))
-        img = img.convert("RGB") # Convert to RGB to ensure JPEG saving works
+        img = img.convert("RGB")
 
-        # Define output directory for this language's images
         output_dir_images = os.path.join(output_dir_base, lang, IMAGE_ASSETS_DIR)
-        if not os.path.exists(output_dir_images):
-            os.makedirs(output_dir_images)
+        os.makedirs(output_dir_images, exist_ok=True)
 
         image_paths = {}
 
-        # --- Process Thumbnail (for cards) ---
-        thumb_filename_webp = f"{base_filename}-thumb.webp"
-        thumb_filename_jpeg = f"{base_filename}-thumb.jpeg"
-        
+        # Thumbnail (400px width)
         thumb = img.copy()
-        thumb.thumbnail((400, 400)) # Resize to 400px width, maintaining aspect ratio
-        
-        thumb_path_webp = os.path.join(output_dir_images, thumb_filename_webp)
+        thumb.thumbnail((400, 400))
+        thumb_path_webp = os.path.join(output_dir_images, f"{base_filename}-thumb.webp")
         thumb.save(thumb_path_webp, "webp", quality=80)
+        image_paths['thumb_webp'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(thumb_path_webp)}"
         
-        thumb_path_jpeg = os.path.join(output_dir_images, thumb_filename_jpeg)
+        # Full size (no longer resized to preserve quality)
+        full_path_webp = os.path.join(output_dir_images, f"{base_filename}-full.webp")
+        img.save(full_path_webp, "webp", quality=85)
+        image_paths['full_webp'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(full_path_webp)}"
+
+        # Create JPEG fallbacks
+        thumb_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-thumb.jpeg")
         thumb.save(thumb_path_jpeg, "jpeg", quality=80)
+        image_paths['thumb_jpeg'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(thumb_path_jpeg)}"
         
-        image_paths['thumb_webp'] = f"{IMAGE_ASSETS_DIR}/{thumb_filename_webp}"
-        image_paths['thumb_jpeg'] = f"{IMAGE_ASSETS_DIR}/{thumb_filename_jpeg}"
-        
-        # --- Process Full Size (for articles) ---
-        full_filename_webp = f"{base_filename}-full.webp"
-        full_filename_jpeg = f"{base_filename}-full.jpeg"
+        full_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-full.jpeg")
+        img.save(full_path_jpeg, "jpeg", quality=85)
+        image_paths['full_jpeg'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(full_path_jpeg)}"
 
-        full = img.copy()
-        # The 'full' version is no longer resized to preserve original dimensions
-        # if full.width > 800:
-        #     full.thumbnail((800, 800)) # Resize to 800px width if it's larger
-        
-        full.save(os.path.join(output_dir_images, full_filename_webp), "webp", quality=85)
-        full.save(os.path.join(output_dir_images, full_filename_jpeg), "jpeg", quality=85)
-
-        image_paths['full_webp'] = f"{IMAGE_ASSETS_DIR}/{full_filename_webp}"
-        image_paths['full_jpeg'] = f"{IMAGE_ASSETS_DIR}/{full_filename_jpeg}"
-        
         return image_paths
 
     except Exception as e:
-        print(f"  - WARN: Could not process image {image_url}. Error: {e}")
+        print(f"  - WARN: Could not process image from {image_source}. Error: {e}")
         return None
-
 
 def process_author_photo(photo_path, output_dir_base, lang):
     """
     Processes an author's photo, handling both local paths and URLs.
-    Returns a dictionary of paths for a <picture> tag.
     """
     if not photo_path:
         return None
 
-    # e.g., dist/it/assets/images/authors/
     output_dir_images = os.path.join(output_dir_base, lang, IMAGE_ASSETS_DIR, "authors")
     os.makedirs(output_dir_images, exist_ok=True)
 
     image_bytes = None
     base_filename = None
 
-    if photo_path.startswith("http"):  # It's a URL
+    if photo_path.startswith("http"):
         try:
             response = requests.get(photo_path, timeout=15)
             response.raise_for_status()
@@ -121,7 +124,7 @@ def process_author_photo(photo_path, output_dir_base, lang):
         except requests.exceptions.RequestException as e:
             print(f"  - WARN: Could not download author image {photo_path}. Error: {e}")
             return None
-    elif photo_path.startswith("/public/"):  # It's a local path
+    elif photo_path.startswith("/public/"):
         local_path = photo_path.lstrip('/')
         if os.path.exists(local_path):
             with open(local_path, "rb") as f:
@@ -148,62 +151,48 @@ def process_author_photo(photo_path, output_dir_base, lang):
         img.save(os.path.join(output_dir_images, photo_filename_webp), "webp", quality=85)
         img.save(os.path.join(output_dir_images, photo_filename_jpeg), "jpeg", quality=85)
 
-        image_paths = {
+        return {
             'webp': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_webp}",
             'jpeg': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_jpeg}"
         }
         
-        return image_paths
-
     except Exception as e:
         print(f"  - WARN: Could not process author image {photo_path}. Error: {e}")
         return None
 
-def process_audio(audio_url, output_dir_base, lang):
+def process_audio(audio_path, output_dir_base, lang):
     """
-    Downloads an audio file and saves it, returning its relative path.
+    Copies a local audio file and saves it, returning its relative path.
     """
-    if not audio_url:
+    if not audio_path or not os.path.exists(audio_path):
+        print(f"  - WARN: Could not find local audio file {audio_path}.")
         return None
 
     try:
-        # Use a longer timeout for potentially larger audio files
-        response = requests.get(audio_url, timeout=60)
-        response.raise_for_status()
-        audio_bytes = response.content
-    except requests.exceptions.RequestException as e:
-        print(f"  - WARN: Could not download audio {audio_url}. Error: {e}")
-        return None
-
-    try:
-        # Create a unique filename based on the URL to avoid collisions
-        url_hash = hashlib.sha1(audio_url.encode()).hexdigest()[:10]
-        original_filename = os.path.basename(urlparse(audio_url).path)
-        # Sanitize filename and create a base name
+        with open(audio_path, "rb") as f:
+            audio_bytes = f.read()
+            
+        content_hash = hashlib.sha1(audio_bytes).hexdigest()[:10]
+        original_filename = os.path.basename(audio_path)
         base_name, ext = os.path.splitext(original_filename)
-        sanitized_base_name = re.sub(r'[^a-zA-Z0-9_-]', '', base_name)
-        base_filename = f"{sanitized_base_name}-{url_hash}{ext}"
+        base_filename = f"{base_name}-{content_hash}{ext}"
 
-        # Define output directory for this language's audio
         output_dir_audio = os.path.join(output_dir_base, lang, AUDIO_ASSETS_DIR)
         os.makedirs(output_dir_audio, exist_ok=True)
 
-        audio_path = os.path.join(output_dir_audio, base_filename)
-        with open(audio_path, "wb") as f:
+        dest_path = os.path.join(output_dir_audio, base_filename)
+        with open(dest_path, "wb") as f:
             f.write(audio_bytes)
         
-        # The path must be relative to the HTML file that will reference it.
-        # Since HTML files are at the root of the language folder (e.g., /it/article.html),
-        # the relative path is straightforward.
         relative_path = f"{AUDIO_ASSETS_DIR}/{base_filename}"
         print(f"  - Saved audio to {relative_path}")
         return relative_path
 
     except Exception as e:
-        print(f"  - WARN: Could not process audio {audio_url}. Error: {e}")
+        print(f"  - WARN: Could not process audio {audio_path}. Error: {e}")
         return None
 
-# Translations
+# --- Translations Dictionary ---
 TRANSLATIONS = {
     "subtitle": {
         "it": "Notizie ed analisi sull'Intelligenza Artificiale",
@@ -482,7 +471,7 @@ TRANSLATIONS = {
         "p1": {
             "it": "Questo sito non raccoglie dati personali di alcun tipo, ad eccezione del nome e dell'indirizzo email forniti volontariamente dagli utenti che si iscrivono alla nostra newsletter. Il nostro obiettivo non è raccogliere informazioni su di voi, ma condividere la passione per l'intelligenza artificiale e il mondo tech.",
             "en": "This site does not collect personal data of any kind, except for the name and email address voluntarily provided by users who subscribe to our newsletter. Our goal is not to collect information about you, but to share the passion for artificial intelligence and the tech world.",
-            "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nome y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la passione por la inteligencia artificial y el mundo de la tecnología.",
+            "es": "Este sitio no recopila datos personales de ningún tipo, a excepción del nome y la dirección de correo electrónico proporcionados voluntariamente por los usuarios que se suscriben a nuestro boletín. Nuestro objetivo no es recopilar información sobre usted, sino compartir la pasión por la inteligencia artificial y el mundo de la tecnología.",
             "fr": "Ce site ne collecte aucune donnée personnelle, à l'exception du nom et de l'adresse e-mail fournis volontariamente par les utilisateurs qui s'abonnent à notre newsletter. Notre obiettivo n'est pas de collecter des informations sur vous, mais de partager la passion pour l'intelligence artificielle et le monde de la technologie.",
             "de": "Diese Website sammelt keinerlei personenbezogene Daten, mit Ausnahme des Namens und der E-Mail-Adresse, die von Benutzern, die unseren Newsletter abonnieren, freiwillig angegeben werden. Unser Ziel ist es nicht, Informationen über Sie zu sammeln, sondern die Leidenschaft für künstliche Intelligenz und die Tech-Welt zu teilen."
         },
@@ -556,12 +545,6 @@ TRANSLATIONS = {
     }
 }
 
-# It's recommended to use a GitHub token to avoid rate limiting.
-# Create a Personal Access Token (PAT) with 'repo' scope and set it as an environment variable.
-# For local development: export GITHUB_TOKEN='your_token_here'
-# In GitHub Actions, this can be set as a secret.
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-
 LANGUAGES = ["it", "en", "es", "fr", "de"]
 
 def get_language_links(depth):
@@ -599,103 +582,62 @@ def get_base_template_data(depth):
     data["{{de_flag_path}}"] = f"{prefix}flags/de.svg"
     return data
 
-def get_all_repo_files():
+def get_local_articles_db():
     """
-    Gets a flat list of all files in the repo using the recursive tree API.
-    This is much more efficient than making multiple API calls.
+    Scans the local 'articoli' directory and builds a database of articles,
+    matching markdown files with their language-specific audio files.
     """
-    print("Fetching file tree from GitHub...")
-    # Get the main branch name
-    repo_info_url = "https://api.github.com/repos/matteobaccan/CorsoAIBook"
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
-    repo_info = requests.get(repo_info_url, headers=headers).json()
-    main_branch = repo_info.get('default_branch', 'main')
+    print("Scanning local 'articoli' directory...")
+    articles_db = {}
+    if not os.path.exists(ARTICLES_DIR):
+        print(f"  - WARN: '{ARTICLES_DIR}' directory not found.")
+        return articles_db
 
-    # Get the tree recursively
-    tree_url = f"https://api.github.com/repos/matteobaccan/CorsoAIBook/git/trees/{main_branch}?recursive=1"
-    tree_response = requests.get(tree_url, headers=headers)
-    if tree_response.status_code != 200:
-        print("Error fetching repository file tree.")
-        return None
-
-    return tree_response.json()['tree']
-
-
-def structure_articles_by_language(all_files):
-    """
-    Structures all markdown and audio files by their article group, matching
-    markdown files to their language-specific audio files.
-    """
     # First pass: group all md and mp3 files by their parent directory.
     file_groups = {}
-    for file_info in all_files:
-        path = file_info['path']
-        if not path.startswith('articoli/'):
-            continue
-        
-        parts = path.split('/')
-        if len(parts) != 3:
-            continue
-
-        article_dir = parts[1]
-        # The 'name' key is not guaranteed in the GitHub API response for trees,
-        # so we derive it from the path.
-        filename = os.path.basename(path)
-        file_info['name'] = filename
+    for root, _, files in os.walk(ARTICLES_DIR):
+        article_dir = os.path.basename(root)
+        if root == ARTICLES_DIR:
+            continue # Skip the root 'articoli' folder itself
 
         if article_dir not in file_groups:
             file_groups[article_dir] = {'md': [], 'mp3': []}
-
-        if filename.endswith('.md'):
-            file_groups[article_dir]['md'].append(file_info)
-        elif filename.endswith('.mp3'):
-            file_groups[article_dir]['mp3'].append(file_info)
+        
+        for filename in files:
+            file_path = os.path.join(root, filename)
+            if filename.endswith('.md'):
+                file_groups[article_dir]['md'].append({'path': file_path, 'name': filename})
+            elif filename.endswith('.mp3'):
+                file_groups[article_dir]['mp3'].append({'path': file_path, 'name': filename})
 
     # Second pass: build the final DB, associating md files with their mp3s.
-    articles_db = {}
     for article_dir, files in file_groups.items():
-        # Create a quick lookup for mp3 files by their base name (e.g., 'article_en').
-        mp3_lookup = {os.path.splitext(f['name'])[0]: f for f in files['mp3']}
+        mp3_lookup = {os.path.splitext(f['name'])[0]: f['path'] for f in files['mp3']}
 
         for md_file in files['md']:
             md_basename = os.path.splitext(md_file['name'])[0]
-
-            # Determine language from the markdown filename suffix.
+            
             lang = 'it' # Default language
             if md_basename.endswith('_en'): lang = 'en'
             elif md_basename.endswith('_es'): lang = 'es'
             elif md_basename.endswith('_fr'): lang = 'fr'
             elif md_basename.endswith('_de'): lang = 'de'
-
-            # Check for a matching mp3 file using the same base name.
-            matching_mp3_info = mp3_lookup.get(md_basename)
-            if matching_mp3_info:
-                # Attach audio file info directly to the markdown file's dictionary.
-                md_file['audio_file'] = {
-                    'name': matching_mp3_info['name'],
-                    'download_url': f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/{matching_mp3_info['path']}",
-                    'parent_dir': article_dir
-                }
             
-            # Populate the final articles_db structure.
+            md_file['audio_path'] = mp3_lookup.get(md_basename)
+            md_file['parent_dir'] = article_dir
+            
             if article_dir not in articles_db:
                 articles_db[article_dir] = {}
             if lang not in articles_db[article_dir]:
                 articles_db[article_dir][lang] = []
             
-            # Ensure other necessary info is present in the md_file dict.
-            md_file['parent_dir'] = article_dir
-            md_file['download_url'] = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/{md_file['path']}"
-
             articles_db[article_dir][lang].append(md_file)
             
     return articles_db
 
-
 def get_files_for_lang(articles_db, lang='it'):
     """
     Gets all markdown files for a specific language from the structured DB.
-    NO FALLBACK. If a translation doesn't exist, it's skipped.
     """
     files_for_lang = []
     for article_dir, languages in articles_db.items():
@@ -709,8 +651,7 @@ def get_files_for_lang(articles_db, lang='it'):
 
 def load_authors(lang='it'):
     """
-    Loads author data from the content/authors directory for a specific language,
-    with a fallback to the default language (Italian).
+    Loads author data from the content/authors directory for a specific language.
     """
     print(f"\nLoading author data for language: '{lang}'...")
     authors_db = {}
@@ -721,17 +662,14 @@ def load_authors(lang='it'):
 
     all_author_files = [f for f in os.listdir(authors_dir) if f.endswith(".md")]
     
-    # Group files by base slug (e.g., 'matteo-baccan' from 'matteo-baccan_en.md')
     author_slugs = {}
     for filename in all_author_files:
-        # Remove any language suffix like _en.md or just .md to get the base slug
         slug = re.sub(r'(_[a-z]{2})?\.md$', '', filename)
         if slug not in author_slugs:
             author_slugs[slug] = []
         author_slugs[slug].append(filename)
 
     for slug, files in author_slugs.items():
-        # Determine the correct file to load
         target_filename = None
         base_file = f"{slug}.md"
         lang_file = f"{slug}_{lang}.md"
@@ -743,7 +681,6 @@ def load_authors(lang='it'):
             if lang_file in files:
                 target_filename = lang_file
             elif base_file in files:
-                # Fallback to Italian
                 target_filename = base_file
         
         if not target_filename:
@@ -769,8 +706,7 @@ def load_authors(lang='it'):
 
 def main():
     """
-    Main function to build the static site and RSS feed.
-    Can also be used to generate master files like sitemap and robots.txt.
+    Main function to build the static site.
     """
     parser = argparse.ArgumentParser(description="Build the static site for a specific language.")
     parser.add_argument('--lang', default=None, help='Language to build (e.g., en, es)')
@@ -780,7 +716,7 @@ def main():
     if args.master_files:
         generate_sitemap_xml()
         generate_robots_txt()
-        create_root_redirect() # This is also a master file
+        create_root_redirect()
         return
 
     lang = args.lang
@@ -791,38 +727,24 @@ def main():
 
     print(f"Starting build process for language: '{lang}'...")
 
-    # Create language-specific output directory if it doesn't exist
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
-    # Create assets directory for images
     image_dir = os.path.join(output_dir, IMAGE_ASSETS_DIR)
     os.makedirs(image_dir, exist_ok=True)
 
-    # Load all author data
     authors_data = load_authors(lang)
     print(f"Successfully loaded {len(authors_data)} authors.")
 
-    # This is now a global database fetched only once if the script were to run
-    # for multiple languages in one go. For now, it's fetched for each run.
-    all_files = get_all_repo_files()
-    if not all_files:
-        return
-
-    articles_db = structure_articles_by_language(all_files)
-
+    articles_db = get_local_articles_db()
     md_files = get_files_for_lang(articles_db, lang)
 
     if not md_files:
         print(f"No markdown files found for language '{lang}'. Exiting.")
-        # We still finish successfully, just for an empty site for this lang
         return
 
-    # Process all articles from the markdown files
     processed_articles = []
-    # Sort files by name case-insensitively descending to get newest parts first
     s1 = sorted(md_files, key=lambda x: x['name'].lower(), reverse=True)
-    # Then sort by parent directory descending to get newest article groups first
     sorted_md_files = sorted(s1, key=lambda x: x['parent_dir'], reverse=True)
 
     for md_file in sorted_md_files:
@@ -830,25 +752,12 @@ def main():
         if article_data:
             processed_articles.append(article_data)
 
-    # 4. Generate individual article pages
     generate_article_pages(authors_data, processed_articles, output_dir, lang)
-
-    # Generate author pages
     generate_author_pages(authors_data, processed_articles, output_dir, lang)
-
-    # 5. Generate index page
     generate_index_page(processed_articles, output_dir, lang)
-
-    # 6. Generate RSS feed
     generate_rss_feed(processed_articles, output_dir, lang)
-
-    # 7. Generate local pages (like newsletter)
     generate_local_pages(output_dir, lang)
-
-    # 8. Generate 404 page
     generate_404_page(output_dir, lang)
-
-    # 9. Copy static assets
     copy_static_assets(output_dir)
 
 def create_root_redirect():
@@ -875,19 +784,18 @@ def create_root_redirect():
         f.write(html_content)
     print("  - dist/index.html (redirect)")
 
-
-def process_article(md_file, output_dir_base, lang):
+def process_article(md_file_info, output_dir_base, lang):
     """
-    Fetches markdown, processes it, optimizes all images, and returns a dict.
+    Reads a local markdown file, processes it, optimizes images, and returns a dict.
     """
-    print(f"Processing file: {md_file['name']} in {md_file['parent_dir']}...")
+    print(f"Processing file: {md_file_info['name']} in {md_file_info['parent_dir']}...")
 
-    md_content_response = requests.get(md_file['download_url'])
-    if md_content_response.status_code != 200:
-        print(f"  Error downloading markdown for {md_file['name']}")
+    try:
+        with open(md_file_info['path'], 'r', encoding='utf-8') as f:
+            md_content = f.read()
+    except Exception as e:
+        print(f"  - ERROR: Could not read markdown file {md_file_info['path']}. Error: {e}")
         return None
-
-    md_content = md_content_response.text
 
     try:
         post = frontmatter.loads(md_content)
@@ -903,86 +811,51 @@ def process_article(md_file, output_dir_base, lang):
                 summary = p.get_text()
                 break
 
-        # Process all images within the article body
         for img in soup.find_all('img'):
             original_src = img.get('src')
             if not original_src:
                 continue
 
-            # Make image src absolute before downloading
-            if not original_src.startswith('http'):
-                absolute_src = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{md_file['parent_dir']}/{original_src}"
-            else:
-                absolute_src = original_src
-
-            # Download, resize, and save the image
-            processed_paths = process_and_save_image(absolute_src, output_dir_base, lang)
+            processed_paths = process_and_save_image(original_src, output_dir_base, lang, article_dir=md_file_info['parent_dir'])
 
             if processed_paths:
-                # Create a <picture> tag to replace the <img> tag
                 picture_tag = soup.new_tag("picture")
-                
                 source_webp = soup.new_tag("source", attrs={"srcset": processed_paths['full_webp'], "type": "image/webp"})
                 source_jpeg = soup.new_tag("source", attrs={"srcset": processed_paths['full_jpeg'], "type": "image/jpeg"})
-                
-                # Create a new fallback <img> tag
-                fallback_img = soup.new_tag("img", attrs={
-                    "src": processed_paths['full_jpeg'],
-                    "alt": img.get('alt', 'Article image'),
-                    "loading": "lazy"
-                })
-
+                fallback_img = soup.new_tag("img", attrs={"src": processed_paths['full_jpeg'], "alt": img.get('alt', 'Article image'), "loading": "lazy"})
                 picture_tag.append(source_webp)
                 picture_tag.append(source_jpeg)
                 picture_tag.append(fallback_img)
-                
-                # Replace the original img tag with the new picture tag
                 img.replace_with(picture_tag)
 
-        # Get the first image for the summary card (after processing)
-        # We need to find the *original* first image URL for this.
-        # Re-parsing the original content is one way.
         temp_soup = BeautifulSoup(markdown2.markdown(post.content), 'html.parser')
         first_img_tag = temp_soup.find('img')
-        main_image_url = None
+        main_image_paths = None
         if first_img_tag and first_img_tag.get('src'):
-            src = first_img_tag['src']
-            if not src.startswith('http'):
-                main_image_url = f"https://raw.githubusercontent.com/matteobaccan/CorsoAIBook/main/articoli/{md_file['parent_dir']}/{src}"
-            else:
-                main_image_url = src
-        
-        main_image_paths = process_and_save_image(main_image_url, output_dir_base, lang)
+            main_image_paths = process_and_save_image(first_img_tag['src'], output_dir_base, lang, article_dir=md_file_info['parent_dir'])
 
-        # --- Process Audio File ---
         audio_path = None
-        if md_file.get('audio_file'):
-            audio_info = md_file['audio_file']
-            print(f"  - Found audio file: {audio_info['name']}")
-            audio_path = process_audio(audio_info['download_url'], output_dir_base, lang)
+        if md_file_info.get('audio_path'):
+            audio_path = process_audio(md_file_info['audio_path'], output_dir_base, lang)
 
         final_html_content = str(soup)
-        slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
-        tags = post.metadata.get('tags', [])
-        date_obj = post.metadata.get('date', None)
-        author = post.metadata.get('author', None)
-
+        slug = os.path.splitext(md_file_info['name'])[0].strip().replace('_', '-')
+        
         return {
             "title": title,
             "summary": summary,
-            "image_paths": main_image_paths, # New field for optimized paths
+            "image_paths": main_image_paths,
             "html_content": final_html_content,
             "slug": slug,
             "path": f"{slug}.html",
-            "tags": tags,
-            "date": date_obj,
-            "author": author,
-            "image_url": main_image_url, # Keep original for RSS feed
+            "tags": post.metadata.get('tags', []),
+            "date": post.metadata.get('date', None),
+            "author": post.metadata.get('author', None),
             "audio_path": audio_path
         }
 
     except Exception as e:
-        print(f"  Error parsing markdown for {md_file['name']}: {e}")
+        print(f"  Error parsing markdown for {md_file_info['name']}: {e}")
         return None
 
 def generate_article_pages(authors_data, articles, output_dir, lang='it'):
@@ -993,16 +866,13 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
     with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
-    # Create a name-to-slug map for efficient lookups
     author_name_to_slug = {v['name']: k for k, v in authors_data.items()}
 
     for article in articles:
         print(f"  - {article['path']}")
 
-        # --- Translations ---
         back_button_text = TRANSLATIONS["article_page"]["back_button"].get(lang, TRANSLATIONS["article_page"]["back_button"]["it"])
 
-        # --- Tags ---
         tags_html = ""
         if article.get('tags'):
             tags_html = '<div class="article-card-tags" style="margin-bottom: 20px;">'
@@ -1010,7 +880,6 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
                 tags_html += f'<a href="index.html#{tag}" class="tag">{tag}</a>'
             tags_html += '</div>'
 
-        # --- Author ---
         author_html = ""
         author_name = article.get('author')
         if author_name:
@@ -1021,7 +890,6 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
             else:
                 author_html = f'<div class="post-author">{author_prefix} {author_name}</div>'
 
-        # --- Podcast Player ---
         podcast_html = ""
         if article.get("audio_path"):
             podcast_button_text = TRANSLATIONS["article_page"]["listen_to_podcast"].get(lang, TRANSLATIONS["article_page"]["listen_to_podcast"]["it"])
@@ -1039,8 +907,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
                 </div>
             </div>
             """
-
-        # --- Main Article View ---
+        
         article_view_html = f"""
         <div id="article-view">
             <a href="index.html" class="back-button">{back_button_text}</a>
@@ -1049,10 +916,9 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
             {podcast_html}
             {article['html_content']}
             
-            <!-- AddToAny Share Buttons -->
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style" style="margin-top: 30px; text-align: center;">
                 <a class="a2a_button_facebook"></a>
-                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_x"></a>
                 <a class="a2a_button_pinterest"></a>
                 <a class="a2a_button_email"></a>
                 <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
@@ -1065,41 +931,39 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
         </div>
         """
 
-        # Replace placeholders
         temp_html = base_template.replace("{{content}}", article_view_html)
-        temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on article pages
+        temp_html = temp_html.replace("{{pagination_controls}}", "")
         
-        # SEO
         page_title = f"{article['title']} - AITalk"
         meta_description = article['summary']
         og_url = f"{SITE_URL}{lang}/{article['path']}"
-        og_image = article.get('image_url', f"{SITE_URL}logo_vn_ia.png") # Fallback to logo
+        og_image = ""
+        if article.get('image_paths'):
+             og_image = f"{SITE_URL}{lang}/{article['image_paths']['full_jpeg']}"
+        else:
+             og_image = f"{SITE_URL}logo_vn_ia.png"
+
         temp_html = temp_html.replace("{{page_title}}", page_title)
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
         temp_html = temp_html.replace("{{og_url}}", og_url)
         temp_html = temp_html.replace("{{og_image}}", og_image)
         temp_html = temp_html.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">')
 
-        # Common placeholders
         temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
         temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
 
-        # Replace all common paths and links
         base_data = get_base_template_data(depth=1)
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         
-        # Language links need to be handled separately if they are not in the base data
         lang_links = get_language_links(depth=1)
         for placeholder, path in lang_links.items():
              temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
 
-        final_page_html = temp_html
-
         with open(os.path.join(output_dir, article['path']), "w", encoding='utf-8') as f:
-            f.write(final_page_html)
+            f.write(temp_html)
 
 
 def generate_author_pages(authors_data, articles, output_dir, lang='it'):
@@ -1122,30 +986,23 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
     for slug, author in authors_data.items():
         print(f"  - Generating page for {author['name']}")
 
-        # --- Find articles by this author ---
         author_articles = [p for p in articles if p.get('author') == author['name']]
-        # Sort by date, assuming 'date' is a datetime object.
-        # Articles without a date will be at the end.
         author_articles.sort(key=lambda p: p.get('date'), reverse=True)
         
-        # --- Create HTML list of latest 10 articles ---
         article_list_html = ""
         if author_articles:
             for article in author_articles[:10]:
-                # Links from author page to article are one level up
                 article_path = f"../{article['path']}"
                 article_list_html += f'<a href="{article_path}" class="author-article-link">{article["title"]}</a>'
         else:
             article_list_html = f'<p>{TRANSLATIONS["author_page"]["no_articles_found"].get(lang, "No articles found for this author.")}</p>'
 
-        # --- Create HTML for social links ---
         links_html = ""
         if author.get('links'):
             for name, url in author['links'].items():
                 links_html += f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="author-social-link">{name.capitalize()}</a>'
 
-        # --- Process author photo ---
-        photo_tag = '<div class="author-placeholder-photo"></div>' # Default placeholder
+        photo_tag = '<div class="author-placeholder-photo"></div>'
         if author.get('photo'):
             photo_paths = process_author_photo(author['photo'], BASE_OUTPUT_DIR, lang)
             if photo_paths:
@@ -1157,7 +1014,6 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
                 </picture>
                 """
         
-        # --- Populate author template ---
         content_html = author_template.replace("{{author_name}}", author['name'])
         content_html = content_html.replace("{{author_photo_picture_tag}}", photo_tag)
         content_html = content_html.replace("{{author_links_html}}", links_html)
@@ -1167,7 +1023,6 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         content_html = content_html.replace("{{biography_title}}", TRANSLATIONS["author_page"]["biography"].get(lang, "Biography"))
         content_html = content_html.replace("{{latest_articles_title}}", TRANSLATIONS["author_page"]["latest_articles"].get(lang, "Latest Articles"))
 
-        # --- Populate base template ---
         page_title_suffix = TRANSLATIONS["author_page"]["page_title_suffix"].get(lang, "Author at AITalk")
         page_title = f"{author['name']} - {page_title_suffix}"
         meta_description = BeautifulSoup(author['bio'], 'html.parser').get_text(strip=True)[:155]
@@ -1176,29 +1031,24 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{page_title}}", page_title)
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
         temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
-        temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on author pages
+        temp_html = temp_html.replace("{{pagination_controls}}", "")
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
         temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
 
-        # Replace all common paths and links
         base_data = get_base_template_data(depth=2)
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         
-        # Language links need to be handled separately if they are not in the base data
         lang_links = get_language_links(depth=2)
         for placeholder, path in lang_links.items():
              temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
 
-        # SEO for author page
         og_url = f"{SITE_URL}{lang}/authors/{slug}.html"
-        # For OG image, we should construct the full URL to the author photo
         og_image = f"{SITE_URL}{lang}/{IMAGE_ASSETS_DIR}/authors/{os.path.basename(photo_paths['jpeg'])}" if author.get('photo') and photo_paths else f"{SITE_URL}logo_vn_ia.png"
         temp_html = temp_html.replace("{{og_url}}", og_url)
         temp_html = temp_html.replace("{{og_image}}", og_image)
 
-        # --- Save the final page ---
         output_path = os.path.join(author_output_dir, f"{slug}.html")
         with open(output_path, "w", encoding='utf-8') as f:
             f.write(temp_html)
@@ -1213,23 +1063,16 @@ def generate_index_page(articles, output_dir, lang='it'):
     with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
-    # Set locale for date formatting
     try:
-        if lang == 'it':
-            locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')
-        elif lang == 'en':
-            locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
-        elif lang == 'es':
-            locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
-        elif lang == 'fr':
-            locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
-        elif lang == 'de':
-            locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
+        if lang == 'it': locale.setlocale(locale.LC_TIME, 'it_IT.UTF-8')
+        elif lang == 'en': locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
+        elif lang == 'es': locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+        elif lang == 'fr': locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+        elif lang == 'de': locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
     except locale.Error:
         print(f"Locale for {lang} not supported, using default.")
         locale.setlocale(locale.LC_TIME, '')
 
-    # --- Create Tag Filter Bar ---
     all_tags = sorted(list(set(tag for article in articles for tag in article.get('tags', []))))
     filter_bar_html = '<div id="tag-filter-bar" style="margin-bottom: 20px; text-align: center; flex-wrap: wrap; display: flex; justify-content: center; gap: 10px;">'
     filter_bar_html += '<button class="tag-filter-button active" data-tag="all">All</button>'
@@ -1239,9 +1082,7 @@ def generate_index_page(articles, output_dir, lang='it'):
 
     ARTICLES_PER_PAGE = 15
     initial_articles = articles[:ARTICLES_PER_PAGE]
-    all_articles_for_json = articles # All articles go into the JSON
-
-    # --- Generate HTML for the first page articles ---
+    
     grid_html = '<div id="articles-grid">\n'
     for article in initial_articles:
         date_html = ""
@@ -1251,12 +1092,9 @@ def generate_index_page(articles, output_dir, lang='it'):
 
         tags_html = ""
         if article.get('tags'):
-            tags_html = '<div class="article-card-tags">'
-            for tag in article['tags']:
-                tags_html += f'<span class="tag">{tag}</span>'
-            tags_html += '</div>'
+            tags_html = '<div class="article-card-tags">' + "".join([f'<span class="tag">{tag}</span>' for tag in article['tags']]) + '</div>'
         
-        image_html = ''
+        image_html = f'<img src="logo_vn_ia.png" alt="{article["title"]}" loading="lazy">'
         if article.get('image_paths'):
             paths = article['image_paths']
             image_html = f"""
@@ -1266,123 +1104,75 @@ def generate_index_page(articles, output_dir, lang='it'):
                     <img src="{paths['thumb_jpeg']}" alt="{article['title']}" loading="lazy">
                 </picture>
             """
-        else:
-            image_html = f'<img src="logo_vn_ia.png" alt="{article["title"]}" loading="lazy">'
 
         tags_data_attr = " ".join(article.get('tags', []))
-
         card_html = f"""
             <a href="{article['path']}" class="article-card" data-tags="{tags_data_attr}">
                 {image_html}
                 <div class="article-card-content">
-                    {date_html}
-                    <h3>{article['title']}</h3>
-                    <p>{article['summary']}</p>
-                    {tags_html}
+                    {date_html}<h3>{article['title']}</h3><p>{article['summary']}</p>{tags_html}
                 </div>
             </a>
             """
         grid_html += card_html
     grid_html += '</div>'
 
-    # --- Generate JSON for all articles ---
     json_output_path = os.path.join(output_dir, "articles.json")
-
-    # Create a serializable version of all articles
     serializable_articles = []
-    for article in all_articles_for_json:
+    for article in articles:
         article_copy = article.copy()
-        if 'date' in article_copy and article_copy['date'] is not None:
+        if isinstance(article_copy.get('date'), (datetime, date)):
             article_copy['date'] = article_copy['date'].isoformat()
-        else:
-            article_copy['date'] = None
         serializable_articles.append(article_copy)
 
     with open(json_output_path, "w", encoding='utf-8') as f:
         json.dump(serializable_articles, f, ensure_ascii=False)
-    print(f"  - Generated articles.json with {len(all_articles_for_json)} articles.")
+    print(f"  - Generated articles.json with {len(articles)} articles.")
 
-
-    # --- Pagination Controls (will be a "View More" button handled by JS) ---
-    pagination_html = ''
-    # The button is shown if there are more articles than initially displayed
-    if len(articles) > ARTICLES_PER_PAGE:
-        # The button itself will be added via JS in the template for easier translation.
-        # We just need a container for it.
-        pagination_html = '<div id="view-more-container"></div>'
-
-    # --- Final HTML Generation for index.html ---
+    pagination_html = '<div id="view-more-container"></div>' if len(articles) > ARTICLES_PER_PAGE else ''
+    
     articles_heading_text = TRANSLATIONS["index_page"]["articles_heading"].get(lang, TRANSLATIONS["index_page"]["articles_heading"]["it"])
     articles_heading_html = f'<h2 class="visually-hidden">{articles_heading_text}</h2>'
     content_with_filter = filter_bar_html + articles_heading_html + grid_html
     temp_html = base_template.replace("{{content}}", content_with_filter)
     temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
 
-    # Common placeholders
-    temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
+    subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+    temp_html = temp_html.replace("{{subtitle}}", subtitle)
     temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
     temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
     temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
 
-    # Replace all common paths and links
     base_data = get_base_template_data(depth=1)
     for placeholder, path in base_data.items():
         temp_html = temp_html.replace(placeholder, path)
     
-    # Language links need to be handled separately if they are not in the base data
     lang_links = get_language_links(depth=1)
     for placeholder, path in lang_links.items():
             temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
 
-    # Add data for the 'View More' script
     view_more_text = TRANSLATIONS["pagination"]["view_more"].get(lang, TRANSLATIONS["pagination"]["view_more"]["it"])
     temp_html = temp_html.replace("{{lang}}", lang)
     temp_html = temp_html.replace("{{view_more_text}}", view_more_text.replace("'", "\\'"))
 
-    # SEO
-    subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
     page_title = f"AITalk - {subtitle}"
-    meta_description = subtitle
-    og_url = f"{SITE_URL}{lang}/index.html"
-    og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo for the index page
     temp_html = temp_html.replace("{{page_title}}", page_title)
-    temp_html = temp_html.replace("{{meta_description}}", meta_description)
-    temp_html = temp_html.replace("{{og_url}}", og_url)
-    temp_html = temp_html.replace("{{og_image}}", og_image)
+    temp_html = temp_html.replace("{{meta_description}}", subtitle)
+    temp_html = temp_html.replace("{{og_url}}", f"{SITE_URL}{lang}/index.html")
+    temp_html = temp_html.replace("{{og_image}}", f"{SITE_URL}logo_vn_ia.png")
 
-    for link_placeholder, link_url in lang_links.items():
-        temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
-
-    output_path = os.path.join(output_dir, "index.html")
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    print(f"  - Generating index.html at {output_path}")
-    with open(output_path, "w", encoding='utf-8') as f:
+    with open(os.path.join(output_dir, "index.html"), "w", encoding='utf-8') as f:
         f.write(temp_html)
 
 def generate_local_pages(output_dir, lang='it'):
     """
     Generates standalone pages from the /pages directory.
     """
-    # SEO Metadata for local pages
     local_pages_meta = {
-        "newsletter.html": {
-            "title": TRANSLATIONS["newsletter_page"]["title"].get(lang, TRANSLATIONS["newsletter_page"]["title"]["it"]),
-            "description": TRANSLATIONS["newsletter_page"]["description"].get(lang, TRANSLATIONS["newsletter_page"]["description"]["it"])
-        },
-        "thank-you.html": {
-            "title": TRANSLATIONS["thank_you_page"]["title"].get(lang, TRANSLATIONS["thank_you_page"]["title"]["it"]),
-            "description": TRANSLATIONS["thank_you_page"]["paragraph"].get(lang, TRANSLATIONS["thank_you_page"]["paragraph"]["it"])
-        },
-        "cookie.html": {
-            "title": TRANSLATIONS["cookie_page"]["title"].get(lang, TRANSLATIONS["cookie_page"]["title"]["it"]),
-            "description": TRANSLATIONS["cookie_page"]["p1"].get(lang, TRANSLATIONS["cookie_page"]["p1"]["it"])
-        },
-        "privacy.html": {
-            "title": TRANSLATIONS["privacy_page"]["title"].get(lang, TRANSLATIONS["privacy_page"]["title"]["it"]),
-            "description": TRANSLATIONS["privacy_page"]["p1"].get(lang, TRANSLATIONS["privacy_page"]["p1"]["it"])
-        }
+        "newsletter.html": {"title": TRANSLATIONS["newsletter_page"]["title"], "description": TRANSLATIONS["newsletter_page"]["description"]},
+        "thank-you.html": {"title": TRANSLATIONS["thank_you_page"]["title"], "description": TRANSLATIONS["thank_you_page"]["paragraph"]},
+        "cookie.html": {"title": TRANSLATIONS["cookie_page"]["title"], "description": TRANSLATIONS["cookie_page"]["p1"]},
+        "privacy.html": {"title": TRANSLATIONS["privacy_page"]["title"], "description": TRANSLATIONS["privacy_page"]["p1"]}
     }
     print("\nGenerating local pages...")
     pages_dir = "pages"
@@ -1398,153 +1188,136 @@ def generate_local_pages(output_dir, lang='it'):
             with open(os.path.join(pages_dir, filename), "r", encoding='utf-8') as f:
                 page_content = f.read()
 
-            # Replace placeholders in the base template
-            temp_html = base_template.replace("{{pagination_controls}}", "") # No pagination on local pages
-
-            # Common placeholders
-            temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
-            temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
-            temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
-            temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
-
-            # Replace all common paths and links
-            base_data = get_base_template_data(depth=1)
-            for placeholder, path in base_data.items():
-                temp_html = temp_html.replace(placeholder, path)
+            final_content = page_content
+            # Replace placeholders in the page content itself
+            if filename == "newsletter.html":
+                for key, trans_dict in TRANSLATIONS["newsletter_page"].items():
+                    placeholder = f"{{{{newsletter_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
+            if filename == "thank-you.html":
+                for key, trans_dict in TRANSLATIONS["thank_you_page"].items():
+                    placeholder = f"{{{{thank_you_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
+            if filename == "cookie.html":
+                for key, trans_dict in TRANSLATIONS["cookie_page"].items():
+                    placeholder = f"{{{{cookie_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
+            if filename == "privacy.html":
+                for key, trans_dict in TRANSLATIONS["privacy_page"].items():
+                    placeholder = f"{{{{privacy_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
             
-            # Language links need to be handled separately if they are not in the base data
-            lang_links = get_language_links(depth=1)
-            for placeholder, path in lang_links.items():
-                temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
+            thank_you_link = f"/{lang}/thank-you.html"
+            final_content = final_content.replace("{{thank_you_link}}", thank_you_link)
 
+            soup = BeautifulSoup(final_content, 'html.parser')
+            form = soup.find('form', {'name': 'newsletter'})
+            if form:
+                form_name = f"newsletter-{lang}"
+                form['name'] = form_name
+                if not form.find('input', {'name': 'form-name'}):
+                    form_name_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'form-name', 'value': form_name})
+                    form.append(form_name_input)
+                if filename == "newsletter.html" and not form.find('input', {'name': 'language'}):
+                    hidden_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'language', 'value': lang})
+                    form.append(hidden_input)
+                final_content = str(soup)
+            
+            # Replace placeholders in the base template
+            temp_html = base_template.replace("{{content}}", final_content)
+            temp_html = temp_html.replace("{{pagination_controls}}", "")
+            
             # SEO
             subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
-            meta_info = local_pages_meta.get(filename, {"title": "AITalk", "description": subtitle})
-            page_title = f"{meta_info['title']} - AITalk"
-            meta_description = meta_info['description']
+            meta_info = local_pages_meta.get(filename, {"title": {"it": "AITalk"}, "description": {"it": subtitle}})
+            page_title = f"{meta_info['title'].get(lang, meta_info['title']['it'])} - AITalk"
+            meta_description = meta_info['description'].get(lang, meta_info['description']['it'])
             og_url = f"{SITE_URL}{lang}/{filename}"
             og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo
             temp_html = temp_html.replace("{{page_title}}", page_title)
             temp_html = temp_html.replace("{{meta_description}}", meta_description)
             temp_html = temp_html.replace("{{og_url}}", og_url)
             temp_html = temp_html.replace("{{og_image}}", og_image)
-
-
-            # Replace language links
-            for link_placeholder, link_url in lang_links.items():
-                temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
-
-            # Replace placeholders in the page content itself
-            final_content = page_content
-            if filename == "newsletter.html":
-                for key, trans_dict in TRANSLATIONS["newsletter_page"].items():
-                    placeholder = f"{{{{newsletter_page_{key}}}}}"
-                    translation = trans_dict.get(lang, trans_dict["it"])
-                    final_content = final_content.replace(placeholder, translation)
-
-            if filename == "thank-you.html":
-                for key, trans_dict in TRANSLATIONS["thank_you_page"].items():
-                    placeholder = f"{{{{thank_you_page_{key}}}}}"
-                    translation = trans_dict.get(lang, trans_dict["it"])
-                    final_content = final_content.replace(placeholder, translation)
-
-            if filename == "cookie.html":
-                for key, trans_dict in TRANSLATIONS["cookie_page"].items():
-                    placeholder = f"{{{{cookie_page_{key}}}}}"
-                    translation = trans_dict.get(lang, trans_dict["it"])
-                    final_content = final_content.replace(placeholder, translation)
-
-            if filename == "privacy.html":
-                for key, trans_dict in TRANSLATIONS["privacy_page"].items():
-                    placeholder = f"{{{{privacy_page_{key}}}}}"
-                    translation = trans_dict.get(lang, trans_dict["it"])
-                    final_content = final_content.replace(placeholder, translation)
-
-            # Inject the dynamic, absolute thank you page link
-            thank_you_link = f"/{lang}/thank-you.html"
-            final_content = final_content.replace("{{thank_you_link}}", thank_you_link)
-
-            # For any page with a newsletter form, update its name and add hidden lang field
-            soup = BeautifulSoup(final_content, 'html.parser')
-            form = soup.find('form', {'name': 'newsletter'})
-            if form:
-                form_name = f"newsletter-{lang}"
-                form['name'] = form_name
-
-                # Add hidden form-name input for Netlify
-                form_name_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'form-name', 'value': form_name})
-                form.append(form_name_input)
-
-                # Add language input only if it's the main newsletter form
-                if filename == "newsletter.html":
-                    hidden_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'language', 'value': lang})
-                    form.append(hidden_input)
-                final_content = str(soup)
-
-            final_page_html = temp_html.replace("{{content}}", final_content)
+            
+            temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
+            temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
+            temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
+            temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
+            
+            base_data = get_base_template_data(depth=1)
+            for placeholder, path in base_data.items():
+                temp_html = temp_html.replace(placeholder, path)
+            
+            lang_links = get_language_links(depth=1)
+            for placeholder, path in lang_links.items():
+                temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
 
             with open(os.path.join(output_dir, filename), "w", encoding='utf-8') as f:
-                f.write(final_page_html)
+                f.write(temp_html)
 
 def generate_404_page(output_dir, lang='it'):
     """
-    Generates a localized 404.html page.
+    Generates a 404.html page for the given language.
     """
-    print("\nGenerating 404 page...")
-    with open("templates/base.html", "r", encoding='utf-8') as f:
-        base_template = f.read()
-    with open("templates/404.html", "r", encoding='utf-8') as f:
-        page_content = f.read()
+    print(f"\nGenerating 404 page for language: '{lang}'...")
+    try:
+        with open("templates/base.html", "r", encoding='utf-8') as f:
+            base_template = f.read()
+        with open("templates/404.html", "r", encoding='utf-8') as f:
+            not_found_content = f.read()
 
-    # Replace placeholders in the base template
-    temp_html = base_template.replace("{{pagination_controls}}", "") # No pagination on 404 page
+        # Translate the content of the 404 page itself
+        for key, trans_dict in TRANSLATIONS["not_found_page"].items():
+            placeholder = f"{{{{not_found_page_{key}}}}}"
+            translation = trans_dict.get(lang, trans_dict["it"])
+            not_found_content = not_found_content.replace(placeholder, translation)
 
-    # Common placeholders
-    temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
-    temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
-    temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
-    temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
+        # Inject the 404 content into the base template
+        temp_html = base_template.replace("{{content}}", not_found_content)
+        temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on 404 page
 
-    # Replace all common paths and links
-    base_data = get_base_template_data(depth=1)
-    for placeholder, path in base_data.items():
-        temp_html = temp_html.replace(placeholder, path)
-    
-    # Language links need to be handled separately if they are not in the base data
-    lang_links = get_language_links(depth=1)
-    for placeholder, path in lang_links.items():
-        temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
+        # Set up translations and paths for the base template
+        subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
+        temp_html = temp_html.replace("{{subtitle}}", subtitle)
+        temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
+        temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
+        temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
 
-    # SEO for 404 page
-    title = TRANSLATIONS["not_found_page"]["title"].get(lang, TRANSLATIONS["not_found_page"]["title"]["it"])
-    page_title = f"{title} - AITalk"
-    # A generic description for 404 page
-    meta_description = TRANSLATIONS["not_found_page"]["paragraph"].get(lang, TRANSLATIONS["not_found_page"]["paragraph"]["it"])
-    og_url = f"{SITE_URL}{lang}/404.html"
-    og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo
-    temp_html = temp_html.replace("{{page_title}}", page_title)
-    temp_html = temp_html.replace("{{meta_description}}", meta_description)
-    temp_html = temp_html.replace("{{og_url}}", og_url)
-    temp_html = temp_html.replace("{{og_image}}", og_image)
+        # SEO and metadata
+        meta_info = TRANSLATIONS["not_found_page"]
+        page_title = f"{meta_info['title'].get(lang, meta_info['title']['it'])} - AITalk"
+        meta_description = meta_info['paragraph'].get(lang, meta_info['paragraph']['it'])
+        og_url = f"{SITE_URL}{lang}/404.html"
+        og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo
 
-    # Replace language links
-    for link_placeholder, link_url in lang_links.items():
-        temp_html = temp_html.replace(f"{{{{{link_placeholder}}}}}", link_url)
+        temp_html = temp_html.replace("{{page_title}}", page_title)
+        temp_html = temp_html.replace("{{meta_description}}", meta_description)
+        temp_html = temp_html.replace("{{og_url}}", og_url)
+        temp_html = temp_html.replace("{{og_image}}", og_image)
 
-    # Replace placeholders in the 404 page content itself
-    final_content = page_content
-    for key, trans_dict in TRANSLATIONS["not_found_page"].items():
-        placeholder = f"{{{{not_found_page_{key}}}}}"
-        translation = trans_dict.get(lang, trans_dict["it"])
-        final_content = final_content.replace(placeholder, translation)
-    
-    final_page_html = temp_html.replace("{{content}}", final_content)
+        # Asset paths (depth is 1, as it's in the root of the lang folder)
+        base_data = get_base_template_data(depth=1)
+        for placeholder, path in base_data.items():
+            temp_html = temp_html.replace(placeholder, path)
+        
+        lang_links = get_language_links(depth=1)
+        for placeholder, path in lang_links.items():
+            temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
 
-    output_path = os.path.join(output_dir, "404.html")
-    with open(output_path, "w", encoding='utf-8') as f:
-        f.write(final_page_html)
-    print(f"  - {output_path}")
+        # Write the final file
+        output_path = os.path.join(output_dir, "404.html")
+        with open(output_path, "w", encoding='utf-8') as f:
+            f.write(temp_html)
+        print(f"  - Generated 404.html for '{lang}'")
 
+    except FileNotFoundError as e:
+        print(f"  - ERROR: Could not generate 404 page. Missing template file: {e.filename}")
+    except Exception as e:
+        print(f"  - ERROR: An unexpected error occurred while generating the 404 page: {e}")
 
 def copy_static_assets(output_dir):
     """
@@ -1564,8 +1337,6 @@ def copy_static_assets(output_dir):
     public_dir = 'public'
     if os.path.exists(public_dir):
         print(f"  - Copying '{public_dir}' directory...")
-        # shutil.copytree is the right tool, ensuring destination exists and is a dir.
-        # We use dirs_exist_ok=True to merge into the existing output_dir.
         shutil.copytree(public_dir, output_dir, dirs_exist_ok=True)
 
 def generate_rss_feed(articles, output_dir, lang='it'):
@@ -1576,87 +1347,47 @@ def generate_rss_feed(articles, output_dir, lang='it'):
     fg = FeedGenerator()
     fg.title(f'Notizie IA - Aggiornamenti e Analisi ({lang})')
     fg.link(href=f"{SITE_URL}{lang}/", rel='alternate')
-    fg.link(href=f"{SITE_URL}{lang}/rss.xml", rel='self', type='application/rss+xml')
+    fg.link(href=f"{SITE_URL}{lang}/rss.xml", rel='self')
     fg.description('Le ultime notizie e approfondimenti sull\'intelligenza artificiale, a cura di Verbania Notizie.')
     fg.language(lang)
 
     for article in reversed(articles):
         fe = fg.add_entry()
         fe.title(article['title'])
-        # URL encode the path to handle spaces and special characters
-        encoded_path = quote(article['path'])
-        full_url = f"{SITE_URL}{lang}/{encoded_path}"
-        
+        full_url = f"{SITE_URL}{lang}/{article['path']}"
         fe.link(href=full_url)
         fe.description(article['summary'])
-        
-        # Add guid and pubDate, which are essential for RSS readers and automation
         fe.guid(full_url, permalink=True)
-        
+
         pub_date_val = article.get('date')
-        if pub_date_val:
-            dt_obj = None
-            if isinstance(pub_date_val, datetime):
-                dt_obj = pub_date_val
-            elif isinstance(pub_date_val, date):
-                dt_obj = datetime.combine(pub_date_val, datetime.min.time())
-            elif isinstance(pub_date_val, str):
-                try:
-                    dt_obj = datetime.fromisoformat(pub_date_val.replace('Z', '+00:00'))
-                except ValueError:
-                    try:
-                        dt_obj = datetime.strptime(pub_date_val, '%Y-%m-%d')
-                    except ValueError:
-                        print(f"  - WARN: Could not parse date string '{pub_date_val}' for article '{article['title']}'.")
+        if isinstance(pub_date_val, (datetime, date)):
+            dt_obj = pub_date_val
+            if isinstance(dt_obj, date) and not isinstance(dt_obj, datetime):
+                dt_obj = datetime.combine(dt_obj, datetime.min.time())
+            
+            if dt_obj.tzinfo is None:
+                dt_obj = dt_obj.replace(tzinfo=timezone.utc)
+            fe.pubDate(dt_obj)
 
-            if dt_obj:
-                # Ensure the datetime is timezone-aware (UTC)
-                if dt_obj.tzinfo is None:
-                    dt_obj = dt_obj.replace(tzinfo=timezone.utc)
-                fe.pubDate(dt_obj)
-
-        # Add the article image as an enclosure
-        if article.get('image_paths') and article['image_paths'].get('full_jpeg'):
-            # Construct the full, public-facing URL for the image
+        if article.get('image_paths'):
             enclosure_url = f"{SITE_URL}{lang}/{article['image_paths']['full_jpeg']}"
-            # It's better to assume the MIME type from the extension if possible,
-            # but for now, we'll default to jpeg.
-            # The length is often required, but many readers are lenient.
-            # Setting to '0' is a common practice when the size is unknown.
             fe.enclosure(url=enclosure_url, length='0', type='image/jpeg')
-
+            
     fg.rss_file(os.path.join(output_dir, 'rss.xml'), pretty=True)
     print(f"  - rss.xml (for {lang})")
 
-    print("Build process finished successfully!")
-
-
 def generate_sitemap_xml():
-    """
-    Generates a sitemap.xml for all articles in all languages.
-    This function is intended to be called once after all languages are built.
-    """
     print("\nGenerating sitemap.xml...")
-
-    all_files = get_all_repo_files()
-    if not all_files:
-        print("  Could not fetch files for sitemap generation.")
-        return
-
-    articles_db = structure_articles_by_language(all_files)
-
+    articles_db = get_local_articles_db()
     urls = []
-    # Add base URLs for each language's index page
     for lang in LANGUAGES:
         urls.append(f"{SITE_URL}{lang}/")
 
-    # Add URLs for each article
     for article_dir, languages in articles_db.items():
         for lang, files in languages.items():
             for file_info in files:
                 slug = os.path.splitext(file_info['name'])[0].strip()
                 path = f"{slug}.html"
-                # URL encode the path to handle spaces and special characters
                 encoded_path = quote(path)
                 urls.append(f"{SITE_URL}{lang}/{encoded_path}")
 
@@ -1666,25 +1397,19 @@ def generate_sitemap_xml():
         xml_content += f"  <url>\n    <loc>{url}</loc>\n  </url>\n"
     xml_content += '</urlset>'
 
-    sitemap_path = os.path.join(BASE_OUTPUT_DIR, "sitemap.xml")
-    with open(sitemap_path, "w", encoding='utf-8') as f:
+    with open(os.path.join(BASE_OUTPUT_DIR, "sitemap.xml"), "w", encoding='utf-8') as f:
         f.write(xml_content)
-
     print(f"  - sitemap.xml generated with {len(urls)} URLs.")
 
 
 def generate_robots_txt():
-    """
-    Generates a robots.txt file in the output directory.
-    """
     print("\nGenerating robots.txt...")
     content = (
         "User-agent: *\n"
         "Allow: /\n\n"
         f"Sitemap: {SITE_URL}sitemap.xml"
     )
-    robots_path = os.path.join(BASE_OUTPUT_DIR, "robots.txt")
-    with open(robots_path, "w", encoding='utf-8') as f:
+    with open(os.path.join(BASE_OUTPUT_DIR, "robots.txt"), "w", encoding='utf-8') as f:
         f.write(content)
     print("  - robots.txt generated.")
 

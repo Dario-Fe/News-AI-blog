@@ -2,6 +2,7 @@
 tags: ["E-learning", "Training"]
 date: 2025-06-15
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/NTXeugSKpX0?si=FiCc_uHt28p-KnhX"
 ---
 
 # AI e Creazione di Contenuti: Il Presente e il Futuro della Creatività Digitale

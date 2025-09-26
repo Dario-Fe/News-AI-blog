@@ -2,6 +2,7 @@
 tags: ["Security", "Business", "Ethics & Society"]
 date: 2025-07-25
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/2pryH_g-IDc"
 ---
 
 # L'intelligenza artificiale senza controllo: le grandi aziende tech bocciate in sicurezza (Prima Puntata)

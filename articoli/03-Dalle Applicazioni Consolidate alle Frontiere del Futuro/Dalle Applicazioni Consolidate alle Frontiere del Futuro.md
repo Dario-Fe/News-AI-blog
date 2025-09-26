@@ -2,6 +2,7 @@
 tags: ["E-learning", "Training"]
 date: 2025-06-13
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/gmMFCGPVdzU?si=SnAYYyCtmPveA8So"
 ---
 
 # L'Intelligenza Artificiale Oggi: Dalle Applicazioni Consolidate alle Frontiere del Futuro

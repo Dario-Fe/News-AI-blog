@@ -358,11 +358,18 @@ TRANSLATIONS = {
             "de": "von"
         },
         "listen_to_podcast": {
-            "it": "Versione podcast",
-            "en": "Podcast version",
-            "es": "Versión podcast",
-            "fr": "Version podcast",
-            "de": "Podcast-Version"
+            "it": "Podcast",
+            "en": "Podcast",
+            "es": "Podcast",
+            "fr": "Podcast",
+            "de": "Podcast"
+        },
+        "watch_video": {
+            "it": "Video",
+            "en": "Video",
+            "es": "Video",
+            "fr": "Vidéo",
+            "de": "Video"
         }
     },
     "author_page": {
@@ -851,7 +858,8 @@ def process_article(md_file_info, output_dir_base, lang):
             "tags": post.metadata.get('tags', []),
             "date": post.metadata.get('date', None),
             "author": post.metadata.get('author', None),
-            "audio_path": audio_path
+            "audio_path": audio_path,
+            "youtube_url": post.metadata.get('youtube_url', None)
         }
 
     except Exception as e:
@@ -890,30 +898,40 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
             else:
                 author_html = f'<div class="post-author">{author_prefix} {author_name}</div>'
 
-        podcast_html = ""
+        media_container_html = ""
+        podcast_button_html = ""
         if article.get("audio_path"):
             podcast_button_text = TRANSLATIONS["article_page"]["listen_to_podcast"].get(lang, TRANSLATIONS["article_page"]["listen_to_podcast"]["it"])
             headset_icon_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3z"></path><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3z"></path></svg>"""
-            podcast_html = f"""
-            <div class="podcast-container">
-                <button id="podcast-button" class="podcast-button">
+            podcast_button_html = f"""<button id="podcast-button" class="podcast-button" data-src="{article['audio_path']}">
                     {headset_icon_svg}
                     <span>{podcast_button_text}</span>
-                </button>
-                <div id="podcast-player-wrapper" class="podcast-player-wrapper" style="display: none;">
-                    <audio id="podcast-player" controls src="{article['audio_path']}">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
+                </button>"""
+
+        youtube_button_html = ""
+        if article.get("youtube_url"):
+            video_button_text = TRANSLATIONS["article_page"]["watch_video"].get(lang, TRANSLATIONS["article_page"]["watch_video"]["it"])
+            youtube_icon_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 11.75a29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>"""
+            youtube_button_html = f"""<a href="{article['youtube_url']}" target="_blank" rel="noopener noreferrer" class="youtube-button">
+                    {youtube_icon_svg}
+                    <span>{video_button_text}</span>
+                </a>"""
+
+        if podcast_button_html or youtube_button_html:
+            media_container_html = f"""
+            <div class="media-controls">
+                {podcast_button_html}
+                {youtube_button_html}
             </div>
+            <div id="media-player-container" style="display: none; margin-top: 15px;"></div>
             """
-        
+
         article_view_html = f"""
         <div id="article-view">
             <a href="index.html" class="back-button">{back_button_text}</a>
             {tags_html}
             {author_html}
-            {podcast_html}
+            {media_container_html}
             {article['html_content']}
             
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style" style="margin-top: 30px; text-align: center;">

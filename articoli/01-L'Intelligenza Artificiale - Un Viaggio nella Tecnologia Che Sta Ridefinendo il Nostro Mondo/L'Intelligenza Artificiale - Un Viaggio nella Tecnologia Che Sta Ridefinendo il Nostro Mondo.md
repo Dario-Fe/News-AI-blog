@@ -2,6 +2,7 @@
 tags: ["E-learning", "Training"]
 date: 2025-06-08
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/APp-bP9LT2c?si=e4XYiGgXaxuixzI8"
 ---
 
 # L'Intelligenza Artificiale: Un Viaggio nella Tecnologia Che Sta Ridefinendo il Nostro Mondo

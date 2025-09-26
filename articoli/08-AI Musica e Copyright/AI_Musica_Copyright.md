@@ -2,6 +2,7 @@
 tags: ["Generative AI", "Copyright", "Ethics & Society"]
 date: 2025-07-29
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/CfhFNGhIG_Q?si=BJqujEsAyLe0stmL"
 ---
 
 # Quando l'Intelligenza Artificiale fa musica: il fenomeno The Velvet Sundown e Iam tra tecnologia ed etica

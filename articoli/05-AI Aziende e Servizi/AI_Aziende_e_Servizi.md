@@ -2,6 +2,7 @@
 tags: ["E-learning", "Training"]
 date: 2025-06-21
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/jC7N2t1koQk?si=RG_O4UbUhrddQm41"
 ---
 
 # Il Panorama dell'Intelligenza Artificiale: Giganti Tecnologici, Sfide Competitive e gli Strumenti che Democratizzano l'IA

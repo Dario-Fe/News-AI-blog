@@ -16,16 +16,22 @@ body {
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
         #header-social-icon-container {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
         #language-selector-container {
             display: flex;
             gap: 10px;
             font-size: 1.2em;
             align-items: center;
+        }
+        #language-selector-container .separator {
+            border-left: 1px solid #dddfe2;
+            height: 20px;
         }
         #language-selector {
             padding: 8px;
@@ -36,6 +42,9 @@ body {
         }
 
         @media (min-width: 769px) {
+            .header-top-row {
+                margin-bottom: 0;
+            }
             #header-social-icon-container {
                 position: absolute;
                 top: 20px;
@@ -412,15 +421,16 @@ body {
 }
 
 /* Podcast Styles */
-#article-view .podcast-container {
-    text-align: left;
+#article-view .media-controls {
+    display: flex;
+    gap: 10px;
     margin-bottom: 20px;
-    margin-top: -10px; /* To bring it closer to the author line */
+    margin-top: -10px;
 }
 
-#article-view .podcast-button {
+#article-view .podcast-button, #article-view .youtube-button {
     background-color: #1877f2;
-    color: white;
+    color: white !important;
     border: none;
     border-radius: 6px;
     padding: 10px 15px;
@@ -430,13 +440,16 @@ body {
     align-items: center;
     gap: 8px;
     transition: background-color 0.2s;
+    text-decoration: none !important;
 }
 
-#article-view .podcast-button:hover {
+#article-view .podcast-button:hover, #article-view .youtube-button:hover {
     background-color: #166fe5;
+    color: white !important;
+    text-decoration: none !important;
 }
 
-#article-view .podcast-button .feather-headphones {
+#article-view .podcast-button .feather-headphones, #article-view .youtube-button .feather-youtube {
     width: 1.2em;
     height: 1.2em;
 }

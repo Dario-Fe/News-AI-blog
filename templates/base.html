@@ -72,7 +72,7 @@
             </div>
             <div id="language-selector-container">
                 <a href="{{newsletter_link}}" class="subscribe-link">{{subscribe_link_text}}</a>
-                <span class="separator" style="border-left: 1px solid #dddfe2; height: 20px;"></span>
+                <span class="separator"></span>
                 <a href="{{it_link}}" title="Italiano"><img src="{{it_flag_path}}" alt="Italiano" class="language-flag"></a>
                 <a href="{{en_link}}" title="English"><img src="{{gb_flag_path}}" alt="English" class="language-flag"></a>
                 <a href="{{es_link}}" title="Español"><img src="{{es_flag_path}}" alt="Español" class="language-flag"></a>
@@ -282,14 +282,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const podcastButton = document.getElementById('podcast-button');
-            const podcastPlayerWrapper = document.getElementById('podcast-player-wrapper');
+            const mediaPlayerContainer = document.getElementById('media-player-container');
 
-            if (podcastButton && podcastPlayerWrapper) {
-                podcastButton.addEventListener('click', function() {
-                    if (podcastPlayerWrapper.style.display === 'none') {
-                        podcastPlayerWrapper.style.display = 'block';
+            const hidePlayer = () => {
+                mediaPlayerContainer.style.display = 'none';
+                mediaPlayerContainer.innerHTML = '';
+            };
+
+            if (podcastButton) {
+                podcastButton.addEventListener('click', () => {
+                    const isPodcastActive = mediaPlayerContainer.querySelector('#podcast-player');
+                    if (isPodcastActive) {
+                        hidePlayer();
                     } else {
-                        podcastPlayerWrapper.style.display = 'none';
+                        const audioSrc = podcastButton.dataset.src;
+                        mediaPlayerContainer.innerHTML = `<audio id="podcast-player" controls src="${audioSrc}" style="width: 100%;">Your browser does not support the audio element.</audio>`;
+                        mediaPlayerContainer.style.display = 'block';
                     }
                 });
             }

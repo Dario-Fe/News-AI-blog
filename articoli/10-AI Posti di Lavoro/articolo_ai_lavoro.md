@@ -2,6 +2,7 @@
 tags: ["Ethics & Society", "Business"]
 date: 2025-08-05
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/yYZJAuayPdQ"
 ---
 
 # L'Intelligenza Artificiale e il Futuro del Lavoro

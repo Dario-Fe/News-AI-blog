@@ -44,8 +44,8 @@ def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
             image_bytes = response.content
             source_filename = os.path.basename(urlparse(image_source).path)
         except requests.exceptions.RequestException as e:
-            print(f"  - WARN: Could not download image {image_source}. Error: {e}")
-            return None
+            print(f"  - ERROR: Could not download image {image_source}. Error: {e}")
+            raise  # Re-raise the exception to stop the build
     else: # It's a local file
         local_path = os.path.join(ARTICLES_DIR, article_dir, image_source)
         if os.path.exists(local_path):
@@ -53,11 +53,12 @@ def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
                 image_bytes = f.read()
             source_filename = os.path.basename(local_path)
         else:
-            print(f"  - WARN: Could not find local image {local_path}.")
-            return None
+            print(f"  - ERROR: Could not find local image {local_path}.")
+            raise FileNotFoundError(f"Image not found at {local_path}")
 
     if not image_bytes:
-        return None
+        # This case should ideally not be reached if the above checks are correct, but as a safeguard:
+        raise ValueError("Image processing failed: image_bytes is empty.")
 
     try:
         # Create a unique filename based on the content to avoid collisions and handle updates
@@ -97,8 +98,8 @@ def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
         return image_paths
 
     except Exception as e:
-        print(f"  - WARN: Could not process image from {image_source}. Error: {e}")
-        return None
+        print(f"  - ERROR: Could not process image from {image_source}. Error: {e}")
+        raise
 
 def process_author_photo(photo_path, output_dir_base, lang):
     """
@@ -122,8 +123,8 @@ def process_author_photo(photo_path, output_dir_base, lang):
             original_filename = os.path.splitext(os.path.basename(urlparse(photo_path).path))[0]
             base_filename = f"{original_filename}-{url_hash}"
         except requests.exceptions.RequestException as e:
-            print(f"  - WARN: Could not download author image {photo_path}. Error: {e}")
-            return None
+            print(f"  - ERROR: Could not download author image {photo_path}. Error: {e}")
+            raise
     elif photo_path.startswith("/public/"):
         local_path = photo_path.lstrip('/')
         if os.path.exists(local_path):
@@ -131,14 +132,14 @@ def process_author_photo(photo_path, output_dir_base, lang):
                 image_bytes = f.read()
             base_filename = os.path.splitext(os.path.basename(local_path))[0]
         else:
-            print(f"  - WARN: Could not find local author image {local_path}.")
-            return None
+            print(f"  - ERROR: Could not find local author image {local_path}.")
+            raise FileNotFoundError(f"Author image not found at {local_path}")
     else:
-        print(f"  - WARN: Invalid photo path format: {photo_path}. Must be a URL or start with /public/.")
-        return None
+        print(f"  - ERROR: Invalid photo path format: {photo_path}. Must be a URL or start with /public/.")
+        raise ValueError(f"Invalid author photo path: {photo_path}")
 
     if not image_bytes or not base_filename:
-        return None
+        raise ValueError("Author image processing failed: image_bytes is empty or base_filename is not set.")
 
     try:
         img = Image.open(BytesIO(image_bytes))
@@ -157,16 +158,16 @@ def process_author_photo(photo_path, output_dir_base, lang):
         }
         
     except Exception as e:
-        print(f"  - WARN: Could not process author image {photo_path}. Error: {e}")
-        return None
+        print(f"  - ERROR: Could not process author image {photo_path}. Error: {e}")
+        raise
 
 def process_audio(audio_path, output_dir_base, lang):
     """
     Copies a local audio file and saves it, returning its relative path.
     """
     if not audio_path or not os.path.exists(audio_path):
-        print(f"  - WARN: Could not find local audio file {audio_path}.")
-        return None
+        print(f"  - ERROR: Could not find local audio file {audio_path}.")
+        raise FileNotFoundError(f"Audio file not found at {audio_path}")
 
     try:
         with open(audio_path, "rb") as f:
@@ -189,8 +190,8 @@ def process_audio(audio_path, output_dir_base, lang):
         return relative_path
 
     except Exception as e:
-        print(f"  - WARN: Could not process audio {audio_path}. Error: {e}")
-        return None
+        print(f"  - ERROR: Could not process audio {audio_path}. Error: {e}")
+        raise
 
 # --- Translations Dictionary ---
 TRANSLATIONS = {
@@ -802,7 +803,7 @@ def process_article(md_file_info, output_dir_base, lang):
             md_content = f.read()
     except Exception as e:
         print(f"  - ERROR: Could not read markdown file {md_file_info['path']}. Error: {e}")
-        return None
+        raise
 
     try:
         post = frontmatter.loads(md_content)
@@ -863,8 +864,8 @@ def process_article(md_file_info, output_dir_base, lang):
         }
 
     except Exception as e:
-        print(f"  Error parsing markdown for {md_file_info['name']}: {e}")
-        return None
+        print(f"  - ERROR: Error parsing markdown for {md_file_info['name']}: {e}")
+        raise
 
 def generate_article_pages(authors_data, articles, output_dir, lang='it'):
     """

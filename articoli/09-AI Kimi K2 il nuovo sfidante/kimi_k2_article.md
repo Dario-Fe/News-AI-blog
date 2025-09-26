@@ -2,7 +2,7 @@
 tags: ["Startups", "Applications", "Research"]
 date: 2025-07-31
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/FJjefeAx0VU"
+youtube_url: "https://youtu.be/FJjefeAx0VU?si=rwCG3q72vl-I6HYU"
 ---
 
 # Kimi K2: L'Intelligenza Artificiale Cinese che Sfida i Giganti del Coding

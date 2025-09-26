@@ -708,7 +708,8 @@ def load_authors(lang='it'):
             }
             print(f"  - Loaded author: {author_post.metadata.get('name')} (from {target_filename})")
         except Exception as e:
-            print(f"  - WARN: Could not process author file {target_filename}. Error: {e}")
+            print(f"  - ERROR: Could not process author file {target_filename}. Error: {e}")
+            raise
     
     return authors_db
 
@@ -1335,8 +1336,10 @@ def generate_404_page(output_dir, lang='it'):
 
     except FileNotFoundError as e:
         print(f"  - ERROR: Could not generate 404 page. Missing template file: {e.filename}")
+        raise
     except Exception as e:
         print(f"  - ERROR: An unexpected error occurred while generating the 404 page: {e}")
+        raise
 
 def copy_static_assets(output_dir):
     """

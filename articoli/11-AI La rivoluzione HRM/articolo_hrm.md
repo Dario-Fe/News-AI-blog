@@ -2,6 +2,7 @@
 tags: ["Startups", "Research", "Training"]
 date: 2025-08-10
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/5sR_jdGuqu0?si=4YkuvJ0ngyegWPEG"
 ---
 
 # "Quando la Dimensione Non Conta": La Rivoluzione del Modello HRM

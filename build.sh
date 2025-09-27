@@ -17,12 +17,12 @@ cp forms.html dist/forms.html
 echo "2. Building site for each language..."
 for lang in it en es fr de; do
   echo "--- Building for $lang ---"
-  python3 build.py --lang "$lang"
+  python build.py --lang "$lang"
 done
 
 # 4. Generate master files (sitemap, robots.txt, root redirect)
 echo "4. Generating master files..."
-python3 build.py --master-files
+python build.py --master-files
 
 # 5. List final output for debugging
 echo "5. Listing final contents of dist directory..."

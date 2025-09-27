@@ -2,6 +2,7 @@
 tags: ["Security", "Generative AI", "Applications"]
 date: 2025-08-12
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/xHQSYuyUkwQ?si=73A3MKw2xXWM1Zxq"
 ---
 
 # Il nemico in casa: quando l'IA diventa complice degli Hacker

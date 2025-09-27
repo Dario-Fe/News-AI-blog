@@ -69,15 +69,12 @@
             <div id="header-social-icon-container">
                 <a href="https://www.facebook.com/profile.php?id=61581021006430" target="_blank" rel="noopener noreferrer" class="header-social-link" title="Facebook"></a>
                 <a href="https://www.youtube.com/@AITalk-AI" target="_blank" rel="noopener noreferrer" class="header-social-link" title="YouTube"></a>
+                <a href="https://open.spotify.com/show/3rxO5H8pkfh70EYiRNZkej?si=b2a69efe6d5543ae" target="_blank" rel="noopener noreferrer" class="header-social-link" title="Spotify"></a>
             </div>
             <div id="language-selector-container">
                 <a href="{{newsletter_link}}" class="subscribe-link">{{subscribe_link_text}}</a>
                 <span class="separator"></span>
-                <a href="{{it_link}}" title="Italiano"><img src="{{it_flag_path}}" alt="Italiano" class="language-flag"></a>
-                <a href="{{en_link}}" title="English"><img src="{{gb_flag_path}}" alt="English" class="language-flag"></a>
-                <a href="{{es_link}}" title="Español"><img src="{{es_flag_path}}" alt="Español" class="language-flag"></a>
-                <a href="{{fr_link}}" title="Français"><img src="{{fr_flag_path}}" alt="Français" class="language-flag"></a>
-                <a href="{{de_link}}" title="Deutsch"><img src="{{de_flag_path}}" alt="Deutsch" class="language-flag"></a>
+                {{language_dropdown_html}}
             </div>
         </div>
         <a href="{{home_link}}">
@@ -298,6 +295,24 @@
                         const audioSrc = podcastButton.dataset.src;
                         mediaPlayerContainer.innerHTML = `<audio id="podcast-player" controls src="${audioSrc}" style="width: 100%;">Your browser does not support the audio element.</audio>`;
                         mediaPlayerContainer.style.display = 'block';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.language-dropdown');
+            if (dropdown) {
+                const toggle = dropdown.querySelector('.language-dropdown-toggle');
+                toggle.addEventListener('click', () => {
+                    dropdown.classList.toggle('open');
+                });
+
+                window.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('open');
                     }
                 });
             }

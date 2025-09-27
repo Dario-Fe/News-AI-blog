@@ -24,4 +24,8 @@ done
 echo "4. Generating master files..."
 python3 build.py --master-files
 
+# 5. List final output for debugging
+echo "5. Listing final contents of dist directory..."
+ls -lR dist
+
 echo "--- BUILD PROCESS COMPLETE ---"

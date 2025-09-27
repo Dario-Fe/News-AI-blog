@@ -982,8 +982,17 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
         for placeholder, path in lang_links.items():
              temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
 
-        with open(os.path.join(output_dir, article['path']), "w", encoding='utf-8') as f:
+        output_path = os.path.join(output_dir, article['path'])
+        with open(output_path, "w", encoding='utf-8') as f:
             f.write(temp_html)
+        
+        # Add hash logging for debugging
+        try:
+            with open(output_path, "rb") as f_read:
+                file_hash = hashlib.sha256(f_read.read()).hexdigest()
+                print(f"  - HASH for {article['path']}: {file_hash}")
+        except Exception as e:
+            print(f"  - WARN: Could not calculate hash for {article['path']}. Error: {e}")
 
 
 def generate_author_pages(authors_data, articles, output_dir, lang='it'):

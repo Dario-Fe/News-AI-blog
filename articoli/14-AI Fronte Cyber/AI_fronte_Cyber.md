@@ -2,6 +2,7 @@
 tags: ["Security", "Ethics & Society", "Business"]
 date: 2025-08-16
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/NybUSGSr0Ak?si=LORRz-aLMo8hDMit"
 ---
 
 # L'IA sotto assedio: cronache dal fronte cyber

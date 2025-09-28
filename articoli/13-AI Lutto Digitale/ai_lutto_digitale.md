@@ -2,6 +2,7 @@
 tags: ["Ethics & Society", "Generative AI", "Business"]
 date: 2025-08-13
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/8m6LYSMMYmc?si=ODYZ1lb4EqvybH78"
 ---
 
 # L'AI che non c'è più: quando GPT-4o diventa un lutto digitale

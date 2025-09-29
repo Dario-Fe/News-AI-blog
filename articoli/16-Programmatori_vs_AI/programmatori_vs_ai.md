@@ -2,6 +2,7 @@
 tags: ["Generative AI", "Ethics & Society", "Business"]
 date: 2025-08-24
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/2tquzsbG-J8?si=x2YKSRm4n6wzeuhO"
 ---
 
 # Il Duello dell'Era Digitale: L'AI ucciderà i Programmatori?

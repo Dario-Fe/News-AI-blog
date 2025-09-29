@@ -2,6 +2,7 @@
 tags: ["Ethics & Society", "Business"]
 date: 2025-08-28
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/3lMLJJxOAHY?si=ekKseVhanvnmAc_2"
 ---
 
 # Quando l'AI sembra viva: l'illusione della coscienza

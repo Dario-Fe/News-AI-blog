@@ -2,6 +2,7 @@
 tags: ["Research", "Ethics & Society", "Business"]
 date: 2025-08-20
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/xco6QJqZDw4?si=5GSh8dMtJG65vVjP"
 ---
 
 # Il "Nobel" per l'informatica:"Produttori AI, Avete Perso la Strada"

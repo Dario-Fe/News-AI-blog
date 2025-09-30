@@ -2,6 +2,7 @@
 tags: ["Ethics & Society", "Business", "Security"]
 date: 2025-08-30
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/PwdgqrW8I_0?si=vOvUh38zE6-Zb7hZ"
 ---
 
 # Silicon Valley: 100 milioni contro la regolamentazione dell'AI

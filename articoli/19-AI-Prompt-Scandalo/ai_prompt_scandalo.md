@@ -1,7 +1,8 @@
 ---
 tags: ["Research", "Ethics & Society", "Security"]
 date: 2025-09-02
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/eUn8M9mUUiM?si=d4f7h8_OVKlW9tMc"
 ---
 
 # Prompt Invisibili: difesa o inganno?

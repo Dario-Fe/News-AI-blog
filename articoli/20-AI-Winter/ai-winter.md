@@ -1,7 +1,8 @@
 ---
 tags: ["Business", "Research"]
 date: 2025-09-05
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/P3Hj_qhj1Xw?si=rgXgszFQjepx1FWc"
 ---
 
 # Futuro dell'AI: scoppierà la bolla e tornerà l'inverno?

@@ -1,7 +1,8 @@
 ---
 tags: ["Business", "Copyright", "Ethics & Society"]
 date: 2025-09-11
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/zepV-Wg0Pb4?si=Kck_gXM4dpaG2YWA"
 ---
 
 # Google AI Mode: La Fine di Internet come la Conosciamo?

@@ -1,7 +1,8 @@
 ---
 tags: ["Research", "Training", "Generative AI"]
 date: 2025-09-07
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/6QhgvqRo0f4?si=W_dfFUnJErvQIvml"
 ---
 
 # Rivoluzione DeepConf: più precisione e meno risorse per gli LLM

@@ -1,7 +1,8 @@
 ---
 tags: ["Business", "Training", "Generative AI"]
 date: 2025-09-09
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/D_5o7qpJ8r4?si=vglIT89Uia-vukI5"
 ---
 
 # Qwen3-Max-Preview: Il Colosso da 1 Trilione di parametri

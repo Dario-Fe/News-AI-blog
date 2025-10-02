@@ -88,4 +88,4 @@ Tuttavia, come ogni rivoluzione tecnologica, anche questa apre opportunità per 
 
 La sfida per publisher, creatori di contenuti e imprenditori digitali non è resistere al cambiamento, ma cavalcare l'onda trasformandosi da fornitori di contenuti in architetti di esperienze. In un mondo dove l'informazione è istantaneamente accessibile, il valore si sposta verso l'interpretazione, il contesto e la comunità. Non si tratta più di rispondere a "cosa", ma di spiegare "perché" e "come".
 
-Il 6 settembre 2025 non segna la fine di Internet, ma l'inizio della sua evoluzione successiva. Come sempre, sopravvivere significa adattarsi. 
+Il 6 settembre 2025 non segna la fine di Internet, ma l'inizio della sua evoluzione successiva. Come sempre, sopravvivere significa adattarsi.

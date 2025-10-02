@@ -1,7 +1,8 @@
 ---
 tags: ["Research", "Generative AI", "Training"]
 date: 2025-09-12
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/OxCN56kjIv0?si=k6bmwYccRpmKZiBX"
 ---
 
 # La "passione" dell'AI che la fa scoprire: l'epanortosi enfatica

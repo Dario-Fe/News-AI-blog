@@ -1,11 +1,12 @@
 ---
 tags: ["Generative AI", "Ethics & Society", "Research"]
 date: 2025-09-23
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/KWmz2YOX-II?si=2dJr8zVfrCsp4ekA"
 ---
 
 # ChatGPT: lo studio su come lo usiamo
-![chatgpt-use.jpg](chatgpt-use.jpg)
+![chatgpt-use.jpg](chatgpt-use.jpg)youtube_url: "
 
 *Lo studio OpenAI rivela come l'AI ha ribaltato demografia e abitudini in meno di tre anni. Per la prima volta dalla nascita di ChatGPT, OpenAI ha sollevato il velo sui propri utenti. Come se Willy Wonka avesse finalmente deciso di aprire le porte della sua fabbrica di cioccolato digitale, il colosso di San Francisco ha pubblicato uno [studio dettagliato](https://openai.com/index/how-people-are-using-chatgpt/) che fotografa chi, come e perché utilizza la sua creatura più famosa.*
 

@@ -1,7 +1,8 @@
 ---
 tags: ["Copyright", "Business", "Ethics & Society"]
 date: 2025-09-17
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/34iETtqzoDY?si=kqsVt-czVNm-fqPk"
 ---
 
 # RSL, il Nuovo Protocollo che Vuole Far Pagare l'AI per i Contenuti Web

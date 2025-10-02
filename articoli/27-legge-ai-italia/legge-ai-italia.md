@@ -1,7 +1,8 @@
 ---
 tags: ["Ethics & Society", "Security", "Business"]
 date: 2025-09-20
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/p9SeegTxWLc?si=DWvDg3eZh7yiotA6"
 ---
 
 # L'Italia scrive il futuro dell'AI: approvata la prima legge nazionale europea

@@ -1,7 +1,8 @@
 ---
 tags: ["Research", "Generative AI", "Training", "Startups"]
 date: 2025-09-15
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/9Y4bRQcHcHY?si=ZbyvOO15AHhzbN4M"
 ---
 
 # LLM: Domanda uguale, risposta diversa? Forse colpa delle GPU

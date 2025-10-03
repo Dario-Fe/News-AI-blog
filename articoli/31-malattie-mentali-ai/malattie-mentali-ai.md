@@ -2,6 +2,7 @@
 tags: ["Ethics & Society", "Research", "E-learning"]
 date: 2025-10-02
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/Ls9MIe5CX30?si=p4efwxbmdlMNNqux"
 ---
 
 # Psychopathia Machinalis: i disturbi 'mentali' dell'Intelligenza Artificiale

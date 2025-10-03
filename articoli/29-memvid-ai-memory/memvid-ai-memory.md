@@ -1,7 +1,8 @@
 ---
 tags: ["Research", "Startups", "Applications"]
 date: 2025-09-25
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/BnTCUyKggYA?si=LQI8o_ruwbtZOzmR"
 ---
 
 # MemVid: Quando QR Code e MP4 Rivoluzionano la Memoria dell'AI

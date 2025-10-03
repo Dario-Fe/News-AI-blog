@@ -1,7 +1,8 @@
 ---
 tags: ["Ethics & Society", "Generative AI", "Business"]
 date: 2025-09-29
-author: Dario Ferrero
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/btAkYD2l22w?si=0d8N4hAp5UaQ7ono"
 ---
 
 # Tilly Norwood: quando l'AI diventa Star di Hollywood

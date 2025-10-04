@@ -1,6 +1,7 @@
-import { getStore } from '@netlify/blobs';
-
 export default async (req) => {
+  // Use dynamic import to resolve the ESM/CJS conflict
+  const { getStore } = await import('@netlify/blobs');
+
   if (req.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
   }
@@ -14,7 +15,7 @@ export default async (req) => {
 
     // The key for the blob store cannot start with a slash.
     const storeKey = path.startsWith('/') ? path.slice(1) : path;
-    
+
     const store = getStore('page-views');
     let currentViews = await store.get(storeKey, { type: 'json' }) || { count: 0 };
     

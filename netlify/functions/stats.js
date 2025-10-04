@@ -52,8 +52,9 @@ export default async (req, context) => {
   
   // 1. Authentication
   const authHeader = req.headers.get('authorization');
-  const user = Deno.env.get('STATS_USER');
-  const pass = Deno.env.get('STATS_PASSWORD');
+  // Use process.env for Node.js runtime on Netlify
+  const user = process.env.STATS_USER;
+  const pass = process.env.STATS_PASSWORD;
 
   if (!user || !pass) {
     return new Response('Authentication not configured.', { status: 500 });

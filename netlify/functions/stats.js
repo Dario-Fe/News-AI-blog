@@ -71,7 +71,7 @@ export default async (req, context) => {
   // 2. If authenticated, fetch data
   try {
     const store = getStore('page-views');
-    const blobs = await store.list();
+    const { blobs } = await store.list();
     
     const allViews = await Promise.all(
       blobs.map(async (blob) => {

@@ -36,7 +36,11 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
 
-# Protezione con password per la pagina delle statistiche
+# Protezione con password per la pagina delle statistiche e la sua API
 [[edge_functions]]
   path = "/stats.html"
+  function = "auth"
+
+[[edge_functions]]
+  path = "/.netlify/functions/get-views"
   function = "auth"

@@ -35,3 +35,8 @@
   for = "/*/articles.json"
   [headers.values]
     Access-Control-Allow-Origin = "*"
+
+# Protezione con password per la pagina delle statistiche
+[[edge_functions]]
+  path = "/stats.html"
+  function = "auth"

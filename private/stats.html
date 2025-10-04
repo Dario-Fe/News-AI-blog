@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiche Visite - AITalk</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            background-color: #f0f2f5; 
+            color: #1c1e21;
+            padding: 20px;
+        }
+        h1 { text-align: center; color: #0056b3; }
+        #stats-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        tr:hover { background-color: #f0f2f5; }
+        #loading, #error {
+            text-align: center;
+            font-size: 1.2em;
+            padding: 40px;
+            color: #606770;
+        }
+        .total { font-weight: bold; margin-top: 20px; text-align: right; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+
+    <div id="stats-container">
+        <h1>Statistiche Visite Anonime</h1>
+        <div id="stats-output">
+            <p id="loading">Caricamento statistiche in corso...</p>
+            <p id="error" style="display: none;">Impossibile caricare le statistiche.</p>
+            <table id="stats-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Pagina</th>
+                        <th>Visite</th>
+                    </tr>
+                </thead>
+                <tbody id="stats-body"></tbody>
+            </table>
+        </div>
+        <div id="total-views" class="total"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/.netlify/functions/get-views')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const tableBody = document.getElementById('stats-body');
+                    const loadingEl = document.getElementById('loading');
+                    const tableEl = document.getElementById('stats-table');
+                    const totalViewsEl = document.getElementById('total-views');
+                    
+                    let totalViews = 0;
+
+                    if (data && data.length > 0) {
+                        data.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `<td>${item.path}</td><td>${item.count}</td>`;
+                            tableBody.appendChild(row);
+                            totalViews += item.count;
+                        });
+                        
+                        totalViewsEl.textContent = `Visite Totali: ${totalViews}`;
+                        tableEl.style.display = 'table';
+                    } else {
+                        loadingEl.textContent = 'Nessun dato di visita ancora registrato.';
+                    }
+
+                    loadingEl.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching stats:', error);
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('error').style.display = 'block';
+                });
+        });
+    </script>
+
+</body>
+</html>

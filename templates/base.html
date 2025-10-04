@@ -318,5 +318,14 @@
             }
         });
     </script>
+    <script>
+        // Anonymous page view tracking. Respects "No Cookie" policy.
+        // We only track on the production domain to respect privacy and avoid test/preview data.
+        if (window.location.hostname === 'aitalk.it') {
+            const data = { path: window.location.pathname };
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            navigator.sendBeacon('/.netlify/functions/page-view', blob);
+        }
+    </script>
 </body>
 </html>

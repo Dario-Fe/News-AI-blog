@@ -67,7 +67,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('/.netlify/functions/get-views')
+            fetch('/.netlify/functions/get-views', {credentials: 'same-origin'})
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

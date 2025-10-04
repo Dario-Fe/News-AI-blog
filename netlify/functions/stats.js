@@ -1,5 +1,3 @@
-import { getStore } from '@netlify/blobs';
-
 // Helper function to generate the HTML page
 function generateHTML(statsData) {
   let totalViews = 0;
@@ -49,6 +47,9 @@ function generateHTML(statsData) {
 
 
 export default async (req, context) => {
+  // Use dynamic import to resolve the ESM/CJS conflict
+  const { getStore } = await import('@netlify/blobs');
+  
   // 1. Authentication
   const authHeader = req.headers.get('authorization');
   const user = Deno.env.get('STATS_USER');

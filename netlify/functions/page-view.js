@@ -1,38 +1,26 @@
+import { getStore } from '@netlify/blobs';
+
 export default async (req) => {
-  // Use dynamic import to resolve the ESM/CJS conflict
-  const { getStore } = await import('@netlify/blobs');
-
-  // --- DIAGNOSTIC ---
-  console.log(`page-view function invoked. Method: ${req.method}`);
-
   if (req.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
   }
 
   try {
-    // --- DIAGNOSTIC: Log the raw body ---
-    const rawBody = await req.text();
-    console.log("Raw request body received:", rawBody);
-
-    // Now, attempt to parse it
-    const data = JSON.parse(rawBody);
-    const path = data.path;
+    const { path } = await req.json();
 
     if (!path || typeof path !== 'string' || !path.startsWith('/')) {
-      console.error("Invalid path received:", path);
       return new Response('Invalid path', { status: 400 });
     }
 
-    const cleanedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+    // The key for the blob store cannot start with a slash.
+    const storeKey = path.startsWith('/') ? path.slice(1) : path;
     
     const store = getStore('page-views');
-    let currentViews = await store.get(cleanedPath, { type: 'json' }) || { count: 0 };
+    let currentViews = await store.get(storeKey, { type: 'json' }) || { count: 0 };
     
     currentViews.count += 1;
 
-    await store.setJSON(cleanedPath, currentViews);
-    
-    console.log(`Successfully updated view count for ${cleanedPath} to ${currentViews.count}`);
+    await store.setJSON(storeKey, currentViews);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
@@ -40,7 +28,7 @@ export default async (req) => {
     });
 
   } catch (error) {
-    console.error('CRITICAL ERROR in page-view function:', error);
+    console.error('Error in page-view function:', error);
     return new Response('Internal Server Error', { status: 500 });
   }
 };

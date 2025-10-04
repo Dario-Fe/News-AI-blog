@@ -1,3 +1,5 @@
+import { getStore } from '@netlify/blobs';
+
 // Helper function to generate the HTML page
 function generateHTML(statsData) {
   let totalViews = 0;
@@ -47,9 +49,6 @@ function generateHTML(statsData) {
 
 
 export default async (req, context) => {
-  // Use dynamic import to resolve the ESM/CJS conflict
-  const { getStore } = await import('@netlify/blobs');
-  
   // 1. Authentication
   const authHeader = req.headers.get('authorization');
   // Use process.env for Node.js runtime on Netlify
@@ -76,8 +75,10 @@ export default async (req, context) => {
     const allViews = await Promise.all(
       blobs.map(async (blob) => {
         const viewData = await store.get(blob.key, { type: 'json' });
+        // Add the leading slash back for display purposes.
+        const displayPath = `/${blob.key}`;
         return {
-          path: blob.key,
+          path: displayPath,
           count: (viewData && viewData.count) ? viewData.count : 0,
         };
       })

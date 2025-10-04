@@ -748,7 +748,6 @@ def main():
         generate_sitemap_xml()
         generate_robots_txt()
         create_root_redirect()
-        generate_stats_page()
         return
 
     lang = args.lang
@@ -791,22 +790,6 @@ def main():
     generate_local_pages(output_dir, lang)
     generate_404_page(output_dir, lang)
     copy_static_assets(output_dir)
-
-def generate_stats_page():
-    """
-    Copies the stats.html page from private to the root of the output directory.
-    """
-    print("\nGenerating stats page...")
-    private_dir = "private"
-    stats_file = "stats.html"
-    source_path = os.path.join(private_dir, stats_file)
-    dest_path = os.path.join(BASE_OUTPUT_DIR, stats_file)
-
-    if os.path.exists(source_path):
-        shutil.copy(source_path, dest_path)
-        print(f"  - {stats_file} copied to dist/")
-    else:
-        print(f"  - WARN: {source_path} not found. Skipping stats page generation.")
 
 def create_root_redirect():
     """

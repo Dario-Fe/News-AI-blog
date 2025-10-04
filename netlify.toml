@@ -35,3 +35,9 @@
   for = "/*/articles.json"
   [headers.values]
     Access-Control-Allow-Origin = "*"
+
+# Regola per la pagina delle statistiche server-rendered
+[[redirects]]
+  from = "/stats"
+  to = "/.netlify/functions/stats"
+  status = 200

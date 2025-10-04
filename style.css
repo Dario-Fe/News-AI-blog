@@ -33,12 +33,56 @@ body {
             border-left: 1px solid #dddfe2;
             height: 20px;
         }
-        #language-selector {
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #dddfe2;
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .language-dropdown-toggle {
             background-color: #f0f2f5;
-            font-size: 1em;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8em;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        .language-dropdown-toggle .dropdown-arrow {
+            transition: transform 0.2s ease-in-out;
+        }
+        .language-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #ffffff;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 5px;
+            z-index: 1000;
+            min-width: 150px;
+        }
+        .language-dropdown-menu a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            text-decoration: none;
+            color: #1c1e21;
+            border-radius: 4px;
+        }
+        .language-dropdown-menu a:hover {
+            background-color: #f0f2f5;
+        }
+        .language-dropdown.open .language-dropdown-menu {
+            display: block;
+        }
+        .language-dropdown.open .language-dropdown-toggle .dropdown-arrow {
+            transform: rotate(180deg);
         }
 
         @media (min-width: 769px) {
@@ -418,6 +462,11 @@ body {
 .header-social-link[href*="youtube.com"]::before {
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M62.603 16.596a8.06 8.06 0 0 0-5.669-5.669C51.964 9.57 31.96 9.57 31.96 9.57s-20.005.04-24.976 1.397a8.06 8.06 0 0 0-5.669 5.669C0 21.607 0 32 0 32s0 10.393 1.356 15.404a8.06 8.06 0 0 0 5.669 5.669C11.995 54.43 32 54.43 32 54.43s20.005 0 24.976-1.356a8.06 8.06 0 0 0 5.669-5.669C64 42.434 64 32 64 32s-.04-10.393-1.397-15.404z M25.592 41.612L42.187 32l-16.596-9.612z'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M62.603 16.596a8.06 8.06 0 0 0-5.669-5.669C51.964 9.57 31.96 9.57 31.96 9.57s-20.005.04-24.976 1.397a8.06 8.06 0 0 0-5.669 5.669C0 21.607 0 32 0 32s0 10.393 1.356 15.404a8.06 8.06 0 0 0 5.669 5.669C11.995 54.43 32 54.43 32 54.43s20.005 0 24.976-1.356a8.06 8.06 0 0 0 5.669-5.669C64 42.434 64 32 64 32s-.04-10.393-1.397-15.404z M25.592 41.612L42.187 32l-16.596-9.612z'/%3E%3C/svg%3E");
+}
+
+.header-social-link[href*="spotify.com"]::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm4.183 14.226c-.23.363-.695.474-1.058.243-2.836-1.733-6.36-2.112-10.513-1.157-.402.093-.804-.14-.897-.542-.093-.402.14-.804.542-.897C8.752 13.01 12.726 13.433 15.94 15.38c.363.23.474.695.243 1.058zm.92-2.466c-.282.443-.84.58-1.284.3-3.225-1.98-8.142-2.58-11.488-1.42-.496.168-1.01-.143-1.176-.639-.168-.496.143-1.01.639-1.176 3.822-1.29 9.246-.624 12.943 1.638.443.282.58.84.3 1.284zm.13-2.794c-3.854-2.26-10.122-2.48-13.385-1.373-.576.195-1.19-.195-1.385-.77-.195-.576.195-1.19.77-1.385C7.29 6.97 14.155 7.21 18.59 9.804c.52.308.71.948.402 1.468-.308.52-.948.71-1.468.402z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm4.183 14.226c-.23.363-.695.474-1.058.243-2.836-1.733-6.36-2.112-10.513-1.157-.402.093-.804-.14-.897-.542-.093-.402.14-.804.542-.897C8.752 13.01 12.726 13.433 15.94 15.38c.363.23.474.695.243 1.058zm.92-2.466c-.282.443-.84.58-1.284.3-3.225-1.98-8.142-2.58-11.488-1.42-.496.168-1.01-.143-1.176-.639-.168-.496.143-1.01.639-1.176 3.822-1.29 9.246-.624 12.943 1.638.443.282.58.84.3 1.284zm.13-2.794c-3.854-2.26-10.122-2.48-13.385-1.373-.576.195-1.19-.195-1.385-.77-.195-.576.195-1.19.77-1.385C7.29 6.97 14.155 7.21 18.59 9.804c.52.308.71.948.402 1.468-.308.52-.948.71-1.468.402z'/%3E%3C/svg%3E");
 }
 
 /* Podcast Styles */

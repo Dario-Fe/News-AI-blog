@@ -24,7 +24,7 @@ The story of The Velvet Sundown begins like a mystery worthy of a technological 
 What is initially striking is the professional quality of the productions and the stylistic coherence that runs through their entire catalog. The songs seem to be born from a mature artistic vision, with sophisticated arrangements and a production curated down to the smallest detail. Fans begin to form an online community, discussing the meaning of the lyrics and sharing interpretations on social media. No one suspects that behind those tracks there are no flesh-and-blood musicians.
 
 The revelation comes gradually, through a carefully orchestrated communication strategy. First the suspicions, then increasingly evident clues, and finally the full confession: The Velvet Sundown is a project entirely based on artificial intelligence, an "artistic provocation" that has confessed to being a synthetic music project guided by human creative direction. The technology used is mainly Suno AI, a platform that is "building a future where anyone can make great music. No instrument needed, just imagination."
-![the-velvet-sundown.jpg](the-velvet-sundown.jpg)
+![velvetsundown.jpg](velvetsundown.jpg)
 *[Image from the Instagram profile thevelvetsundownband](https://www.instagram.com/thevelvetsundownband/)*
 
 The Velvet Sundown case has set a precedent for several reasons. First of all, it has shown that AI-generated music can compete in quality with that produced by human artists, at least from the point of view of casual listening. Suno, launched in 2022 by former OpenAI engineers, uses neural networks trained on millions of songs of all genres, allowing for the creation of compositions that respect musical conventions while maintaining elements of originality.

@@ -25,7 +25,7 @@ Was zunächst auffällt, ist die professionelle Qualität der Produktionen und d
 
 Die Enthüllung erfolgt schrittweise durch eine sorgfältig orchestrierte Kommunikationsstrategie. Zuerst die Verdachtsmomente, dann immer deutlichere Hinweise, schließlich das vollständige Geständnis: The Velvet Sundown ist ein vollständig auf künstlicher Intelligenz basierendes Projekt, eine "künstlerische Provokation", die zugab, ein synthetisches Musikprojekt unter menschlicher kreativer Leitung zu sein. Die verwendete Technologie ist hauptsächlich Suno AI, eine Plattform, die "eine Zukunft baut, in der jeder großartige Musik machen kann. Kein Instrument erforderlich, nur Vorstellungskraft."
 
-![the-velvet-sundown.jpg](the-velvet-sundown.jpg)
+![velvetsundown.jpg](velvetsundown.jpg)
 
 *[Bild aus dem Instagram-Profil thevelvetsundownband](https://www.instagram.com/thevelvetsundownband/)*
 

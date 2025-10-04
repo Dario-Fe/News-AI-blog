@@ -554,22 +554,50 @@ TRANSLATIONS = {
 }
 
 LANGUAGES = ["it", "en", "es", "fr", "de"]
+LANG_CONFIG = {
+    "it": {"name": "Italiano", "flag": "it.svg", "abbr": "IT"},
+    "en": {"name": "English", "flag": "gb.svg", "abbr": "EN"},
+    "es": {"name": "Español", "flag": "es.svg", "abbr": "ES"},
+    "fr": {"name": "Français", "flag": "fr.svg", "abbr": "FR"},
+    "de": {"name": "Deutsch", "flag": "de.svg", "abbr": "DE"},
+}
 
-def get_language_links(depth):
+def generate_language_dropdown_html(current_lang, depth=1):
     """
-    Generates a dictionary of relative language links based on page depth.
+    Generates the complete HTML for the language selector dropdown.
     """
-    links = {}
-    path_prefix = "../" * depth
-    for lang in LANGUAGES:
-        links[f"{lang}_link"] = f"{path_prefix}{lang}/index.html"
-    return links
+    asset_prefix = "../" * (depth - 1)
+    link_prefix = "../" * depth
+
+    current_lang_info = LANG_CONFIG[current_lang]
+
+    toggle_html = f"""<button class="language-dropdown-toggle">
+                        <img src="{asset_prefix}flags/{current_lang_info['flag']}" alt="{current_lang_info['name']}" class="language-flag">
+                        <span>{current_lang_info['abbr']}</span>
+                        <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>"""
+
+    menu_items_html = ""
+    for lang_code, lang_info in LANG_CONFIG.items():
+        link = f"{link_prefix}{lang_code}/index.html"
+        menu_items_html += f"""
+                        <a href="{link}" title="{lang_info['name']}">
+                            <img src="{asset_prefix}flags/{lang_info['flag']}" alt="{lang_info['name']}" class="language-flag">
+                            <span>{lang_info['name']}</span>
+                        </a>"""
+
+    dropdown_html = f"""<div class="language-dropdown">
+                    {toggle_html}
+                    <div class="language-dropdown-menu">{menu_items_html}
+                    </div>
+                </div>"""
+    return dropdown_html
 
 def get_base_template_data(depth):
     """
     Generates a dictionary of common, relative-path-based data for the base template.
     """
-    prefix = "../" * (depth - 1) if depth > 1 else ""
+    prefix = "../" * (depth - 1)
     data = {
         "{{css_path}}": f"{prefix}style.css",
         "{{favicon_ico_path}}": f"{prefix}favicon.ico",
@@ -582,12 +610,6 @@ def get_base_template_data(depth):
         "{{privacy_link}}": f"{prefix}privacy.html",
         "{{home_link}}": f"{prefix}index.html" if prefix else "index.html"
     }
-    # Add dynamic paths for flag images
-    data["{{it_flag_path}}"] = f"{prefix}flags/it.svg"
-    data["{{gb_flag_path}}"] = f"{prefix}flags/gb.svg"
-    data["{{es_flag_path}}"] = f"{prefix}flags/es.svg"
-    data["{{fr_flag_path}}"] = f"{prefix}flags/fr.svg"
-    data["{{de_flag_path}}"] = f"{prefix}flags/de.svg"
     return data
 
 def get_local_articles_db():
@@ -726,6 +748,7 @@ def main():
         generate_sitemap_xml()
         generate_robots_txt()
         create_root_redirect()
+        generate_stats_page()
         return
 
     lang = args.lang
@@ -768,6 +791,22 @@ def main():
     generate_local_pages(output_dir, lang)
     generate_404_page(output_dir, lang)
     copy_static_assets(output_dir)
+
+def generate_stats_page():
+    """
+    Copies the stats.html page from private to the root of the output directory.
+    """
+    print("\nGenerating stats page...")
+    private_dir = "private"
+    stats_file = "stats.html"
+    source_path = os.path.join(private_dir, stats_file)
+    dest_path = os.path.join(BASE_OUTPUT_DIR, stats_file)
+
+    if os.path.exists(source_path):
+        shutil.copy(source_path, dest_path)
+        print(f"  - {stats_file} copied to dist/")
+    else:
+        print(f"  - WARN: {source_path} not found. Skipping stats page generation.")
 
 def create_root_redirect():
     """
@@ -978,9 +1017,8 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         
-        lang_links = get_language_links(depth=1)
-        for placeholder, path in lang_links.items():
-             temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
+        dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
+        temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
         with open(os.path.join(output_dir, article['path']), "w", encoding='utf-8') as f:
             f.write(temp_html)
@@ -1060,9 +1098,8 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         
-        lang_links = get_language_links(depth=2)
-        for placeholder, path in lang_links.items():
-             temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
+        dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=2)
+        temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
         og_url = f"{SITE_URL}{lang}/authors/{slug}.html"
         og_image = f"{SITE_URL}{lang}/{IMAGE_ASSETS_DIR}/authors/{os.path.basename(photo_paths['jpeg'])}" if author.get('photo') and photo_paths else f"{SITE_URL}logo_vn_ia.png"
@@ -1167,9 +1204,8 @@ def generate_index_page(articles, output_dir, lang='it'):
     for placeholder, path in base_data.items():
         temp_html = temp_html.replace(placeholder, path)
     
-    lang_links = get_language_links(depth=1)
-    for placeholder, path in lang_links.items():
-            temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
+    dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
+    temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
     view_more_text = TRANSLATIONS["pagination"]["view_more"].get(lang, TRANSLATIONS["pagination"]["view_more"]["it"])
     temp_html = temp_html.replace("{{lang}}", lang)
@@ -1272,9 +1308,8 @@ def generate_local_pages(output_dir, lang='it'):
             for placeholder, path in base_data.items():
                 temp_html = temp_html.replace(placeholder, path)
             
-            lang_links = get_language_links(depth=1)
-            for placeholder, path in lang_links.items():
-                temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
+            dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
+            temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
             with open(os.path.join(output_dir, filename), "w", encoding='utf-8') as f:
                 f.write(temp_html)
@@ -1324,9 +1359,8 @@ def generate_404_page(output_dir, lang='it'):
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         
-        lang_links = get_language_links(depth=1)
-        for placeholder, path in lang_links.items():
-            temp_html = temp_html.replace(f"{{{{{placeholder}}}}}", path)
+        dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
+        temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
         # Write the final file
         output_path = os.path.join(output_dir, "404.html")

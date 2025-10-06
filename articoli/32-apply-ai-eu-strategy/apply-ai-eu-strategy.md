@@ -164,7 +164,7 @@ La partita è ancora aperta. Ma il timer sta scorrendo veloce, e l'Europa non pu
 - [The Draghi Report on EU Competitiveness](https://commission.europa.eu/topics/eu-competitiveness/draghi-report_en) - Commissione Europea
 - [Competitiveness Compass](https://ec.europa.eu/commission/presscorner/detail/en/ac_25_385) - Commissione Europea
 
-### Stusi e analisi
+### Studi e analisi
 - [The EU's AI Power Play: Between Deregulation and Innovation](https://carnegieendowment.org/research/2025/05/the-eus-ai-power-play-between-deregulation-and-innovation?lang=en) - Carnegie Endowment for International Peace
 - [EuroStack – a European Alternative for Digital Sovereignty](https://doi.org/10.11586/2025006) - Bertelsmann Stiftung
 - [Open Letter: European Industry Calls for Strong Commitment to Sovereign Digital Infrastructure](https://www.digitalsme.eu/digital/uploads/Open-Letter-European-Industry-Calls-for-Strong-Commitment-to-Sovereign-Digital-Infrastructure.pdf) - European DIGITAL SME Alliance

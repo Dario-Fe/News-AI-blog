@@ -9,7 +9,7 @@ youtube_url: "https://youtu.be/ptma9gAcr3U?si=0RFpk-wKztL6rwwB"
 ![piccoli-vs-grandi.jpg](piccoli-vs-grandi.jpg)
 
 
-*Nel mondo dell'intelligenza artificiale, dove la regola d'oro sembrava essere "più grande è meglio", sta emergendo una contronarrazione che ricorda il finale di *Attack on Titan*: a volte, sono i titani più piccoli a nascondere il vero potere. Samsung AI, attraverso il suo laboratorio SAIL di Montreal, ha appena pubblicato un [paper scientifico](https://arxiv.org/html/2510.04871v1) che potrebbe segnare un punto di svolta nel modo in cui pensiamo all'intelligenza delle macchine.*
+*Nel mondo dell'intelligenza artificiale, dove la regola d'oro sembrava essere "più grande è meglio", sta emergendo una contronarrazione che ricorda il finale di 'Attack on Titan': a volte, sono i titani più piccoli a nascondere il vero potere. Samsung AI, attraverso il suo laboratorio SAIL di Montreal, ha appena pubblicato un [paper scientifico](https://arxiv.org/html/2510.04871v1) che potrebbe segnare un punto di svolta nel modo in cui pensiamo all'intelligenza delle macchine.*
 
 Si chiama Tiny Recursive Model, abbreviato in TRM, e con i suoi miseri 7 milioni di parametri sta facendo quello che sembrava impossibile: battere sistematicamente colossi da centinaia di miliardi di parametri in compiti di ragionamento complesso.
 

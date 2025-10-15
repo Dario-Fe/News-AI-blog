@@ -2,7 +2,6 @@
 tags: ["Ethics & Society", "Security", "Generative AI"]
 date: 2025-10-15
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/Eg61-05-jTs?si=lgfaqGhx4HUeXlNE"
 ---
 
 # AI as a Tool, Not an Oracle: The Deloitte Case and the Illusion of Infallibility

@@ -2,7 +2,6 @@
 tags: ["Ethics & Society", "Security", "Generative AI"]
 date: 2025-10-15
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/Eg61-05-jTs?si=lgfaqGhx4HUeXlNE"
 ---
 
 # L'IA comme Outil et non comme Oracle : le cas Deloitte et l'illusion de l'infaillibilité

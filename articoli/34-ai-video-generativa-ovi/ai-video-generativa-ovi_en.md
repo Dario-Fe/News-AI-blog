@@ -2,7 +2,6 @@
 tags: ["Generative AI", "Business", "Startups"]
 date: 2025-10-13
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/m_qMQVY0_I8?si=lE-LycwJ09z6z7Uh"
 ---
 
 # The Explosion of Generative AI Video. Between the Hype of the Giants and the Shadow of Open Source. Ovi and the Other Rebels.

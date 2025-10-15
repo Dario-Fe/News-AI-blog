@@ -2,7 +2,6 @@
 tags: ["Generative AI", "Business", "Startups"]
 date: 2025-10-13
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/m_qMQVY0_I8?si=lE-LycwJ09z6z7Uh"
 ---
 
 # La explosión del vídeo generativo con IA. Entre el bombo de las grandes y la sombra del código abierto. Ovi y los otros rebeldes.

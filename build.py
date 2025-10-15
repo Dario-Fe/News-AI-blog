@@ -371,6 +371,13 @@ TRANSLATIONS = {
             "es": "Video",
             "fr": "Vidéo",
             "de": "Video"
+        },
+        "back_to_top_button": {
+            "it": "Torna su",
+            "en": "Back to top",
+            "es": "Volver arriba",
+            "fr": "Retour en haut",
+            "de": "Nach oben"
         }
     },
     "author_page": {
@@ -834,6 +841,8 @@ def process_article(md_file_info, output_dir_base, lang):
         soup = BeautifulSoup(html_content, 'html.parser')
 
         title = soup.h1.get_text() if soup.h1 else "Titolo non disponibile"
+        if soup.h1:
+            soup.h1.decompose()
 
         summary = ""
         all_paragraphs = soup.find_all('p')
@@ -904,6 +913,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
         print(f"  - {article['path']}")
 
         back_button_text = TRANSLATIONS["article_page"]["back_button"].get(lang, TRANSLATIONS["article_page"]["back_button"]["it"])
+        back_to_top_button_text = TRANSLATIONS["article_page"]["back_to_top_button"].get(lang, TRANSLATIONS["article_page"]["back_to_top_button"]["it"])
 
         tags_html = ""
         if article.get('tags'):
@@ -952,9 +962,9 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
 
         article_view_html = f"""
         <div id="article-view">
-            <a href="index.html" class="back-button">{back_button_text}</a>
-            {tags_html}
+            <h1>{article['title']}</h1>
             {author_html}
+            {tags_html}
             {media_container_html}
             {article['html_content']}
             
@@ -968,7 +978,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
 
             <div class="footer-back-button">
                 {tags_html}
-                <a href="index.html" class="back-button" style="margin-top: 20px;">{back_button_text}</a>
+                <a href="#article-view" class="back-button" style="margin-top: 20px;">{back_to_top_button_text}</a>
             </div>
         </div>
         """

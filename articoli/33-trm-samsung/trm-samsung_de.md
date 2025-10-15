@@ -2,7 +2,6 @@
 tags: ["Research", "Training", "Generative AI"]
 date: 2025-10-09
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/ptma9gAcr3U?si=0RFpk-wKztL6rwwB"
 ---
 
 # Weniger ist Mehr: Die Revolution geht weiter mit dem TRM-Modell

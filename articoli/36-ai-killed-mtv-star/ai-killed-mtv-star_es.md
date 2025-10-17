@@ -1,0 +1,78 @@
+---
+tags: ["Ethics & Society", "Business", "Generative AI"]
+date: 2025-10-17
+author: "Dario Ferrero"
+---
+
+# 'AI Killed the MTV Star': la IA cierra MTV
+![ai-unplug-mtv.jpg](ai-unplug-mtv.jpg)
+
+*El 1 de agosto de 1981, a las 00:01, MTV lanzó sus transmisiones con un videoclip que hoy suena a profecía invertida. "Video Killed the Radio Star" de The Buggles era la declaración de intenciones de una nueva era, aquella en la que la música ya no solo se escuchaba, sino que se veía. La letra hablaba de la nostalgia por la era de la radio, arrollada por el advenimiento del vídeo.*
+
+Sin embargo, con una ironía que habría hecho sonreír amargamente incluso a Philip K. Dick, la historia tomó un rumbo diferente. En 2025 la radio goza de una salud excelente, con [sólidas audiencias y un público fiel](https://www.radiospeaker.it/blog/ascolti-radio-primo-semestre-2025-editori/), mientras que MTV está apagando sus canales de música uno tras otro. El vídeo no mató a la estrella de la radio. Pero algo más mató a MTV.
+
+Ese algo tiene el rostro aséptico de los algoritmos de inteligencia artificial que hoy gobiernan YouTube, Spotify y TikTok. Y este no es un artículo de nostalgia televisiva, sino de tecnología. Porque detrás del [cierre anunciado por Paramount Global](https://www.broadbandtvnews.com/2025/10/10/paramount-to-close-mtv-channels-across-europe/) de cinco canales de música de MTV antes del 31 de diciembre de 2025 hay una revolución silenciosa que ha redefinido la forma en que descubrimos, escuchamos y consumimos música. Una revolución que tiene sus raíces en el aprendizaje automático y los sistemas de recomendación, no en las preferencias del público por los reality shows.
+
+## El fin de una era
+
+[El anuncio de Paramount](https://www.bbc.com/news/articles/cdr612yz8p0o) marca el fin de las transmisiones para MTV Music, MTV 80s, MTV 90s, Club MTV y MTV Live. No hablamos de mercados marginales: el cierre afecta a Reino Unido, Irlanda, Francia, Alemania, Austria, Polonia, Hungría, y se extenderá a Australia y Brasil. El canal principal MTV HD sobrevivirá, pero como una versión zombi de sí mismo, centrado en programas de entretenimiento y reality shows que poco tienen que ver con la música. Como guinda final al pastel del declive, Paramount también ha cancelado la [edición de 2025 de los MTV Europe Music Awards](https://www.rollingstone.com/music/music-news/mtv-uk-music-channels-end-of-year-1235444783/), lo que antes era una de las citas más esperadas del año para el público musical europeo.
+
+La motivación oficial es la que cabría esperar: la necesidad de recortar unos 500 millones de dólares en costes en un mercado televisivo en contracción. Pero decir que MTV cierra porque la gente ya no ve la televisión musical es como decir que los dinosaurios se extinguieron porque hacía frío. Es cierto, pero no cuenta toda la historia. La verdadera extinción masiva se ha producido a un nivel más profundo, en el sustrato tecnológico que determina cómo y qué escuchamos.
+![mtv-Logo-history.jpg](mtv-Logo-history.jpg)
+[La historia del logo de MTV, imagen extraída de: 1000logos.net](https://1000logos.net/mtv-logo/)
+
+## La revolución invisible de los algoritmos
+
+A primera vista, esto podría parecer un tema alejado del negocio principal de un portal de tecnología. MTV es televisión, cosa del siglo XX, dinosaurios mediáticos que no supieron evolucionar. Pero mirando más a fondo, el cierre de MTV es el testimonio más evidente de cómo la inteligencia artificial ya ha transformado radicalmente sectores enteros de nuestra vida cultural, a menudo sin que nos diéramos cuenta. No estamos hablando de ChatGPT o de deepfakes, estamos hablando de algoritmos de recomendación que trabajan en segundo plano, invisibles pero omnipresentes, redefiniendo nuestros gustos musicales desde hace más de una década.
+
+Cuando en 1981 MTV iniciaba sus transmisiones, el descubrimiento musical era un proceso intrínsecamente social y curado por seres humanos. Había VJs, video jockeys como Martha Quinn o Mark Goodman, o algo más tarde el italiano Andrea Pezzi, que seleccionaban qué emitir, creaban flujos narrativos entre un vídeo y otro, te hacían descubrir a los Talking Heads justo después de Madonna. Había un elemento humano de curación, un gusto editorial, una visión. Incluso cuando esa visión era discutible o controvertida, como cuando [se acusó a MTV de racismo](https://hollywoodreporter.it/musica/mtv-music-television-storia-vera-anniversario-nascita-canale-videoclip-musica-cultura-pop/35199/) por la escasa presencia de artistas afroamericanos en sus primeros años, seguía siendo un proceso mediado por decisiones humanas, criticables y discutibles, pero transparentes.
+
+Hoy ese proceso ha sido sustituido por sistemas de aprendizaje automático que analizan miles de millones de datos de comportamiento. El algoritmo de YouTube no se limita a sugerirte vídeos similares a los que ya has visto: construye un perfil psicográfico de tus preferencias musicales cruzando el tiempo de visualización, los momentos en que pausas, cuándo abandonas un vídeo, qué buscas después, qué escuchan los usuarios con patrones de consumo similares al tuyo. Spotify utiliza [sistemas de recomendación híbridos](https://www.nature.com/articles/s41598-024-75967-0) que combinan el filtrado colaborativo, el análisis del contenido de audio mediante redes neuronales convolucionales que reconocen patrones musicales, y el procesamiento del lenguaje natural para analizar cómo hablan los usuarios de música en las redes sociales.
+
+Es una tecnología fascinante, por supuesto. Pero también es una tecnología que ha dejado obsoleto el modelo de transmisión de MTV. ¿Por qué ver un flujo lineal de vídeos musicales elegidos por otra persona cuando puedes tener un DJ algorítmico personal que conoce tus gustos mejor que tú mismo? Es como si Skynet hubiera decidido ser crítico musical en lugar de exterminar a la humanidad.
+
+## Del broadcast al unicast personalizado
+
+El cambio de época que MTV no supo gestionar es el del broadcasting al unicasting algorítmico. MTV transmitía el mismo flujo a millones de personas simultáneamente. Era de uno a muchos, una plaza compartida donde toda una generación veía los mismos vídeos, a las mismas horas. Esto creaba una cultura común, referencias compartidas, conversaciones colectivas. ¿Recuerdan cuando todo el mundo hablaba del mismo vídeo al día siguiente? Yo sí, por suerte, o por desgracia... Ese era el poder del broadcast.
+
+Las plataformas digitales han pulverizado este modelo. YouTube genera más de mil millones de horas de contenido de vídeo musical visto diariamente, pero nadie está viendo el mismo flujo. Cada uno tiene su propio feed personalizado, su propia mezcla única. TikTok ha llevado esta lógica al extremo con su [Página Para Ti](https://derev.com/2025/06/tiktok-nel-2025-algoritmo-e-novita/), un flujo infinito de contenido breve donde la IA decide en tiempo real qué mostrarte basándose en microinteracciones medidas en milisegundos de atención. Ya не es de uno a muchos, es de uno a uno, multiplicado por miles de millones.
+
+Esto también ha redefinido lo que significa "ver música". En MTV veías un videoclip de cuatro minutos de principio a fin. En TikTok las canciones se fragmentan en fragmentos de 15-30 segundos, se remezclan, se reinterpretan, se convierten en memes. El algoritmo aprende no solo si te gusta una canción, sino qué fragmento específico de esa canción capta tu atención. Es una granularidad analítica llevada a un nivel que los programadores de MTV nunca podrían haber imaginado.
+
+## Los números de una emigración masiva
+
+Los datos sobre el declive de la televisión musical tradicional son despiadados. Según las [investigaciones de mercado](https://economictimes.indiatimes.com/news/international/us/mtv-to-shut-its-popular-music-tv-channels-after-4-decades-which-popular-mtv-channels-are-being-closed-and-what-triggered-the-big-move-all-you-need-to-know/articleshow/124516118.cms) citadas en el anuncio de Paramount, la gran mayoría del público joven menor de 35 años nunca ha visto un canal de televisión musical. No por elección ideológica, sino simplemente porque la idea misma de esperar a que pase un vídeo que no te interesa para ver el que quieres es tan ajena como usar un módem de acceso telefónico para descargar una canción.
+
+YouTube Music cuenta con más de 100 millones de suscriptores de pago, Spotify supera los 600 millones de usuarios activos. Pero lo que es más significativo es el tiempo invertido: el usuario medio pasa más de 2 horas y media al día en estas plataformas, frente a los pocos minutos residuales de la televisión musical tradicional. Y no es solo una cuestión de comodidad o de acceso bajo demanda. Es que estas plataformas han construido ecosistemas donde la IA actúa como pegamento entre el descubrimiento, la escucha, el intercambio y la creación de contenidos.
+
+La música se ha vuelto ambiental, siempre disponible, personalizada para cada momento del día. Spotify tiene listas de reproducción generadas algorítmicamente para "Concentración", "Entrenamiento", "Tarde tranquila". YouTube sugiere vídeos musicales basándose no solo en tus gustos, sino en el contexto: hora del día, dispositivo que estás usando, si estás viendo en la televisión o en el smartphone. MTV emitía los mismos vídeos a mediodía y a medianoche, a un estudiante y a un trabajador nocturno. Era democrático pero rígido. La IA es flexible pero fragmentada.
+![video-killed-radio-star.jpg](video-killed-radio-star.jpg)
+[Imagen del vídeo "Video Killed the Radio Star" en YouTube](https://www.youtube.com/watch?v=W8r-tXRLazs)
+
+## La paradoja del descubrimiento algorítmico
+
+Y aquí es donde llegamos al meollo de la cuestión, a la duda que debería hacernos reflexionar mientras MTV cierra sus puertas. ¿Son los algoritmos realmente mejores que los VJ humanos para hacernos descubrir nueva música? ¿O estamos cambiando la biodiversidad cultural por una monocultura algorítmica disfrazada de personalización?
+
+[Una investigación publicada en Scientific Reports en 2025](https://www.nature.com/articles/s41598-024-75967-0) analizó miles de millones de escuchas en plataformas de streaming de música, descubriendo algo inquietante. Sí, los algoritmos exponen a los usuarios a un número mayor de artistas diferentes que la radio tradicional. Pero estos artistas están "semánticamente confinados", es decir, pertenecen a nichos cada vez más estrechos y homogéneos. En otras palabras: descubres más bandas, pero todas suenan sustancialmente igual.
+
+El problema se llama "burbuja de filtro musical", y funciona así. El algoritmo parte de tus primeras elecciones musicales y construye un perfil. Luego te sugiere contenido que maximiza la probabilidad de que sigas escuchando, porque su objetivo es mantenerte en la plataforma. Para ello, privilegia la familiaridad sobre la novedad radical. Te propone artistas que son lo suficientemente diferentes como para parecer un descubrimiento, pero lo suficientemente similares como para no arriesgarse a que abandones la escucha. Es la lógica de la zona de confort algorítmica.
+
+[Un estudio presentado en la ACM Web Conference 2024](https://dl.acm.org/doi/10.1145/3589334.3645497) demostró que los sistemas de recomendación tradicionales reducen significativamente la diversidad "interusuario" (las diferencias entre los gustos de personas diferentes) sin aumentar proporcionalmente la diversidad "intrausuario" (la variedad musical que cada oyente individual experimenta). Traducido: todos acabamos escuchando una mezcla cada vez más similar, mientras que cada uno de nosotros explora un territorio cada vez más restringido.
+
+MTV, con todas sus limitaciones y sus decisiones discutibles, te obligaba a una forma de serendipia. Encendías la tele para ver a Duran Duran y te encontrabas con Sonic Youth, te gustara o no. Quizás cambiabas de canal molesto, o quizás descubrías algo que nunca habrías buscado por tu cuenta. Era un modelo de descubrimiento "push" (de empuje) basado en la curación humana. El algoritmo, en cambio, es "pull" (de arrastre): parte de donde ya estás y te lleva a donde quiere que vayas, creando la ilusión de que estás eligiendo libremente.
+
+[Un estudio de 2024 sobre la homogeneización de la música pop](https://www.researchgate.net/publication/385087005_Homogenization_of_Pop_Music_How_Social_Media's_Algorithms_Prevents_Creativity_and_Innovation) mostró cómo los algoritmos de las redes sociales crean un peligroso bucle de retroalimentación: premian el contenido mainstream de gran atractivo, los artistas y productores aprenden lo que funciona algorítmicamente y producen música optimizada para los algoritmos, que a su vez premian esta música porque funciona bien, en un círculo que tiende a la estandarización. Es como si estuviéramos criando la música en batería en lugar de en libertad en el campo.
+
+El VJ humano podía equivocarse, tener prejuicios, tomar decisiones horribles. Pero también tenía la oportunidad de tomar decisiones valientes, de poner en rotación un vídeo experimental porque creía en él, de crear conexiones inesperadas entre diferentes géneros. El algoritmo optimiza para el engagement, no para el descubrimiento cultural. Y esta es una diferencia fundamental que corremos el riesgo de comprender demasiado tarde.
+
+## El vídeo no mató a la estrella de la radio
+
+Hay una última ironía en esta historia que vale la pena subrayar. La radio, la que los Buggles daban por muerta en 1981, ha sobrevivido y goza de buena salud. Según datos de 2025, la radio todavía llega al 90% de la población adulta en muchos países occidentales, ha sabido integrarse en lo digital con el streaming, los podcasts, las aplicaciones. Los DJ de radio humanos siguen haciendo descubrir música, creando flujos narrativos, siendo voces reconocibles con una personalidad.
+
+MTV, en cambio, está cerrando porque se quedó anclada en el modelo de transmisión lineal sin evolucionar. No supo convertirse en una plataforma digital, no construyó algoritmos competitivos, no entendió que el futuro no era simplemente poner sus contenidos en línea, sino repensar por completo lo que significa curar y hacer descubrir música en la era de la IA.
+
+La radio evolucionó porque entendió que su valor no estaba en el medio tecnológico, sino en la relación humana, en la voz del DJ que conoces y en quien confías, en la comunidad de oyentes. MTV creyó que su valor estaba en el control del canal de distribución televisivo, y cuando ese canal se volvió obsoleto, no tenía nada más.
+
+Quizás dentro de unos años nos demos cuenta de que incluso la personalización algorítmica tiene sus límites, que la biodiversidad cultural necesita curadores humanos que tomen decisiones aparentemente ineficientes pero culturalmente vitales. Quizás descubramos que el amigo que te hace escuchar esa banda rara que nunca habrías buscado en Spotify, o el DJ de radio que te sorprende con un tema fuera de tu perfil algorítmico, desempeñaban una función ecológica importante para mantener vivo un ecosistema musical diversificado.
+
+Pero por ahora, mientras MTV apaga sus últimos canales de música y Paramount promete que la marca vivirá "en lo digital", la realidad es que el vídeo no mató a la estrella de la radio. Fueron los algoritmos de inteligencia artificial los que mataron a la estrella de MTV. Y esto, con el debido respeto a los Buggles, es el último videoclip que vale la pena ver antes de que las transmisiones cesen definitivamente el 31 de diciembre de 2025. "La IA mató a la estrella de MTV". Y aún no está claro si deberíamos considerarlo un progreso o una pérdida.

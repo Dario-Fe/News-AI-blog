@@ -1,0 +1,77 @@
+---
+tags: ["Research", "Training", "Applications"]
+date: 2025-10-22
+author: "Dario Ferrero"
+---
+
+# DeepSeek OCR : quand l'image vaut 10 000 tokens
+![deepseek-ocr.jpg](deepseek-ocr.jpg)
+
+
+*Habituellement, nous évitons de courir après chaque annonce des grandes entreprises technologiques, à moins qu'il ne s'agisse d'une véritable innovation. Et cette fois, cela semble bien être le cas. [DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR), publié le 20 octobre 2025, a atteint plus de 7 000 étoiles sur GitHub en quelques jours et a attiré l'attention d'Andrej Karpathy, ancien directeur de l'IA chez Tesla et figure légendaire dans le domaine de l'apprentissage profond. Ce n'est pas anodin quand l'un des esprits les plus brillants de la vision par ordinateur [qualifie un modèle de "plutôt intéressant"](https://x.com/karpathy/status/1980397031542989305) et se met à philosopher sur l'avenir des tokenizers. Mais qu'a de si spécial ce modèle de 3 milliards de paramètres qui a déclenché un tel enthousiasme ?*
+
+## L'architecture du renversement
+
+DeepSeek-OCR renverse un paradigme qui semblait bien établi : au lieu de convertir des images en texte pour ensuite le tokeniser, il transforme le texte en image et le compresse optiquement. C'est comme si quelqu'un avait regardé la pierre de Rosette à l'envers et avait compris que le hiéroglyphe est plus efficace que l'alphabet. L'idée est aussi simple que contre-intuitive, et rappelle cette scène de *Tenet* où les balles reviennent en arrière dans le temps : ici, les tokens redeviennent des pixels.
+
+L'architecture se divise en deux composants principaux. Le DeepEncoder prend un document en haute résolution, le traite via un encodeur visuel basé sur [SAM](https://segment-anything.com/) et CLIP, puis le compresse à l'aide d'un module convolutionnel qui réduit considérablement le nombre de tokens nécessaires. Le décodeur est un modèle Mixture-of-Experts de 3 milliards de paramètres qui interprète ces "tokens de vision" compressés et produit une sortie structurée.
+
+Les chiffres racontent une histoire intéressante : avec une compression de 10x, le système maintient une précision de 97 %. En poussant le rapport à 20x, la précision chute à 60 %, mais pour de nombreux cas d'utilisation, cela reste plus qu'acceptable. Cela signifie qu'un article de mille mots, qui nécessiterait environ mille tokens au format texte, peut être représenté avec seulement 100 tokens de vision en conservant presque intacte l'information. [DeepSeek affirme](https://deepseek.ai/blog/deepseek-ocr-context-compression) qu'un seul GPU NVIDIA A100 peut traiter 200 000 pages par jour avec ce système, un débit qui éclipse les pipelines OCR traditionnels.
+
+## Benchmarks et comparaisons : là où il brille (et là où il ne brille pas)
+
+La comparaison avec la concurrence révèle des lumières et des ombres. Sur [OmniDocBench](https://www.marktechpost.com/2025/10/20/deepseek-just-released-a-3b-ocr-model-a-3b-vlm-designed-for-high-performance-ocr-and-structured-document-conversion/), le benchmark qui teste les capacités d'extraction sur des documents complexes, DeepSeek-OCR se comporte bien mais ne domine pas. GOT-OCR 2.0, développé par l'Université de Pékin, reste supérieur en termes de précision pure, en particulier sur les documents avec des mises en page complexes ou des formules mathématiques. MinerU 2.0, un autre concurrent chinois, affiche des performances similaires mais avec une architecture plus traditionnelle.
+
+Dans la comparaison avec les modèles vision-langage multimodaux généralistes, la situation devient plus intéressante. MiniCPM-V 2.6, InternVL 2.5 et le récent Mistral OCR sont tous des modèles plus grands, avec des paramètres allant de 7 à 20 milliards. DeepSeek-OCR, avec ses 3 milliards, joue dans une autre catégorie. Comme le [note Karpathy lui-même](https://x.com/karpathy/status/1980397031542989305), le modèle est "peut-être un peu moins bon que les points" (faisant probablement référence à Gemini ou à d'autres systèmes fermés), mais l'aveu est sincère et symptomatique : il ne s'agit pas d'une suprématie absolue, mais d'une efficacité relative.
+
+IBM Docling, une autre solution open source pour l'analyse de documents, adopte une approche hybride avec des pipelines modulaires et obtient d'excellents résultats sur les documents techniques et scientifiques, mais nécessite plus de ressources de calcul. Microsoft Florence-2, bien qu'étant un modèle de vision plus générique, montre des capacités OCR décentes mais souffre dans les situations où il est nécessaire de préserver la structure du document.
+
+La véritable force de DeepSeek-OCR émerge dans des cas d'utilisation spécifiques : documents longs, traitement par lots, applications où la vitesse est critique et une légère perte de précision est tolérable. C'est l'équivalent technologique de choisir un appareil photo sans miroir plutôt qu'un moyen format : moins parfait, mais beaucoup plus polyvalent et pratique.
+![grafico1.jpg](grafico1.jpg)
+[Image tirée du profil GitHub de DeepSeek OCR](https://github.com/deepseek-ai/DeepSeek-OCR)
+
+## De la théorie à la pratique : là où c'est vraiment utile
+
+Mais quand est-il judicieux d'implémenter DeepSeek-OCR dans un projet réel ? La réponse dépend du contexte spécifique. Les applications les plus prometteuses concernent des scénarios où le volume et la vitesse comptent plus que la perfection absolue. Pensons à la numérisation d'archives historiques papier, où des millions de pages doivent être converties en format consultable : ici, la capacité de traiter 200 000 pages par jour sur un seul GPU fait la différence entre un projet réalisable et un projet économiquement insoutenable.
+
+Dans le monde de l'entreprise, l'extraction automatique de données à partir de factures, de reçus ou de documents comptables représente un autre terrain fertile. Des entreprises comme [Dataconomy soulignent](https://dataconomy.com/2025/10/21/deepseek-ocr-new-open-source-ai-model-goes-viral-on-github/) comment les cabinets d'avocats et les services de conformité pourraient bénéficier de l'analyse massive de contrats, où le maintien de la structure visuelle du document est aussi crucial que l'extraction du texte. Un avocat qui recherche une clause spécifique dans dix mille accords de non-divulgation n'a pas besoin d'une précision de 99,9 %, mais de trouver rapidement les documents pertinents.
+
+Il y a cependant une ombre qui plane sur ces scénarios : le manque de transparence sur les données d'entraînement. DeepSeek n'a pas publié de détails sur l'ensemble de données utilisé pour entraîner le modèle, et c'est un problème non négligeable. Un OCR entraîné principalement sur des documents financiers chinois pourrait mal interpréter des factures européennes, tout comme un modèle exposé principalement à des textes imprimés pourrait peiner avec l'écriture manuscrite. L'opacité des données rend difficile l'évaluation a priori de l'adéquation du modèle à un cas d'utilisation spécifique, obligeant à des tests empiriques que tout le monde ne peut pas se permettre.
+
+## La philosophie open source en temps de guerre des puces
+
+La décision de publier DeepSeek-OCR en open source complet, avec les poids du modèle téléchargeables sur [Hugging Face](https://huggingface.co/spaces/khang119966/DeepSeek-OCR-DEMO) et le code sur GitHub, contraste violemment avec le destin du modèle R2 de DeepSeek, toujours dans les limbes. [Le contexte géopolitique explique tout](https://www.techradar.com/pro/chaos-at-deepseek-as-r2-launch-crashes-into-hardware-problems-rivals-gain-huge-advantage) : après le succès viral de DeepSeek-R1 au début de 2025, les autorités chinoises ont poussé l'entreprise à abandonner les GPU NVIDIA au profit des puces Ascend de Huawei pour l'entraînement de R2.
+
+Le résultat a été un désastre technique. [Selon le Financial Times](https://www.tomshardware.com/tech-industry/artificial-intelligence/deepseek-reportedly-urged-by-chinese-authorities-to-train-new-model-on-huawei-hardware-after-multiple-failures-r2-training-to-switch-back-to-nvidia-hardware-while-ascend-gpus-handle-inference), DeepSeek n'a pas réussi à terminer une seule session d'entraînement avec succès sur les puces Huawei, malgré l'envoi d'une équipe d'ingénieurs sur place. L'administration Trump avait interdit l'exportation des H20 de NVIDIA vers la Chine en avril 2025, et DeepSeek s'est retrouvée coincée entre les sanctions américaines et les pressions gouvernementales chinoises. Le PDG Liang Wenfeng, [insatisfait des performances de R2](https://www.bgr.com/tech/what-happened-to-deepseeks-revolutionary-r2-ai/), a dû choisir : patriotisme technologique ou résultats concrets.
+
+Dans ce scénario, publier DeepSeek-OCR en open source devient une manœuvre stratégique multidimensionnelle. Premièrement, cela contourne les limitations matérielles : un modèle de 3 milliards de paramètres peut fonctionner sur du matériel grand public, réduisant la dépendance vis-à-vis des centres de données remplis de GPU impossibles à obtenir. Deuxièmement, cela construit du soft power : pendant que R2 végète sur les serveurs de DeepSeek, OCR conquiert les développeurs du monde entier. Troisièmement, cela contourne les restrictions : un modèle open source ne peut pas être "interdit" efficacement, il ne peut qu'être répliqué et amélioré par la communauté.
+
+C'est la même stratégie que Meta a utilisée avec Llama : si vous ne pouvez pas gagner sur le plan commercial fermé, ouvrez tout et laissez l'écosystème faire le travail. [Comme le rapporte Dataconomy](https://dataconomy.com/2025/10/21/deepseek-ocr-new-open-source-ai-model-goes-viral-on-github/), le modèle a atteint 4 000 étoiles sur GitHub en moins de 24 heures, une adoption virale qu'aucune campagne marketing ne pourrait acheter.
+![grafica2.jpg](grafica2.jpg)
+[Image tirée du profil GitHub de DeepSeek OCR](https://github.com/deepseek-ai/DeepSeek-OCR)
+
+## L'avenir de l'OCR : vision contre texte
+
+La réflexion la plus provocatrice vient justement de Karpathy, qui dans son fil de discussion sur X [soulève une question philosophique](https://x.com/karpathy/status/1980397031542989305) : "Peut-être serait-il plus logique que toutes les entrées des LLM soient toujours et uniquement des images." C'est une affirmation qui sonne comme une hérésie pour ceux qui ont passé des années à perfectionner les tokenizers et les embeddings textuels.
+
+Karpathy énumère quatre arguments : une plus grande compression de l'information, un flux de données plus général qui inclut le formatage et les couleurs, la capacité d'utiliser une attention bidirectionnelle plutôt qu'autorégressive, et l'élimination du "vilain tokenizer" avec tous ses problèmes d'Unicode, de sécurité et d'encodage. Son point est simple : un emoji souriant devrait être représenté comme un visage souriant, avec les pixels et tout, et non comme un token abstrait qui a perdu toute connexion visuelle avec sa signification originale.
+
+Xie Saining, professeur assistant à l'Université de New York, [est d'accord avec cette vision](https://dataconomy.com/2025/10/21/deepseek-ocr-new-open-source-ai-model-goes-viral-on-github/) de convergence entre la vision par ordinateur et le traitement du langage naturel. Mais l'enthousiasme doit être tempéré par le réalisme. Les tokenizers textuels existent depuis des décennies pour une raison : ils sont efficaces pour le langage naturel pur. Le texte rendu sous forme d'image, même compressé, prend plus de place qu'un bon tokenizer BPE pour un contenu purement textuel.
+
+Le véritable cas d'utilisation est hybride : des documents où la mise en page, le formatage et la structure visuelle font partie intégrante de la signification. Des contrats juridiques où l'indentation compte. Des rapports financiers où tableaux et graphiques coexistent avec le texte. Des articles scientifiques remplis d'équations. Dans ces scénarios, DeepSeek-OCR brille car il préserve le contexte visuel qu'un analyseur de texte détruirait.
+
+D'un autre côté, pour une conversation en chat ou une simple invite textuelle, tout convertir en image est un gaspillage. C'est comme utiliser un oscilloscope pour mesurer la température : techniquement possible, mais absurde. [Simon Willison](https://simonwillison.net/2025/Oct/20/deepseek-ocr-claude-code/) note que DeepSeek-OCR fonctionne mieux lorsqu'il est combiné avec d'autres outils, et non comme un substitut universel.
+
+Le débat rappelle celui entre le vinyle et le numérique dans la musique : les puristes du texte soutiennent que la représentation symbolique est plus propre, les visionnaires des pixels disent que seule l'image capture la totalité de l'information. La vérité, comme toujours, se situe entre les deux : une multi-modalité native, où les modèles peuvent choisir dynamiquement la meilleure représentation pour chaque type d'entrée.
+
+## Conclusions : innovation ou échappatoire élégante ?
+
+DeepSeek-OCR est les deux. C'est une innovation authentique dans l'approche de la compression contextuelle, avec une architecture qui remet en question les hypothèses établies sur la manière de représenter l'information textuelle. Mais c'est aussi une échappatoire brillante à des contraintes concrètes : peu de GPU, pressions politiques, besoin d'une efficacité extrême.
+
+[Le modèle sur Hugging Face](https://huggingface.co/spaces/khang119966/DeepSeek-OCR-DEMO) tourne à 2 500 tokens par seconde sur une A100-40G, des performances qui impressionnent compte tenu de la complexité de la tâche. Les développeurs peuvent l'intégrer facilement dans leurs pipelines, et la licence open source permet des modifications et des adaptations. Pour ceux qui travaillent avec de grands volumes de documents, cela pourrait être la solution qu'ils cherchaient.
+
+Cependant, les aspects critiques ne doivent pas être ignorés. La précision n'est pas meilleure que l'état de l'art, comme l'a admis Karpathy lui-même. La qualité des données d'entraînement, cruciale pour tout système OCR, reste opaque dans la documentation officielle. Et le modèle est optimisé pour les documents en chinois et en anglais, avec un support limité pour d'autres langues.
+
+Le succès viral sur GitHub et l'enthousiasme de la communauté suggèrent que DeepSeek a touché un point sensible : le désir d'outils efficaces, ouverts et pragmatiques à une époque de modèles de plus en plus grands et coûteux. Alors que les géants de la technologie se disputent pour savoir qui a le plus grand centre de données, DeepSeek démontre qu'on peut encore innover dans les coins, en trouvant de l'efficacité là où d'autres ne voient que la nécessité de plus de puissance brute.
+
+Comme cette scène finale de *Ghost in the Shell* où Motoko Kusanagi fusionne avec le Puppet Master, peut-être que l'avenir de l'IA n'est pas une victoire totale du texte ou de la vision, mais une synthèse hybride où les deux coexistent et se complètent. DeepSeek-OCR est un pas dans cette direction, imparfait mais fascinant, pragmatique mais visionnaire. Et surtout, il est open source : ce qui signifie que dans six mois, un adolescent de génie aura probablement déjà résolu les problèmes qui semblent limitants aujourd'hui. C'est cela, au fond, le véritable pouvoir de l'open source : non pas la perfection, mais l'itération infinie.

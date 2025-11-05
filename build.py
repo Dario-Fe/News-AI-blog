@@ -1435,7 +1435,7 @@ def generate_sitemap_xml():
     for article_dir, languages in articles_db.items():
         for lang, files in languages.items():
             for file_info in files:
-                slug = os.path.splitext(file_info['name'])[0].strip()
+                slug = os.path.splitext(file_info['name'])[0].strip().replace('_', '-')
                 path = f"{slug}.html"
                 encoded_path = quote(path)
                 urls.append(f"{SITE_URL}{lang}/{encoded_path}")

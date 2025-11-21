@@ -5,7 +5,7 @@ author: "Dario Ferrero"
 youtube_url: "https://youtu.be/qY0DZDvbtFs?si=h8ZiFeNXy3Pdrlg2"
 ---
 
-# L'Ai ti rende più abile, non più saggio. Sovrastimare le proprie conoscenze
+# L'AI ti rende più abile, non più saggio. Sovrastimare le proprie conoscenze
 ![ai-metacognition.jpg](ai-metacognition.jpg)
 
 *Immaginate di sostenere il test d'ammissione alla facoltà di legge americana con ChatGPT al vostro fianco. I risultati migliorano sensibilmente: tre punti in più rispetto a chi affronta l'esame da solo. Eppure, quando vi viene chiesto di valutare la vostra performance, sbagliate di quattro punti per eccesso. Non solo: più conoscete tecnicamente il funzionamento dell'intelligenza artificiale, più questa illusione di competenza si amplifica. Benvenuti nel paradosso della cognizione aumentata, dove diventare più bravi significa contemporaneamente perdere la capacità di capire quanto siamo davvero bravi.*

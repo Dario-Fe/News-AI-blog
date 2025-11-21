@@ -1,0 +1,5 @@
+reportlab
+Pillow
+markdown2
+python-frontmatter
+PyPDF2

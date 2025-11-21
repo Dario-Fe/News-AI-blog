@@ -1,0 +1,75 @@
+/* Stili di base per l'ebook */
+@page {
+    size: A4;
+    margin: 0; /* RIMUOVI I MARGINI DA TUTTE LE PAGINE PER ORA */
+}
+
+body {
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 2cm; /* RIMETTI I MARGINI SOLO PER IL CORPO */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #111;
+    break-after: avoid-page;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-top: 1.5em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.3em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+    border: 1px solid #ddd;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+/* Copertina - QUESTO È IL CODICE CHIAVE */
+.cover {
+    page-break-after: always;
+    text-align: center;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.cover img {
+    width: 210mm !important;
+    height: 297mm !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+/* Articoli */
+.article {
+    page-break-before: always;
+    margin: 2cm; /* RIMETTI I MARGINI PER GLI ARTICOLI */
+}
+
+/* Indice */
+.toc {
+    page-break-before: always;
+    margin: 2cm; /* RIMETTI I MARGINI PER GLI INDICI */
+}

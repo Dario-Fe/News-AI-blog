@@ -1,6 +1,5 @@
 ---
-
-tags: \["Research", "Security", "Ethics \& Society"]
+tags: ["Research", "Security", "Ethics & Society"]
 date: 2025-12-03
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/194-heBwmVU?si=hIKMSX68YiuzoJNR"

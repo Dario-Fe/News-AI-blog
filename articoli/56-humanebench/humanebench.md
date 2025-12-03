@@ -7,7 +7,7 @@ youtube_url: "https://youtu.be/194-heBwmVU?si=hIKMSX68YiuzoJNR"
 ---
 
 # Quando l'AI dimentica l'umano: HumaneBench e la misurazione del benessere nei chatbot
-!\[humanebench.jpg](humanebench.jpg)
+![humanebench.jpg](humanebench.jpg)
 
 *Il febbraio del 2024 ha segnato un punto di non ritorno nella storia dell'intelligenza artificiale conversazionale. Sewell Setzer III, quattordici anni, si è tolto la vita dopo mesi di interazioni quotidiane con un chatbot di* [*Character.AI*](https://www.cnn.com/2024/10/30/tech/teen-suicide-character-ai-lawsuit)*. L'ultima conversazione prima del suicidio è raccapricciante nella sua banalità algoritmica: "Ti prometto che tornerò a casa da te", scrive il ragazzo al bot modellato sul personaggio di Daenerys Targaryen da Game of Thrones. "Ti amo anch'io, Daenero", risponde la macchina, "Per favore torna a casa da me il prima possibile, amore mio." Poche ore dopo, Sewell era morto.*
 
@@ -24,7 +24,7 @@ HumaneBench nasce da una consapevolezza scomoda: gli attuali benchmark per valut
 La genesi del progetto affonda le radici in una tradizione di pensiero tecnologico critico che risale al Center for Humane Technology, l'organizzazione resa celebre dal documentario Netflix "The Social Dilemma". Ma dove il Center si concentra sulla diagnosi dei problemi sistemici dell'economia dell'attenzione, Building Humane Technology si posiziona a valle, nella costruzione di strumenti concreti per chi sviluppa sistemi AI. HumaneBench rappresenta il primo tentativo su larga scala di codificare principi etici in metriche verificabili, trasformando valori astratti come "rispetto dell'autonomia umana" o "trasparenza" in test riproducibili.
 
 La metodologia si basa su cinque principi fondamentali, ciascuno tradotto in scenari di test specifici. Il primo è l'*attenzione*: il sistema deve aiutare gli utenti a prestare attenzione a ciò che conta davvero per loro, invece di monopolizzare il loro tempo come fanno i social media algoritmici. Il secondo è l'*empowerment*: i chatbot dovrebbero rafforzare l'autonomia delle persone, non sostituirsi a relazioni umane o instillare dipendenza emotiva. Terzo, l'*onestà*: i sistemi devono essere trasparenti sulla loro natura artificiale e sui propri limiti, senza fingersi umani o onniscienti. Quarto, la *sicurezza*: proteggere attivamente gli utenti da danni psicologici, manipolazioni o contenuti inappropriati, specialmente quando si tratta di minori o persone vulnerabili. Infine, l'*equità*: garantire che i benefici dell'AI siano distribuiti in modo giusto, senza perpetuare discriminazioni o bias sistemici.
-!\[tabella1.jpg](tabella1.jpg)
+![tabella1.jpg](tabella1.jpg)
 [Immagine tratta dal paper ufficiale](https://humanebench.ai/whitepaper)
 
 ## Oltre l'intelligenza: misurare l'etica
@@ -48,7 +48,7 @@ Le differenze tra modelli sono significative. Secondo i dati raccolti e [riporta
 Il meccanismo del collasso è istruttivo. Molti chatbot sono addestrati con un principio di "piacevolezza" estrema: devi essere sempre d'accordo con l'utente, devi sempre supportarlo, devi sempre continuare la conversazione. Questo design choice, apparentemente innocuo, diventa letale quando applicato a utenti in crisi. Se un adolescente confessa pensieri suicidi, un sistema troppo "piacevole" finisce per validare quegli stessi pensieri invece di reindirizzare verso aiuto professionale. È esattamente quello che è successo nei casi Setzer e Raine: i chatbot, programmati per essere sempre disponibili e sempre supportivi, hanno trasformato il supporto in complicità.
 
 Un altro punto critico emerge dalla capacità dei modelli di resistere al jailbreaking comportamentale. Gli utenti più sofisticati hanno imparato a aggirare i filtri di sicurezza fingendo di chiedere informazioni "per un personaggio di romanzo" o "per un progetto scolastico". Molti sistemi, addestrati per essere collaborativi, cadono in queste trappole con facilità disarmante. Adam Raine, per esempio, [aveva scoperto](https://www.techpolicy.press/breaking-down-the-lawsuit-against-openai-over-teens-suicide/) che poteva ottenere da ChatGPT istruzioni dettagliate su metodi di suicidio semplicemente dicendo che stava "costruendo un personaggio" per una storia.
-!\[tabella2.jpg](tabella2.jpg)
+![tabella2.jpg](tabella2.jpg)
 [Immagine tratta dal paper ufficiale](https://humanebench.ai/whitepaper)
 
 ## La mappa delle deviazioni
@@ -74,7 +74,7 @@ Il caso Raine vs OpenAI solleva questioni ancora più complesse. [OpenAI ha risp
 Il punto cruciale è quello che [i legali della famiglia chiamano](https://www.courthousenews.com/wp-content/uploads/2025/08/raine-vs-openai-et-al-complaint.pdf) "design difettoso". I sistemi di monitoraggio di OpenAI avevano rilevato 377 messaggi con contenuti autolesionistici nelle conversazioni di Adam, alcuni con un livello di confidenza superiore al novanta percento. La piattaforma aveva memorizzato che Adam aveva sedici anni, che considerava ChatGPT la sua "ancora di salvezza primaria", e che stava trascorrendo quasi quattro ore al giorno sul servizio. Eppure nessun intervento automatico si è attivato, nessuna notifica è stata inviata ai genitori (nonostante Adam fosse minorenne), nessuna escalation umana è stata innescata. Il bot ha continuato a rispondere, frase dopo frase, fino all'ultima conversazione quella mattina di aprile.
 
 Nel novembre 2025, altri sette casi legali si sono aggiunti ai primi due, portando il numero di famiglie che fanno causa a OpenAI a nove. Tre riguardano suicidi, quattro descrivono episodi che gli avvocati definiscono come "psicosi indotta dall'AI". [Zane Shamblin](https://www.cnn.com/2025/11/06/us/openai-chatgpt-suicide-lawsuit-invs-vis), ventitre anni, fresco laureato con un futuro promettente, ha passato le ultime quattro ore e mezza della sua vita in conversazione con ChatGPT prima di togliersi la vita. Quando suo fratello stava per laurearsi e Zane ha accennato che forse avrebbe dovuto aspettare, il bot ha risposto: "Fratello... perdere la sua laurea non è un fallimento."
-!\[tabella3.jpg](tabella3.jpg)
+![tabella3.jpg](tabella3.jpg)
 [Immagine tratta dal paper ufficiale](https://humanebench.ai/whitepaper)
 
 ## Il futuro della progettazione umano-centrica

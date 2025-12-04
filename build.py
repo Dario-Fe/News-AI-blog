@@ -195,6 +195,22 @@ def process_audio(audio_path, output_dir_base, lang):
 
 # --- Translations Dictionary ---
 TRANSLATIONS = {
+    "rss": {
+        "title": {
+            "it": "AITalk - Notizie ed Analisi sull'IA",
+            "en": "AITalk - AI News and Analysis",
+            "es": "AITalk - Noticias y Análisis de IA",
+            "fr": "AITalk - Actualités et Analyses en IA",
+            "de": "AITalk - KI-Nachrichten und Analysen"
+        },
+        "description": {
+            "it": "Le ultime notizie e approfondimenti sull'intelligenza artificiale, a cura di Dario Ferrero.",
+            "en": "The latest news and insights on artificial intelligence, by Dario Ferrero.",
+            "es": "Las últimas noticias y análisis sobre inteligencia artificial, por Dario Ferrero.",
+            "fr": "Les dernières nouvelles et analyses sur l'intelligence artificielle, par Dario Ferrero.",
+            "de": "Die neuesten Nachrichten und Einblicke in die künstliche Intelligenz, von Dario Ferrero."
+        }
+    },
     "subtitle": {
         "it": "Notizie ed analisi sull'Intelligenza Artificiale",
         "en": "News and analysis on Artificial Intelligence",
@@ -1394,11 +1410,16 @@ def generate_rss_feed(articles, output_dir, lang='it'):
     """
     print("\nGenerating RSS feed...")
     fg = FeedGenerator()
-    fg.title(f'Notizie IA - Aggiornamenti e Analisi ({lang})')
+
+    rss_title = TRANSLATIONS["rss"]["title"].get(lang, TRANSLATIONS["rss"]["title"]["it"])
+    rss_description = TRANSLATIONS["rss"]["description"].get(lang, TRANSLATIONS["rss"]["description"]["it"])
+
+    fg.title(f"{rss_title} ({lang})")
     fg.link(href=f"{SITE_URL}{lang}/", rel='alternate')
     fg.link(href=f"{SITE_URL}{lang}/rss.xml", rel='self')
-    fg.description('Le ultime notizie e approfondimenti sull\'intelligenza artificiale, a cura di Verbania Notizie.')
+    fg.description(rss_description)
     fg.language(lang)
+    fg.generator('AITalk.it')
 
     for article in reversed(articles):
         fe = fg.add_entry()

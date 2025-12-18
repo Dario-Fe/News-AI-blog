@@ -225,6 +225,29 @@ TRANSLATIONS = {
         "fr": "S'abonner",
         "de": "Abonnieren"
     },
+    "newsletter_box": {
+        "title": {
+            "it": "Ti sta piacendo questo articolo?",
+            "en": "Are you enjoying this article?",
+            "es": "¿Estás disfrutando de este artículo?",
+            "fr": "Vous appréciez cet article ?",
+            "de": "Gefällt Ihnen dieser Artikel?"
+        },
+        "paragraph": {
+            "it": "Iscriviti alla newsletter per non perdere i prossimi contenuti. Niente spam, solo approfondimenti di qualità sull'IA.",
+            "en": "Subscribe to the newsletter to not miss future content. No spam, only quality insights on AI.",
+            "es": "Suscríbete al boletín para no perderte contenido futuro. Sin spam, solo análisis de calidad sobre IA.",
+            "fr": "Abonnez-vous à la newsletter pour ne pas manquer les prochains contenus. Pas de spam, juste des analyses de qualité sur l'IA.",
+            "de": "Abonnieren Sie den Newsletter, um keine zukünftigen Inhalte zu verpassen. Kein Spam, nur qualitativ hochwertige Einblicke in die KI."
+        },
+        "button_text": {
+            "it": "Iscriviti Gratuitamente",
+            "en": "Subscribe for Free",
+            "es": "Suscríbete Gratis",
+            "fr": "Abonnez-vous Gratuitement",
+            "de": "Kostenlos abonnieren"
+        }
+    },
     "newsletter_page": {
         "title": {
             "it": "Iscriviti alla nostra Newsletter",
@@ -893,6 +916,24 @@ def process_article(md_file_info, output_dir_base, lang):
         audio_path = None
         if md_file_info.get('audio_path'):
             audio_path = process_audio(md_file_info['audio_path'], output_dir_base, lang)
+
+        # Inject newsletter box
+        paragraphs = soup.find_all('p')
+        if len(paragraphs) > 2:
+            insertion_point = paragraphs[len(paragraphs) // 2]
+
+            box_title = TRANSLATIONS["newsletter_box"]["title"].get(lang, TRANSLATIONS["newsletter_box"]["title"]["it"])
+            box_paragraph = TRANSLATIONS["newsletter_box"]["paragraph"].get(lang, TRANSLATIONS["newsletter_box"]["paragraph"]["it"])
+            box_button = TRANSLATIONS["newsletter_box"]["button_text"].get(lang, TRANSLATIONS["newsletter_box"]["button_text"]["it"])
+
+            newsletter_box_html = f"""
+            <div class="newsletter-box">
+                <h3>{box_title}</h3>
+                <p>{box_paragraph}</p>
+                <a href="../newsletter.html" class="subscribe-button">{box_button}</a>
+            </div>
+            """
+            insertion_point.insert_after(BeautifulSoup(newsletter_box_html, 'html.parser'))
 
         final_html_content = str(soup)
         slug = os.path.splitext(md_file_info['name'])[0].strip().replace('_', '-')

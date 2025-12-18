@@ -930,7 +930,7 @@ def process_article(md_file_info, output_dir_base, lang):
             <div class="newsletter-box">
                 <h3>{box_title}</h3>
                 <p>{box_paragraph}</p>
-                <a href="../newsletter.html" class="subscribe-button">{box_button}</a>
+                <a href="newsletter.html" class="subscribe-button">{box_button}</a>
             </div>
             """
             insertion_point.insert_after(BeautifulSoup(newsletter_box_html, 'html.parser'))

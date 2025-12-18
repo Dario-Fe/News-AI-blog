@@ -1,27 +1,41 @@
 #!/bin/bash
-# Exit immediately if a command exits with a non-zero status.
-set -e
+echo "Questo script installerà le dipendenze necessarie e costruirà il sito web."
+read -p "Premi Invio per continuare..."
 
-echo "--- STARTING BUILD PROCESS ---"
+echo "Installazione delle dipendenze da requirements.txt..."
+pip install -r requirements.txt
 
-# 1. Clean and create the main output directory
-echo "1. Cleaning previous build..."
-if [ -d "dist" ]; then rm -r dist; fi
-mkdir dist
+if [ $? -ne 0 ]; then
+    echo "Si è verificato un errore durante l'installazione delle dipendenze."
+    read -p "Premi Invio per uscire."
+    exit 1
+fi
 
-# 2. Copy site-wide static files (like form definitions)
-echo "2. Copying site-wide static files..."
-cp forms.html dist/forms.html
+echo ""
+echo "Avvio del processo di build per tutte le lingue..."
+echo ""
 
-# 3. Build the site for each language
-echo "2. Building site for each language..."
-for lang in it en es fr de; do
-  echo "--- Building for $lang ---"
-  python build.py --lang "$lang"
+LANGUAGES=("it" "en" "es" "fr" "de")
+
+for lang in "${LANGUAGES[@]}"; do
+    echo "--- Costruzione del sito per la lingua: $lang ---"
+    python3 build.py --lang "$lang"
+    if [ $? -ne 0 ]; then
+        echo "Si è verificato un errore durante la costruzione per la lingua $lang."
+        read -p "Premi Invio per uscire."
+        exit 1
+    fi
+    echo ""
 done
 
-# 4. Generate master files (sitemap, robots.txt, root redirect)
-echo "4. Generating master files..."
-python build.py --master-files
+echo "--- Generazione dei file master (sitemap, robots.txt)... ---"
+python3 build.py --master-files
+if [ $? -ne 0 ]; then
+    echo "Si è verificato un errore during la generazione dei file master."
+    read -p "Premi Invio per uscire."
+    exit 1
+fi
 
-echo "--- BUILD PROCESS COMPLETE ---"
+echo ""
+echo "Processo di build completato con successo!"
+read -p "Premi Invio per uscire."

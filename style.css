@@ -511,3 +511,39 @@ body {
 #article-view #podcast-player {
     width: 100%;
 }
+
+/* Newsletter Box */
+.newsletter-box {
+    background-color: #f0f2f5;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.newsletter-box h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #1c1e21;
+}
+
+.newsletter-box p {
+    color: #606770;
+    margin-bottom: 20px;
+}
+
+.newsletter-box .subscribe-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #1877f2;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.newsletter-box .subscribe-button:hover {
+    background-color: #166fe5;
+}

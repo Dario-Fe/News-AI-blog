@@ -918,10 +918,19 @@ def process_article(md_file_info, output_dir_base, lang):
             audio_path = process_audio(md_file_info['audio_path'], output_dir_base, lang)
 
         # Inject newsletter box
-        paragraphs = soup.find_all('p')
-        if len(paragraphs) > 2:
-            insertion_point = paragraphs[len(paragraphs) // 2]
+        headings = soup.find_all('h2')
+        insertion_point = None
 
+        if len(headings) > 1:
+            # Prefer to insert after a middle chapter heading
+            insertion_point = headings[len(headings) // 2]
+        else:
+            # Fallback to inserting in the middle of the article's paragraphs for longer articles
+            paragraphs = soup.find_all('p')
+            if len(paragraphs) > 5:
+                insertion_point = paragraphs[len(paragraphs) // 2]
+
+        if insertion_point:
             box_title = TRANSLATIONS["newsletter_box"]["title"].get(lang, TRANSLATIONS["newsletter_box"]["title"]["it"])
             box_paragraph = TRANSLATIONS["newsletter_box"]["paragraph"].get(lang, TRANSLATIONS["newsletter_box"]["paragraph"]["it"])
             box_button = TRANSLATIONS["newsletter_box"]["button_text"].get(lang, TRANSLATIONS["newsletter_box"]["button_text"]["it"])

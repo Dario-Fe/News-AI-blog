@@ -942,7 +942,7 @@ def process_article(md_file_info, output_dir_base, lang):
                 <a href="newsletter.html" class="subscribe-button">{box_button}</a>
             </div>
             """
-            insertion_point.insert_after(BeautifulSoup(newsletter_box_html, 'html.parser'))
+            insertion_point.insert_before(BeautifulSoup(newsletter_box_html, 'html.parser'))
 
         final_html_content = str(soup)
         slug = os.path.splitext(md_file_info['name'])[0].strip().replace('_', '-')

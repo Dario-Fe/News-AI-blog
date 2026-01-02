@@ -1,5 +1,5 @@
 ---
-tags: ["Generative A", "Ethics & Society", "Business"]
+tags: ["Generative AI", "Ethics & Society", "Business"]
 date: 2025-12-31
 author: "Dario Ferrero"
 ---

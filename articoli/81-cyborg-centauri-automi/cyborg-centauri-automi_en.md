@@ -1,0 +1,68 @@
+---
+tags: ["Research", "Ethics & Society", "Generative AI"]
+date: 2026-01-30
+author: "Dario Ferrero"
+---
+
+# Cyborgs, Centaurs, or Automators: How You Use AI Reveals Who You Will Become
+![cyborg-centauri-automi.jpg](cyborg-centauri-automi.jpg)
+
+*Imagine a consultant from the Boston Consulting Group, handsomely paid for their strategic acumen, who, when faced with a critical business case, copies and pastes the entire problem into ChatGPT and accepts the AI's recommendation without asking a single question. The answer was wrong. Yet this professional delivered the memo to the CEO without batting an eye. This is not an isolated case: in a [study conducted by researchers from Harvard and MIT](https://www.hbs.edu/ris/Publication%20Files/26-036_e7d0e59a-904c-49f1-b610-56eb2bdfe6f9.pdf) on 244 BCG consultants, 27% did exactly this, completely delegating their reasoning to the machine.*
+
+The contradiction is striking. These were not lazy interns but qualified professionals who knew they were being evaluated. They had access to the same tool, the same data, the same task. Yet they produced three completely different patterns of collaboration with generative artificial intelligence, with radically opposite consequences for their professional development. The question that emerges from the study is not whether to use AI, but how. And the answer to that "how" is quietly redrawing the boundary between human expertise and machine capability.
+
+## Three Tribes, One Tool
+
+The [working paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4921696) by Steven Randazzo, Katherine Kellogg, Hila Lifshitz, François Candelon, Fabrizio Dell'Acqua, Ethan Mollick, and Karim Lakhani is titled "Cyborgs, Centaurs and Self-Automators" and represents a natural evolution of the research that in 2023 introduced the concept of the "jagged frontier" of AI. That first investigation revealed how GPT-4's capabilities were irregular, excellent in some tasks and surprisingly fragile in others. This new study goes further, shifting the focus from what AI can do to how humans choose to integrate it into their workflow.
+
+The researchers built a custom platform based on GPT-4 to track every single interaction: 4,975 exchanges between professionals and the machine, all recorded with timestamps. The assigned task replicated a classic strategic consulting case, analyzing three clothing brands of a fictitious company and recommending which one to invest in to maximize growth. Participants had transcripts of interviews with executives, historical financial data, and market information. Dense, ambiguous material, just like in reality.
+
+What emerged from the analysis of the interaction patterns surprised the researchers themselves. There was not one single way of working with generative AI, but three distinct modes that the authors named with evocative names borrowed from mythology and science fiction. 60% of the consultants behaved like "Cyborgs," continuously merging their own reasoning with that of the machine in a tight, iterative dialogue. 14% acted as "Centaurs," firmly maintaining strategic control and using AI selectively for specific tasks. The remaining 27% transformed into "Self-Automators," entrusting the AI with both the definition of the problem and its execution.
+
+The choice of the name Centaur is not accidental. Like the mythological creature that combines human intelligence and equine strength while keeping them distinct, these professionals keep their domains of expertise separate, deciding for themselves what to do and how to do it, delegating only circumscribed tasks to the AI. The Cyborgs, on the other hand, in a fusion more reminiscent of *Ghost in the Shell* than The Matrix, work in continuous symbiosis with the machine, with no clear boundaries between where human thought ends and algorithmic thought begins.
+
+## The Jagged Frontier of Expertise
+
+To truly understand what distinguishes these three tribes, one must delve into the details of the conversations. The Cyborgs developed a sophisticated repertoire of interactive practices. They assign the machine a role, a persona, "Imagine you are a senior consultant specializing in retail," to guide its responses. Then they break down complex problems into more manageable sub-tasks, what the researchers call "modularization" and what in technical jargon is known as chain-of-thought prompting. They do not trust blindly: they ask the AI to check its own work, to justify its conclusions, and they challenge it when they find contradictions.
+
+A concrete example from the study. A consultant receives a recommendation from GPT-4 to invest in the women's brand. But something doesn't add up. He adds market data showing 72% growth in the men's segment and asks, "Does this change your recommendation?". The AI re-evaluates and suggests considering the men's brand as well. The consultant insists, points out inconsistencies in the growth rates, pushes back. After several rounds, the correct answer emerges. This is not a simple use of AI; it is a cognitive dance.
+
+The Centaurs, however, work in a radically different way. They use AI mainly for three purposes: to map the problem domain by asking for general information like "What are the key trends in menswear?", to gather methodological information such as "What is the Excel formula to calculate CAGR?", and to refine content they have already written themselves. A Centaur consultant does the calculations himself in Excel after asking the AI for the formula. He writes his conclusions and then asks, "Can you review this text for clarity and conciseness?". Control is never relinquished.
+
+The Self-Automators are the opposite extreme. In some cases, they completed the entire task with one or two interactions. They copy the entire problem description, all the interviews, all the financial tables into a single mammoth prompt. GPT-4 responds with analysis, recommendations, innovative strategies, and a final memo. They accept, perhaps making a few superficial editorial tweaks, "Reduce to 400 words" or "Remove the direct quotes." The end. No validation, no iteration on the merits.
+
+## Who Learns What (and Who Learns Nothing)
+
+The implications for professional development are drastic. The researchers identified three different learning trajectories which they call upskilling, newskilling, and no skilling. The Cyborgs develop what the study defines as AI-related expertise, learning to orchestrate the machine with increasing precision. One consultant interviewed recounts, "Before, I would ask a question and take the answer as a starting point. Now I know I can keep digging, ask follow-up questions, push deeper." They are acquiring a new meta-cognitive skill, the ability to collaborate effectively with generative systems.
+
+But be careful, the Cyborgs are not abandoning their domain expertise. On the contrary, they keep it active precisely because they must continuously evaluate, correct, and integrate what the AI produces. When a Cyborg points out a factual contradiction in GPT-4's output, they are exercising their professional judgment. When they ask the AI to recalculate after adding new data, they are guiding the analysis with their understanding of the context.
+
+The Centaurs, on the other hand, develop classic upskilling, deepening their expertise in the specific domain. One consultant reports using ChatGPT as a "one-stop service" to accelerate learning in new sectors, asking for examples of companies that have faced similar challenges, studying concrete cases, and using the AI as an enhanced version of Google that not only finds information but also synthesizes and contextualizes it. Their relationship with the machine is instrumental, a means to become better at their job, not to transform it.
+
+The Self-Automators, however, are the most disturbing story. The study is lapidary: "no skilling," no development of either AI skills or domain expertise. The minimal exchange of information, the lack of iteration, the total delegation of decision-making produce professional stagnation. Like Melville's Bartleby the Scrivener who only replies "I would prefer not to," these professionals preferred not to think, delegating to the machine even the learning process that comes from cognitive effort.
+![tabella-skills.jpg](tabella-skills.jpg)
+[Image from hbs.edu](https://www.hbs.edu/ris/Publication%20Files/26-036_e7d0e59a-904c-49f1-b610-56eb2bdfe6f9.pdf)
+
+## The Pitfalls of Total Delegation
+
+There is a counterintuitive element in the results on the quality of the outputs. The Centaurs produced the most accurate recommendations, surpassing both the Cyborgs and the Self-Automators. This raises profound questions about the relationship between intense collaboration and performance. Why don't the Cyborgs, who interact continuously with the AI, achieve the best results?
+
+The answer lies in what [Ethan Mollick](https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged) calls the problem of the "jagged frontier." GPT-4's capabilities are excellent in some tasks but fragile in others, and the boundaries are unpredictable. The Cyborgs, working in constant symbiosis, risk trusting the machine too much even when it is operating outside of its zone of strength. A Cyborg consultant in the study uses the practice of "validation," explicitly asking the AI to check its own work. GPT-4 confirms the wrong recommendation with plausible arguments. The consultant, convinced by the apparent logical coherence, accepts. He used a best practice, but the machine still deceived him.
+
+The Centaurs avoid this trap because they always keep their critical lens active. They never ask the AI to make strategic decisions, only to support their analysis. When a Centaur asks, "How can I reposition the price to attract a younger male target?", he is looking for stimuli, not definitive answers. The final judgment remains human.
+
+The Self-Automators, on the other hand, represent the most obvious risk, the erosion of expertise through disuse. Like muscles that atrophy without exercise, problem-solving skills deteriorate when they are systematically delegated. And here a worrying pattern emerges from the study. Many Self-Automators in the interviews expressed full confidence in the AI. One says, "I did a quick sanity check to verify that the data and the recommendation were not too far from reality." Another candidly admits, "I was lazy frankly. I didn't want to write 500 words, I wanted GenAI to produce them."
+
+Cognitive laziness disguised as efficiency is perhaps the most alarming signal. Because these were professionals who knew they were being evaluated, who had an explicit incentive to perform well. What will happen when the daily use of AI is not tracked, when the only pressure is to quickly close a delivery?
+
+## What Kind of AI User Are You?
+
+The study raises questions that go far beyond the specific case of consulting. If three such different modes emerge spontaneously in a homogeneous group of qualified professionals facing the same task, what will happen when generative AI penetrates professions with different epistemic dynamics? A lawyer who has to build a legal argument, a doctor who has to formulate a differential diagnosis, an architect who has to balance aesthetics and structural constraints—each of them could develop unique variations of these patterns.
+
+The researchers are cautious about extending the results too far. The study captured a snapshot of a single session with GPT-4 from April 2023, a model that is already outdated today. We do not know how these patterns evolve over time, whether someone who starts as a Self-Automator can become a Cyborg with experience, or if, conversely, prolonged use inevitably leads to automation for convenience. And there is a quadrant of their theoretical framework that has remained empirically empty, the one where the AI selects what to do but the human executes. Perhaps that configuration is simply unstable; perhaps it represents a future yet to be explored.
+
+Then there is the theme of agentic AIs, systems that do not wait for prompts but act autonomously to complete complex workflows. When AI is no longer a conversational partner but a proactive agent, the three modes identified by the study could collapse or transform into something radically different. The distinction between Cyborg and Self-Automator makes sense only as long as there is an interactive loop to maintain or abdicate.
+
+The organizational implications are equally profound. If Centaurs produce the most accurate outputs but Cyborgs develop new AI skills, which mode should a company promote? The answer depends on the strategic objectives. An organization focused on the immediate quality of service will favor Centaurs. One that aims to build internal AI orchestration capabilities will invest in Cyborgs. And the Self-Automators? The study suggests that complete automation makes sense for routine tasks or when time is critical, but the risks of deskilling must be carefully weighed against the context.
+
+What is certain is that we can no longer treat "the use of AI" as a monolithic category. The relevant question for the future of cognitive work is not "do you use AI?", but "how do you use it?". And that choice, often unconscious, is already writing the script of who you will become professionally in the coming years. Are you a Cyborg learning to dance with the machine, a Centaur who remains firmly in control, or a Self-Automator who prefers to delegate? The answer may be different from task to task, from day to day. But recognizing the pattern is the first step to choosing it consciously instead of being subjected to it.

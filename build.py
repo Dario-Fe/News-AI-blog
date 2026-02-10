@@ -357,6 +357,13 @@ TRANSLATIONS = {
             "es": "Contacto",
             "fr": "Contacts",
             "de": "Kontakt"
+        },
+        "editorial_method": {
+            "it": "Metodo editoriale",
+            "en": "Editorial Method",
+            "es": "Método editorial",
+            "fr": "Méthode éditoriale",
+            "de": "Redaktionelle Methode"
         }
     },
     "pagination": {
@@ -558,6 +565,148 @@ TRANSLATIONS = {
             "de": "Wenn Sie Ihre Daten ändern, löschen oder den Newsletter abbestellen möchten, können Sie uns jederzeit kontaktieren oder den in jeder E-Mail enthaltenen Abmeldelink verwenden."
         }
     },
+    "metodo_page": {
+        "title": {
+            "it": "Metodo editoriale",
+            "en": "Editorial Method",
+            "es": "Método editorial",
+            "fr": "Méthode éditoriale",
+            "de": "Redaktionelle Methode"
+        },
+        "h1": {
+            "it": "Dietro le quinte: come nascono le analisi di AITalk",
+            "en": "Behind the scenes: how AITalk analyses are born",
+            "es": "Entre bastidores: cómo nacen los análisis de AITalk",
+            "fr": "Dans les coulisses : comment naissent les analyses d'AITalk",
+            "de": "Hinter den Kulissen: Wie die AITalk-Analysen entstehen"
+        },
+        "h2_1": {
+            "it": "L'idea prima degli strumenti",
+            "en": "The idea before the tools",
+            "es": "La idea antes que las herramientas",
+            "fr": "L'idée avant les outils",
+            "de": "Die Idee vor den Werkzeugen"
+        },
+        "p1": {
+            "it": "Ogni analisi pubblicata su questo portale inizia nello stesso modo in cui è sempre iniziato un articolo: con la ricerca di una storia che valga la pena raccontare. Scorro giornali specializzati, blog tecnici, social network, YouTube, archivi di ricerche accademiche. Non cerco l'hype del momento, quello che tutti stanno già commentando. Cerco argomenti di sostanza, innovazioni effettive o prospettiche che si nascondono lontano dai riflettori. A volte sono questioni puramente tecniche che però portano con sé collegamenti etici, sociali, culturali, economici o geopolitici. È in questi interstizi che si annidano le storie più interessanti. Ecco l'angolo narrativo: non solo \"cosa hanno fatto\", ma \"perché l'hanno fatto così\" e \"cosa significa nel contesto più ampio della competizione tecnologica globale\".",
+            "en": "Every analysis published on this portal starts the same way an article has always started: with the search for a story worth telling. I scroll through specialized newspapers, technical blogs, social networks, YouTube, archives of academic research. I don't look for the hype of the moment, what everyone is already commenting on. I look for substantive topics, effective or prospective innovations that are hidden away from the spotlight. Sometimes they are purely technical issues that nevertheless bring with them ethical, social, cultural, economic or geopolitical connections. It is in these interstices that the most interesting stories lurk. Here is the narrative angle: not just \"what they did\", but \"why they did it that way\" and \"what it means in the broader context of global technological competition\".",
+            "es": "Cada análisis publicado en este portal comienza de la misma manera que siempre ha comenzado un artículo: con la búsqueda de una historia que valga la pena contar. Recorro periódicos especializados, blogs técnicos, redes sociales, YouTube, archivos de investigaciones académicas. No busco el hype del momento, lo que todo el mundo ya está comentando. Busco temas de fondo, innovaciones reales o prospectivas que se esconden lejos de los focos. A veces son cuestiones puramente técnicas que, sin embargo, conllevan conexiones éticas, sociales, culturales, económicas o geopolíticas. Es en estos intersticios donde se esconden las historias más interesantes. He aquí el ángulo narrativo: no solo \"qué hicieron\", sino \"por qué lo hicieron así\" y \"qué significa en el contexto más amplio de la competencia tecnológica global\".",
+            "fr": "Chaque analyse publiée sur ce portail commence de la même manière qu'un article a toujours commencé : par la recherche d'une histoire qui mérite d'être racontée. Je parcours les journaux spécialisés, les blogs techniques, les réseaux sociaux, YouTube, les archives de recherche académique. Je ne cherche pas le buzz du moment, ce que tout le monde commente déjà. Je cherche des sujets de fond, des innovations réelles ou prospectives qui se cachent loin des projecteurs. Parfois, il s'agit de questions purement techniques qui portent néanmoins en elles des liens éthiques, sociaux, culturels, économiques ou géopolitiques. C'est dans ces interstices que se nichent les histoires les plus intéressantes. Voici l'angle narratif : non seulement « ce qu'ils ont fait », mais « pourquoi ils l'ont fait ainsi » et « ce que cela signifie dans le contexte plus large de la compétition technologique mondiale ».",
+            "de": "Jede auf diesem Portal veröffentlichte Analyse beginnt auf dieselbe Weise, wie ein Artikel schon immer begonnen hat: mit der Suche nach einer Geschichte, die es wert ist, erzählt zu werden. Ich durchforste Fachzeitungen, technische Blogs, soziale Netzwerke, YouTube, Archive akademischer Forschung. Ich suche nicht nach dem Hype des Augenblicks, dem, was alle bereits kommentieren. Ich suche nach substanziellen Themen, effektiven oder perspektivischen Innovationen, die sich abseits des Rampenlichts verbergen. Manchmal sind es rein technische Fragen, die jedoch ethische, soziale, kulturelle, wirtschaftliche oder geopolitische Verbindungen mit sich bringen. In diesen Zwischenräumen nisten die interessantesten Geschichten. Hier ist der erzählerische Blickwinkel: nicht nur \"was sie getan haben\", sondern \"warum sie es so getan haben\" und \"was es im größeren Kontext des globalen technologischen Wettbewerbs bedeutet\"."
+        },
+        "h2_2": {
+            "it": "La ricerca: da Google a Perplexity",
+            "en": "Research: from Google to Perplexity",
+            "es": "La investigación: de Google a Perplexity",
+            "fr": "La recherche : de Google à Perplexity",
+            "de": "Die Recherche: von Google bis Perplexity"
+        },
+        "p2_1": {
+            "it": "Una volta identificata l'idea, inizia il lavoro di scavo. La prima fase è quella classica: una ricerca manuale su Google per orientarmi, capire chi ha già scritto cosa, individuare le fonti primarie. Poi passo a Perplexity, uno strumento AI specializzato nella ricerca e nell'aggregazione di fonti che ho trovato particolarmente affidabile. Non si tratta di delegare la ricerca all'intelligenza artificiale, ma di usarla come amplificatore: Perplexity mi permette di esplorare connessioni che richiederebbero ore di lavoro manuale, indicizzando rapidamente paper accademici, comunicati stampa ufficiali, discussioni tecniche su forum specializzati.",
+            "en": "Once the idea has been identified, the excavation work begins. The first phase is the classic one: a manual search on Google to orient myself, understand who has already written what, identify primary sources. Then I move on to Perplexity, an AI tool specialized in research and source aggregation that I have found particularly reliable. It's not about delegating research to artificial intelligence, but about using it as an amplifier: Perplexity allows me to explore connections that would require hours of manual work, quickly indexing academic papers, official press releases, technical discussions on specialized forums.",
+            "es": "Una vez identificada la idea, comienza el trabajo de excavación. La primera fase es la clásica: una búsqueda manual en Google para orientarme, entender quién ha escrito ya qué, identificar fuentes primarias. Luego paso a Perplexity, una herramienta de IA especializada en la investigación y agregación de fuentes que me ha parecido particularmente fiable. No se trata de delegar la investigación en la inteligencia artificial, sino de usarla como amplificador: Perplexity me permite explorar conexiones que requerirían horas de trabajo manual, indexando rápidamente artículos académicos, comunicados de prensa oficiales, discusiones técnicas en foros especializados.",
+            "fr": "Une fois l'idée identifiée, le travail de fouille commence. La première phase est classique : une recherche manuelle sur Google pour m'orienter, comprendre qui a déjà écrit quoi, identifier les sources primaires. Ensuite, je passe à Perplexity, un outil d'IA spécialisé dans la recherche et l'agrégation de sources que j'ai trouvé particulièrement fiable. Il ne s'agit pas de déléguer la recherche à l'intelligence artificielle, mais de l'utiliser comme un amplificateur : Perplexity me permet d'explorer des connexions qui nécessiteraient des heures de travail manuel, en indexant rapidement des articles académiques, des communiqués de presse officiels, des discussions techniques sur des forums spécialisés.",
+            "de": "Sobald die Idee identifiziert ist, beginnt die Grabungsarbeit. Die erste Phase ist die klassische: eine manuelle Suche auf Google, um mich zu orientieren, zu verstehen, wer bereits was geschrieben hat, und Primärquellen zu identifizieren. Dann wechsle ich zu Perplexity, einem KI-Tool, das auf Recherche und Aggregation von Quellen spezialisiert ist und das ich als besonders zuverlässig empfunden habe. Es geht nicht darum, die Recherche an die künstliche Intelligenz zu delegieren, sondern sie als Verstärker zu nutzen: Perplexity ermöglicht es mir, Verbindungen zu erkunden, die Stunden manueller Arbeit erfordern würden, indem es akademische Paper, offizielle Pressemitteilungen und technische Diskussionen in Fachforen schnell indiziert."
+        },
+        "p2_2": {
+            "it": "Dopo aver letto le fonti primarie, faccio quello che chiamo un \"brainstorming assistito\" con Perplexity: identifico cinque o sei punti essenziali su cui indagare per costruire un'analisi completa a trecentosessanta gradi. È ancora un lavoro profondamente umano: l'AI suggerisce, io decido cosa vale la pena approfondire e cosa scartare.",
+            "en": "After reading the primary sources, I do what I call \"assisted brainstorming\" with Perplexity: I identify five or six essential points to investigate to build a complete three-hundred-and-sixty-degree analysis. It is still deeply human work: the AI suggests, I decide what is worth exploring further and what to discard.",
+            "es": "Tras leer las fuentes primarias, hago lo que llamo una \"lluvia de ideas asistida\" con Perplexity: identifico cinco o seis puntos esenciales a investigar para construir un análisis completo de trescientos sesenta grados. Sigue siendo un trabajo profundamente humano: la IA sugiere, yo decido qué vale la pena profundizar y qué descartar.",
+            "fr": "Après avoir lu les sources primaires, je fais ce que j'appelle un « brainstorming assisté » avec Perplexity : j'identifie cinq ou six points essentiels à approfondir pour construire une analyse complète à trois cent soixante degrés. C'est encore un travail profondément humain : l'IA suggère, je décide de ce qui mérite d'être approfondi et de ce qu'il faut écarter.",
+            "de": "Nach dem Lesen der Primärquellen mache ich das, was ich ein \"unterstütztes Brainstorming\" mit Perplexity nenne: Ich identifiziere fünf oder sechs wesentliche Punkte, die untersucht werden müssen, um eine vollständige 360-Grad-Analyse zu erstellen. Es ist immer noch eine zutiefst menschliche Arbeit: Die KI schlägt vor, ich entscheide, was es wert ist, vertieft zu werden, und was verworfen wird."
+        },
+        "h2_3": {
+            "it": "Lo scheletro dell'analisi",
+            "en": "The skeleton of the analysis",
+            "es": "El esqueleto del análisis",
+            "fr": "Le squelette de l'analyse",
+            "de": "Das Skelett der Analyse"
+        },
+        "p3_1": {
+            "it": "A questo punto costruisco uno schema dettagliato di come voglio sviluppare l'articolo. Definisco il tono, cerco un filo rosso narrativo che tenga insieme i diversi piani dell'analisi, ragiono sull'incipit e sul finale, penso ad eventuali metafore culturali che possano alleggerire la lettura senza banalizzarla. Riferimenti pop non mainstream, analogie da nicchie culturali, citazioni di cult movie o videogiochi narrativi: tutto serve a rendere accessibile la complessità senza svilirla.",
+            "en": "At this point I build a detailed outline of how I want to develop the article. I define the tone, look for a narrative red thread that holds the different levels of analysis together, think about the opening and the ending, think about possible cultural metaphors that can lighten the reading without trivializing it. Non-mainstream pop references, analogies from cultural niches, quotes from cult movies or narrative video games: everything serves to make complexity accessible without debasing it.",
+            "es": "En este punto, construyo un esquema detallado de cómo quiero desarrollar el artículo. Defino el tono, busco un hilo conductor narrativo que mantenga unidos los diferentes niveles del análisis, pienso en el inicio y el final, pienso en posibles metáforas culturales que puedan aligerar la lectura sin banalizarla. Referencias pop no convencionales, analogías de nichos culturales, citas de películas de culto o videojuegos narrativos: todo sirve para hacer accesible la complejidad sin degradarla.",
+            "fr": "À ce stade, je construis un schéma détaillé de la manière dont je veux développer l'article. Je définis le ton, je cherche un fil rouge narratif qui lie les différents niveaux de l'analyse, je réfléchis à l'accroche et à la fin, je pense à d'éventuelles métaphores culturelles qui pourraient alléger la lecture sans la banaliser. Références pop non-mainstream, analogies issues de niches culturelles, citations de films cultes ou de jeux vidéo narratifs : tout sert à rendre la complexité accessible sans l'avilir.",
+            "de": "An diesem Punkt erstelle ich einen detaillierten Entwurf, wie ich den Artikel entwickeln möchte. Ich definiere den Tonfall, suche nach einem erzählerischen roten Faden, der die verschiedenen Ebenen der Analyse zusammenhält, überlege mir den Anfang und das Ende und denke an mögliche kulturelle Metaphern, die das Lesen auflockern können, ohne es zu banalisieren. Nicht-Mainstream-Pop-Referenzen, Analogien aus kulturellen Nischen, Zitate aus Kultfilmen oder erzählerischen Videospielen: Alles dient dazu, Komplexität zugänglich zu machen, ohne sie herabzuwürdigen."
+        },
+        "p3_2": {
+            "it": "Poi riempio questo scheletro con i contenuti estratti dalle varie fonti, verificando ogni dato, ogni citazione, ogni collegamento logico. Questa prima bozza, che generalmente occupa circa tre cartelle Word, è già un testo strutturato e referenziato, non una raccolta casuale di appunti. È il materiale grezzo ma organizzato che poi affinerò.",
+            "en": "Then I fill this skeleton with the content extracted from various sources, verifying every piece of data, every quote, every logical connection. This first draft, which generally takes up about three Word pages, is already a structured and referenced text, not a random collection of notes. It is the raw but organized material that I will then refine.",
+            "es": "Luego relleno este esqueleto con el contenido extraído de las diversas fuentes, verificando cada dato, cada cita, cada conexión lógica. Este primer borrador, que generalmente ocupa unas tres páginas de Word, ya es un texto estructurado y referenciado, no una colección aleatoria de notas. Es el material en bruto pero organizado que luego refinaré.",
+            "fr": "Ensuite, je remplis ce squelette avec le contenu extrait des diverses sources, en vérifiant chaque donnée, chaque citation, chaque lien logique. Ce premier brouillon, qui occupe généralement environ trois pages Word, est déjà un texte structuré et référencé, pas une collection aléatoire de notes. C'est le matériau brut mais organisé que j'affinerai ensuite.",
+            "de": "Dann fülle ich dieses Skelett mit den aus den verschiedenen Quellen extrahierten Inhalten und überprüfe jedes Datum, jedes Zitat, jede logische Verbindung. Dieser erste Entwurf, der in der Regel etwa drei Word-Seiten umfasst, ist bereits ein strukturierter und mit Quellen versehener Text, keine zufällige Sammlung von Notizen. Er ist das rohe, aber organisierte Material, das ich dann verfeinern werde."
+        },
+        "h2_4": {
+            "it": "Claude entra in scena",
+            "en": "Claude enters the scene",
+            "es": "Claude entra en escena",
+            "fr": "Claude entre en scène",
+            "de": "Claude betritt die Bühne"
+        },
+        "p4_1": {
+            "it": "Solo a questo punto entra in gioco Claude, il modello linguistico di Anthropic che uso per la stesura finale. Gli fornisco la mia bozza insieme a un prompt che ho affinato nel tempo, dove definisco identità e stile del portale, il tono di voce, l'approccio critico che voglio mantenere, il processo di lavoro e una checklist finale. Claude mi restituisce una proposta di sviluppo che affino una o due volte, generalmente arrivando rapidamente a qualcosa di molto vicino alla mia visione grazie al lavoro pregresso sul prompt.",
+            "en": "Only at this point does Claude come into play, the language model from Anthropic that I use for the final drafting. I provide him with my draft together with a prompt that I have refined over time, where I define the identity and style of the portal, the tone of voice, the critical approach I want to maintain, the work process and a final checklist. Claude gives me back a development proposal that I refine once or twice, generally quickly arriving at something very close to my vision thanks to the previous work on the prompt.",
+            "es": "Solo en este punto entra en juego Claude, el modelo lingüístico de Anthropic que utilizo para la redacción final. Le proporciono mi borrador junto con un prompt que he ido perfeccionando con el tiempo, donde defino la identidad y el estilo del portal, el tono de voz, el enfoque crítico que quiero mantener, el proceso de trabajo y una lista de verificación final. Claude me devuelve una propuesta de desarrollo que afino una o dos veces, llegando generalmente rápido a algo muy cercano a mi visión gracias al trabajo previo sobre el prompt.",
+            "fr": "Ce n'est qu'à ce moment-là qu'intervient Claude, le modèle linguistique d'Anthropic que j'utilise pour la rédaction finale. Je lui fournis mon brouillon accompagné d'un prompt que j'ai affiné au fil du temps, où je définis l'identité et le style du portail, le ton de la voix, l'approche critique que je veux maintenir, le processus de travail et une checklist finale. Claude me renvoie une proposition de développement que j'affine une ou deux fois, arrivant généralement rapidement à quelque chose de très proche de ma vision grâce au travail préalable sur le prompt.",
+            "de": "Erst an diesem Punkt kommt Claude ins Spiel, das Sprachmodell von Anthropic, das ich für die endgültige Fassung verwende. Ich stelle ihm meinen Entwurf zusammen mit einem Prompt zur Verfügung, den ich im Laufe der Zeit verfeinert habe, in dem ich die Identität und den Stil des Portals, den Tonfall, den kritischen Ansatz, den ich beibehalten möchte, den Arbeitsprozess und eine abschließende Checkliste definiere. Claude liefert mir einen Entwicklungsvorschlag, den ich ein- oder zweimal verfeinere, wobei ich dank der Vorarbeit am Prompt in der Regel schnell zu etwas komme, das meiner Vision sehr nahe kommt."
+        },
+        "p4_2": {
+            "it": "È importante chiarire cosa fa Claude in questo processo: non scrive l'articolo al posto mio, lo riscrive seguendo parametri precisi che io ho definito. Trasforma la mia bozza tecnica in una narrazione più fluida, mantiene coerenza stilistica, suggerisce connessioni che potrebbero essere sfuggite. Ma il controllo resta interamente umano. Claude è uno strumento di editing avanzato, non un coautore.",
+            "en": "It is important to clarify what Claude does in this process: he doesn't write the article in my place, he rewrites it following precise parameters that I have defined. He transforms my technical draft into a more fluid narrative, maintains stylistic consistency, suggests connections that might have been missed. But control remains entirely human. Claude is an advanced editing tool, not a co-author.",
+            "es": "Es importante aclarar qué hace Claude en este proceso: no escribe el artículo por mí, lo redacta siguiendo parámetros precisos que yo he definido. Transforma mi borrador técnico en una narración más fluida, mantiene la coherencia estilística, sugiere conexiones que podrían haber pasado desapercibidas. Pero el control sigue siendo enteramente humano. Claude es una herramienta de edición avanzada, no un coautor.",
+            "fr": "Il est important de préciser ce que fait Claude dans ce processus : il n'écrit pas l'article à ma place, il le réécrit suivant des paramètres précis que j'ai définis. Il transforme mon brouillon technique en une narration plus fluide, maintient la cohérence stylistique, suggère des connexions qui auraient pu m'échapper. Mais le contrôle reste entièrement humain. Claude est un outil d'édition avancé, pas un co-auteur.",
+            "de": "Es wichtig zu klären, was Claude in diesem Prozess tut: Er schreibt den Artikel nicht an meiner Stelle, er schreibt ihn nach präzisen Parametern um, die ich definiert habe. Er verwandelt meinen technischen Entwurf in eine flüssigere Erzählung, wahrt die stilistische Konsistenz und schlägt Verbindungen vor, die möglicherweise übersehen wurden. Aber die Kontrolle bleibt vollständig in menschlicher Hand. Claude ist ein fortgeschrittenes Bearbeitungswerkzeug, kein Mitautor."
+        },
+        "h2_5": {
+            "it": "La revisione è tutto",
+            "en": "Revision is everything",
+            "es": "La revisión lo es todo",
+            "fr": "La révision est tout",
+            "de": "Überprüfung ist alles"
+        },
+        "p5_1": {
+            "it": "Qui arriva la parte più impegnativa e che richiede la massima attenzione critica. I modelli linguistici sono convincenti nelle loro asserzioni, ed è proprio questa sicurezza apparente a rappresentare una trappola psicologica: bisogna verificare tutto. Inizio una revisione totale del testo, correggendo le parti che non mi convincono, verificando ogni singola citazione e fonte. Claude, sulla base del mio testo e delle fonti che gli ho fornito, a volte integra autonomamente la ricerca o inserisce collegamenti aggiuntivi. Se queste integrazioni mi sembrano utili per arricchire l'analisi, le tengo solo dopo opportune verifiche. Se non aggiungono valore o se non riesco a confermarle attraverso fonti primarie affidabili, le taglio senza esitazione.",
+            "en": "Here comes the most demanding part, requiring maximum critical attention. Language models are convincing in their assertions, and it is precisely this apparent certainty that represents a psychological trap: everything must be verified. I begin a total revision of the text, correcting the parts that don't convince me, verifying every single quote and source. Claude, based on my text and the sources I provided him, sometimes independently integrates research or inserts additional links. If these integrations seem useful to me to enrich the analysis, I keep them only after appropriate verification. If they don't add value or if I can't confirm them through reliable primary sources, I cut them without hesitation.",
+            "es": "Aquí llega la parte más exigente, que requiere la máxima atención crítica. Los modelos lingüísticos son convincentes en sus afirmaciones, y es precisamente esta seguridad aparente la que representa una trampa psicológica: hay que verificarlo todo. Comienzo una revisión total del texto, corrigiendo las partes que no me convencen, verificando cada cita y fuente. Claude, basándose en mi texto y en las fuentes que le he proporcionado, a veces integra la investigación de forma autónoma o inserta enlaces adicionales. Si estas integraciones me parecen útiles para enriquecer el análisis, las mantengo solo después de las verificaciones oportunas. Si no aportan valor o si no puedo confirmarlas a través de fuentes primarias fiables, las elimino sin vacilación.",
+            "fr": "C'est ici que commence la partie la plus exigeante, celle qui demande la plus grande attention critique. Les modèles linguistiques sont convaincants dans leurs affirmations, et c'est précisément cette assurance apparente qui représente un piège psychologique : il faut tout vérifier. Je commence une révision totale du texte, en corrigeant les parties qui ne me convainquent pas, en vérifiant chaque citation et source. Claude, sur la base de mon texte et des sources que je lui ai fournies, intègre parfois de lui-même des recherches ou insère des liens supplémentaires. Si ces intégrations me semblent utiles pour enrichir l'analyse, je ne les garde qu'après les vérifications d'usage. Si elles n'apportent pas de valeur ajoutée ou si je ne parviens pas à les confirmer par des sources primaires fiables, je les coupe sans hésitation.",
+            "de": "Hier kommt der anspruchsvollste Teil, der höchste kritische Aufmerksamkeit erfordert. Sprachmodelle sind in ihren Behauptungen überzeugend, und genau diese scheinbare Sicherheit stellt eine psychologische Falle dar: Alles muss überprüft werden. Ich beginne eine vollständige Überarbeitung des Textes, korrigiere die Teile, die mich nicht überzeugen, und überprüfe jedes einzelne Zitat und jede Quelle. Claude integriert auf der Grundlage meines Textes und der Quellen, die ich ihm zur Verfügung gestellt habe, manchmal selbstständig Recherchen oder fügt zusätzliche Links ein. Wenn mir diese Ergänzungen nützlich erscheinen, um die Analyse zu bereichern, behalte ich sie nur nach entsprechenden Überprüfungen bei. Wenn sie keinen Mehrwert bieten oder ich sie nicht durch zuverlässige Primärquellen bestätigen kann, schneide ich sie ohne Zögern heraus."
+        },
+        "p5_2": {
+            "it": "Ogni affermazione deve avere un link verificato. Non accetto riferimenti generici o citazioni non tracciabili. Questo controllo maniacale, secondo me, è ciò che distingue un'analisi di qualità da un contenuto generato in massa. È un lavoro lungo, a tratti noioso, assolutamente fondamentale. Come nel montaggio cinematografico, il regista può avere ottimi strumenti di editing, ma la decisione su quale inquadratura tenere e quale scartare resta sua e solo sua.",
+            "en": "Every statement must have a verified link. I do not accept generic references or untraceable quotes. This obsessive control, in my opinion, is what distinguishes a quality analysis from mass-generated content. It is a long, sometimes tedious, absolutely fundamental job. As in film editing, the director may have excellent editing tools, but the decision on which shot to keep and which to discard remains theirs and theirs alone.",
+            "es": "Cada afirmación debe tener un enlace verificado. No acepto referencias genéricas ni citas no rastreables. Este control obsesivo es, en mi opinión, lo que distingue un análisis de calidad de un contenido generado en masa. Es un trabajo largo, a veces tedioso, absolutamente fundamental. Como en el montaje cinematográfico, el director puede tener excelentes herramientas de edición, pero la decisión sobre qué plano mantener y cuál descartar sigue siendo suya y solo suya.",
+            "fr": "Chaque affirmation doit avoir un lien vérifié. Je n'accepte pas de références génériques ou de citations non traçables. Ce contrôle obsessionnel est, selon moi, ce qui distingue une analyse de qualité d'un contenu généré en masse. C'est un travail long, parfois fastidieux, absolument fondamental. Comme pour le montage cinématographique, le réalisateur peut disposer d'excellent outils de montage, mais la décision de garder ou de rejeter un plan lui appartient à lui seul.",
+            "de": "Jede Aussage muss einen verifizierten Link haben. Ich akzeptiere keine pauschalen Verweise oder nicht nachverfolgbaren Zitate. Diese obsessive Kontrolle ist meiner Meinung nach das, was eine Qualitätsanalyse von massengenerierten Inhalten unterscheidet. Es ist eine lange, manchmal mühsame, absolut grundlegende Arbeit. Wie beim Filmschnitt mag der Regisseur über hervorragende Bearbeitungswerkzeuge verfügen, aber die Entscheidung, welche Einstellung er behält und welche er verwirft, bleibt seine und nur seine."
+        },
+        "h2_6": {
+            "it": "Il packaging multimediale",
+            "en": "Multimedia packaging",
+            "es": "El packaging multimedia",
+            "fr": "Le packaging multimédia",
+            "de": "Das multimediale Packaging"
+        },
+        "p6_1": {
+            "it": "Terminata la revisione del testo, cerco immagini che possano integrare l'analisi, preferibilmente da paper ufficiali o fonti verificate, linkando sempre la provenienza. Poi creo l'immagine di copertina: penso a un'immagine che richiami immediatamente il concetto fondamentale dell'articolo, la trasformo in un prompt e la genero con strumenti AI come Leonardo AI o Whisk. Formatto quindi tutto il materiale, testo e immagini, in formato Markdown adatto al backend del portale.",
+            "en": "Once the revision of the text is finished, I look for images that can complement the analysis, preferably from official papers or verified sources, always linking the source. Then I create the cover image: I think of an image that immediately recalls the fundamental concept of the article, I transform it into a prompt and generate it with AI tools like Leonardo AI or Whisk. I then format all the material, text and images, in Markdown format suitable for the portal's backend.",
+            "es": "Terminada la revisión del texto, busco imágenes que puedan complementar el análisis, preferiblemente de artículos oficiales o fuentes verificadas, enlazando siempre la procedencia. Luego creo la imagen de portada: pienso en una imagen que evoque inmediatamente el concepto fundamental del artículo, la transformo en un prompt y la genero con herramientas de IA como Leonardo AI o Whisk. A continuación, doy formato a todo el material, texto e imágenes, en formato Markdown apto para el backend del portal.",
+            "fr": "Une fois la révision du texte terminée, je cherche des images qui peuvent compléter l'analyse, de préférence issues d'articles officiels ou de sources vérifiées, en indiquant toujours la provenance. Ensuite, je crée l'image de couverture : je pense à une image qui évoque immédiatement le concept fondamental de l'article, la transforme en prompt et je la génère avec des outils d'IA comme Leonardo AI ou Whisk. Je formate ensuite tout le matériel, texte et images, au format Markdown adapté au backend du portail.",
+            "de": "Nach Abschluss der Textüberarbeitung suche ich nach Bildern, die die Analyse ergänzen können, vorzugsweise aus offiziellen Papern oder verifizierten Quellen, wobei ich immer die Herkunft verlinke. Dann erstelle ich das Titelbild: Ich denke an ein Bild, das sofort das Grundkonzept des Artikels hervorruft, wandle es in einen Prompt um und generiere es mit KI-Werkzeugen wie Leonardo AI oder Whisk. Dann formatiere ich das gesamte Material, Text und Bilder, im Markdown-Format, das für das Backend des Portals geeignet ist."
+        },
+        "p6_2": {
+            "it": "A questo punto genero i contenuti collaterali con NotebookLM: la sintesi video, il podcast audio, l'infografica. Uso prompt mirati per mantenere coerenza stilistica. Infine, siccome il portale è pensato multilingua, genero le traduzioni in inglese, spagnolo, francese e tedesco con Jules, uno strumento che tecnicamente non è nato per questo scopo ma che ho trovato particolarmente efficace e comodo essendo collegato al mio progetto AITalk su GitHub.",
+            "en": "At this point I generate collateral content with NotebookLM: the video summary, the audio podcast, the infographic. I use targeted prompts to maintain stylistic consistency. Finally, since the portal is designed to be multilingual, I generate translations in English, Spanish, French and German with Jules, a tool that technically was not born for this purpose but that I have found particularly effective and convenient being connected to my AITalk project on GitHub.",
+            "es": "En este punto, genero los contenidos colaterales con NotebookLM: el resumen de vídeo, el podcast de audio, la infografía. Utilizo prompts específicos para mantener la coherencia estilística. Por último, como el portal está pensado para ser multilingüe, genero las traducciones al inglés, español, francés y alemán con Jules, una herramienta que técnicamente no nació para este fin pero que me ha resultado particularmente eficaz y cómoda al estar conectada a mi proyecto AITalk en GitHub.",
+            "fr": "À ce stade, je génère les contenus collatéraux avec NotebookLM : le résumé vidéo, le podcast audio, l'infographie. J'utilise des prompts ciblés pour maintenir la cohérence stylistique. Enfin, comme le portail est conçu pour être multilingue, je génère les traductions en anglais, espagnol, français et allemand avec Jules, un outil qui n'est techniquement pas né pour cela mais que j'ai trouvé particulièrement efficace et pratique car il est connecté à mon projet d'AITalk sur GitHub.",
+            "de": "An diesem Punkt generiere ich die Begleitinhalte mit NotebookLM: die Videozusammenfassung, den Audio-Podcast, die Infografik. Ich verwende gezielte Prompts, um die stilistische Konsistenz zu wahren. Schließlich, da das Portal mehrsprachig konzipiert ist, generiere ich die Übersetzungen ins Englische, Spanische, Französische und Deutsche mit Jules, einem Werkzeug, das technisch gesehen nicht für diesen Zweck geboren wurde, das ich aber als besonders effektiv und bequem empfunden habe, da es mit meinem AITalk-Projekt auf GitHub verbunden ist."
+        },
+        "p7": {
+            "it": "Il risultato finale lo potete giudicare voi stessi, articolo per articolo, verificando fonti e collegamenti, valutando la solidità delle argomentazioni. La trasparenza su questo processo non è solo un principio etico, è un invito al controllo incrociato. In un'epoca in cui le content farm basate su AI producono migliaia di articoli al giorno senza supervisione umana, rendere visibile il metodo di lavoro diventa parte integrante della credibilità. L'intelligenza artificiale è uno strumento formidabile, ma solo quando resta esattamente questo: uno strumento nelle mani di chi ha ancora qualcosa da dire.",
+            "en": "The final result you can judge for yourself, article by article, verifying sources and connections, evaluating the solidity of the arguments. Transparency about this process is not just an ethical principle, it is an invitation to cross-checking. In an era where AI-based content farms produce thousands of articles a day without human supervision, making the work method visible becomes an integral part of credibility. Artificial intelligence is a formidable tool, but only when it remains exactly that: a tool in the hands of those who still have something to say.",
+            "es": "El resultado final lo podéis juzgar vosotros mismos, artículo por artículo, verificando fuentes y conexiones, evaluando la solidez de los argumentos. La transparencia sobre este proceso no es solo un principio ético, es una invitación al control cruzado. En una época en la que las granjas de contenidos basadas en IA producen miles de artículos al día sin supervisión humana, hacer visible el método de trabajo se convierte en parte integrante de la credibilidad. La inteligencia artificial es una herramienta formidable, pero solo cuando sigue siendo exactamente eso: una herramienta en manos de quien todavía tiene algo que decir.",
+            "fr": "Le résultat final, vous pouvez en juger par vous-mêmes, article par article, en vérifiant les sources et les liens, en évaluant la solidité des arguments. La transparence sur ce processus n'est pas seulement un principe éthique, c'est une invitation au contrôle croisé. À une époque où les fermes de contenus basées sur l'IA produisent des milliers d'articles par jour sans supervision humaine, rendre visible la méthode de travail fait partie intégrante de la crédibilité. L'intelligence artificielle est un outil formidable, mais seulement lorsqu'elle reste exactement cela : un outil entre les mains de ceux qui ont encore quelque chose à dire.",
+            "de": "Das Endergebnis können Sie selbst beurteilen, Artikel für Artikel, indem Sie Quellen und Verbindungen prüfen und die Solidität der Argumente bewerten. Transparenz über diesen Prozess ist nicht nur ein ethisches Prinzip, sondern eine Aufforderung zur Gegenprobe. In einer Zeit, in der KI-basierte Content-Farmen täglich Tausende von Artikeln ohne menschliche Aufsicht produzieren, wird das Sichtbarmachen der Arbeitsmethode zu einem integralen Bestandteil der Glaubwürdigkeit. Künstliche Intelligenz ist ein formidables Werkzeug, aber nur, wenn sie genau das bleibt: ein Werkzeug in den Händen derer, die noch etwas zu sagen haben."
+        }
+    },
     "not_found_page": {
         "title": {
             "it": "Pagina Non Trovata",
@@ -654,6 +803,7 @@ def get_base_template_data(depth):
         "{{newsletter_link}}": f"{prefix}newsletter.html",
         "{{cookie_link}}": f"{prefix}cookie.html",
         "{{privacy_link}}": f"{prefix}privacy.html",
+        "{{metodo_link}}": f"{prefix}metodo-editoriale.html",
         "{{home_link}}": f"{prefix}index.html" if prefix else "index.html"
     }
     return data
@@ -1071,6 +1221,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
         temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
+        temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
 
         base_data = get_base_template_data(depth=1)
         for placeholder, path in base_data.items():
@@ -1152,6 +1303,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
         temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
+        temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
 
         base_data = get_base_template_data(depth=2)
         for placeholder, path in base_data.items():
@@ -1258,6 +1410,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
     temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
     temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
+    temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
 
     base_data = get_base_template_data(depth=1)
     for placeholder, path in base_data.items():
@@ -1287,7 +1440,8 @@ def generate_local_pages(output_dir, lang='it'):
         "newsletter.html": {"title": TRANSLATIONS["newsletter_page"]["title"], "description": TRANSLATIONS["newsletter_page"]["description"]},
         "thank-you.html": {"title": TRANSLATIONS["thank_you_page"]["title"], "description": TRANSLATIONS["thank_you_page"]["paragraph"]},
         "cookie.html": {"title": TRANSLATIONS["cookie_page"]["title"], "description": TRANSLATIONS["cookie_page"]["p1"]},
-        "privacy.html": {"title": TRANSLATIONS["privacy_page"]["title"], "description": TRANSLATIONS["privacy_page"]["p1"]}
+        "privacy.html": {"title": TRANSLATIONS["privacy_page"]["title"], "description": TRANSLATIONS["privacy_page"]["p1"]},
+        "metodo-editoriale.html": {"title": TRANSLATIONS["metodo_page"]["title"], "description": TRANSLATIONS["metodo_page"]["p1"]}
     }
     print("\nGenerating local pages...")
     pages_dir = "pages"
@@ -1323,6 +1477,11 @@ def generate_local_pages(output_dir, lang='it'):
             if filename == "privacy.html":
                 for key, trans_dict in TRANSLATIONS["privacy_page"].items():
                     placeholder = f"{{{{privacy_page_{key}}}}}"
+                    translation = trans_dict.get(lang, trans_dict["it"])
+                    final_content = final_content.replace(placeholder, translation)
+            if filename == "metodo-editoriale.html":
+                for key, trans_dict in TRANSLATIONS["metodo_page"].items():
+                    placeholder = f"{{{{metodo_page_{key}}}}}"
                     translation = trans_dict.get(lang, trans_dict["it"])
                     final_content = final_content.replace(placeholder, translation)
             
@@ -1362,6 +1521,7 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
             temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
             temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
+            temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
             
             base_data = get_base_template_data(depth=1)
             for placeholder, path in base_data.items():
@@ -1400,6 +1560,7 @@ def generate_404_page(output_dir, lang='it'):
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
         temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
+        temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
 
         # SEO and metadata
         meta_info = TRANSLATIONS["not_found_page"]

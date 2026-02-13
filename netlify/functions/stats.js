@@ -1,9 +1,8 @@
-// Helper function to generate the HTML page
-function generateHTML(statsData) {
-  let totalViews = 0;
-  const tableRows = statsData.map(item => {
-    totalViews += item.count;
-    // Add the leading slash back for display purposes.
+const ROWS_PER_PAGE = 20;
+
+// Funzione per generare la pagina HTML iniziale
+function generateHTML(initialData, totalRows, totalViews) {
+  const tableRows = initialData.map(item => {
     const displayPath = `/${item.path}`;
     return `<tr><td>${displayPath}</td><td>${item.count}</td></tr>`;
   }).join('');
@@ -23,7 +22,10 @@ function generateHTML(statsData) {
             th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
             th { background-color: #f8f9fa; font-weight: bold; }
             tr:hover { background-color: #f0f2f5; }
-            .total { font-weight: bold; margin-top: 20px; text-align: right; font-size: 1.1em; }
+            .total { font-weight: bold; margin-top: 20px; text-align: right; font-size: 1.1em; display: none; }
+            #load-more-btn { display: block; width: 100%; padding: 10px; margin-top: 20px; background-color: #0056b3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
+            #load-more-btn:hover { background-color: #004494; }
+            #load-more-btn:disabled { background-color: #ccc; cursor: not-allowed; }
         </style>
     </head>
     <body>
@@ -36,25 +38,83 @@ function generateHTML(statsData) {
                         <th>Visite</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="stats-tbody">
                     ${tableRows}
                 </tbody>
             </table>
-            <div class="total">Visite Totali: ${totalViews}</div>
+            <button id="load-more-btn" ${totalRows <= ROWS_PER_PAGE ? 'style="display: none;"' : ''}>Carica Altre 20</button>
+            <div class="total" id="total-views">Visite Totali: ${totalViews}</div>
         </div>
+        <script>
+            let currentPage = 1;
+            let allStats = null;
+            const totalRows = ${totalRows};
+            const rowsPerPage = ${ROWS_PER_PAGE};
+
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            const statsTbody = document.getElementById('stats-tbody');
+            const totalViewsDiv = document.getElementById('total-views');
+
+            async function fetchStats() {
+                if (allStats) {
+                    return allStats;
+                }
+                try {
+                    const response = await fetch('/stats?format=json');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    allStats = await response.json();
+                    return allStats;
+                } catch (error) {
+                    console.error('Failed to fetch stats:', error);
+                    loadMoreBtn.textContent = 'Errore nel caricamento';
+                    throw error;
+                }
+            }
+
+            function renderNextPage() {
+                currentPage++;
+                const start = (currentPage - 1) * rowsPerPage;
+                const end = currentPage * rowsPerPage;
+                const nextRows = allStats.slice(start, end);
+
+                nextRows.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = \`<td>/\${item.path}</td><td>\${item.count}</td>\`;
+                    statsTbody.appendChild(tr);
+                });
+
+                if (end >= totalRows) {
+                    loadMoreBtn.style.display = 'none';
+                    totalViewsDiv.style.display = 'block';
+                }
+            }
+
+            loadMoreBtn.addEventListener('click', async () => {
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.textContent = 'Caricamento...';
+
+                try {
+                    await fetchStats();
+                    renderNextPage();
+                } finally {
+                    if (loadMoreBtn.style.display !== 'none') {
+                        loadMoreBtn.disabled = false;
+                        loadMoreBtn.textContent = 'Carica Altre 20';
+                    }
+                }
+            });
+        </script>
     </body>
     </html>
   `;
 }
 
-
 export default async (req, context) => {
-  // Use dynamic import to resolve the ESM/CJS conflict
   const { getStore } = await import('@netlify/blobs');
   
-  // 1. Authentication
   const authHeader = req.headers.get('authorization');
-  // Use process.env for Node.js runtime on Netlify
   const user = process.env.STATS_USER;
   const pass = process.env.STATS_PASSWORD;
 
@@ -70,7 +130,6 @@ export default async (req, context) => {
     });
   }
 
-  // 2. If authenticated, fetch data
   try {
     const store = getStore('page-views');
     const { blobs } = await store.list();
@@ -86,9 +145,21 @@ export default async (req, context) => {
     );
 
     allViews.sort((a, b) => b.count - a.count);
+
+    const url = new URL(req.url);
+    const format = url.searchParams.get('format');
+
+    if (format === 'json') {
+      return new Response(JSON.stringify(allViews), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const totalViewsCount = allViews.reduce((sum, item) => sum + item.count, 0);
+    const initialData = allViews.slice(0, ROWS_PER_PAGE);
     
-    // 3. Render the full HTML page with the data
-    const html = generateHTML(allViews);
+    const html = generateHTML(initialData, allViews.length, totalViewsCount);
     
     return new Response(html, {
       status: 200,

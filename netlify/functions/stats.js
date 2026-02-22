@@ -1,12 +1,7 @@
 // Helper function to generate the HTML page
 function generateHTML(statsData) {
   let totalViews = 0;
-  const tableRows = statsData.map(item => {
-    totalViews += item.count;
-    // Add the leading slash back for display purposes.
-    const displayPath = `/${item.path}`;
-    return `<tr><td>${displayPath}</td><td>${item.count}</td></tr>`;
-  }).join('');
+  statsData.forEach(item => totalViews += item.count);
 
   return `
     <!DOCTYPE html>
@@ -24,6 +19,37 @@ function generateHTML(statsData) {
             th { background-color: #f8f9fa; font-weight: bold; }
             tr:hover { background-color: #f0f2f5; }
             .total { font-weight: bold; margin-top: 20px; text-align: right; font-size: 1.1em; }
+            
+            #view-more-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .view-more-button {
+                background-color: #ffffff;
+                padding: 10px 20px;
+                border-radius: 6px;
+                text-decoration: none;
+                color: #1c1e21;
+                font-weight: bold;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                transition: all 0.2s;
+                border: 1px solid #dddfe2;
+                cursor: pointer;
+            }
+            .view-more-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                background-color: #f8f9fa;
+            }
+            .view-more-button:disabled {
+                background-color: #e9ebee;
+                color: #bec3c9;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
         </style>
     </head>
     <body>
@@ -36,12 +62,51 @@ function generateHTML(statsData) {
                         <th>Visite</th>
                     </tr>
                 </thead>
-                <tbody>
-                    ${tableRows}
+                <tbody id="stats-body">
+                    <!-- Rows will be injected here by JavaScript -->
                 </tbody>
             </table>
+            
+            <div id="view-more-container">
+                <button id="view-more-button" class="view-more-button">Visualizza altro</button>
+            </div>
+
             <div class="total">Visite Totali: ${totalViews}</div>
         </div>
+
+        <script>
+            const statsData = ${JSON.stringify(statsData)};
+            let currentPage = 0;
+            const rowsPerPage = 20;
+            
+            const statsBody = document.getElementById('stats-body');
+            const viewMoreButton = document.getElementById('view-more-button');
+            const viewMoreContainer = document.getElementById('view-more-container');
+
+            function renderNextRows() {
+                const start = currentPage * rowsPerPage;
+                const end = start + rowsPerPage;
+                const rowsToRender = statsData.slice(start, end);
+
+                rowsToRender.forEach(item => {
+                    const row = document.createElement('tr');
+                    const displayPath = '/' + item.path;
+                    row.innerHTML = '<td>' + displayPath + '</td><td>' + item.count + '</td>';
+                    statsBody.appendChild(row);
+                });
+
+                currentPage++;
+
+                if (currentPage * rowsPerPage >= statsData.length) {
+                    viewMoreContainer.style.display = 'none';
+                }
+            }
+
+            viewMoreButton.addEventListener('click', renderNextRows);
+
+            // Initial render
+            renderNextRows();
+        </script>
     </body>
     </html>
   `;

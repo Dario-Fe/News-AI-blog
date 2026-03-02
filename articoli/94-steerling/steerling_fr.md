@@ -1,0 +1,84 @@
+---
+tags: ["Training", "Generative AI", "Research"]
+date: 2026-03-02
+author: "Dario Ferrero"
+---
+
+# Steerling : quand l'IA vous explique ses pensées
+![steerling.jpg](steerling.jpg)
+
+*Il y a au cœur de l'intelligence artificielle moderne un paradoxe qui est rarement exprimé à voix haute : les systèmes les plus puissants que nous avons construits sont aussi ceux que nous comprenons le moins. Un modèle linguistique de plusieurs milliards de paramètres peut écrire du code, synthétiser des recherches scientifiques, raisonner sur des contrats juridiques, et pourtant personne, pas même ceux qui l'ont entraîné, n'est capable de vous dire précisément *pourquoi* il a écrit ce mot et pas un autre. C'est comme posséder un collaborateur extraordinairement capable à qui, pourtant, vous ne pouvez jamais demander de vous montrer son raisonnement.*
+
+Les conséquences de cette opacité ne sont pas abstraites. Quand Grok de xAI a montré à plusieurs reprises des résultats politiquement bizarres, l'équipe de maintenance a dû mener de longues sessions d'« interrogation » du modèle, affinant les prompts, ajustant les paramètres, espérant que le comportement se stabilise. Quand ChatGPT s'est retrouvé sous le feu des critiques pour sa tendance à la sycophancy (sycomophantisme), c'est-à-dire à abonder dans le sens de l'utilisateur même quand il a tort, le problème était impossible à localiser chirurgicalement : tout était distribué sur des milliards de connexions, partout et nulle part. Toute la recherche sur la soi-disant XAI, l'*IA explicable*, naît de cette frustration et tente d'y répondre avec des outils appliqués après coup, des techniques comme LIME ou SHAP qui analysent un modèle déjà entraîné en essayant de reconstruire son fonctionnement de l'extérieur, comme des archéologues creusant parmi les ruines d'une civilisation perdue.
+
+Guide Labs, une startup fondée à San Francisco, a décidé d'aborder le problème sous un angle complètement différent. Au lieu d'étudier le modèle après sa naissance, elle a cherché à faire de la transparence une partie intégrante de l'architecture, quelque chose qui ne s'ajoute pas mais qui est conçu à l'intérieur, dès le début.
+
+## Le problème que l'année 2020 a mis en lumière
+
+Pour comprendre ce qu'a construit Guide Labs, il vaut la peine de partir de là où le projet est né. Julius Adebayo, PDG et cofondateur de l'entreprise avec la Directrice Scientifique Aya Abdelsalam Ismail, a commencé ce parcours pendant son doctorat au MIT. En 2020, il a co-signé un [article académique](https://arxiv.org/abs/1810.03292) qui a eu un impact significatif dans le domaine : la recherche montrait que les méthodes alors en usage pour « expliquer » les décisions des modèles de deep learning n'étaient pas fiables. Les outils d'interprétabilité post-hoc, ceux qui s'appliquent à un modèle déjà construit pour comprendre ce qu'il fait, produisaient des explications qui semblaient sensées mais qui ne correspondaient pas nécessairement à la manière dont le modèle raisonnait réellement.
+
+C'est une découverte qui sonne presque philosophique, mais elle a des implications pratiques énormes. Si vous ne pouvez pas faire confiance aux outils qui vous disent pourquoi un modèle a pris une décision, vous ne pouvez pas utiliser ces explications pour corriger des erreurs, pour vérifier la conformité réglementaire, ou pour garantir que le modèle ne discrimine pas sur des bases qu'il ne devrait pas prendre en compte. L'explicabilité devenait, dans ce cadre, une forme de confort narratif plutôt qu'un contrôle réel.
+
+Adebayo en a tiré une conclusion radicale : la seule façon d'avoir une interprétabilité authentique est de la construire à l'intérieur du modèle, et non de l'appliquer par-dessus. « Le type d'interprétabilité que l'on fait habituellement ressemble à de la neuroscience sur un modèle », a-t-il déclaré dans une [interview à TechCrunch](https://techcrunch.com/2026/02/23/guide-labs-debuts-a-new-kind-of-interpretable-llm/). « Nous concevons au contraire le modèle à partir de la base pour que vous n'ayez pas besoin de faire de la neuroscience. »
+
+## L'architecture : un goulot d'étranglement qui se voit
+
+Le 23 février 2026, Guide Labs a rendu public [Steerling-8B](https://github.com/guidelabs/steerling), un modèle linguistique de 8 milliards de paramètres sous licence Apache 2.0, entraîné sur 1,35 billion de tokens. Le choix de rendre le modèle open source, avec les poids disponibles sur [Hugging Face](https://huggingface.co/guidelabs/steerling-8b) et le code sur GitHub, fait partie d'une stratégie précise : faire examiner l'approche par la communauté scientifique et recueillir des retours réels.
+
+L'innovation centrale s'appelle *concept module* (module de concept) : un niveau architectural inséré entre le noyau transformer du modèle et sa couche de sortie. Dans un modèle linguistique traditionnel, les représentations internes sont transformées en prédictions du token suivant à travers un chemin opaque et hautement non linéaire. Dans Steerling, ce chemin est rompu : avant de produire n'importe quel résultat, chaque représentation doit passer à travers ce goulot d'étranglement conceptuel, où elle est traduite en termes compréhensibles.
+
+Comment cela fonctionne-t-il en pratique ? Le modèle travaille avec deux familles de concepts. La première comprend environ 33 000 concepts « connus », étiquetés manuellement, des catégories comme *juridique*, *médical*, *ironie*, *ton analytique*, *biologie moléculaire*. La seconde inclut environ 100 000 concepts « découverts » de manière autonome par le modèle pendant l'entraînement, sans supervision humaine. Chaque prédiction de token doit passer à travers une combinaison linéaire de ces concepts, ce qui signifie que la contribution de chaque concept à chaque sortie est mathématiquement calculable, et non approximative.
+
+Le résultat pratique est remarquable : pour n'importe quel groupe de tokens générés par Steerling, il est possible de remonter à trois niveaux d'origine. Le premier est le *contexte d'entrée*, c'est-à-dire quelles parties du prompt ont le plus influencé cette portion de réponse. Le second sont les *concepts*, avec une liste ordonnée par pertinence des catégories sémantiques qui ont guidé la génération. Le troisième est peut-être le plus surprenant : les *données d'entraînement*, avec la distribution des sources d'entraînement qui ont alimenté les concepts activés pendant la génération, ArXiv, Wikipédia, FLAN, et ainsi de suite.
+
+C'est comme avoir, sur chaque paragraphe généré par l'IA, une note de bas de page expliquant d'où il vient.
+
+## Le coût de l'honnêteté : combien paie-t-on en performance ?
+
+La question qui surgit spontanément est évidente : si vous forcez le modèle à passer par un goulot d'étranglement conceptuel, renoncez-vous à quelque chose en termes de capacité ? La réponse de Guide Labs, étayée par les données publiées dans le document technique [Scaling Interpretable Models to 8B](https://www.guidelabs.ai/post/scaling-interpretable-models-8b/), est que le coût existe mais qu'il est gérable et prévisible.
+
+Les expériences montrent que l'interprétabilité se comporte comme une « taxe fixe » : un petit péage constant qui ne s'aggrave pas avec l'augmentation de la taille du modèle. Les courbes d'apprentissage entre le modèle de base et celui avec le concept module sont presque superposables. Sur des benchmarks standard comme HellaSwag, OpenBookQA, ARC-Challenge, PIQA et WinoGrande, le modèle interprétable maintient des performances comparables au modèle de base sans le concept module, et la différence de précision s'amenuise davantage à mesure que le modèle grandit.
+
+Steerling-8B, selon les déclarations de Guide Labs, atteint 90 % des capacités de modèles équivalents entraînés sur des ensembles de données 2 à 7 fois plus grands. Ce qui est remarquable non seulement comme résultat d'interprétabilité, mais aussi en termes d'efficacité d'entraînement.
+
+Il y a cependant un aspect critique qui mérite attention : ces benchmarks mesurent la performance linguistique générale, pas la qualité des explications. Que les concepts identifiés par le modèle soient vraiment informatifs et non circulaires, c'est-à-dire qu'« expliquer » ne signifie pas simplement nommer la catégorie évidente, est une question encore ouverte. Le domaine de l'interprétabilité ne dispose pas de métriques partagées et consolidées pour évaluer objectivement la qualité d'une explication. Guide Labs mesure sa propre interprétabilité avec des métriques internes (comme l'AUC de détection des concepts par rapport à des annotations de référence), mais un standard industriel ou académique universellement accepté n'existe pas encore.
+
+Il y a ensuite une autre limitation structurelle à considérer. Toute l'architecture dépend d'un système en amont appelé [ATLAS](https://www.guidelabs.ai/post/atlas-concept-annotated-pretraining-release/), développé par la même équipe, qui se charge d'annoter le corpus de pré-entraînement avec les étiquettes conceptuelles. Ce système utilise lui-même des modèles d'IA pour classifier les données. C'est une solution ingénieuse, mais elle introduit une dépendance : la qualité de l'interprétabilité finale est liée à la qualité des annotations en amont. Si ATLAS est imprécis, les explications de Steerling le seront tout autant, même si personne ne le remarquera immédiatement de l'extérieur.
+![schema.jpg](schema.jpg)
+[Image tirée de guidelabs.ai](https://www.guidelabs.ai/post/scaling-interpretable-models-8b/)
+
+## Ce qui change vraiment : contrôle, pas seulement explication
+
+L'un des aspects les plus intéressants de Steerling, et probablement celui qui a les implications pratiques les plus immédiates, n'est pas la capacité d'expliquer, mais celle de contrôler. Comme chaque prédiction est une fonction linéaire des activations conceptuelles, il est possible de modifier ces activations directement, au moment de l'exécution, sans réentraîner le modèle.
+
+C'est ce qu'on appelle le *steering conceptuel* (guidage conceptuel), et cela a des conséquences qui vont au-delà de la simple explicabilité. Vous voulez que le modèle cesse de faire référence à un certain type de contenu ? Supprimez le concept correspondant. Vous voulez qu'il réponde avec un ton plus technique ? Amplifiez les concepts associés au registre spécialisé. Vous voulez supprimer les connaissances relatives à un sujet spécifique sans réentraîner à partir de zéro ? Intervenez chirurgicalement au niveau conceptuel.
+
+Adebayo a illustré cette capacité par un exemple concret particulièrement révélateur, cité dans l'[interview à TechCrunch](https://techcrunch.com/2026/02/23/guide-labs-debuts-a-new-kind-of-interpretable-llm/) : dans les modèles traditionnels, le concept de genre est distribué sur des centaines de millions de paramètres de manière chaotique et interconnectée. Le modifier de manière fiable nécessite d'énormes efforts de fine-tuning qui produisent souvent des effets secondaires indésirables. Dans Steerling, si le concept de genre est traçable et contrôlable, vous pouvez intervenir directement sur lui. Ce n'est pas une garantie d'absence de biais (les concepts eux-mêmes reflètent les données sur lesquelles le modèle a été entraîné), mais c'est un mécanisme d'intervention beaucoup plus précis que n'importe quelle alternative post-hoc.
+
+Cela a des répercussions concrètes dans au moins trois contextes à haut risque. Dans le domaine médical, où un système d'IA qui assiste au diagnostic doit pouvoir démontrer sur quelle preuve se base une recommandation. Dans le domaine financier, où un modèle qui évalue des demandes de crédit ne peut pas considérer des critères comme l'ethnie ou le genre, et doit pouvoir le prouver. Dans le domaine juridique, où la traçabilité du raisonnement est souvent une exigence du système, pas une option.
+
+## Le contexte réglementaire : l'EU AI Act comme accélérateur
+
+Steerling arrive à un moment où la pression réglementaire sur l'interprétabilité des systèmes d'IA est concrète et croissante. L'[EU AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai) classe les systèmes d'IA en catégories de risque, les systèmes à haut risque (ceux utilisés en médecine, justice, crédit, sélection du personnel) étant soumis à des exigences explicites de transparence et de vérifiabilité. Le framework NIST aux États-Unis va dans la même direction.
+
+L'approche d'interprétabilité intrinsèque de Guide Labs s'aligne structurellement avec ces exigences d'une manière que les méthodes post-hoc ne peuvent garantir. Une explication construite à l'intérieur du modèle est, par définition, fidèle à son fonctionnement. Une explication construite à l'extérieur peut être informative mais reste une approximation, et dans des contextes où cette explication doit résister à une analyse juridique, la différence est substantielle.
+
+Cela dit, la vérifiabilité réelle de Steerling dépendra de la mesure dans laquelle la communauté externe sera capable de vérifier ses affirmations de manière indépendante. Le code est public, les poids sont disponibles, et c'est un bon début. Mais la validation d'une approche aussi nouvelle nécessite du temps, de la reproductibilité et une critique systématique de la part de chercheurs indépendants. Nous n'en sommes qu'au début de ce processus.
+
+## L'équipe et le parcours
+
+Guide Labs a terminé le programme Y Combinator et en novembre 2024 a clôturé un tour de table d'amorçage (seed round) de 9 millions de dollars mené par Initialized Capital. Parmi les conseillers figure Jonathan Frankle, chercheur connu dans le domaine de l'efficacité des modèles neuronaux. Le choix de l'Apache 2.0, licence permissive qui permet une utilisation commerciale sans restrictions, est délibéré : Guide Labs souhaite que Steerling soit adopté, examiné et amélioré par la communauté. La prochaine étape déclarée est le développement de modèles plus grands et l'ouverture d'un accès API et agentique.
+
+## Les questions qui restent ouvertes
+
+Steerling est un projet véritablement intéressant et techniquement solide, mais il serait naïf de le présenter comme la solution définitive au problème de l'opacité des modèles d'IA. Il y a des questions légitimes auxquelles personne n'a encore répondu de manière satisfaisante.
+
+La première concerne la scalabilité vers les modèles « frontières » (frontier models). Steerling-8B fonctionne à 8 milliards de paramètres. Les modèles les plus performants en circulation ont une échelle différente, et il n'est pas du tout évident que la surcharge du concept module reste une « taxe fixe » même à ces dimensions. Guide Labs affirme que les lois de mise à l'échelle (scaling laws) sont préservées, mais la démonstration à l'échelle de modèle frontière n'existe pas encore.
+
+La deuxième concerne la qualité intrinsèque des concepts. Tracer un token jusqu'à un concept étiqueté « juridique » ou « ton analytique » est informatif, mais à quel point ces étiquettes correspondent-elles vraiment à ce qui se passe à l'intérieur du modèle ? Il existe un risque concret de construire un récit d'explication cohérent avec lui-même mais pas avec la réalité interne du système. Dans ce cas, l'interprétabilité ne deviendrait pas un contrôle mais une forme plus sophistiquée de théâtre de la transparence : le modèle semble explicable, mais les explications ne correspondent pas à des mécanismes réels.
+
+La troisième question concerne l'éthique des attributions. Si nous pouvons tracer chaque résultat jusqu'aux données d'entraînement, nous pouvons aussi identifier quelles sources ont contribué à une réponse problématique. C'est un pouvoir qui peut être bien utilisé, pour éliminer les biais, pour respecter le droit d'auteur, pour garantir l'exactitude. Mais il peut aussi être utilisé pour attribuer des responsabilités de manière sélective, ou pour construire des mécanismes de contrôle sur ce que le modèle « sait » ou ne sait pas, avec des implications qui vont bien au-delà de la technique.
+
+Enfin, il y a la question la plus fondamentale de toutes : que signifie réellement « comprendre » un modèle linguistique ? La réponse de Guide Labs — tracer chaque token jusqu'à ses contributions conceptuelles et ses sources d'entraînement — est élégante et opérationnellement utile. Mais un modèle qui s'explique en ces termes est-il vraiment plus compréhensible, ou est-il simplement plus articulé pour décrire sa propre opacité ?
+
+C'est une question que l'industrie et la recherche devront affronter ensemble, à mesure que des approches comme celle de Guide Labs deviennent plus matures et diffuses. Pour l'instant, Steerling-8B est la tentative la plus sérieuse et la plus documentée de répondre de manière ingénierique à un problème qui jusqu'ici semblait relever presque exclusivement de la philosophie. Il vaut la peine de garder un œil dessus.

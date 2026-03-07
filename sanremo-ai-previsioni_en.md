@@ -80,4 +80,4 @@ It applies to Sanremo. It applies to your data. It applies to any system where t
 
 ---
 
-*The Gemini analyses cited in this article were conducted in February 2026 during the evenings of the Sanremo Festival. The listening, streaming, and voting data are the official ones from the 2026 edition.
+*The Gemini analyses cited in this article were conducted in February 2026 during the evenings of the Sanremo Festival. The listening, streaming, and voting data are the official ones from the 2026 edition.*

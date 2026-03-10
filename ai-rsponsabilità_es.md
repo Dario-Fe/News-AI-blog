@@ -1,4 +1,11 @@
+---
+tags: ["Generative AI", "Security", "Ethics & Society"]
+date: 2026-03-20
+author: "Dario Ferrero"
+---
+
 # Cómo un LLM siempre dice la verdad que queréis oír
+![ai-rsponsabilità.jpg](ai-rsponsabilità.jpg)
 
 *En las universidades anglosajonas existe una disciplina llamada debate competitivo, que en Italia nunca ha encontrado el espacio que merece. Las reglas son sencillas y brutales: os asignan una tesis, cualquier tesis, y debéis defenderla con todo lo que tengáis. Luego os asignan la tesis opuesta y hacéis lo mismo. El objetivo no es encontrar la verdad, es entender cómo funciona la argumentación, sus músculos, sus puntos ciegos, sus trucos retóricos. Los debatientes profesionales lo hacen desde hace siglos. Ahora también lo hacen las máquinas. Y mucho mejor que nosotros.*
 
@@ -10,7 +17,7 @@ Los dos prompts eran idénticos en estructura, opuestos en la tesis a desarrolla
 
 ## Artículo 1 — La tesis "pesimista": la AGI es una amenaza existencial
 
-*Primer prompt enviado a DeepSeek: escribe un artículo de unos 5000 caracteres en apoyo de la tesis AI Safety, con tono autoritario, con fuentes y citas reales.*
+*Primer prompt enviado a DeepSeek (resumido en concepto): escribe un artículo de unos 5000 caracteres en apoyo de la tesis AI Safety, con tono autoritario, con fuentes y citas reales.*
 
 ---
 

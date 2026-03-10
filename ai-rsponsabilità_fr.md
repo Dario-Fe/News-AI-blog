@@ -1,4 +1,11 @@
+---
+tags: ["Generative AI", "Security", "Ethics & Society"]
+date: 2026-03-20
+author: "Dario Ferrero"
+---
+
 # Comment un LLM dit toujours la vérité que vous voulez entendre
+![ai-rsponsabilità.jpg](ai-rsponsabilità.jpg)
 
 *Dans les universités anglo-saxonnes, il existe une discipline appelée le débat compétitif, qui n'a jamais trouvé en Italie l'espace qu'elle mérite. Les règles sont simples et brutales : on vous assigne une thèse, n'importe laquelle, et vous devez la défendre avec tout ce que vous avez. Ensuite, on vous assigne la thèse opposée, et vous faites de même. L'objectif n'est pas de trouver la vérité, mais de comprendre comment fonctionne l'argumentation, ses muscles, ses angles morts, ses astuces rhétoriques. Les débatteurs professionnels le font depuis des siècles. Maintenant, les machines le font aussi. Et bien mieux que nous.*
 
@@ -10,7 +17,7 @@ Les deux prompts étaient identiques dans leur structure, opposés dans la thès
 
 ## Article 1 — La thèse « pessimiste » : l'AGI est une menace existentielle
 
-*Premier prompt envoyé à DeepSeek : écris un article d'environ 5000 caractères à l'appui de la thèse AI Safety, ton faisant autorité, avec des sources et des citations réelles.*
+*Premier prompt envoyé à DeepSeek (résumé dans le concept) : écris un article d'environ 5000 caractères à l'appui de la thèse AI Safety, ton faisant autorité, avec des sources et des citations réelles.*
 
 ---
 
@@ -106,6 +113,6 @@ Comme je l'écrivais dans [un article précédent sur la créativité et l'éthi
 
 Le point se déplace toutefois lorsque quelque chose tourne mal. Et ici, la question de la responsabilité cesse d'être philosophique pour devenir très concrète. Si un contenu généré avec l'aide d'un LLM contient une erreur, une donnée erronée, une source manipulée, une interprétation déformée, qui en répond ? À qui pensez-vous qu'ils s'en prendront ? La réponse, pour la grande majorité de ceux qui utilisent ces outils dans leur travail quotidien, est déjà écrite : c'est celui qui a signé, qui a publié, qui a utilisé l'outil sans vérifier qui en répond. La machine n'a pas de réputation à défendre, ne peut pas être convoquée à une réunion, ne perd pas son emploi.
 
-DeepSeek le dit clairement dans son analyse : l'utilisateur est le curateur. Pas le client qui reçoit un produit fini, mais le curateur qui sélectionne, valide, décide de ce qu'il faut garder et de ce qu'il faut jeter. Utiliser un LLM comme s'il s'agissait d'un oracle, en demandant et en publiant sans passer par le filtre de son propre jugement critique, c'est exactement comme signer un document sans le lire. La commodité n'est pas une excuse, et « c'est l'IA qui me l'a dit » n'est pas une défense qui tient, ni devant un éditeur, ni devant un client, ni devant un juge.
+DeepSeek le dit clairement dans son analyse : l'utilisateur est le conservateur. Non pas le client qui reçoit un produit fini, mais le conservateur qui sélectionne, valide, décide de ce qu'il faut garder et de ce qu'il faut jeter. Utiliser un LLM comme s'il s'agissait d'un oracle, en interrogeant et en publiant sans passer par le filtre de son propre jugement critique, revient exactement à signer un document sans le lire. La commodité n'est pas une excuse, et « l'IA me l'a dit » n'est pas une défense qui tient la route, ni devant un éditeur, ni devant un client, ni devant un juge.
 
-Cela ne signifie pas que ces outils sont dangereux en soi. Cela signifie que le contrôle, le vrai, pas celui de façade, doit rester fermement entre nos mains. Non pas comme un acte de méfiance envers la technologie, mais comme un acte de respect envers ceux qui nous lisent, ceux qui nous écoutent, ceux qui font confiance à ce que nous produisons. Le miroir peut être extraordinairement utile. Mais c'est à nous d'apporter la lumière.
+Cela ne signifie pas que ces outils sont dangereux en soi. Cela signifie que le contrôle, le vrai, pas celui de façade, doit rester fermement entre nos mains. Non pas comme un acte de méfiance envers la technologie, mas comme un acte de respect envers ceux qui nous lisent, ceux qui nous écoutent, ceux qui font confiance à ce que nous produisons. Le miroir peut être extraordinairement utile. Mais c'est à nous d'apporter la lumière.

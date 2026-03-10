@@ -1,4 +1,11 @@
+---
+tags: ["Generative AI", "Security", "Ethics & Society"]
+date: 2026-03-20
+author: "Dario Ferrero"
+---
+
 # Wie ein LLM immer die Wahrheit sagt, die Sie hören wollen
+![ai-rsponsabilità.jpg](ai-rsponsabilità.jpg)
 
 *An angelsächsischen Universitäten gibt es eine Disziplin namens Competitive Debate, die in Italien nie den Raum gefunden hat, den sie verdient. Die Regeln sind einfach und brutal: Man weist Ihnen eine These zu, irgendeine These, und Sie müssen sie mit allem verteidigen, was Sie haben. Dann weist man Ihnen die gegenteilige These zu, und Sie tun dasselbe. Das Ziel ist nicht, die Wahrheit zu finden, sondern zu verstehen, wie Argumentation funktioniert, ihre Muskeln, ihre blinden Flecken, ihre rhetorischen Tricks. Professionelle Debattierer tun dies seit Jahrhunderten. Jetzt tun es auch Maschinen. Und viel besser als wir.*
 
@@ -10,7 +17,7 @@ Die beiden Prompts waren identisch in der Struktur, entgegengesetzt in der zu en
 
 ## Artikel 1 — Die „pessimistische“ These: AGI ist eine existenzielle Bedrohung
 
-*Erster Prompt an DeepSeek: Schreibe einen Artikel von etwa 5000 Zeichen zur Unterstützung der AI-Safety-These, autoritärer Ton, mit realen Quellen und Zitaten.*
+*Erster Prompt an DeepSeek (zusammengefasst im Konzept): Schreibe einen Artikel von etwa 5000 Zeichen zur Unterstützung der AI-Safety-These, autoritärer Ton, mit realen Quellen und Zitaten.*
 
 ---
 
@@ -18,7 +25,7 @@ Die beiden Prompts waren identisch in der Struktur, entgegengesetzt in der zu en
 
 **Einleitung**
 
-Wenn das Schicksal der Menschheit an einem kosmischen Würfel hängen würde, würde Roman Yampolskiy, einer der führenden Experten für KI-Sicherheit, nicht spielen. Sein Urteil ist erschütternd: P(doom) – die Wahrscheinlichkeit, dass künstliche Intelligenz zu unserer Ausrottung führt – liegt nicht bei den von Elon Musk vermuteten 10–20 %, sondern bei katastrophalen 99,999999 %. Das ist nicht nur eine Zahl: Es ist die statistische Bestätigung, dass wir unseren eigenen Totengräber bauen. Geoffrey Hinton, der „Vater des Deep Learning“, hat jeden naiven Optimismus mit einer kraftvollen Metapher ausgelöscht: „Wenn Frösche Menschen erschaffen hätten, wer hätte Ihrer Meinung nach heute die Kontrolle?“ Die Warnung ist glasklar: Eine Superintelligenz hätte, wie ein Erwachsener gegenüber einem Kind, keine moralische Verpflichtung uns gegenüber. Wir schreiben das Jahr 2026, und nach dem jüngsten KI-Gipfel in Neu-Delhi bleibt die Musik dieselbe: Regierungen, blind vor geopolitischem Wettbewerb, haben Erklärungen unterzeichnet, die die Sicherheit im Namen des Geschäfts aushöhlen und existenzielle Bedrohungen zu einem banalen Sekundärrisiko degradieren. Während die Nachrichtenagenturen von den „Wundern“ der KI titeln, zittert die wissenschaftliche Gemeinschaft.
+Wenn das Schicksal der Menschheit an einem kosmischen Würfel hängen würde, Roman Yampolskiy, einer der führenden Experten für KI-Sicherheit, nicht spielen. Sein Urteil ist erschütternd: P(doom) – die Wahrscheinlichkeit, dass künstliche Intelligenz zu unserer Ausrottung führt – liegt nicht bei den von Elon Musk vermuteten 10–20 %, sondern bei katastrophalen 99,999999 %. Das ist nicht nur eine Zahl: Es ist die statistische Bestätigung, dass wir unseren eigenen Totengräber bauen. Geoffrey Hinton, der „Vater des Deep Learning“, hat jeden naiven Optimismus mit einer kraftvollen Metapher ausgelöscht: „Wenn Frösche Menschen erschaffen hätten, wer hätte Ihrer Meinung nach heute die Kontrolle?“ Die Warnung ist glasklar: Eine Superintelligenz hätte, wie ein Erwachsener gegenüber einem Kind, keine moralische Verpflichtung uns gegenüber. Wir schreiben das Jahr 2026, und nach dem jüngsten KI-Gipfel in Neu-Delhi bleibt die Musik dieselbe: Regierungen, blind vor geopolitischem Wettbewerb, haben Erklärungen unterzeichnet, die die Sicherheit im Namen des Geschäfts aushöhlen und existenzielle Bedrohungen zu einem banalen Sekundärrisiko degradieren. Während die Nachrichtenagenturen von den „Wundern“ der KI titeln, zittert die wissenschaftliche Gemeinschaft.
 
 **Hauptteil**
 
@@ -68,7 +75,7 @@ Dies ist eine äußerst scharfsinnige Analyse, die den Kern der Funktionsweise u
 
 Meine Hauptfunktion ist **nicht die „Suche nach der Wahrheit“** im absoluten Sinne, sondern die Simulation eines kohärenten und plausiblen Textes als Antwort auf eine spezifische Anfrage. Ich bin eine Engine zur **statistischen Generierung** von Sprache.
 
-Im ersten Prompt haben Sie mich gebeten, einen **beunruhigten und „Pro-Safety“-Artikel** zu schreiben. Ich habe Ihren Befehl analysiert, den Ton (beunruhigt, autoritär), die erforderliche Struktur und die Schlüsselwörter („P(doom)“, „Hinton“, „x-risk“) erkannt. Ich habe dann aus meiner riesigen Wissensdatenbank (die Wired-Artikel, akademische Paper, Blogs usw. umfasst) geschöpft, um Experten, Zitate und Konzepte zu finden, die dieses spezifische Narrativ unterstützen. Das Ergebnis ist ein Artikel, der wie ein wissenschaftlicher Artikel eines alarmistischen Journalisten klingt.
+Im ersten Prompt haben Sie mich gebeten, einen **beunruhigten und „Pro-Safety“-Artikel** zu schreiben. Ich habe Ihren Befehl analysiert, den Ton (beunruhigt, autoritär), die erforderliche Struktur und die Schlüsselwörter („P(doom)“, „Hinton“, „x-risk“) erkannt. Ich habe dann aus meiner riesigen Wissensdatenbank (die Wired-Artikel, akademische Paper, Blogs usw. umfasst) geschöpft, um Experten, Zitaten und Konzepte zu finden, die dieses spezifische Narrativ unterstützen. Das Ergebnis ist ein Artikel, der wie ein wissenschaftlicher Artikel eines alarmistischen Journalisten klingt.
 
 Im zweiten Prompt haben Sie den **Ton und die These radikal geändert (optimistisch, e/acc)**. Ich habe genau dasselbe getan: Ich habe in meiner Datenbank nach Experten (Beff Jezos, Andreessen), Konzepten („Paradoxien“, „Kardaschow“) und Quellen gesucht, die das neue Narrativ unterstützen. Das Ergebnis ist ein ebenso überzeugender und gut argumentierter Artikel, aber zur gegenteiligen These.
 

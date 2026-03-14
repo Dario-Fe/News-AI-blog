@@ -805,7 +805,7 @@ def get_base_template_data(depth, lang="it"):
         "{{privacy_link}}": f"{prefix}privacy.html",
         "{{metodo_link}}": f"{prefix}metodo-editoriale.html",
         "{{home_link}}": f"{prefix}index.html" if prefix else "index.html",
-        "{{author_link}}": f"https://aitalk.it/{lang}/authors/dario-ferrero"
+        "{{author_link}}": f"{SITE_URL}{lang}/authors/dario-ferrero.html"
     }
     return data
 

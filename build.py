@@ -788,7 +788,7 @@ def generate_language_dropdown_html(current_lang, depth=1):
                 </div>"""
     return dropdown_html
 
-def get_base_template_data(depth):
+def get_base_template_data(depth, lang="it"):
     """
     Generates a dictionary of common, relative-path-based data for the base template.
     """
@@ -804,7 +804,8 @@ def get_base_template_data(depth):
         "{{cookie_link}}": f"{prefix}cookie.html",
         "{{privacy_link}}": f"{prefix}privacy.html",
         "{{metodo_link}}": f"{prefix}metodo-editoriale.html",
-        "{{home_link}}": f"{prefix}index.html" if prefix else "index.html"
+        "{{home_link}}": f"{prefix}index.html" if prefix else "index.html",
+        "{{author_link}}": f"https://aitalk.it/{lang}/authors/dario-ferrero"
     }
     return data
 
@@ -1223,7 +1224,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
         temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
 
-        base_data = get_base_template_data(depth=1)
+        base_data = get_base_template_data(depth=1, lang=lang)
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         
@@ -1305,7 +1306,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
         temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
 
-        base_data = get_base_template_data(depth=2)
+        base_data = get_base_template_data(depth=2, lang=lang)
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         
@@ -1412,7 +1413,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
     temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
 
-    base_data = get_base_template_data(depth=1)
+    base_data = get_base_template_data(depth=1, lang=lang)
     for placeholder, path in base_data.items():
         temp_html = temp_html.replace(placeholder, path)
     
@@ -1523,7 +1524,7 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
             temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
             
-            base_data = get_base_template_data(depth=1)
+            base_data = get_base_template_data(depth=1, lang=lang)
             for placeholder, path in base_data.items():
                 temp_html = temp_html.replace(placeholder, path)
             
@@ -1575,7 +1576,7 @@ def generate_404_page(output_dir, lang='it'):
         temp_html = temp_html.replace("{{og_image}}", og_image)
 
         # Asset paths (depth is 1, as it's in the root of the lang folder)
-        base_data = get_base_template_data(depth=1)
+        base_data = get_base_template_data(depth=1, lang=lang)
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
         

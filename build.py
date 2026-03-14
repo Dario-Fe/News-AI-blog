@@ -804,6 +804,7 @@ def get_base_template_data(depth):
         "{{cookie_link}}": f"{prefix}cookie.html",
         "{{privacy_link}}": f"{prefix}privacy.html",
         "{{metodo_link}}": f"{prefix}metodo-editoriale.html",
+        "{{author_link}}": f"{prefix}authors/dario-ferrero.html",
         "{{home_link}}": f"{prefix}index.html" if prefix else "index.html"
     }
     return data

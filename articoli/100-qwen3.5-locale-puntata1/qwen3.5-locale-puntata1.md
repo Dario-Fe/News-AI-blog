@@ -2,7 +2,7 @@
 tags: ["Generative AI", "Applications", "E-learning"]
 date: 2026-03-16
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/FWY9NQRSmxg?si=ob3qR7FwGGssfcuC
+youtube_url: "https://youtu.be/FWY9NQRSmxg?si=ob3qR7FwGGssfcuC"
 ---
 
 ## L'AI in casa: LM Studio e Qwen 3.5 sul mio PC - Puntata 1

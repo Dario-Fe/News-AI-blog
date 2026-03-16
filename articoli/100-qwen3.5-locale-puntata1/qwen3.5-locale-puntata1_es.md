@@ -4,7 +4,7 @@ date: 2026-03-16
 author: "Dario Ferrero"
 ---
 
-## La IA en casa: LM Studio y Qwen 3.5 en mi PC - Entrega 1
+# La IA en casa: LM Studio y Qwen 3.5 en mi PC - Entrega 1
 ![qwen3.5-locale-puntata1.jpg](qwen3.5-locale-puntata1.jpg)
 
 *Hay un momento preciso en el que una tecnología deja de ser una promesa y se convierte en una herramienta. No es cuando sale el comunicado de prensa, ni cuando los benchmarks dan la vuelta a las redes sociales, sino cuando una persona normal, con un PC normal, se sienta, descarga algo y decide entender de verdad lo que está pasando. Este artículo es ese momento, al menos para mí.*

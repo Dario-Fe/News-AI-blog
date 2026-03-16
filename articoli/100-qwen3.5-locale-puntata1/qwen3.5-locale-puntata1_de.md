@@ -4,7 +4,7 @@ date: 2026-03-16
 author: "Dario Ferrero"
 ---
 
-## KI zu Hause: LM Studio und Qwen 3.5 auf meinem PC – Folge 1
+# KI zu Hause: LM Studio und Qwen 3.5 auf meinem PC – Folge 1
 ![qwen3.5-locale-puntata1.jpg](qwen3.5-locale-puntata1.jpg)
 
 *Es gibt einen präzisen Moment, in dem eine Technologie aufhört, ein Versprechen zu sein, und zum Werkzeug wird. Es ist nicht der Moment, in dem die Pressemitteilung erscheint, nicht der, in dem die Benchmarks in den sozialen Medien die Runde machen, sondern der Moment, in dem sich ein normaler Mensch mit einem normalen PC hinsetzt, etwas herunterlädt und beschließt, wirklich zu verstehen, was da gerade passiert. Dieser Artikel ist dieser Moment, zumindest für mich.*

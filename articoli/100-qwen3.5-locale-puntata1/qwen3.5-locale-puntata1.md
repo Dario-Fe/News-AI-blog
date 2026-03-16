@@ -5,7 +5,7 @@ author: "Dario Ferrero"
 youtube_url: "https://youtu.be/FWY9NQRSmxg?si=ob3qR7FwGGssfcuC"
 ---
 
-## L'AI in casa: LM Studio e Qwen 3.5 sul mio PC - Puntata 1
+# L'AI in casa: LM Studio e Qwen 3.5 sul mio PC - Puntata 1
 ![qwen3.5-locale-puntata1.jpg](qwen3.5-locale-puntata1.jpg)
 
 *C'è un momento preciso in cui una tecnologia smette di essere promessa e diventa strumento. Non è quando esce il comunicato stampa, non è quando i benchmark fanno il giro dei social, ma quando una persona normale, con un PC normale, si siede, scarica qualcosa, e decide di capire davvero cosa sta succedendo. Questo articolo è quel momento, almeno per me.*

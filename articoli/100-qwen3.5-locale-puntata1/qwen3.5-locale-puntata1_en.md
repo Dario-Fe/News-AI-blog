@@ -4,7 +4,7 @@ date: 2026-03-16
 author: "Dario Ferrero"
 ---
 
-## AI at Home: LM Studio and Qwen 3.5 on My PC - Episode 1
+# AI at Home: LM Studio and Qwen 3.5 on My PC - Episode 1
 ![qwen3.5-locale-puntata1.jpg](qwen3.5-locale-puntata1.jpg)
 
 *There is a precise moment when a technology stops being a promise and becomes a tool. It's not when the press release comes out, it's not when the benchmarks go viral on social media, but when an ordinary person, with an ordinary PC, sits down, downloads something, and decides to really understand what is happening. This article is that moment, at least for me.*

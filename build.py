@@ -757,6 +757,12 @@ LANG_CONFIG = {
     "de": {"name": "Deutsch", "flag": "de.svg", "abbr": "DE"},
 }
 
+def natural_sort_key(s):
+    """
+    Returns a key for natural (alphanumeric) sorting.
+    """
+    return [int(text) if text.isdigit() else text.lower() for text in re.split('([0-9]+)', str(s))]
+
 def generate_language_dropdown_html(current_lang, depth=1):
     """
     Generates the complete HTML for the language selector dropdown.
@@ -972,8 +978,8 @@ def main():
         return
 
     processed_articles = []
-    s1 = sorted(md_files, key=lambda x: x['name'].lower(), reverse=True)
-    sorted_md_files = sorted(s1, key=lambda x: x['parent_dir'], reverse=True)
+    s1 = sorted(md_files, key=lambda x: natural_sort_key(x['name']), reverse=True)
+    sorted_md_files = sorted(s1, key=lambda x: natural_sort_key(x['parent_dir']), reverse=True)
 
     for md_file in sorted_md_files:
         article_data = process_article(md_file, BASE_OUTPUT_DIR, lang)

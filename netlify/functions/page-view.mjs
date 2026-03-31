@@ -1,12 +1,11 @@
 export default async (req) => {
-  // Use dynamic import to resolve the ESM/CJS conflict
-  const { getStore } = await import('@netlify/blobs');
-
   if (req.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
   }
 
   try {
+    // Use dynamic import to resolve the ESM/CJS conflict
+    const { getStore } = await import('@netlify/blobs');
     const { path } = await req.json();
 
     if (!path || typeof path !== 'string' || !path.startsWith('/')) {

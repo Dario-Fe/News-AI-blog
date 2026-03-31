@@ -114,29 +114,29 @@ function generateHTML(statsData) {
 
 
 export default async (req, context) => {
-  // Use dynamic import to resolve the ESM/CJS conflict
-  const { getStore } = await import('@netlify/blobs');
-  
-  // 1. Authentication
-  const authHeader = req.headers.get('authorization');
-  // Use process.env for Node.js runtime on Netlify
-  const user = process.env.STATS_USER;
-  const pass = process.env.STATS_PASSWORD;
-
-  if (!user || !pass) {
-    return new Response('Authentication not configured.', { status: 500 });
-  }
-
-  const expectedAuth = 'Basic ' + btoa(`${user}:${pass}`);
-  if (authHeader !== expectedAuth) {
-    return new Response('Unauthorized', {
-      status: 401,
-      headers: { 'WWW-Authenticate': 'Basic realm="Restricted Area"' },
-    });
-  }
-
   // 2. If authenticated, fetch data
   try {
+    // Use dynamic import to resolve the ESM/CJS conflict
+    const { getStore } = await import('@netlify/blobs');
+    
+    // 1. Authentication
+    const authHeader = req.headers.get('authorization');
+    // Use process.env for Node.js runtime on Netlify
+    const user = process.env.STATS_USER;
+    const pass = process.env.STATS_PASSWORD;
+
+    if (!user || !pass) {
+      return new Response('Authentication not configured.', { status: 500 });
+    }
+
+    const expectedAuth = 'Basic ' + Buffer.from(`${user}:${pass}`).toString('base64');
+    if (authHeader !== expectedAuth) {
+      return new Response('Unauthorized', {
+        status: 401,
+        headers: { 'WWW-Authenticate': 'Basic realm="Restricted Area"' },
+      });
+    }
+
     const store = getStore('page-views');
     const { blobs } = await store.list();
     

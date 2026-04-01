@@ -1395,7 +1395,9 @@ def generate_index_page(articles, output_dir, lang='it'):
     json_output_path = os.path.join(output_dir, "articles.json")
     serializable_articles = []
     for article in articles:
-        article_copy = article.copy()
+        # Optimization: remove the full HTML content from the JSON used for the homepage.
+        # This drastically reduces the file size as the site grows.
+        article_copy = {k: v for k, v in article.items() if k != 'html_content'}
         if isinstance(article_copy.get('date'), (datetime, date)):
             article_copy['date'] = article_copy['date'].isoformat()
         serializable_articles.append(article_copy)
@@ -1694,7 +1696,9 @@ def generate_robots_txt():
     print("\nGenerating robots.txt...")
     content = (
         "User-agent: *\n"
-        "Allow: /\n\n"
+        "Allow: /\n"
+        "Disallow: /*/assets/audio/\n"
+        "Disallow: /stats\n\n"
         f"Sitemap: {SITE_URL}sitemap.xml"
     )
     with open(os.path.join(BASE_OUTPUT_DIR, "robots.txt"), "w", encoding='utf-8') as f:

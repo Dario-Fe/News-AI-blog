@@ -1,0 +1,91 @@
+---
+tags: ["Research", "Generative AI", "Security"]
+date: 2026-04-01
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/EBZ6ulYQt94?si=PyGeTQzM0qiSWN0T"
+---
+
+# Il MIT realizza la promessa degli occhiali a raggi X
+![wave-former-raggix.jpg](wave-former-raggix.jpg)
+
+*Chi era ragazzo tra la fine dei '70 e i primi degli '80 ricorda bene quella sensazione che arrivava sfogliando le ultime pagine de *L'Intrepido* o di *Lanciostory*: in mezzo alle pubblicità di penne a sfera e corsi di disegno per corrispondenza, campeggiava una réclame che prometteva l'impossibile. Occhiali a raggi X. Veri. Per poche lire, spedizione compresa. La promessa era cristallina: indossali e vedrai attraverso qualsiasi cosa. Muri, scatole, vestiti. La realtà, come scopriva amaramente ogni ragazzo che cedeva alla tentazione, era molto più prosaica: un cartoncino con un curioso effetto ottico basato sulla diffrazione della luce, capace al massimo di far sembrare trasparente la propria mano. Una truffa alla Totò, un illusione a buon mercato.*
+
+Quel sogno, però, non è mai davvero scomparso. Si è solo trasferito nei laboratori di ricerca, dove per decenni ingegneri e fisici hanno cercato modi concreti per vedere ciò che gli occhi umani non possono raggiungere. E il 19 marzo 2026, il [MIT ha pubblicato](https://news.mit.edu/2026/generative-ai-improves-wireless-vision-system-sees-through-obstructions-0319) i risultati di una ricerca che, senza esagerare, rappresenta il passo più convincente verso quella promessa bufala degli anni Ottanta: un sistema capace di ricostruire oggetti nascosti e ambienti interi usando segnali radio riflessi, guidato da modelli di intelligenza artificiale generativa. Niente occhialini di cartone, stavolta. Due paper accettati alla conferenza IEEE CVPR, uno dei forum più autorevoli al mondo nel campo della visione artificiale, e un laboratorio che da oltre un decennio accumula risultati considerati impossibili.
+
+## Il problema fisico che ha tenuto tutto in standby per vent'anni
+
+Per capire perché questa ricerca sia rilevante, bisogna fare un passo indietro e affrontare una questione di fisica onesta. Le onde millimetriche, o mmWave, sono segnali radio con frequenza molto alta, gli stessi usati nelle reti Wi-Fi di ultima generazione e nei radar automobilistici. Hanno una proprietà utilissima: attraversano con relativa facilità materiali comuni come cartone, plastica, legno e cartongesso. Questo le rende, in teoria, perfette per "vedere" ciò che si trova dall'altra parte di una parete o nascosto sotto una pila di oggetti.
+
+Il problema è un altro, e ha un nome tecnico preciso: specularity, ovvero riflessione speculare. Quando un'onda millimetrica colpisce una superficie, tende a rimbalzare in una direzione sola, come la luce su uno specchio. Questo significa che il sensore riesce a catturare solo una porzione limitata della superficie dell'oggetto nascosto: tipicamente la parte più alta, quella che riflette il segnale direttamente verso il ricevitore. Il lato inferiore, i fianchi, le superfici inclinate: tutto invisibile. Come cercare di ricostruire la forma di una scultura toccandola con un solo dito, sempre dallo stesso angolo.
+
+I ricercatori del gruppo [Signal Kinetics](https://www.media.mit.edu/groups/signal-kinetics/overview/) del MIT Media Lab avevano già ottenuto risultati significativi in questo campo. Nell'estate del 2025 avevano presentato mmNorm, un sistema capace di stimare le normali di superficie degli oggetti nascosti, vincendo il Best Paper Runner-up e il Best Poster Award a ACM MobiSys. Ma il problema della specularity rimaneva un soffitto di vetro: le ricostruzioni erano parziali, precise dove il segnale arrivava, cieche altrove. Serviva qualcosa di qualitativamente diverso per il salto successivo.
+
+## Wave-Former: quando l'IA impara a immaginare ciò che non vede
+
+La soluzione che il team ha trovato è, a pensarci bene, elegante nella sua logica: se il sensore fisico non può raccogliere abbastanza dati per ricostruire l'intera forma di un oggetto, si addestra un modello di intelligenza artificiale generativa a *immaginare* le parti mancanti. Non un'invenzione arbitraria, ma un'inferenza guidata dalla fisica: il sistema sa come si comportano le onde millimetriche, conosce le proprietà della riflessione speculare, e impara a completare la forma plausibile di un oggetto partendo da una ricostruzione parziale.
+
+Il sistema si chiama Wave-Former, e funziona in tre fasi. Prima, costruisce una ricostruzione parziale dell'oggetto nascosto a partire dai segnali mmWave riflessi. Poi, passa questa ricostruzione incompleta a un modello generativo, che propone come potrebbe essere la forma completa. Infine, raffina iterativamente le superfici fino a ottenere una ricostruzione finale coerente.
+
+Il nodo più interessante, dal punto di vista tecnico, è come il team abbia risolto il problema dell'addestramento. I modelli di intelligenza artificiale generativa funzionano bene quando hanno a disposizione grandi quantità di dati di addestramento. GPT, Claude, Llama: tutti si fondano su dataset di dimensioni astronomiche. Ma non esiste un dataset abbastanza grande di scansioni mmWave di oggetti nascosti, e costruirne uno ex novo avrebbe richiesto, come spiega Maisy Lam, una delle ricercatrici coinvolte, letteralmente anni di raccolta dati. Il team ha quindi adottato una strategia indiretta: ha preso i grandi dataset esistenti di visione artificiale, quelli con milioni di immagini 3D di oggetti comuni, e li ha *trasformati* per simulare le proprietà fisiche della riflessione mmWave, inclusa la specularity e il rumore caratteristico di questi segnali. Un dataset sintetico ma fisicamente accurato, costruito con un processo che incorpora direttamente la fisica delle onde nelle immagini di addestramento.
+
+I risultati sono solidi. Wave-Former è stato testato su circa 70 oggetti di uso quotidiano, lattine, scatole, posate, frutta, nascosti dietro o sotto materiali diversi: cartone, legno, cartongesso, plastica, tessuto. Rispetto ai metodi precedenti considerati allo stato dell'arte, il sistema ha ottenuto un miglioramento di quasi il 20% nell'accuratezza della ricostruzione, misurata con la metrica Chamfer error, che quantifica quanto la forma ricostruita si discosti da quella reale.
+![esempio1.jpg](esempio1.jpg)
+[Immagine tratta da news.mit.edu](https://news.mit.edu/2026/generative-ai-improves-wireless-vision-system-sees-through-obstructions-0319)
+
+## RISE: i fantasmi che disegnano le stanze
+
+Il secondo sistema presentato nei paper si chiama RISE, e spinge il concetto ancora più in là. Invece di ricostruire singoli oggetti nascosti, RISE ricostruisce intere stanze, inclusi tutti i mobili presenti, usando un singolo radar fisso e senza che nessun sensore si muova nell'ambiente.
+
+Il meccanismo che sfrutta è controintuitivo. Quando una persona si muove in una stanza, le onde mmWave emesse dal radar non rimbalzano solo sulla persona: alcune onde riflesse dalla figura umana rimbalzano poi su un muro o su un mobile, e solo dopo raggiungono il sensore. Queste riflessioni secondarie, chiamate segnali "fantasma" perché appaiono come copie spostate della sorgente originale, vengono di solito ignorate o filtrate come rumore. Contengono, però, informazioni preziose: siccome la loro posizione cambia mentre la persona si muove, e siccome il loro percorso dipende dalla geometria della stanza, analizzando come variano nel tempo è possibile inferire dove si trovano le pareti e i mobili.
+
+Il problema è che questa inferenza diretta produce ricostruzioni molto grezze e imprecise. È qui che interviene il modello generativo: come nel caso di Wave-Former, il sistema usa l'IA per prendere una mappa coarse dell'ambiente e raffinarla fino a ottenere una rappresentazione credibile della stanza. RISE è stato validato su oltre 100 traiettorie umane registrate in ambienti reali, con un singolo radar statico. Il miglioramento rispetto ai metodi precedenti è ancora più marcato: le ricostruzioni risultano mediamente due volte più precise di quelle ottenibili con le tecniche preesistenti.
+
+## Il laboratorio dell'impossibile e il suo fondatore
+
+Dietro questi risultati c'è il [Signal Kinetics Group](https://www.media.mit.edu/groups/signal-kinetics/overview/), che Fadel Adib dirige al MIT Media Lab. Adib è un ricercatore libanese-americano, laureato all'American University of Beirut con il GPA più alto nella storia digitalmente registrata dell'ateneo, poi master e dottorato al MIT. La sua tesi di dottorato, che gli è valsa l'ACM SIGMOBILE Dissertation Award, riguardava già il vedere attraverso le pareti usando il Wi-Fi. Da quel lavoro è nata Emerald Innovations, una startup i cui dispositivi vengono oggi usati per il monitoraggio remoto della salute di migliaia di pazienti.
+
+Il curriculum di Adib è il tipo di lista che risulta quasi fastidiosa per la sua densità: tra Forbes 30 Under 30, Technology Review's 35 Innovators Under 35, Sloan Research Fellowship, ACM SIGMOBILE Rockstar Award, ACM MobiCom Best Paper Award, ONR Young Investigator Award e NSF CAREER Award, ha anche avuto il privilegio piuttosto raro di presentare la propria ricerca al presidente Obama durante il primo White House Demo Day nel 2015. Il gruppo che dirige ha prodotto, nel corso degli anni, tecnologie che spaziano dalla navigazione subacquea senza batterie agli auricolari di realtà aumentata con visione a raggi X, fino al rilevamento dei battiti cardiaci attraverso le pareti.
+
+I due paper presentati questa settimana vedono come coautrice principale Laura Dodds, MIT Presidential Fellow e detentrice del premio per la migliore tesi MEng in EECS al MIT. Il gruppo di lavoro include anche Maisy Lam, NSF GRFP Fellow, Waleed Akbar, Yibo Cheng, e l'ex postdoc Kaichen Zhou, ora autore principale del paper su RISE. Il finanziamento proviene da NSF, MIT Media Lab e Amazon.
+![esempio3.jpg](esempio3.jpg)
+[Immagine tratta da arxiv.org](https://arxiv.org/pdf/2511.14152)
+
+## Dal magazzino alla sala operatoria: le applicazioni concrete
+
+Il salto dalle ricostruzioni in laboratorio alle applicazioni del mondo reale è meno lungo di quanto si potrebbe immaginare. I ricercatori stessi citano due scenari prioritari, e in entrambi i casi la logica è stringente.
+
+Nel contesto della logistica e dei magazzini automatizzati, la capacità di verificare il contenuto di una scatola chiusa senza aprirla è un valore economico diretto e misurabile. Oggi, una quota significativa dei resi nell'e-commerce è generata da errori di imballaggio: prodotto sbagliato, prodotto mancante, prodotto danneggiato non visibile dall'esterno. Un robot equipaggiato con un sistema come Wave-Former potrebbe verificare il contenuto di ogni scatola prima della spedizione, riducendo drasticamente questi errori. Amazon, tra i finanziatori della ricerca, ha evidentemente interesse in questa direzione.
+
+Nel contesto domestico e della robotica di servizio, RISE apre un'altra possibilità: un robot che "sa" dove si trovano i mobili e dove si trova la persona nella stanza, senza bisogno di telecamere. Il vantaggio sulla privacy rispetto ai sistemi basati su videocamera è tutt'altro che banale: i segnali mmWave non catturano immagini visive delle persone, ma solo la loro posizione approssimativa e il profilo dell'ambiente. Un sistema di assistenza domestica per anziani che funziona senza registrare video è un prodotto commercialmente e eticamente molto più accettabile di uno che installa telecamere in ogni stanza.
+
+In ambito medico, le prospettive sono ancora più ambiziose ma anche più lontane dall'applicazione immediata. La possibilità di ottenere immagini attraverso superfici opache con hardware relativamente economico potrebbe un giorno integrare o affiancare tecniche di imaging come l'ecografia in contesti dove l'accesso a macchinari sofisticati è limitato.
+
+## Il rovescio della medaglia: sorveglianza, privacy e chi resta indietro
+
+Fin qui, la storia del progresso tecnico nella sua versione ottimistica. Ma sarebbe disonesto fermarsi qui, perché una tecnologia capace di ricostruire ambienti e oggetti attraverso le pareti porta con sé domande scomode che non si risolvono con la buona volontà dei ricercatori.
+
+La distinzione tra "rileva la posizione di una persona" e "sorveglia una persona" è molto più sottile di quanto sembri. Il sistema RISE, nella sua forma attuale, ha bisogno di un essere umano in movimento nella stanza per funzionare come mapper ambientale. Ma il fatto che la posizione della persona venga usata come "sonda" per l'ambiente non significa che quella posizione non venga registrata. Un sistema che sa dove sei nella tua casa, anche senza telecamere, è già un sistema di sorveglianza nella misura in cui qualcuno ha accesso a quei dati.
+
+Il confronto con il GDPR e l'AI Act europeo è inevitabile, e i contorni non sono ancora definiti. La normativa europea sulla privacy è costruita attorno al concetto di "dato personale", che include esplicitamente le informazioni relative alla posizione di una persona identificabile. Un segnale radio che localizza qualcuno nella propria abitazione rientra con tutta probabilità in questa categoria, il che significa che qualsiasi prodotto commerciale basato su questi principi dovrà ottenere un consenso informato esplicito e documentato. L'AI Act, approvato nel 2024, introduce ulteriori vincoli sui sistemi di "remote biometric identification", categoria in cui questi sistemi potrebbero rientrare se usati per identificare e tracciare persone in spazi pubblici.
+
+Il rischio più concreto a breve termine non è il governo che spia i cittadini attraverso i muri delle loro case, scenario da regime distopico che richiede risorse e motivazioni straordinarie. Il rischio più immediato è quello dell'uso non autorizzato a scala ridotta: un proprietario di casa che installa un sensore per monitorare gli inquilini, un datore di lavoro che traccia i movimenti dei dipendenti negli uffici, un partner violento che vuole sapere dove si trova l'altra persona in ogni momento. La storia della tecnologia di sorveglianza insegna che gli usi più pericolosi non sono mai quelli immaginati dai ricercatori in fase di sviluppo.
+
+C'è poi una questione di distribuzione del potere tecnologico che merita attenzione. Le tecnologie di sensing avanzato tendono a diffondersi prima tra chi ha già risorse: forze dell'ordine, grandi aziende, stati con capacità tecnologica elevata. Se la regolamentazione non tiene il passo con la diffusione, si crea un periodo di asimmetria informativa potenzialmente molto problematico, in cui alcuni attori possono "vedere" senza essere visti. Il gap tra paesi con forte capacità regolamentare, come l'Unione Europea, e paesi dove queste tutele sono assenti rischia di tradursi in una disparità concreta nelle protezioni che i cittadini possono aspettarsi.
+![esempio2.jpg](esempio2.jpg)
+[Immagine tratta da arxiv.org](https://arxiv.org/pdf/2511.14152)
+
+## Verso il "foundation model" del wireless
+
+I ricercatori del MIT non si fermano ai risultati attuali. Adib ha dichiarato esplicitamente che l'obiettivo a lungo termine è costruire modelli fondazionali per i segnali wireless, ovvero quello che GPT, Claude e Gemini rappresentano per il linguaggio e le immagini. Un modello addestrato su una varietà enorme di segnali radio, capace di comprendere e interpretare riflessioni da ambienti, oggetti e corpi umani con una generalità e una flessibilità che i sistemi attuali non hanno.
+
+Questa prospettiva è allo stesso tempo affascinante e vertiginosa. I modelli fondazionali per il linguaggio hanno dimostrato capacità emergenti, ovvero comportamenti che non erano esplicitamente programmati ma sono emersi dalla scala e dalla diversità del training. Un modello analogo per il dominio wireless potrebbe sviluppare capacità di percezione ambientale che oggi non sappiamo nemmeno immaginare. Potrebbe anche, come i modelli linguistici, risultare difficile da interpretare, da controllare e da limitare a usi specifici.
+
+Il contesto competitivo in cui si muove questa ricerca è vivace. Esistono approcci alternativi basati su Wi-Fi CSI (Channel State Information), che usa le variazioni nelle caratteristiche del canale Wi-Fi per inferire la presenza e il movimento di persone, e radar through-wall di tipo militare, sistemi molto più costosi e invasivi usati da forze speciali in contesti operativi. La ricerca del gruppo Adib si distingue per il focus su hardware relativamente economico, segnali già presenti nell'ambiente e tecniche di processing sempre più sofisticate. La startup Cartesian Systems, coffondata da Adib, sembra orientata a portare queste tecnologie verso applicazioni commerciali, anche se i dettagli specifici sul prodotto non sono ancora pubblici.
+
+## Occhiali a raggi X, finalmente
+
+C'è qualcosa di circolare, e vagamente commovente, nel fatto che la tecnologia abbia impiegato cinquant'anni per mantenere una promessa fatta su carta patinata a un ragazzo con 7.200 lire in tasca. Gli occhiali de *L'Intrepido* erano una truffa, ma erano anche un sintomo: la percezione aumentata, il vedere oltre il visibile, è un desiderio così radicato nell'immaginario umano da resistere a qualsiasi disillusione.
+
+Wave-Former e RISE non sono prodotti commerciali, non sono pronti per il mercato e non sono privi di limiti tecnici e implicazioni etiche irrisolte. Sono però qualcosa di più solido di una promessa: sono risultati replicabili, misurabili, presentati davanti alla comunità scientifica internazionale. Il salto qualitativo introdotto dall'intelligenza artificiale generativa, la capacità di *completare* ciò che la fisica da sola non riesce a vedere, è genuino.
+
+La domanda che rimane aperta non è tecnica. È la domanda che accompagna ogni tecnologia di percezione da quando esiste la sorveglianza: chi ha il diritto di vedere, cosa, e con quale autorizzazione? Il MIT ha costruito uno strumento straordinario. Spetta a legislatori, aziende e cittadini decidere in quale mondo usarlo. Perché stavolta, a differenza degli occhialini di cartone, funziona davvero.

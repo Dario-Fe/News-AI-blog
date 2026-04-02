@@ -113,43 +113,57 @@ function generateHTML(statsData) {
 }
 
 
+import { getStore } from '@netlify/blobs';
+
 export default async (req, context) => {
-  // 2. If authenticated, fetch data
+  // 1. Authentication Check (Fastest check first)
+  const authHeader = req.headers.get('authorization');
+  const user = process.env.STATS_USER;
+  const pass = process.env.STATS_PASSWORD;
+
+  if (!user || !pass) {
+    return new Response('Authentication not configured on server.', { status: 500 });
+  }
+
+  const expectedAuth = 'Basic ' + Buffer.from(`${user}:${pass}`).toString('base64');
+  if (authHeader !== expectedAuth) {
+    return new Response('Unauthorized', {
+      status: 401,
+      headers: { 'WWW-Authenticate': 'Basic realm="Restricted Area"' },
+    });
+  }
+
+  // 2. Fetch and process data
   try {
-    // Use dynamic import to resolve the ESM/CJS conflict
-    const { getStore } = await import('@netlify/blobs');
+    const store = getStore({ name: 'page-views' });
     
-    // 1. Authentication
-    const authHeader = req.headers.get('authorization');
-    // Use process.env for Node.js runtime on Netlify
-    const user = process.env.STATS_USER;
-    const pass = process.env.STATS_PASSWORD;
-
-    if (!user || !pass) {
-      return new Response('Authentication not configured.', { status: 500 });
+    // List blobs with a limit to avoid timeouts if the site has thousands of pages
+    const { blobs } = await store.list({ limit: 1000 });
+    
+    // Process blobs in batches of 50 to avoid hitting concurrency limits or timing out
+    const allViews = [];
+    const batchSize = 50;
+    
+    for (let i = 0; i < blobs.length; i += batchSize) {
+      const batch = blobs.slice(i, i + batchSize);
+      const batchResults = await Promise.all(
+        batch.map(async (blob) => {
+          try {
+            const viewData = await store.get(blob.key, { type: 'json' });
+            return {
+              path: blob.key,
+              count: (viewData && typeof viewData.count === 'number') ? viewData.count : 0,
+            };
+          } catch (e) {
+            console.error(`Error fetching blob ${blob.key}:`, e);
+            return null; // Skip failed blobs
+          }
+        })
+      );
+      allViews.push(...batchResults.filter(item => item !== null));
     }
 
-    const expectedAuth = 'Basic ' + Buffer.from(`${user}:${pass}`).toString('base64');
-    if (authHeader !== expectedAuth) {
-      return new Response('Unauthorized', {
-        status: 401,
-        headers: { 'WWW-Authenticate': 'Basic realm="Restricted Area"' },
-      });
-    }
-
-    const store = getStore('page-views');
-    const { blobs } = await store.list();
-    
-    const allViews = await Promise.all(
-      blobs.map(async (blob) => {
-        const viewData = await store.get(blob.key, { type: 'json' });
-        return {
-          path: blob.key,
-          count: (viewData && viewData.count) ? viewData.count : 0,
-        };
-      })
-    );
-
+    // Sort by views descending
     allViews.sort((a, b) => b.count - a.count);
     
     // 3. Render the full HTML page with the data
@@ -157,11 +171,14 @@ export default async (req, context) => {
     
     return new Response(html, {
       status: 200,
-      headers: { 'Content-Type': 'text/html' },
+      headers: { 
+        'Content-Type': 'text/html',
+        'Cache-Control': 'no-store, max-age=0' // Ensure fresh data on every visit
+      },
     });
 
   } catch (error) {
-    console.error('Error generating stats page:', error);
-    return new Response('Error generating stats page.', { status: 500 });
+    console.error('Critical error generating stats page:', error);
+    return new Response(`Server error while processing statistics: ${error.message}`, { status: 500 });
   }
 };

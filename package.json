@@ -1,0 +1,10 @@
+{
+  "name": "aitalk",
+  "version": "1.0.0",
+  "description": "AITalk static site",
+  "main": "build.py",
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^2.0.0"
+  }
+}

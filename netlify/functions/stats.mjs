@@ -1,7 +1,9 @@
-// Helper function to generate the HTML page
-function generateHTML(statsData) {
+// Funzione per generare la pagina HTML delle statistiche
+function generateHTML(statsData, lastUpdate) {
   let totalViews = 0;
   statsData.forEach(item => totalViews += item.count);
+
+  const formattedDate = lastUpdate ? new Date(lastUpdate).toLocaleString('it-IT') : 'In fase di aggiornamento...';
 
   return `
     <!DOCTYPE html>
@@ -12,7 +14,8 @@ function generateHTML(statsData) {
         <title>Statistiche Visite - AITalk</title>
         <style>
             body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: #f0f2f5; color: #1c1e21; padding: 20px; }
-            h1 { text-align: center; color: #0056b3; }
+            h1 { text-align: center; color: #0056b3; margin-bottom: 5px; }
+            .last-update { text-align: center; color: #65676b; font-size: 0.9em; margin-bottom: 20px; }
             #stats-container { max-width: 900px; margin: 20px auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; }
             table { width: 100%; border-collapse: collapse; margin-top: 20px; }
             th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
@@ -43,18 +46,12 @@ function generateHTML(statsData) {
                 box-shadow: 0 4px 8px rgba(0,0,0,0.15);
                 background-color: #f8f9fa;
             }
-            .view-more-button:disabled {
-                background-color: #e9ebee;
-                color: #bec3c9;
-                cursor: not-allowed;
-                transform: none;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
         </style>
     </head>
     <body>
         <div id="stats-container">
             <h1>Statistiche Visite Anonime</h1>
+            <div class="last-update">Ultimo aggiornamento: ${formattedDate}</div>
             <table>
                 <thead>
                     <tr>
@@ -63,7 +60,7 @@ function generateHTML(statsData) {
                     </tr>
                 </thead>
                 <tbody id="stats-body">
-                    <!-- Rows will be injected here by JavaScript -->
+                    <!-- Righe caricate da JS -->
                 </tbody>
             </table>
             
@@ -77,7 +74,7 @@ function generateHTML(statsData) {
         <script>
             const statsData = ${JSON.stringify(statsData)};
             let currentPage = 0;
-            const rowsPerPage = 20;
+            const rowsPerPage = 25;
             
             const statsBody = document.getElementById('stats-body');
             const viewMoreButton = document.getElementById('view-more-button');
@@ -90,7 +87,7 @@ function generateHTML(statsData) {
 
                 rowsToRender.forEach(item => {
                     const row = document.createElement('tr');
-                    const displayPath = '/' + item.path;
+                    const displayPath = item.path.startsWith('/') ? item.path : '/' + item.path;
                     row.innerHTML = '<td>' + displayPath + '</td><td>' + item.count + '</td>';
                     statsBody.appendChild(row);
                 });
@@ -103,8 +100,6 @@ function generateHTML(statsData) {
             }
 
             viewMoreButton.addEventListener('click', renderNextRows);
-
-            // Initial render
             renderNextRows();
         </script>
     </body>
@@ -112,73 +107,54 @@ function generateHTML(statsData) {
   `;
 }
 
-
 import { getStore } from '@netlify/blobs';
 
 export default async (req, context) => {
-  // 1. Authentication Check (Fastest check first)
+  // 1. Verifica Autenticazione (Basic Auth)
   const authHeader = req.headers.get('authorization');
   const user = process.env.STATS_USER;
   const pass = process.env.STATS_PASSWORD;
 
   if (!user || !pass) {
-    return new Response('Authentication not configured on server.', { status: 500 });
+    return new Response('Configurazione server incompleta (variabili d\'ambiente mancanti).', { status: 500 });
   }
 
   const expectedAuth = 'Basic ' + Buffer.from(`${user}:${pass}`).toString('base64');
   if (authHeader !== expectedAuth) {
-    return new Response('Unauthorized', {
+    return new Response('Accesso negato', {
       status: 401,
-      headers: { 'WWW-Authenticate': 'Basic realm="Restricted Area"' },
+      headers: { 'WWW-Authenticate': 'Basic realm="Area Riservata"' },
     });
   }
 
-  // 2. Fetch and process data
+  // 2. Recupero del Riepilogo Aggregato
   try {
     const store = getStore({ name: 'page-views' });
     
-    // List blobs with a limit to avoid timeouts if the site has thousands of pages
-    const { blobs } = await store.list({ limit: 1000 });
-    
-    // Process blobs in batches of 50 to avoid hitting concurrency limits or timing out
-    const allViews = [];
-    const batchSize = 50;
-    
-    for (let i = 0; i < blobs.length; i += batchSize) {
-      const batch = blobs.slice(i, i + batchSize);
-      const batchResults = await Promise.all(
-        batch.map(async (blob) => {
-          try {
-            const viewData = await store.get(blob.key, { type: 'json' });
-            return {
-              path: blob.key,
-              count: (viewData && typeof viewData.count === 'number') ? viewData.count : 0,
-            };
-          } catch (e) {
-            console.error(`Error fetching blob ${blob.key}:`, e);
-            return null; // Skip failed blobs
-          }
-        })
-      );
-      allViews.push(...batchResults.filter(item => item !== null));
+    // Leggiamo il blob di riepilogo creato dalla funzione pianificata (update-stats.mjs)
+    let summary = await store.get('__summary__', { type: 'json' });
+
+    // Se il riepilogo non esiste ancora, mostriamo un messaggio di attesa
+    if (!summary) {
+      return new Response(generateHTML([], null), {
+        status: 200,
+        headers: { 'Content-Type': 'text/html' },
+      });
     }
 
-    // Sort by views descending
-    allViews.sort((a, b) => b.count - a.count);
-    
-    // 3. Render the full HTML page with the data
-    const html = generateHTML(allViews);
+    // 3. Rendering con i dati del riepilogo
+    const html = generateHTML(summary.statsData, summary.lastUpdate);
     
     return new Response(html, {
       status: 200,
       headers: { 
         'Content-Type': 'text/html',
-        'Cache-Control': 'no-store, max-age=0' // Ensure fresh data on every visit
+        'Cache-Control': 'no-store, max-age=0'
       },
     });
 
   } catch (error) {
-    console.error('Critical error generating stats page:', error);
-    return new Response(`Server error while processing statistics: ${error.message}`, { status: 500 });
+    console.error('Errore critico durante la generazione delle statistiche:', error);
+    return new Response(`Errore server: ${error.message}`, { status: 500 });
   }
 };

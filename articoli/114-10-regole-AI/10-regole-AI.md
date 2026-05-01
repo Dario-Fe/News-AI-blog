@@ -1,5 +1,5 @@
 ---
-tags: [" Generative AI", "Security", "Business"]
+tags: ["Generative AI", "Security", "Business"]
 date: 2026-04-17
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/SSQITcGdzB4?si=Mr9_U4Ckhg8yADYr"

@@ -1,5 +1,5 @@
 ---
-tags: [" Generative AI", "Security", "Business"]
+tags: ["Generative AI", "Security", "Business"]
 date: 2026-04-15
 author: "Dario Ferrero"
 ---

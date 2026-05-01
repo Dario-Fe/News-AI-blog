@@ -1,5 +1,5 @@
 ---
-tags: [" Generative AI", "Applications", "Training"]
+tags: ["Generative AI", "Applications", "Training"]
 date: 2026-04-20
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/z6JiZcEs1tA?si=DGMTGuevCBbT04U3"

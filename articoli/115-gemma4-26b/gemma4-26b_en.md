@@ -1,5 +1,5 @@
 ---
-tags: [" Generative AI", "Applications", "Training"]
+tags: ["Generative AI", "Applications", "Training"]
 date: 2026-04-20
 author: "Dario Ferrero"
 ---

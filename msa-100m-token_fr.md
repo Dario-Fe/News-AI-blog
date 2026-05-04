@@ -4,7 +4,7 @@ date: 2026-05-06
 author: "Dario Ferrero"
 ---
 
-# 100 millions de tokens : mémoire o mirage ?
+# 100 millions de tokens : mémoire ou mirage ?
 ![msa-100m-token.jpg](msa-100m-token.jpg)
 
 *Essayons de raisonner par images. Cent millions de tokens n'est pas un nombre que le cerveau humain parvient à visualiser spontanément, il nous faut donc une ancre. Un token, dans le jargon des modèles de langage, correspond approximativement à trois quarts d'un mot anglais. Dix mille tokens représentent environ soixante-quinze pages de texte. Un million de tokens équivaut à l'intégralité de la *Recherche* de Proust, cette œuvre en sept volumes que presque tout le monde prétend avoir lue. Dix millions de tokens couvrent l'œuvre complète de Shakespeare plus la Bible plus quelques encyclopédies de taille moyenne. Cent millions de tokens, c'est de l'ordre d'une petite bibliothèque universitaire, disons soixante mille romans de longueur moyenne chargés dans un seul contexte actif, disponibles simultanément pour un modèle de langage qui répond à des questions.*

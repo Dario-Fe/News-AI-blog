@@ -15,6 +15,7 @@ from PIL import Image
 import hashlib
 from io import BytesIO
 from datetime import datetime, date, timezone
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Constants
 SITE_URL = "https://aitalk.it/"
@@ -22,6 +23,47 @@ BASE_OUTPUT_DIR = "dist"
 ARTICLES_DIR = "articoli" # New constant for local articles path
 IMAGE_ASSETS_DIR = "assets/images"
 AUDIO_ASSETS_DIR = "assets/audio"
+
+# --- Cache and Hashing Helpers ---
+
+def get_file_hash(filepath):
+    """Calculates the SHA-1 hash of a file."""
+    if not os.path.exists(filepath):
+        return None
+    sha1 = hashlib.sha1()
+    with open(filepath, 'rb') as f:
+        while True:
+            data = f.read(65536)
+            if not data:
+                break
+            sha1.update(data)
+    return sha1.hexdigest()
+
+def get_string_hash(text):
+    """Calculates the SHA-1 hash of a string."""
+    return hashlib.sha1(text.encode('utf-8')).hexdigest()
+
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    raise TypeError ("Type %s not serializable" % type(obj))
+
+def load_build_cache():
+    cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+def save_build_cache(cache):
+    os.makedirs(BASE_OUTPUT_DIR, exist_ok=True)
+    cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
+    with open(cache_path, 'w', encoding='utf-8') as f:
+        json.dump(cache, f, indent=2, default=json_serial)
 
 # --- Media Processing Helpers ---
 
@@ -64,7 +106,30 @@ def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
         # Create a unique filename based on the content to avoid collisions and handle updates
         content_hash = hashlib.sha1(image_bytes).hexdigest()[:10]
         base_name, _ = os.path.splitext(source_filename)
+        # Sanitize base_name to avoid issues with special characters in URLs
+        base_name = re.sub(r'[^a-zA-Z0-9_-]', '', base_name.replace(' ', '-'))
         base_filename = f"{base_name}-{content_hash}"
+
+        output_dir_images = os.path.join(output_dir_base, lang, IMAGE_ASSETS_DIR)
+        os.makedirs(output_dir_images, exist_ok=True)
+
+        image_paths = {
+            'thumb_webp': f"{IMAGE_ASSETS_DIR}/{base_filename}-thumb.webp",
+            'full_webp': f"{IMAGE_ASSETS_DIR}/{base_filename}-full.webp",
+            'thumb_jpeg': f"{IMAGE_ASSETS_DIR}/{base_filename}-thumb.jpeg",
+            'full_jpeg': f"{IMAGE_ASSETS_DIR}/{base_filename}-full.jpeg"
+        }
+
+        # Check if all files already exist
+        all_exist = True
+        for p in image_paths.values():
+            if not os.path.exists(os.path.join(output_dir_base, lang, p)):
+                all_exist = False
+                break
+
+        if all_exist:
+            # print(f"  - Image {base_filename} already exists, skipping processing.")
+            return image_paths
 
         img = Image.open(BytesIO(image_bytes))
         img = img.convert("RGB")
@@ -142,20 +207,27 @@ def process_author_photo(photo_path, output_dir_base, lang):
         raise ValueError("Author image processing failed: image_bytes is empty or base_filename is not set.")
 
     try:
+        photo_filename_webp = f"{base_filename}.webp"
+        photo_filename_jpeg = f"{base_filename}.jpeg"
+
+        photo_paths = {
+            'webp': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_webp}",
+            'jpeg': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_jpeg}"
+        }
+
+        # Check if already processed
+        if os.path.exists(os.path.join(output_dir_images, photo_filename_webp)) and \
+           os.path.exists(os.path.join(output_dir_images, photo_filename_jpeg)):
+            return photo_paths
+
         img = Image.open(BytesIO(image_bytes))
         img = img.convert("RGB")
         img.thumbnail((200, 200))
 
-        photo_filename_webp = f"{base_filename}.webp"
-        photo_filename_jpeg = f"{base_filename}.jpeg"
-        
         img.save(os.path.join(output_dir_images, photo_filename_webp), "webp", quality=85)
         img.save(os.path.join(output_dir_images, photo_filename_jpeg), "jpeg", quality=85)
 
-        return {
-            'webp': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_webp}",
-            'jpeg': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_jpeg}"
-        }
+        return photo_paths
         
     except Exception as e:
         print(f"  - ERROR: Could not process author image {photo_path}. Error: {e}")
@@ -182,10 +254,15 @@ def process_audio(audio_path, output_dir_base, lang):
         os.makedirs(output_dir_audio, exist_ok=True)
 
         dest_path = os.path.join(output_dir_audio, base_filename)
+        relative_path = f"{AUDIO_ASSETS_DIR}/{base_filename}"
+
+        if os.path.exists(dest_path):
+            # print(f"  - Audio {base_filename} already exists, skipping copy.")
+            return relative_path
+
         with open(dest_path, "wb") as f:
             f.write(audio_bytes)
         
-        relative_path = f"{AUDIO_ASSETS_DIR}/{base_filename}"
         print(f"  - Saved audio to {relative_path}")
         return relative_path
 
@@ -977,14 +1054,116 @@ def main():
         print(f"No markdown files found for language '{lang}'. Exiting.")
         return
 
+    # Load cache and check global dependencies
+    cache = load_build_cache()
+
+    # Calculate global hashes
+    global_hashes = {
+        "templates/base.html": get_file_hash("templates/base.html"),
+        "templates/author.html": get_file_hash("templates/author.html"),
+        "style.css": get_file_hash("style.css"),
+        "build.py": get_file_hash("build.py")
+    }
+
+    # Check if any global file has changed
+    global_changed = False
+    if "globals" not in cache:
+        global_changed = True
+    else:
+        for filepath, current_hash in global_hashes.items():
+            if cache["globals"].get(filepath) != current_hash:
+                print(f"  - GLOBAL CHANGE DETECTED: {filepath}")
+                global_changed = True
+                break
+
+    # We also check if this specific language has seen the global changes
+    if "lang_globals_seen" not in cache:
+        cache["lang_globals_seen"] = {}
+
+    # Generate a single hash representing the state of all globals
+    combined_globals_hash = get_string_hash("".join([h for h in global_hashes.values() if h]))
+
+    if cache["lang_globals_seen"].get(lang) != combined_globals_hash:
+        print(f"  - GLOBAL CHANGES NOT YET APPLIED FOR LANGUAGE: {lang}")
+        global_changed = True
+
+    # Update cache with current global state
+    cache["globals"] = global_hashes
+    cache["lang_globals_seen"][lang] = combined_globals_hash
+
     processed_articles = []
     s1 = sorted(md_files, key=lambda x: natural_sort_key(x['name']), reverse=True)
     sorted_md_files = sorted(s1, key=lambda x: natural_sort_key(x['parent_dir']), reverse=True)
 
+    # Prepare for incremental build
+    articles_to_process = []
+    if "articles" not in cache:
+        cache["articles"] = {}
+
+    if lang not in cache["articles"]:
+        cache["articles"][lang] = {}
+
     for md_file in sorted_md_files:
-        article_data = process_article(md_file, BASE_OUTPUT_DIR, lang)
-        if article_data:
+        md_path = md_file['path']
+        current_hash = get_file_hash(md_path)
+        article_slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
+        output_path = os.path.join(output_dir, f"{article_slug}.html")
+
+        # Check if we can skip this article
+        cached_data = cache["articles"][lang].get(md_path)
+        if not global_changed and cached_data and cached_data.get("hash") == current_hash and os.path.exists(output_path):
+            # print(f"  - Skipping {md_file['name']} (no changes detected)")
+            article_data = cached_data["data"]
+            # Convert date string back to date/datetime object
+            if article_data.get('date') and isinstance(article_data['date'], str):
+                try:
+                    if len(article_data['date']) > 10:
+                        article_data['date'] = datetime.fromisoformat(article_data['date'])
+                    else:
+                        article_data['date'] = date.fromisoformat(article_data['date'])
+                except ValueError:
+                    pass
             processed_articles.append(article_data)
+        else:
+            articles_to_process.append(md_file)
+
+    print(f"Processing {len(articles_to_process)} articles (out of {len(sorted_md_files)})...")
+
+    # Use parallel processing for articles
+    if articles_to_process:
+        with ProcessPoolExecutor() as executor:
+            future_to_article = {executor.submit(process_article, md_file, BASE_OUTPUT_DIR, lang): md_file for md_file in articles_to_process}
+            for future in as_completed(future_to_article):
+                md_file = future_to_article[future]
+                try:
+                    article_data = future.result()
+                    if article_data:
+                        processed_articles.append(article_data)
+                        # Store in cache
+                        cache["articles"][lang][md_file['path']] = {
+                            "hash": get_file_hash(md_file['path']),
+                            "data": article_data
+                        }
+                except Exception as exc:
+                    print(f"  - Article {md_file['name']} generated an exception: {exc}")
+                    raise
+
+    # Sort processed_articles again to maintain order
+    processed_articles.sort(key=lambda x: natural_sort_key(x['slug']), reverse=True)
+    # The above sorting is a bit weak, let's try to match the original sorting criteria if possible
+    # but slug based should be enough for the index page. Actually it was sorted by parent_dir then name.
+    # Let's rebuild the sorted list based on the original sorted_md_files to be safe.
+
+    slug_to_data = {a['slug']: a for a in processed_articles}
+    final_processed_articles = []
+    for md_file in sorted_md_files:
+        slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
+        if slug in slug_to_data:
+            final_processed_articles.append(slug_to_data[slug])
+
+    processed_articles = final_processed_articles
+
+    save_build_cache(cache)
 
     generate_article_pages(authors_data, processed_articles, output_dir, lang)
     generate_author_pages(authors_data, processed_articles, output_dir, lang)

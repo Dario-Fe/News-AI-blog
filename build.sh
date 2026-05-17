@@ -4,10 +4,9 @@ set -e
 
 echo "--- STARTING BUILD PROCESS ---"
 
-# 1. Clean and create the main output directory
-echo "1. Cleaning previous build..."
-if [ -d "dist" ]; then rm -r dist; fi
-mkdir dist
+# 1. Ensure the main output directory exists
+echo "1. Ensuring dist directory exists..."
+mkdir -p dist
 
 # 2. Copy site-wide static files (like form definitions)
 echo "2. Copying site-wide static files..."

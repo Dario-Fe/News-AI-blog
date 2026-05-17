@@ -1123,6 +1123,7 @@ def main():
                         article_data['date'] = date.fromisoformat(article_data['date'])
                 except ValueError:
                     pass
+            article_data["_is_cached"] = True
             processed_articles.append(article_data)
         else:
             articles_to_process.append(md_file)
@@ -1165,7 +1166,7 @@ def main():
 
     save_build_cache(cache)
 
-    generate_article_pages(authors_data, processed_articles, output_dir, lang)
+    generate_article_pages(authors_data, processed_articles, output_dir, lang, global_changed)
     generate_author_pages(authors_data, processed_articles, output_dir, lang)
     generate_index_page(processed_articles, output_dir, lang)
     generate_rss_feed(processed_articles, output_dir, lang)
@@ -1301,17 +1302,29 @@ def process_article(md_file_info, output_dir_base, lang):
         print(f"  - ERROR: Error parsing markdown for {md_file_info['name']}: {e}")
         raise
 
-def generate_article_pages(authors_data, articles, output_dir, lang='it'):
+def generate_article_pages(authors_data, articles, output_dir, lang='it', global_changed=True):
     """
     Generates an HTML page for each article.
     """
     print("\nGenerating article pages...")
+
+    # Check if we can skip all together (this print is mostly for user feedback)
+    if not global_changed and all(a.get("_is_cached") for a in articles):
+        # We still might want to check if files exist, but main() already did that for _is_cached articles
+        print("  - All article pages are up to date. Skipping disk writes.")
+        return
+
     with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
     author_name_to_slug = {v['name']: k for k, v in authors_data.items()}
 
     for article in articles:
+        # Skip writing if cached and no global changes
+        output_path = os.path.join(output_dir, article['path'])
+        if not global_changed and article.get("_is_cached") and os.path.exists(output_path):
+            continue
+
         print(f"  - {article['path']}")
 
         back_button_text = TRANSLATIONS["article_page"]["back_button"].get(lang, TRANSLATIONS["article_page"]["back_button"]["it"])

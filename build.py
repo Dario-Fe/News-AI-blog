@@ -1186,7 +1186,14 @@ def main():
 
     for md_file in sorted_md_files:
         md_path = md_file['path']
-        current_hash = get_file_hash(md_path)
+
+        # Composite hash: MD content + all files in the same directory (images, audio)
+        article_dir = os.path.dirname(md_path)
+        all_dir_files = sorted([os.path.join(article_dir, f) for f in os.listdir(article_dir) if os.path.isfile(os.path.join(article_dir, f))])
+        composite_content = "".join([get_file_hash(f) or "" for f in all_dir_files])
+        current_hash = get_string_hash(composite_content)
+        md_file['_composite_hash'] = current_hash # Store for later use in cache update
+
         article_slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
 
         # Duplicate slug detection
@@ -1225,8 +1232,8 @@ def main():
             pre_process_article_media(md_file, BASE_OUTPUT_DIR, lang)
 
     # 3. Parallel HTML Phase
-    print(f"Processing {len(articles_to_process)} articles in parallel...")
     if articles_to_process:
+        print(f"Processing {len(articles_to_process)} articles in parallel...")
         with ProcessPoolExecutor() as executor:
             future_to_article = {executor.submit(process_article, md_file, BASE_OUTPUT_DIR, lang): md_file for md_file in articles_to_process}
             for future in as_completed(future_to_article):
@@ -1237,7 +1244,7 @@ def main():
                         processed_articles.append(article_data)
                         # Store in cache
                         cache["articles"][lang][md_file['path']] = {
-                            "hash": get_file_hash(md_file['path']),
+                            "hash": md_file['_composite_hash'],
                             "data": article_data
                         }
                 except Exception as exc:
@@ -1304,6 +1311,8 @@ def main():
     else:
         print(f"  - No changes for language '{lang}'. Skipping global page generation.")
 
+    copy_static_assets(output_dir)
+
 def create_root_redirect():
     """
     Creates a root index.html to redirect to the default language.
@@ -1357,7 +1366,8 @@ def process_article(md_file_info, output_dir_base, lang):
                 summary = p.get_text()
                 break
 
-        for img in soup.find_all('img'):
+        main_image_paths = None
+        for i, img in enumerate(soup.find_all('img')):
             original_src = img.get('src')
             if not original_src:
                 continue
@@ -1365,6 +1375,9 @@ def process_article(md_file_info, output_dir_base, lang):
             processed_paths = process_and_save_image(original_src, output_dir_base, lang, article_dir=md_file_info['parent_dir'])
 
             if processed_paths:
+                if i == 0:
+                    main_image_paths = processed_paths
+
                 picture_tag = soup.new_tag("picture")
                 source_webp = soup.new_tag("source", attrs={"srcset": processed_paths['full_webp'], "type": "image/webp"})
                 source_jpeg = soup.new_tag("source", attrs={"srcset": processed_paths['full_jpeg'], "type": "image/jpeg"})
@@ -1373,12 +1386,6 @@ def process_article(md_file_info, output_dir_base, lang):
                 picture_tag.append(source_jpeg)
                 picture_tag.append(fallback_img)
                 img.replace_with(picture_tag)
-
-        temp_soup = BeautifulSoup(markdown2.markdown(post.content), 'html.parser')
-        first_img_tag = temp_soup.find('img')
-        main_image_paths = None
-        if first_img_tag and first_img_tag.get('src'):
-            main_image_paths = process_and_save_image(first_img_tag['src'], output_dir_base, lang, article_dir=md_file_info['parent_dir'])
 
         audio_path = None
         if md_file_info.get('audio_path'):
@@ -1924,22 +1931,51 @@ def generate_404_page(output_dir, lang='it'):
 def copy_static_assets(output_dir):
     """
     Copies static assets from the root and the public directory to the output directory.
+    Uses write_if_changed logic to avoid redundant disk I/O.
     """
-    print("\nCopying static assets...")
+    # print(f"\nCopying static assets to {output_dir}...")
     
     # Copy root files
     static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html', '.webp', '.ico']
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
-            if item not in ["base.html", "forms.html"]:
-                print(f"  - {item}")
-                shutil.copy(item, os.path.join(output_dir, item))
+            if item in ["forms.html"]: # Skip system/template files
+                continue
+
+            dest_path = os.path.join(output_dir, item)
+            with open(item, 'rb') as f:
+                content = f.read()
+
+            # Binary check for images/assets
+            if os.path.exists(dest_path):
+                with open(dest_path, 'rb') as f:
+                    if f.read() == content:
+                        continue
+
+            os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+            with open(dest_path, 'wb') as f:
+                f.write(content)
 
     # Copy public directory contents recursively
     public_dir = 'public'
     if os.path.exists(public_dir):
-        print(f"  - Copying '{public_dir}' directory...")
-        shutil.copytree(public_dir, output_dir, dirs_exist_ok=True)
+        for root, _, files in os.walk(public_dir):
+            for filename in files:
+                src_path = os.path.join(root, filename)
+                rel_path = os.path.relpath(src_path, public_dir)
+                dest_path = os.path.join(output_dir, rel_path)
+
+                with open(src_path, 'rb') as f:
+                    content = f.read()
+
+                if os.path.exists(dest_path):
+                    with open(dest_path, 'rb') as f:
+                        if f.read() == content:
+                            continue
+
+                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+                with open(dest_path, 'wb') as f:
+                    f.write(content)
 
 def generate_rss_feed(articles, output_dir, lang='it'):
     """

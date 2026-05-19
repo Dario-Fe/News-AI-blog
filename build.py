@@ -47,7 +47,7 @@ def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
     if isinstance(obj, (datetime, date)):
         return obj.isoformat()
-    raise TypeError("Type %s not serializable" % type(obj))
+    raise TypeError(f"Type {type(obj)} not serializable")
 
 def load_build_cache():
     cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
@@ -1671,6 +1671,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = base_template.replace("{{content}}", content_html)
         temp_html = temp_html.replace("{{page_title}}", page_title)
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
+        temp_html = temp_html.replace("{{lang}}", lang)
         temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
         temp_html = temp_html.replace("{{pagination_controls}}", "")
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
@@ -1889,6 +1890,7 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{meta_description}}", meta_description)
             temp_html = temp_html.replace("{{og_url}}", og_url)
             temp_html = temp_html.replace("{{og_image}}", og_image)
+            temp_html = temp_html.replace("{{lang}}", lang)
             
             temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
             temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
@@ -1945,6 +1947,7 @@ def generate_404_page(output_dir, lang='it'):
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
         temp_html = temp_html.replace("{{og_url}}", og_url)
         temp_html = temp_html.replace("{{og_image}}", og_image)
+        temp_html = temp_html.replace("{{lang}}", lang)
 
         # Asset paths (depth is 1, as it's in the root of the lang folder)
         base_data = get_base_template_data(depth=1)

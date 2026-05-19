@@ -47,7 +47,7 @@ def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
     if isinstance(obj, (datetime, date)):
         return obj.isoformat()
-    raise TypeError ("Type %s not serializable" % type(obj))
+    raise TypeError("Type %s not serializable" % type(obj))
 
 def load_build_cache():
     cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
@@ -125,6 +125,8 @@ def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
         base_name, _ = os.path.splitext(source_filename)
         # Sanitize base_name to avoid issues with special characters in URLs
         base_name = re.sub(r'[^a-zA-Z0-9_-]', '', base_name.replace(' ', '-'))
+        if not base_name:
+            base_name = "image"
         base_filename = f"{base_name}-{content_hash}"
 
         output_dir_images = os.path.join(output_dir_base, lang, IMAGE_ASSETS_DIR)
@@ -151,31 +153,22 @@ def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
         img = Image.open(BytesIO(image_bytes))
         img = img.convert("RGB")
 
-        output_dir_images = os.path.join(output_dir_base, lang, IMAGE_ASSETS_DIR)
-        os.makedirs(output_dir_images, exist_ok=True)
-
-        image_paths = {}
-
         # Thumbnail (400px width)
         thumb = img.copy()
         thumb.thumbnail((400, 400))
         thumb_path_webp = os.path.join(output_dir_images, f"{base_filename}-thumb.webp")
         thumb.save(thumb_path_webp, "webp", quality=80)
-        image_paths['thumb_webp'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(thumb_path_webp)}"
         
         # Full size (no longer resized to preserve quality)
         full_path_webp = os.path.join(output_dir_images, f"{base_filename}-full.webp")
         img.save(full_path_webp, "webp", quality=85)
-        image_paths['full_webp'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(full_path_webp)}"
 
         # Create JPEG fallbacks
         thumb_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-thumb.jpeg")
         thumb.save(thumb_path_jpeg, "jpeg", quality=80)
-        image_paths['thumb_jpeg'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(thumb_path_jpeg)}"
         
         full_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-full.jpeg")
         img.save(full_path_jpeg, "jpeg", quality=85)
-        image_paths['full_jpeg'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(full_path_jpeg)}"
 
         return image_paths
 
@@ -1072,7 +1065,6 @@ def main():
         generate_sitemap_xml()
         generate_robots_txt()
         create_root_redirect()
-        copy_static_assets(BASE_OUTPUT_DIR)
         return
 
     lang = args.lang
@@ -1300,6 +1292,51 @@ def main():
 
     save_build_cache(cache)
 
+    # Track all expected media assets for pruning
+    expected_media_files = set()
+    for article in processed_articles:
+        if article.get('image_paths'):
+            for p in article['image_paths'].values():
+                expected_media_files.add(os.path.basename(p))
+
+        # Audio
+        if article.get('audio_path'):
+            expected_media_files.add(os.path.basename(article['audio_path']))
+
+        # Images in content
+        soup = BeautifulSoup(article['html_content'], 'html.parser')
+        for picture in soup.find_all('picture'):
+            for source in picture.find_all('source'):
+                if source.get('srcset'):
+                    expected_media_files.add(os.path.basename(source['srcset']))
+            if picture.img and picture.img.get('src'):
+                expected_media_files.add(os.path.basename(picture.img['src']))
+
+    # Also include author photos
+    author_output_dir_images = os.path.join(BASE_OUTPUT_DIR, lang, IMAGE_ASSETS_DIR, "authors")
+    if os.path.exists(author_output_dir_images):
+        for f in os.listdir(author_output_dir_images):
+            # Author photos are not as easily tracked by article loop,
+            # so we just keep everything in authors/ for now to be safe,
+            # or we could hash check them. Let's focus on main assets first.
+            pass
+
+    # Prune orphaned images
+    output_dir_images = os.path.join(output_dir, IMAGE_ASSETS_DIR)
+    if os.path.exists(output_dir_images):
+        for f in os.listdir(output_dir_images):
+            if os.path.isfile(os.path.join(output_dir_images, f)) and f not in expected_media_files:
+                # print(f"  - Pruning orphaned image: {f}")
+                os.remove(os.path.join(output_dir_images, f))
+
+    # Prune orphaned audio
+    output_dir_audio = os.path.join(output_dir, AUDIO_ASSETS_DIR)
+    if os.path.exists(output_dir_audio):
+        for f in os.listdir(output_dir_audio):
+            if os.path.isfile(os.path.join(output_dir_audio, f)) and f not in expected_media_files:
+                # print(f"  - Pruning orphaned audio: {f}")
+                os.remove(os.path.join(output_dir_audio, f))
+
     generate_article_pages(authors_data, processed_articles, output_dir, lang, global_changed)
 
     if language_changed:
@@ -1416,7 +1453,7 @@ def process_article(md_file_info, output_dir_base, lang):
                 <a href="newsletter.html" class="subscribe-button">{box_button}</a>
             </div>
             """
-            insertion_point.insert_before(BeautifulSoup(newsletter_box_html, 'html.parser'))
+            insertion_point.insert_before(BeautifulSoup(newsletter_box_html, 'html.parser').div)
 
         final_html_content = str(soup)
         slug = os.path.splitext(md_file_info['name'])[0].strip().replace('_', '-')
@@ -1551,6 +1588,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
         temp_html = temp_html.replace("{{og_url}}", og_url)
         temp_html = temp_html.replace("{{og_image}}", og_image)
+        temp_html = temp_html.replace("{{lang}}", lang)
         temp_html = temp_html.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">')
 
         temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))

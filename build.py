@@ -15,7 +15,6 @@ from PIL import Image
 import hashlib
 from io import BytesIO
 from datetime import datetime, date, timezone
-from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # Constants
 SITE_URL = "https://aitalk.it/"
@@ -23,64 +22,6 @@ BASE_OUTPUT_DIR = "dist"
 ARTICLES_DIR = "articoli" # New constant for local articles path
 IMAGE_ASSETS_DIR = "assets/images"
 AUDIO_ASSETS_DIR = "assets/audio"
-
-# --- Cache and Hashing Helpers ---
-
-def get_file_hash(filepath):
-    """Calculates the SHA-1 hash of a file."""
-    if not os.path.exists(filepath):
-        return None
-    sha1 = hashlib.sha1()
-    with open(filepath, 'rb') as f:
-        while True:
-            data = f.read(65536)
-            if not data:
-                break
-            sha1.update(data)
-    return sha1.hexdigest()
-
-def get_string_hash(text):
-    """Calculates the SHA-1 hash of a string."""
-    return hashlib.sha1(text.encode('utf-8')).hexdigest()
-
-def json_serial(obj):
-    """JSON serializer for objects not serializable by default json code"""
-    if isinstance(obj, (datetime, date)):
-        return obj.isoformat()
-    raise TypeError("Type %s not serializable" % type(obj))
-
-def load_build_cache():
-    cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
-    if os.path.exists(cache_path):
-        try:
-            with open(cache_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except Exception:
-            return {}
-    return {}
-
-def save_build_cache(cache):
-    os.makedirs(BASE_OUTPUT_DIR, exist_ok=True)
-    cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
-    with open(cache_path, 'w', encoding='utf-8') as f:
-        json.dump(cache, f, indent=2, default=json_serial)
-
-def write_if_changed(filepath, content):
-    """Writes content to a file only if it has changed, preserving the timestamp otherwise."""
-    if os.path.exists(filepath):
-        try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                if f.read() == content:
-                    # print(f"  - No changes for {filepath}, skipping write.")
-                    return False
-        except Exception:
-            pass # Fallback to writing if reading fails
-    
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(content)
-    # print(f"  - Wrote {filepath}")
-    return True
 
 # --- Media Processing Helpers ---
 
@@ -123,52 +64,36 @@ def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
         # Create a unique filename based on the content to avoid collisions and handle updates
         content_hash = hashlib.sha1(image_bytes).hexdigest()[:10]
         base_name, _ = os.path.splitext(source_filename)
-        # Sanitize base_name to avoid issues with special characters in URLs
-        base_name = re.sub(r'[^a-zA-Z0-9_-]', '', base_name.replace(' ', '-'))
-        if not base_name:
-            base_name = "image"
         base_filename = f"{base_name}-{content_hash}"
+
+        img = Image.open(BytesIO(image_bytes))
+        img = img.convert("RGB")
 
         output_dir_images = os.path.join(output_dir_base, lang, IMAGE_ASSETS_DIR)
         os.makedirs(output_dir_images, exist_ok=True)
 
-        image_paths = {
-            'thumb_webp': f"{IMAGE_ASSETS_DIR}/{base_filename}-thumb.webp",
-            'full_webp': f"{IMAGE_ASSETS_DIR}/{base_filename}-full.webp",
-            'thumb_jpeg': f"{IMAGE_ASSETS_DIR}/{base_filename}-thumb.jpeg",
-            'full_jpeg': f"{IMAGE_ASSETS_DIR}/{base_filename}-full.jpeg"
-        }
-
-        # Check if all files already exist
-        all_exist = True
-        for p in image_paths.values():
-            if not os.path.exists(os.path.join(output_dir_base, lang, p)):
-                all_exist = False
-                break
-        
-        if all_exist:
-            # print(f"  - Image {base_filename} already exists, skipping processing.")
-            return image_paths
-
-        img = Image.open(BytesIO(image_bytes))
-        img = img.convert("RGB")
+        image_paths = {}
 
         # Thumbnail (400px width)
         thumb = img.copy()
         thumb.thumbnail((400, 400))
         thumb_path_webp = os.path.join(output_dir_images, f"{base_filename}-thumb.webp")
         thumb.save(thumb_path_webp, "webp", quality=80)
+        image_paths['thumb_webp'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(thumb_path_webp)}"
         
         # Full size (no longer resized to preserve quality)
         full_path_webp = os.path.join(output_dir_images, f"{base_filename}-full.webp")
         img.save(full_path_webp, "webp", quality=85)
+        image_paths['full_webp'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(full_path_webp)}"
 
         # Create JPEG fallbacks
         thumb_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-thumb.jpeg")
         thumb.save(thumb_path_jpeg, "jpeg", quality=80)
+        image_paths['thumb_jpeg'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(thumb_path_jpeg)}"
         
         full_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-full.jpeg")
         img.save(full_path_jpeg, "jpeg", quality=85)
+        image_paths['full_jpeg'] = f"{IMAGE_ASSETS_DIR}/{os.path.basename(full_path_jpeg)}"
 
         return image_paths
 
@@ -217,58 +142,24 @@ def process_author_photo(photo_path, output_dir_base, lang):
         raise ValueError("Author image processing failed: image_bytes is empty or base_filename is not set.")
 
     try:
-        photo_filename_webp = f"{base_filename}.webp"
-        photo_filename_jpeg = f"{base_filename}.jpeg"
-        
-        photo_paths = {
-            'webp': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_webp}",
-            'jpeg': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_jpeg}"
-        }
-
-        # Check if already processed
-        if os.path.exists(os.path.join(output_dir_images, photo_filename_webp)) and \
-           os.path.exists(os.path.join(output_dir_images, photo_filename_jpeg)):
-            return photo_paths
-
         img = Image.open(BytesIO(image_bytes))
         img = img.convert("RGB")
         img.thumbnail((200, 200))
 
+        photo_filename_webp = f"{base_filename}.webp"
+        photo_filename_jpeg = f"{base_filename}.jpeg"
+        
         img.save(os.path.join(output_dir_images, photo_filename_webp), "webp", quality=85)
         img.save(os.path.join(output_dir_images, photo_filename_jpeg), "jpeg", quality=85)
 
-        return photo_paths
+        return {
+            'webp': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_webp}",
+            'jpeg': f"../{IMAGE_ASSETS_DIR}/authors/{photo_filename_jpeg}"
+        }
         
     except Exception as e:
         print(f"  - ERROR: Could not process author image {photo_path}. Error: {e}")
         raise
-
-def pre_process_article_media(md_file_info, output_dir_base, lang):
-    """
-    Parses the article to find and process all media assets sequentially.
-    This avoids race conditions when running the main HTML generation in parallel.
-    """
-    try:
-        with open(md_file_info['path'], 'r', encoding='utf-8') as f:
-            post = frontmatter.load(f)
-        
-        # Process images in content
-        html_content = markdown2.markdown(post.content)
-        soup = BeautifulSoup(html_content, 'html.parser')
-        
-        for img in soup.find_all('img'):
-            src = img.get('src')
-            if src:
-                process_and_save_image(src, output_dir_base, lang, article_dir=md_file_info['parent_dir'])
-        
-        # Process audio if exists
-        if md_file_info.get('audio_path'):
-            process_audio(md_file_info['audio_path'], output_dir_base, lang)
-            
-    except Exception as e:
-        print(f"  - ERROR pre-processing media for {md_file_info['name']}: {e}")
-        # We don't raise here to allow the build to attempt to continue, 
-        # but errors will likely resurface in the main phase.
 
 def process_audio(audio_path, output_dir_base, lang):
     """
@@ -291,15 +182,10 @@ def process_audio(audio_path, output_dir_base, lang):
         os.makedirs(output_dir_audio, exist_ok=True)
 
         dest_path = os.path.join(output_dir_audio, base_filename)
-        relative_path = f"{AUDIO_ASSETS_DIR}/{base_filename}"
-
-        if os.path.exists(dest_path):
-            # print(f"  - Audio {base_filename} already exists, skipping copy.")
-            return relative_path
-
         with open(dest_path, "wb") as f:
             f.write(audio_bytes)
         
+        relative_path = f"{AUDIO_ASSETS_DIR}/{base_filename}"
         print(f"  - Saved audio to {relative_path}")
         return relative_path
 
@@ -1091,263 +977,21 @@ def main():
         print(f"No markdown files found for language '{lang}'. Exiting.")
         return
 
-    # Load cache and check dependencies
-    cache = load_build_cache()
-    
-    # Calculate global hashes
-    global_hashes = {
-        "templates/base.html": get_file_hash("templates/base.html"),
-        "templates/author.html": get_file_hash("templates/author.html"),
-        "templates/404.html": get_file_hash("templates/404.html"),
-        "style.css": get_file_hash("style.css"),
-        "build.py": get_file_hash("build.py")
-    }
-    
-    # Check if any global file has changed
-    global_changed = False
-    if "globals" not in cache:
-        global_changed = True
-    else:
-        for filepath, current_hash in global_hashes.items():
-            if cache["globals"].get(filepath) != current_hash:
-                print(f"  - GLOBAL CHANGE DETECTED: {filepath}")
-                global_changed = True
-                break
-
-    # We also check if this specific language has seen the global changes
-    if "lang_globals_seen" not in cache:
-        cache["lang_globals_seen"] = {}
-    
-    # Generate a single hash representing the state of all globals
-    combined_globals_hash = get_string_hash("".join([h for h in global_hashes.values() if h]))
-    
-    if cache["lang_globals_seen"].get(lang) != combined_globals_hash:
-        print(f"  - GLOBAL CHANGES NOT YET APPLIED FOR LANGUAGE: {lang}")
-        global_changed = True
-    
-    # Track if anything specific to this language changed
-    language_changed = global_changed
-
-    # Author Hashing
-    if "authors" not in cache: cache["authors"] = {}
-    if lang not in cache["authors"]: cache["authors"][lang] = {}
-    
-    authors_dir = "content/authors"
-    if os.path.exists(authors_dir):
-        for filename in os.listdir(authors_dir):
-            if filename.endswith(".md"):
-                path = os.path.join(authors_dir, filename)
-                h = get_file_hash(path)
-                if cache["authors"][lang].get(path) != h:
-                    print(f"  - AUTHOR CHANGE DETECTED: {filename}")
-                    language_changed = True
-                cache["authors"][lang][path] = h
-
-    # Static Pages Hashing
-    if "pages" not in cache: cache["pages"] = {}
-    if lang not in cache["pages"]: cache["pages"][lang] = {}
-    
-    pages_dir = "pages"
-    if os.path.exists(pages_dir):
-        for filename in os.listdir(pages_dir):
-            if filename.endswith(".html"):
-                path = os.path.join(pages_dir, filename)
-                h = get_file_hash(path)
-                if cache["pages"][lang].get(path) != h:
-                    print(f"  - PAGE CHANGE DETECTED: {filename}")
-                    language_changed = True
-                cache["pages"][lang][path] = h
-
-    # Update cache with current global state
-    cache["globals"] = global_hashes
-    cache["lang_globals_seen"][lang] = combined_globals_hash
-
     processed_articles = []
     s1 = sorted(md_files, key=lambda x: natural_sort_key(x['name']), reverse=True)
     sorted_md_files = sorted(s1, key=lambda x: natural_sort_key(x['parent_dir']), reverse=True)
 
-    # 1. Scouting and Validation Phase
-    articles_to_process = []
-    expected_html_files = set()
-    slugs_seen = {}
-    
-    if "articles" not in cache:
-        cache["articles"] = {}
-    if lang not in cache["articles"]:
-        cache["articles"][lang] = {}
-
     for md_file in sorted_md_files:
-        md_path = md_file['path']
-        
-        # Composite hash: MD content + all files in the same directory (images, audio)
-        article_dir = os.path.dirname(md_path)
-        all_dir_files = sorted([os.path.join(article_dir, f) for f in os.listdir(article_dir) if os.path.isfile(os.path.join(article_dir, f))])
-        composite_content = "".join([get_file_hash(f) or "" for f in all_dir_files])
-        current_hash = get_string_hash(composite_content)
-        md_file['_composite_hash'] = current_hash # Store for later use in cache update
-
-        article_slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
-        
-        # Duplicate slug detection
-        if article_slug in slugs_seen:
-            print(f"WARNING: Duplicate slug detected: '{article_slug}'")
-            print(f"  - Original: {slugs_seen[article_slug]}")
-            print(f"  - Duplicate: {md_path}")
-        slugs_seen[article_slug] = md_path
-        
-        expected_html_files.add(f"{article_slug}.html")
-        output_path = os.path.join(output_dir, f"{article_slug}.html")
-
-        # Check if we can skip this article
-        cached_data = cache["articles"][lang].get(md_path)
-        if not global_changed and cached_data and cached_data.get("hash") == current_hash and os.path.exists(output_path):
-            article_data = cached_data["data"]
-            # Convert date string back to date/datetime object
-            if article_data.get('date') and isinstance(article_data['date'], str):
-                try:
-                    if len(article_data['date']) > 10:
-                        article_data['date'] = datetime.fromisoformat(article_data['date'])
-                    else:
-                        article_data['date'] = date.fromisoformat(article_data['date'])
-                except ValueError:
-                    pass
-            article_data["_is_cached"] = True
+        article_data = process_article(md_file, BASE_OUTPUT_DIR, lang)
+        if article_data:
             processed_articles.append(article_data)
-        else:
-            articles_to_process.append(md_file)
-            language_changed = True
 
-    # 2. Sequential Media Phase (Addresses Race Conditions)
-    if articles_to_process:
-        print(f"Pre-processing media for {len(articles_to_process)} articles...")
-        for md_file in articles_to_process:
-            pre_process_article_media(md_file, BASE_OUTPUT_DIR, lang)
-
-    # 3. Parallel HTML Phase
-    if articles_to_process:
-        print(f"Processing {len(articles_to_process)} articles in parallel...")
-        with ProcessPoolExecutor() as executor:
-            future_to_article = {executor.submit(process_article, md_file, BASE_OUTPUT_DIR, lang): md_file for md_file in articles_to_process}
-            for future in as_completed(future_to_article):
-                md_file = future_to_article[future]
-                try:
-                    article_data = future.result()
-                    if article_data:
-                        processed_articles.append(article_data)
-                        # Store in cache
-                        cache["articles"][lang][md_file['path']] = {
-                            "hash": md_file['_composite_hash'],
-                            "data": article_data
-                        }
-                except Exception as exc:
-                    print(f"  - Article {md_file['name']} generated an exception: {exc}")
-                    raise
-
-    # Maintain original sorting order
-    slug_to_data = {a['slug']: a for a in processed_articles}
-    final_processed_articles = []
-    for md_file in sorted_md_files:
-        slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
-        if slug in slug_to_data:
-            final_processed_articles.append(slug_to_data[slug])
-    
-    processed_articles = final_processed_articles
-
-    # 4. Cleanup and Cache Sanification
-    print("Cleaning up orphaned files and stale cache entries...")
-    # Remove orphaned HTML files in the language directory
-    all_html_in_dist = [f for f in os.listdir(output_dir) if f.endswith(".html")]
-    protected_pages = {"index.html", "404.html", "newsletter.html", "thank-you.html", "cookie.html", "privacy.html", "metodo-editoriale.html"}
-    for html_file in all_html_in_dist:
-        if html_file not in expected_html_files and html_file not in protected_pages:
-            file_to_remove = os.path.join(output_dir, html_file)
-            print(f"  - Removing orphaned page: {file_to_remove}")
-            os.remove(file_to_remove)
-
-    # Remove stale cache entries
-    current_md_paths = {f['path'] for f in md_files}
-    if "articles" in cache and lang in cache["articles"]:
-        cached_paths = list(cache["articles"][lang].keys())
-        for path in cached_paths:
-            if path not in current_md_paths:
-                print(f"  - Removing stale cache entry: {path}")
-                del cache["articles"][lang][path]
-                language_changed = True
-
-    # Remove stale author cache entries
-    if "authors" in cache and lang in cache["authors"]:
-        cached_auth_paths = list(cache["authors"][lang].keys())
-        for path in cached_auth_paths:
-            if not os.path.exists(path):
-                del cache["authors"][lang][path]
-                language_changed = True
-
-    # Remove stale pages cache entries
-    if "pages" in cache and lang in cache["pages"]:
-        cached_page_paths = list(cache["pages"][lang].keys())
-        for path in cached_page_paths:
-            if not os.path.exists(path):
-                del cache["pages"][lang][path]
-                language_changed = True
-
-    save_build_cache(cache)
-
-    # Track all expected media assets for pruning
-    expected_media_files = set()
-    for article in processed_articles:
-        if article.get('image_paths'):
-            for p in article['image_paths'].values():
-                expected_media_files.add(os.path.basename(p))
-        
-        # Audio
-        if article.get('audio_path'):
-            expected_media_files.add(os.path.basename(article['audio_path']))
-            
-        # Images in content
-        soup = BeautifulSoup(article['html_content'], 'html.parser')
-        for picture in soup.find_all('picture'):
-            for source in picture.find_all('source'):
-                if source.get('srcset'):
-                    expected_media_files.add(os.path.basename(source['srcset']))
-            if picture.img and picture.img.get('src'):
-                expected_media_files.add(os.path.basename(picture.img['src']))
-
-    # Also include author photos
-    author_output_dir_images = os.path.join(BASE_OUTPUT_DIR, lang, IMAGE_ASSETS_DIR, "authors")
-    if os.path.exists(author_output_dir_images):
-        for f in os.listdir(author_output_dir_images):
-            # Author photos are not as easily tracked by article loop, 
-            # so we just keep everything in authors/ for now to be safe, 
-            # or we could hash check them. Let's focus on main assets first.
-            pass
-
-    # Prune orphaned images
-    output_dir_images = os.path.join(output_dir, IMAGE_ASSETS_DIR)
-    if os.path.exists(output_dir_images):
-        for f in os.listdir(output_dir_images):
-            if os.path.isfile(os.path.join(output_dir_images, f)) and f not in expected_media_files:
-                # print(f"  - Pruning orphaned image: {f}")
-                os.remove(os.path.join(output_dir_images, f))
-
-    # Prune orphaned audio
-    output_dir_audio = os.path.join(output_dir, AUDIO_ASSETS_DIR)
-    if os.path.exists(output_dir_audio):
-        for f in os.listdir(output_dir_audio):
-            if os.path.isfile(os.path.join(output_dir_audio, f)) and f not in expected_media_files:
-                # print(f"  - Pruning orphaned audio: {f}")
-                os.remove(os.path.join(output_dir_audio, f))
-
-    generate_article_pages(authors_data, processed_articles, output_dir, lang, global_changed)
-    
-    if language_changed:
-        generate_author_pages(authors_data, processed_articles, output_dir, lang)
-        generate_index_page(processed_articles, output_dir, lang)
-        generate_rss_feed(processed_articles, output_dir, lang)
-        generate_local_pages(output_dir, lang)
-        generate_404_page(output_dir, lang)
-    else:
-        print(f"  - No changes for language '{lang}'. Skipping global page generation.")
-
+    generate_article_pages(authors_data, processed_articles, output_dir, lang)
+    generate_author_pages(authors_data, processed_articles, output_dir, lang)
+    generate_index_page(processed_articles, output_dir, lang)
+    generate_rss_feed(processed_articles, output_dir, lang)
+    generate_local_pages(output_dir, lang)
+    generate_404_page(output_dir, lang)
     copy_static_assets(output_dir)
 
 def create_root_redirect():
@@ -1403,8 +1047,7 @@ def process_article(md_file_info, output_dir_base, lang):
                 summary = p.get_text()
                 break
 
-        main_image_paths = None
-        for i, img in enumerate(soup.find_all('img')):
+        for img in soup.find_all('img'):
             original_src = img.get('src')
             if not original_src:
                 continue
@@ -1412,9 +1055,6 @@ def process_article(md_file_info, output_dir_base, lang):
             processed_paths = process_and_save_image(original_src, output_dir_base, lang, article_dir=md_file_info['parent_dir'])
 
             if processed_paths:
-                if i == 0:
-                    main_image_paths = processed_paths
-                
                 picture_tag = soup.new_tag("picture")
                 source_webp = soup.new_tag("source", attrs={"srcset": processed_paths['full_webp'], "type": "image/webp"})
                 source_jpeg = soup.new_tag("source", attrs={"srcset": processed_paths['full_jpeg'], "type": "image/jpeg"})
@@ -1423,6 +1063,12 @@ def process_article(md_file_info, output_dir_base, lang):
                 picture_tag.append(source_jpeg)
                 picture_tag.append(fallback_img)
                 img.replace_with(picture_tag)
+
+        temp_soup = BeautifulSoup(markdown2.markdown(post.content), 'html.parser')
+        first_img_tag = temp_soup.find('img')
+        main_image_paths = None
+        if first_img_tag and first_img_tag.get('src'):
+            main_image_paths = process_and_save_image(first_img_tag['src'], output_dir_base, lang, article_dir=md_file_info['parent_dir'])
 
         audio_path = None
         if md_file_info.get('audio_path'):
@@ -1453,7 +1099,7 @@ def process_article(md_file_info, output_dir_base, lang):
                 <a href="newsletter.html" class="subscribe-button">{box_button}</a>
             </div>
             """
-            insertion_point.insert_before(BeautifulSoup(newsletter_box_html, 'html.parser').div)
+            insertion_point.insert_before(BeautifulSoup(newsletter_box_html, 'html.parser'))
 
         final_html_content = str(soup)
         slug = os.path.splitext(md_file_info['name'])[0].strip().replace('_', '-')
@@ -1476,29 +1122,17 @@ def process_article(md_file_info, output_dir_base, lang):
         print(f"  - ERROR: Error parsing markdown for {md_file_info['name']}: {e}")
         raise
 
-def generate_article_pages(authors_data, articles, output_dir, lang='it', global_changed=True):
+def generate_article_pages(authors_data, articles, output_dir, lang='it'):
     """
     Generates an HTML page for each article.
     """
     print("\nGenerating article pages...")
-    
-    # Check if we can skip all together (this print is mostly for user feedback)
-    if not global_changed and all(a.get("_is_cached") for a in articles):
-        # We still might want to check if files exist, but main() already did that for _is_cached articles
-        print("  - All article pages are up to date. Skipping disk writes.")
-        return
-
     with open("templates/base.html", "r", encoding='utf-8') as f:
         base_template = f.read()
 
     author_name_to_slug = {v['name']: k for k, v in authors_data.items()}
 
     for article in articles:
-        # Skip writing if cached and no global changes
-        output_path = os.path.join(output_dir, article['path'])
-        if not global_changed and article.get("_is_cached") and os.path.exists(output_path):
-            continue
-
         print(f"  - {article['path']}")
 
         back_button_text = TRANSLATIONS["article_page"]["back_button"].get(lang, TRANSLATIONS["article_page"]["back_button"]["it"])
@@ -1588,7 +1222,6 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
         temp_html = temp_html.replace("{{og_url}}", og_url)
         temp_html = temp_html.replace("{{og_image}}", og_image)
-        temp_html = temp_html.replace("{{lang}}", lang)
         temp_html = temp_html.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">')
 
         temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
@@ -1604,7 +1237,8 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
         dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
         temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
-        write_if_changed(os.path.join(output_dir, article['path']), temp_html)
+        with open(os.path.join(output_dir, article['path']), "w", encoding='utf-8') as f:
+            f.write(temp_html)
 
 
 def generate_author_pages(authors_data, articles, output_dir, lang='it'):
@@ -1691,7 +1325,8 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{og_image}}", og_image)
 
         output_path = os.path.join(author_output_dir, f"{slug}.html")
-        write_if_changed(output_path, temp_html)
+        with open(output_path, "w", encoding='utf-8') as f:
+            f.write(temp_html)
 
 
 def generate_index_page(articles, output_dir, lang='it'):
@@ -1767,9 +1402,9 @@ def generate_index_page(articles, output_dir, lang='it'):
             article_copy['date'] = article_copy['date'].isoformat()
         serializable_articles.append(article_copy)
 
-    json_content = json.dumps(serializable_articles, ensure_ascii=False)
-    if write_if_changed(json_output_path, json_content):
-        print(f"  - Generated articles.json with {len(articles)} articles.")
+    with open(json_output_path, "w", encoding='utf-8') as f:
+        json.dump(serializable_articles, f, ensure_ascii=False)
+    print(f"  - Generated articles.json with {len(articles)} articles.")
 
     pagination_html = '<div id="view-more-container"></div>' if len(articles) > ARTICLES_PER_PAGE else ''
     
@@ -1803,7 +1438,8 @@ def generate_index_page(articles, output_dir, lang='it'):
     temp_html = temp_html.replace("{{og_url}}", f"{SITE_URL}{lang}/index.html")
     temp_html = temp_html.replace("{{og_image}}", f"{SITE_URL}logo_vn_ia.png")
 
-    write_if_changed(os.path.join(output_dir, "index.html"), temp_html)
+    with open(os.path.join(output_dir, "index.html"), "w", encoding='utf-8') as f:
+        f.write(temp_html)
 
 def generate_local_pages(output_dir, lang='it'):
     """
@@ -1903,7 +1539,8 @@ def generate_local_pages(output_dir, lang='it'):
             dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
             temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
-            write_if_changed(os.path.join(output_dir, filename), temp_html)
+            with open(os.path.join(output_dir, filename), "w", encoding='utf-8') as f:
+                f.write(temp_html)
 
 def generate_404_page(output_dir, lang='it'):
     """
@@ -1956,8 +1593,9 @@ def generate_404_page(output_dir, lang='it'):
 
         # Write the final file
         output_path = os.path.join(output_dir, "404.html")
-        if write_if_changed(output_path, temp_html):
-            print(f"  - Generated 404.html for '{lang}'")
+        with open(output_path, "w", encoding='utf-8') as f:
+            f.write(temp_html)
+        print(f"  - Generated 404.html for '{lang}'")
 
     except FileNotFoundError as e:
         print(f"  - ERROR: Could not generate 404 page. Missing template file: {e.filename}")
@@ -1969,51 +1607,22 @@ def generate_404_page(output_dir, lang='it'):
 def copy_static_assets(output_dir):
     """
     Copies static assets from the root and the public directory to the output directory.
-    Uses write_if_changed logic to avoid redundant disk I/O.
     """
-    # print(f"\nCopying static assets to {output_dir}...")
+    print("\nCopying static assets...")
     
     # Copy root files
     static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html', '.webp', '.ico']
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
-            if item in ["forms.html"]: # Skip system/template files
-                continue
-            
-            dest_path = os.path.join(output_dir, item)
-            with open(item, 'rb') as f:
-                content = f.read()
-            
-            # Binary check for images/assets
-            if os.path.exists(dest_path):
-                with open(dest_path, 'rb') as f:
-                    if f.read() == content:
-                        continue
-            
-            os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-            with open(dest_path, 'wb') as f:
-                f.write(content)
+            if item not in ["base.html", "forms.html"]:
+                print(f"  - {item}")
+                shutil.copy(item, os.path.join(output_dir, item))
 
     # Copy public directory contents recursively
     public_dir = 'public'
     if os.path.exists(public_dir):
-        for root, _, files in os.walk(public_dir):
-            for filename in files:
-                src_path = os.path.join(root, filename)
-                rel_path = os.path.relpath(src_path, public_dir)
-                dest_path = os.path.join(output_dir, rel_path)
-                
-                with open(src_path, 'rb') as f:
-                    content = f.read()
-                
-                if os.path.exists(dest_path):
-                    with open(dest_path, 'rb') as f:
-                        if f.read() == content:
-                            continue
-                
-                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-                with open(dest_path, 'wb') as f:
-                    f.write(content)
+        print(f"  - Copying '{public_dir}' directory...")
+        shutil.copytree(public_dir, output_dir, dirs_exist_ok=True)
 
 def generate_rss_feed(articles, output_dir, lang='it'):
     """

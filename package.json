@@ -5,7 +5,6 @@
   "main": "build.py",
   "type": "module",
   "dependencies": {
-    "@netlify/blobs": "^2.0.0",
-    "netlify-plugin-cache": "^1.0.3"
+    "@netlify/blobs": "^2.0.0"
   }
 }

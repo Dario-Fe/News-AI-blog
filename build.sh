@@ -4,18 +4,19 @@ set -e
 
 echo "--- STARTING BUILD PROCESS ---"
 
-# 1. Ensure the main output directory exists
-echo "1. Ensuring dist directory exists..."
-mkdir -p dist
+# 1. Clean and create the main output directory
+echo "1. Cleaning previous build..."
+if [ -d "dist" ]; then rm -r dist; fi
+mkdir dist
 
 # 2. Copy site-wide static files (like form definitions)
 echo "2. Copying site-wide static files..."
 cp forms.html dist/forms.html
 
 # 3. Build the site for each language
-echo "3. Building site for each language..."
+echo "2. Building site for each language..."
 for lang in it en es fr de; do
-  echo "--- Starting build for $lang ---"
+  echo "--- Building for $lang ---"
   python build.py --lang "$lang"
 done
 

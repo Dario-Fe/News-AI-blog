@@ -65,6 +65,23 @@ def save_build_cache(cache):
     with open(cache_path, 'w', encoding='utf-8') as f:
         json.dump(cache, f, indent=2, default=json_serial)
 
+def write_if_changed(filepath, content):
+    """Writes content to a file only if it has changed, preserving the timestamp otherwise."""
+    if os.path.exists(filepath):
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                if f.read() == content:
+                    # print(f"  - No changes for {filepath}, skipping write.")
+                    return False
+        except Exception:
+            pass # Fallback to writing if reading fails
+
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content)
+    # print(f"  - Wrote {filepath}")
+    return True
+
 # --- Media Processing Helpers ---
 
 def process_and_save_image(image_source, output_dir_base, lang, article_dir=""):
@@ -1055,6 +1072,7 @@ def main():
         generate_sitemap_xml()
         generate_robots_txt()
         create_root_redirect()
+        copy_static_assets(BASE_OUTPUT_DIR)
         return
 
     lang = args.lang
@@ -1081,13 +1099,14 @@ def main():
         print(f"No markdown files found for language '{lang}'. Exiting.")
         return
 
-    # Load cache and check global dependencies
+    # Load cache and check dependencies
     cache = load_build_cache()
 
     # Calculate global hashes
     global_hashes = {
         "templates/base.html": get_file_hash("templates/base.html"),
         "templates/author.html": get_file_hash("templates/author.html"),
+        "templates/404.html": get_file_hash("templates/404.html"),
         "style.css": get_file_hash("style.css"),
         "build.py": get_file_hash("build.py")
     }
@@ -1113,6 +1132,39 @@ def main():
     if cache["lang_globals_seen"].get(lang) != combined_globals_hash:
         print(f"  - GLOBAL CHANGES NOT YET APPLIED FOR LANGUAGE: {lang}")
         global_changed = True
+
+    # Track if anything specific to this language changed
+    language_changed = global_changed
+
+    # Author Hashing
+    if "authors" not in cache: cache["authors"] = {}
+    if lang not in cache["authors"]: cache["authors"][lang] = {}
+
+    authors_dir = "content/authors"
+    if os.path.exists(authors_dir):
+        for filename in os.listdir(authors_dir):
+            if filename.endswith(".md"):
+                path = os.path.join(authors_dir, filename)
+                h = get_file_hash(path)
+                if cache["authors"][lang].get(path) != h:
+                    print(f"  - AUTHOR CHANGE DETECTED: {filename}")
+                    language_changed = True
+                cache["authors"][lang][path] = h
+
+    # Static Pages Hashing
+    if "pages" not in cache: cache["pages"] = {}
+    if lang not in cache["pages"]: cache["pages"][lang] = {}
+
+    pages_dir = "pages"
+    if os.path.exists(pages_dir):
+        for filename in os.listdir(pages_dir):
+            if filename.endswith(".html"):
+                path = os.path.join(pages_dir, filename)
+                h = get_file_hash(path)
+                if cache["pages"][lang].get(path) != h:
+                    print(f"  - PAGE CHANGE DETECTED: {filename}")
+                    language_changed = True
+                cache["pages"][lang][path] = h
 
     # Update cache with current global state
     cache["globals"] = global_hashes
@@ -1164,6 +1216,7 @@ def main():
             processed_articles.append(article_data)
         else:
             articles_to_process.append(md_file)
+            language_changed = True
 
     # 2. Sequential Media Phase (Addresses Race Conditions)
     if articles_to_process:
@@ -1220,16 +1273,36 @@ def main():
             if path not in current_md_paths:
                 print(f"  - Removing stale cache entry: {path}")
                 del cache["articles"][lang][path]
+                language_changed = True
+
+    # Remove stale author cache entries
+    if "authors" in cache and lang in cache["authors"]:
+        cached_auth_paths = list(cache["authors"][lang].keys())
+        for path in cached_auth_paths:
+            if not os.path.exists(path):
+                del cache["authors"][lang][path]
+                language_changed = True
+
+    # Remove stale pages cache entries
+    if "pages" in cache and lang in cache["pages"]:
+        cached_page_paths = list(cache["pages"][lang].keys())
+        for path in cached_page_paths:
+            if not os.path.exists(path):
+                del cache["pages"][lang][path]
+                language_changed = True
 
     save_build_cache(cache)
 
     generate_article_pages(authors_data, processed_articles, output_dir, lang, global_changed)
-    generate_author_pages(authors_data, processed_articles, output_dir, lang)
-    generate_index_page(processed_articles, output_dir, lang)
-    generate_rss_feed(processed_articles, output_dir, lang)
-    generate_local_pages(output_dir, lang)
-    generate_404_page(output_dir, lang)
-    copy_static_assets(output_dir)
+
+    if language_changed:
+        generate_author_pages(authors_data, processed_articles, output_dir, lang)
+        generate_index_page(processed_articles, output_dir, lang)
+        generate_rss_feed(processed_articles, output_dir, lang)
+        generate_local_pages(output_dir, lang)
+        generate_404_page(output_dir, lang)
+    else:
+        print(f"  - No changes for language '{lang}'. Skipping global page generation.")
 
 def create_root_redirect():
     """
@@ -1486,8 +1559,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
         dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
         temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
-        with open(os.path.join(output_dir, article['path']), "w", encoding='utf-8') as f:
-            f.write(temp_html)
+        write_if_changed(os.path.join(output_dir, article['path']), temp_html)
 
 
 def generate_author_pages(authors_data, articles, output_dir, lang='it'):
@@ -1574,8 +1646,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         temp_html = temp_html.replace("{{og_image}}", og_image)
 
         output_path = os.path.join(author_output_dir, f"{slug}.html")
-        with open(output_path, "w", encoding='utf-8') as f:
-            f.write(temp_html)
+        write_if_changed(output_path, temp_html)
 
 
 def generate_index_page(articles, output_dir, lang='it'):
@@ -1651,9 +1722,9 @@ def generate_index_page(articles, output_dir, lang='it'):
             article_copy['date'] = article_copy['date'].isoformat()
         serializable_articles.append(article_copy)
 
-    with open(json_output_path, "w", encoding='utf-8') as f:
-        json.dump(serializable_articles, f, ensure_ascii=False)
-    print(f"  - Generated articles.json with {len(articles)} articles.")
+    json_content = json.dumps(serializable_articles, ensure_ascii=False)
+    if write_if_changed(json_output_path, json_content):
+        print(f"  - Generated articles.json with {len(articles)} articles.")
 
     pagination_html = '<div id="view-more-container"></div>' if len(articles) > ARTICLES_PER_PAGE else ''
     
@@ -1687,8 +1758,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     temp_html = temp_html.replace("{{og_url}}", f"{SITE_URL}{lang}/index.html")
     temp_html = temp_html.replace("{{og_image}}", f"{SITE_URL}logo_vn_ia.png")
 
-    with open(os.path.join(output_dir, "index.html"), "w", encoding='utf-8') as f:
-        f.write(temp_html)
+    write_if_changed(os.path.join(output_dir, "index.html"), temp_html)
 
 def generate_local_pages(output_dir, lang='it'):
     """
@@ -1788,8 +1858,7 @@ def generate_local_pages(output_dir, lang='it'):
             dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
             temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
-            with open(os.path.join(output_dir, filename), "w", encoding='utf-8') as f:
-                f.write(temp_html)
+            write_if_changed(os.path.join(output_dir, filename), temp_html)
 
 def generate_404_page(output_dir, lang='it'):
     """
@@ -1842,9 +1911,8 @@ def generate_404_page(output_dir, lang='it'):
 
         # Write the final file
         output_path = os.path.join(output_dir, "404.html")
-        with open(output_path, "w", encoding='utf-8') as f:
-            f.write(temp_html)
-        print(f"  - Generated 404.html for '{lang}'")
+        if write_if_changed(output_path, temp_html):
+            print(f"  - Generated 404.html for '{lang}'")
 
     except FileNotFoundError as e:
         print(f"  - ERROR: Could not generate 404 page. Missing template file: {e.filename}")

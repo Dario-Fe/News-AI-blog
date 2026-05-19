@@ -233,6 +233,33 @@ def process_author_photo(photo_path, output_dir_base, lang):
         print(f"  - ERROR: Could not process author image {photo_path}. Error: {e}")
         raise
 
+def pre_process_article_media(md_file_info, output_dir_base, lang):
+    """
+    Parses the article to find and process all media assets sequentially.
+    This avoids race conditions when running the main HTML generation in parallel.
+    """
+    try:
+        with open(md_file_info['path'], 'r', encoding='utf-8') as f:
+            post = frontmatter.load(f)
+
+        # Process images in content
+        html_content = markdown2.markdown(post.content)
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        for img in soup.find_all('img'):
+            src = img.get('src')
+            if src:
+                process_and_save_image(src, output_dir_base, lang, article_dir=md_file_info['parent_dir'])
+
+        # Process audio if exists
+        if md_file_info.get('audio_path'):
+            process_audio(md_file_info['audio_path'], output_dir_base, lang)
+
+    except Exception as e:
+        print(f"  - ERROR pre-processing media for {md_file_info['name']}: {e}")
+        # We don't raise here to allow the build to attempt to continue,
+        # but errors will likely resurface in the main phase.
+
 def process_audio(audio_path, output_dir_base, lang):
     """
     Copies a local audio file and saves it, returning its relative path.
@@ -1095,11 +1122,13 @@ def main():
     s1 = sorted(md_files, key=lambda x: natural_sort_key(x['name']), reverse=True)
     sorted_md_files = sorted(s1, key=lambda x: natural_sort_key(x['parent_dir']), reverse=True)
 
-    # Prepare for incremental build
+    # 1. Scouting and Validation Phase
     articles_to_process = []
+    expected_html_files = set()
+    slugs_seen = {}
+
     if "articles" not in cache:
         cache["articles"] = {}
-
     if lang not in cache["articles"]:
         cache["articles"][lang] = {}
 
@@ -1107,12 +1136,20 @@ def main():
         md_path = md_file['path']
         current_hash = get_file_hash(md_path)
         article_slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
+
+        # Duplicate slug detection
+        if article_slug in slugs_seen:
+            print(f"WARNING: Duplicate slug detected: '{article_slug}'")
+            print(f"  - Original: {slugs_seen[article_slug]}")
+            print(f"  - Duplicate: {md_path}")
+        slugs_seen[article_slug] = md_path
+
+        expected_html_files.add(f"{article_slug}.html")
         output_path = os.path.join(output_dir, f"{article_slug}.html")
 
         # Check if we can skip this article
         cached_data = cache["articles"][lang].get(md_path)
         if not global_changed and cached_data and cached_data.get("hash") == current_hash and os.path.exists(output_path):
-            # print(f"  - Skipping {md_file['name']} (no changes detected)")
             article_data = cached_data["data"]
             # Convert date string back to date/datetime object
             if article_data.get('date') and isinstance(article_data['date'], str):
@@ -1128,9 +1165,14 @@ def main():
         else:
             articles_to_process.append(md_file)
 
-    print(f"Processing {len(articles_to_process)} articles (out of {len(sorted_md_files)})...")
+    # 2. Sequential Media Phase (Addresses Race Conditions)
+    if articles_to_process:
+        print(f"Pre-processing media for {len(articles_to_process)} articles...")
+        for md_file in articles_to_process:
+            pre_process_article_media(md_file, BASE_OUTPUT_DIR, lang)
 
-    # Use parallel processing for articles
+    # 3. Parallel HTML Phase
+    print(f"Processing {len(articles_to_process)} articles in parallel...")
     if articles_to_process:
         with ProcessPoolExecutor() as executor:
             future_to_article = {executor.submit(process_article, md_file, BASE_OUTPUT_DIR, lang): md_file for md_file in articles_to_process}
@@ -1149,12 +1191,7 @@ def main():
                     print(f"  - Article {md_file['name']} generated an exception: {exc}")
                     raise
 
-    # Sort processed_articles again to maintain order
-    processed_articles.sort(key=lambda x: natural_sort_key(x['slug']), reverse=True)
-    # The above sorting is a bit weak, let's try to match the original sorting criteria if possible
-    # but slug based should be enough for the index page. Actually it was sorted by parent_dir then name.
-    # Let's rebuild the sorted list based on the original sorted_md_files to be safe.
-
+    # Maintain original sorting order
     slug_to_data = {a['slug']: a for a in processed_articles}
     final_processed_articles = []
     for md_file in sorted_md_files:
@@ -1163,6 +1200,26 @@ def main():
             final_processed_articles.append(slug_to_data[slug])
 
     processed_articles = final_processed_articles
+
+    # 4. Cleanup and Cache Sanification
+    print("Cleaning up orphaned files and stale cache entries...")
+    # Remove orphaned HTML files in the language directory
+    all_html_in_dist = [f for f in os.listdir(output_dir) if f.endswith(".html")]
+    protected_pages = {"index.html", "404.html", "newsletter.html", "thank-you.html", "cookie.html", "privacy.html", "metodo-editoriale.html"}
+    for html_file in all_html_in_dist:
+        if html_file not in expected_html_files and html_file not in protected_pages:
+            file_to_remove = os.path.join(output_dir, html_file)
+            print(f"  - Removing orphaned page: {file_to_remove}")
+            os.remove(file_to_remove)
+
+    # Remove stale cache entries
+    current_md_paths = {f['path'] for f in md_files}
+    if "articles" in cache and lang in cache["articles"]:
+        cached_paths = list(cache["articles"][lang].keys())
+        for path in cached_paths:
+            if path not in current_md_paths:
+                print(f"  - Removing stale cache entry: {path}")
+                del cache["articles"][lang][path]
 
     save_build_cache(cache)
 

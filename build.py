@@ -1058,6 +1058,8 @@ def main():
         generate_sitemap_xml()
         generate_robots_txt()
         create_root_redirect()
+        cache = load_build_cache()
+        prune_orphaned_assets(cache)
         return
 
     lang = args.lang
@@ -1285,46 +1287,6 @@ def main():
                 language_changed = True
 
     save_build_cache(cache)
-
-    # Track all expected media assets for pruning
-    expected_media_files = set()
-    for article in processed_articles:
-        if article.get('image_paths'):
-            for p in article['image_paths'].values():
-                expected_media_files.add(os.path.basename(p))
-        
-        # Audio
-        if article.get('audio_path'):
-            expected_media_files.add(os.path.basename(article['audio_path']))
-            
-        # Images in content
-        soup = BeautifulSoup(article['html_content'], 'html.parser')
-        for picture in soup.find_all('picture'):
-            for source in picture.find_all('source'):
-                if source.get('srcset'):
-                    expected_media_files.add(os.path.basename(source['srcset']))
-            if picture.img and picture.img.get('src'):
-                expected_media_files.add(os.path.basename(picture.img['src']))
-
-    # Also include author photos
-    author_output_dir_images = os.path.join(BASE_OUTPUT_DIR, IMAGE_ASSETS_DIR, "authors")
-    if os.path.exists(author_output_dir_images):
-        for f in os.listdir(author_output_dir_images):
-            pass
-
-    # Prune orphaned images
-    output_dir_images = os.path.join(BASE_OUTPUT_DIR, IMAGE_ASSETS_DIR)
-    if os.path.exists(output_dir_images):
-        for f in os.listdir(output_dir_images):
-            if os.path.isfile(os.path.join(output_dir_images, f)) and f not in expected_media_files:
-                os.remove(os.path.join(output_dir_images, f))
-
-    # Prune orphaned audio
-    output_dir_audio = os.path.join(BASE_OUTPUT_DIR, AUDIO_ASSETS_DIR)
-    if os.path.exists(output_dir_audio):
-        for f in os.listdir(output_dir_audio):
-            if os.path.isfile(os.path.join(output_dir_audio, f)) and f not in expected_media_files:
-                os.remove(os.path.join(output_dir_audio, f))
 
     generate_article_pages(authors_data, processed_articles, output_dir, lang, global_changed)
     
@@ -1954,6 +1916,73 @@ def generate_404_page(output_dir, lang='it'):
     except Exception as e:
         print(f"  - ERROR: An unexpected error occurred while generating the 404 page: {e}")
         raise
+
+def prune_orphaned_assets(cache):
+    """
+    Identifies and removes images and audio files that are no longer referenced
+    by any article in any language.
+    """
+    print("\nPruning orphaned assets across all languages...")
+    expected_media_files = set()
+
+    if "articles" not in cache:
+        print("  - No articles in cache. Skipping pruning to be safe.")
+        return
+
+    for lang in cache["articles"]:
+        for article_path in cache["articles"][lang]:
+            article_data = cache["articles"][lang][article_path].get("data")
+            if not article_data:
+                continue
+
+            # Core images
+            if article_data.get('image_paths'):
+                for p in article_data['image_paths'].values():
+                    expected_media_files.add(os.path.basename(p))
+
+            # Audio
+            if article_data.get('audio_path'):
+                expected_media_files.add(os.path.basename(article_data['audio_path']))
+
+            # Images in content
+            if article_data.get('html_content'):
+                soup = BeautifulSoup(article_data['html_content'], 'html.parser')
+                for picture in soup.find_all('picture'):
+                    for source in picture.find_all('source'):
+                        if source.get('srcset'):
+                            expected_media_files.add(os.path.basename(source['srcset']))
+                    if picture.img and picture.img.get('src'):
+                        expected_media_files.add(os.path.basename(picture.img['src']))
+
+    # Also include author photos
+    author_output_dir_images = os.path.join(BASE_OUTPUT_DIR, IMAGE_ASSETS_DIR, "authors")
+    if os.path.exists(author_output_dir_images):
+        for f in os.listdir(author_output_dir_images):
+            expected_media_files.add(f)
+
+    # Prune orphaned images
+    output_dir_images = os.path.join(BASE_OUTPUT_DIR, IMAGE_ASSETS_DIR)
+    if os.path.exists(output_dir_images):
+        removed_images = 0
+        for f in os.listdir(output_dir_images):
+            filepath = os.path.join(output_dir_images, f)
+            if os.path.isfile(filepath) and f not in expected_media_files:
+                os.remove(filepath)
+                removed_images += 1
+        if removed_images > 0:
+            print(f"  - Removed {removed_images} orphaned images.")
+
+    # Prune orphaned audio
+    output_dir_audio = os.path.join(BASE_OUTPUT_DIR, AUDIO_ASSETS_DIR)
+    if os.path.exists(output_dir_audio):
+        removed_audio = 0
+        for f in os.listdir(output_dir_audio):
+            filepath = os.path.join(output_dir_audio, f)
+            if os.path.isfile(filepath) and f not in expected_media_files:
+                os.remove(filepath)
+                removed_audio += 1
+        if removed_audio > 0:
+            print(f"  - Removed {removed_audio} orphaned audio files.")
 
 def copy_static_assets(output_dir):
     """

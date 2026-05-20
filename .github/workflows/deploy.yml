@@ -39,11 +39,27 @@ jobs:
         with:
           python-version: '3.10' # Or your desired version
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node.js dependencies
+        run: npm install
+
       - name: Install locales
         run: |
           sudo apt-get update
           sudo apt-get install -y language-pack-it language-pack-es language-pack-fr language-pack-de
           sudo locale-gen it_IT.UTF-8 en_US.UTF-8 es_ES.UTF-8 fr_FR.UTF-8 de_DE.UTF-8
+
+      - name: Cache dist directory
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-dist-
 
       - name: Install dependencies
         run: |
@@ -63,10 +79,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Deploy to Netlify
-        uses: South-Paw/action-netlify-cli@v2
-        id: netlify
-        with:
-          args: deploy --dir=dist --prod
+        run: npx netlify-cli deploy --dir=dist --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

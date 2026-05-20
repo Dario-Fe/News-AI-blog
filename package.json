@@ -8,7 +8,7 @@
     "build": "./build.sh"
   },
   "dependencies": {
-    "@netlify/blobs": "2.0.0",
+    "@netlify/blobs": "^4.2.0",
     "netlify-plugin-cache": "^1.0.3"
   },
   "devDependencies": {

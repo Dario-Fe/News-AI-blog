@@ -153,9 +153,9 @@
                     if (article.image_paths) {
                         imageHtml = `
                             <picture>
-                                <source srcset="${article.image_paths.thumb_webp}" type="image/webp">
-                                <source srcset="${article.image_paths.thumb_jpeg}" type="image/jpeg">
-                                <img src="${article.image_paths.thumb_jpeg}" alt="${article.title}" loading="lazy">
+                                <source srcset="../${article.image_paths.thumb_webp}" type="image/webp">
+                                <source srcset="../${article.image_paths.thumb_jpeg}" type="image/jpeg">
+                                <img src="../${article.image_paths.thumb_jpeg}" alt="${article.title}" loading="lazy">
                             </picture>`;
                     } else {
                         imageHtml = `<img src="${window.APP_CONFIG.placeholderImage}" alt="${article.title}" loading="lazy">`;

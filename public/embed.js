@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const lang = embedContainer.dataset.lang || 'it';
         const siteUrl = embedContainer.dataset.url || 'https://aitalk.it';
         const jsonUrl = `${siteUrl}/${lang}/articles.json`;
-        const placeholderImage = `${siteUrl}/logo_vn_ia.png`;
+        const placeholderImage = `${siteUrl}/${lang}/logo_vn_ia.png`;
         
         const translations = {
             it: 'Leggi su AITalk &rarr;',
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     let imageHtml = '';
                     if (latestArticle.image_paths && latestArticle.image_paths.thumb_jpeg) {
-                        const imageUrl = `${siteUrl}/${lang}/${latestArticle.image_paths.thumb_jpeg}`;
+                        const imageUrl = `${siteUrl}/${latestArticle.image_paths.thumb_jpeg}`;
                         imageHtml = `<img src="${imageUrl}" alt="${latestArticle.title}" style="width: 100%; height: auto; border-radius: 8px 8px 0 0; object-fit: cover; border-bottom: 1px solid #eee;">`;
                     } else {
                          imageHtml = `<img src="${placeholderImage}" alt="AITalk" style="width: 100%; height: auto; border-radius: 8px 8px 0 0; object-fit: cover; border-bottom: 1px solid #eee;">`;

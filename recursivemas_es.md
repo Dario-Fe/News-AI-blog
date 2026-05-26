@@ -25,7 +25,7 @@ El resultado es lo que el paper describe como un *cerebro colectivo recursivo*: 
 
 ## RecursiveLink: el intérprete ligero
 
-El problema técnico más delicato es el de la traducción entre mundos. En un sistema multi-agente heterogéneo, donde cada agente es un modelo diferente, con arquitectura diferente, dimensiones diferentes del espacio oculto (*hidden size*), ¿cómo se transfiere un latent state de un modelo a otro sin convertirlo en texto?
+El problema técnico más delicado es el de la traducción entre mundos. En un sistema multi-agente heterogéneo, donde cada agente es un modelo diferente, con arquitectura diferente, dimensiones diferentes del espacio oculto (*hidden size*), ¿cómo se transfiere un latent state de un modelo a otro sin convertirlo en texto?
 
 La respuesta que propone RecursiveMAS es el módulo [RecursiveLink](https://recursivemas.github.io/): un componente ligero con dos capas residuales que actúa como intérprete entre los latent spaces de los diferentes modelos. En su variante interna (*inner link*), opera dentro de cada agente individual durante la generación: en lugar de proyectar el estado oculto sobre el vocabulario para producir un token, lo transforma y lo reinyecta como input para el paso siguiente, manteniendo el razonamiento íntegramente en el espacio continuo. En la variante externa (*outer link*), añade una layer lineal suplementaria para proyectar el latent state de un agente en el espacio dimensional del agente siguiente, permitiendo la transferencia incluso entre modelos con geometrías internas incompatibles.
 

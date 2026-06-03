@@ -332,6 +332,29 @@ TRANSLATIONS = {
         "fr": "S'abonner",
         "de": "Abonnieren"
     },
+    "search": {
+        "placeholder": {
+            "it": "Cerca articoli...",
+            "en": "Search articles...",
+            "es": "Buscar artículos...",
+            "fr": "Rechercher des articles...",
+            "de": "Artikel suchen..."
+        },
+        "label": {
+            "it": "Cerca",
+            "en": "Search",
+            "es": "Buscar",
+            "fr": "Rechercher",
+            "de": "Suchen"
+        },
+        "no_results": {
+            "it": "Nessun risultato trovato",
+            "en": "No results found",
+            "es": "No se han encontrado resultados",
+            "fr": "Aucun résultat trouvé",
+            "de": "Keine Ergebnisse gefunden"
+        }
+    },
     "newsletter_box": {
         "title": {
             "it": "Ti sta piacendo questo articolo?",
@@ -918,7 +941,8 @@ def get_base_template_data(depth):
         "{{privacy_link}}": f"{prefix}privacy.html",
         "{{metodo_link}}": f"{prefix}metodo-editoriale.html",
         "{{author_link}}": f"{prefix}authors/dario-ferrero.html",
-        "{{home_link}}": f"{prefix}index.html" if prefix else "index.html"
+        "{{home_link}}": f"{prefix}index.html" if prefix else "index.html",
+        "{{depth}}": str(depth)
     }
     return data
 
@@ -1544,6 +1568,9 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
 
         temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
+        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
+        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
+        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
         temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
         temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
@@ -1733,6 +1760,9 @@ def generate_index_page(articles, output_dir, lang='it'):
     subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
     temp_html = temp_html.replace("{{subtitle}}", subtitle)
     temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
+    temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
+    temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
+    temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
     temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
     temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
     temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
@@ -1843,6 +1873,9 @@ def generate_local_pages(output_dir, lang='it'):
             
             temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
             temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
+            temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
+            temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
+            temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
             temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
             temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
             temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
@@ -1881,6 +1914,9 @@ def generate_404_page(output_dir, lang='it'):
         subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
         temp_html = temp_html.replace("{{subtitle}}", subtitle)
         temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
+        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
+        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
+        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
         temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
         temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
         temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))

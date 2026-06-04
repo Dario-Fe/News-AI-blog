@@ -4,12 +4,12 @@ import os
 with open('build.py', 'r', encoding='utf-8') as f:
     content = f.read()
 
-# 1. Add translations
+# 1. Translations
 search_trans = """    "search": {
         "placeholder": {
             "it": "Cerca articoli...",
             "en": "Search articles...",
-            "es": "Buscar artículos...",
+            "es": "Buscar articoli...",
             "fr": "Rechercher des articles...",
             "de": "Artikel suchen..."
         },
@@ -24,66 +24,58 @@ search_trans = """    "search": {
             "it": "Nessun risultato trovato",
             "en": "No results found",
             "es": "No se han trovato risultati",
-            "fr": "Aucun résultat trovato",
+            "fr": "Aucun risultato trovato",
             "de": "Keine Ergebnisse gefunden"
         }
     },"""
 content = re.sub(r'("subscribe": \{.*?\n\s+\},)', r'\1\n' + search_trans, content, flags=re.DOTALL)
 
-# 2. Add lang to articles.json
-content = content.replace("article_copy = {k: v for k, v in article.items() if k != 'html_content'}",
-                        "article_copy = {k: v for k, v in article.items() if k != 'html_content'}\n        article_copy['lang'] = lang")
+# 2. Dynamic placeholders
+# Function to safely insert multiple replacements
+def safe_inject(text, func_name, depth):
+    # Match the function and the target line
+    pattern = f'(def {func_name}.*?temp_html = temp_html\.replace\("{{{{subscribe_link_text}}}}", TRANSLATIONS\["subscribe"\]\.get\(lang, TRANSLATIONS\["subscribe"\]\["it"\]\)\))'
 
-# 3. Add data-is-home to articles grid
-content = content.replace('grid_html = \'<div id="articles-grid">\\n\'', 'grid_html = \'<div id="articles-grid" data-is-home="true">\\n\'')
-
-# 4. Define unified replacement logic in all functions
-funcs = [
-    ('generate_article_pages', 1),
-    ('generate_author_pages', 2),
-    ('generate_index_page', 1),
-    ('generate_local_pages', 1),
-    ('generate_404_page', 1)
-]
-
-for func, depth in funcs:
-    replaces = f"""        temp_html = temp_html.replace("{{{{lang}}}}", lang)
+    replaces = f"""
+        temp_html = temp_html.replace("{{{{lang}}}}", lang)
         temp_html = temp_html.replace("{{{{depth}}}}", "{depth}")
         temp_html = temp_html.replace("{{{{search_placeholder}}}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
         temp_html = temp_html.replace("{{{{search_label}}}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
         temp_html = temp_html.replace("{{{{search_no_results}}}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))"""
 
-    if func == 'generate_index_page':
+    if func_name == 'generate_index_page':
         replaces = replaces.replace('        ', '    ')
 
-    target = 'temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))'
-    if target in content:
-        # Avoid double replacement if script is re-run
-        if f'temp_html.replace("{{{{depth}}}}", "{depth}")' not in content:
-             content = content.replace(target, target + '\n' + replaces)
+    return re.sub(pattern, r'\1' + replaces, text, flags=re.DOTALL)
+
+for fn, d in [('generate_article_pages', '1'), ('generate_author_pages', '2'), ('generate_index_page', '1'), ('generate_local_pages', '1'), ('generate_404_page', '1')]:
+    content = safe_inject(content, fn, d)
+
+# 3. articles.json lang
+content = content.replace("article_copy = {k: v for k, v in article.items() if k != 'html_content'}",
+                        "article_copy = {k: v for k, v in article.items() if k != 'html_content'}\n        article_copy['lang'] = lang")
+
+# 4. data-is-home
+content = content.replace('grid_html = \'<div id="articles-grid">\\n\'', 'grid_html = \'<div id="articles-grid" data-is-home="true">\\n\'')
 
 with open('build.py', 'w', encoding='utf-8') as f:
     f.write(content)
 
-# 5. Fix templates/base.html
+# --- Templates ---
 with open('templates/base.html', 'r', encoding='utf-8') as f:
     base = f.read()
 
-search_ui = """                <div id="search-container">
+ui = """                <div id="search-container">
                     <button id="search-toggle" class="search-toggle" title="{{search_label}}"></button>
                     <div id="search-input-wrapper" class="search-input-wrapper">
                         <input type="text" id="search-input" placeholder="{{search_placeholder}}" aria-label="{{search_label}}">
                         <div id="search-results" class="search-results"></div>
                     </div>
                 </div>"""
-if '<div id="search-container">' not in base:
-    base = base.replace('<div id="language-selector-container">', '<div id="language-selector-container">\n' + search_ui)
+base = base.replace('<div id="language-selector-container">', '<div id="language-selector-container">\n' + ui)
+base = base.replace("placeholderImage: '{{placeholder_image_path}}'", "placeholderImage: '{{placeholder_image_path}}',\n        searchNoResultsText: '{{search_no_results}}'")
 
-if 'searchNoResultsText' not in base:
-    base = base.replace("placeholderImage: '{{placeholder_image_path}}'",
-                       "placeholderImage: '{{placeholder_image_path}}',\n        searchNoResultsText: '{{search_no_results}}'")
-
-search_js = r"""
+js = r"""
             /**
              * Loads the articles JSON index for search if not already loaded.
              */
@@ -157,14 +149,12 @@ search_js = r"""
                 searchResults.style.display = 'block';
             };
 """
+base = base.replace('// --- State Management ---', 'let searchIndexLoaded = false;\n            // --- State Management ---')
+base = base.replace('const filterButtons = document.querySelectorAll(\'.tag-filter-button\');',
+                   "const filterButtons = document.querySelectorAll('.tag-filter-button');\n            const searchToggle = document.getElementById('search-toggle');\n            const searchInputWrapper = document.getElementById('search-input-wrapper');\n            const searchInput = document.getElementById('search-input');\n            const searchResults = document.getElementById('search-results');")
+base = base.replace('// --- Core Functions ---', '// --- Core Functions ---' + js)
 
-if 'ensureSearchIndexLoaded' not in base:
-    base = base.replace('// --- DOM Elements ---', 'let searchIndexLoaded = false;\n            // --- DOM Elements ---')
-    base = base.replace('const filterButtons = document.querySelectorAll(\'.tag-filter-button\');',
-                       "const filterButtons = document.querySelectorAll('.tag-filter-button');\n            const searchToggle = document.getElementById('search-toggle');\n            const searchInputWrapper = document.getElementById('search-input-wrapper');\n            const searchInput = document.getElementById('search-input');\n            const searchResults = document.getElementById('search-results');")
-    base = base.replace('// --- Core Functions ---', '// --- Core Functions ---' + search_js)
-
-search_listeners = """
+listeners = """
                 // Search UI Handlers
                 if (searchToggle) {
                     searchToggle.addEventListener('click', async () => {
@@ -201,18 +191,15 @@ search_listeners = """
                     }
                 });
 """
-if 'Search UI Handlers' not in base:
-    base = base.replace('const initialize = async () => {', 'const initialize = async () => {\n' + search_listeners)
-
+base = base.replace('const initialize = async () => {', 'const initialize = async () => {\n' + listeners)
 base = base.replace('if (grid) {', 'if (grid && grid.hasAttribute(\'data-is-home\')) {')
-if 'searchIndexLoaded = true;' not in base:
-    base = base.replace('allArticles = await response.json();', 'allArticles = await response.json();\n                        searchIndexLoaded = true;')
+base = base.replace('allArticles = await response.json();', 'allArticles = await response.json();\n                        searchIndexLoaded = true;')
 
 with open('templates/base.html', 'w', encoding='utf-8') as f:
     f.write(base)
 
-# 6. Add style.css
-styles = """
+# --- CSS ---
+css_add = """
         /* Search Bar Styles */
         #search-container {
             display: flex;
@@ -355,8 +342,111 @@ styles = """
             }
         }
 """
-with open('style.css', 'r', encoding='utf-8') as f:
-    style_content = f.read()
-if 'Search Bar Styles' not in style_content:
-    with open('style.css', 'a', encoding='utf-8') as f:
-        f.write(styles)
+with open('style.css', 'a', encoding='utf-8') as f:
+    f.write(css_add)
+
+# --- README ---
+readme = """# AITalk: Static Site Engine & Content Repository
+
+[![Deployment Status](https://img.shields.io/github/actions/workflow/status/darioferrero/aitalk/deploy.yml?branch=main&label=Deploy)](https://github.com/darioferrero/aitalk/actions)
+[![Technology](https://img.shields.io/badge/Engine-Python%20SSG-blue.svg)](https://www.python.org/)
+[![Platform](https://img.shields.io/badge/Platform-Netlify-00ad9f.svg)](https://www.netlify.com/)
+
+AITalk is a professional, high-performance static site generator (SSG) specifically engineered for multi-language news portals focused on Artificial Intelligence. This repository contains the complete source code, automation scripts, and Markdown-based content database.
+
+---
+
+## 🚀 Key Features
+
+### ⚡ Performance & Architecture
+- **Pure Python SSG**: Customized build engine (`build.py`) designed for maximum speed and minimal overhead.
+- **Atomic Incremental Builds**: Intelligent change detection using SHA-1 hashing ensures only modified content is re-processed.
+- **Parallel Processing**: Utilizes `ProcessPoolExecutor` for high-speed HTML generation across multiple CPU cores.
+
+### 🌐 Multilingual Excellence
+- **Native Support**: Full localized experiences for **Italian**, **English**, **Spanish**, **French**, and **German**.
+- **Live Search**: Integrated high-speed, client-side search engine with language-aware filtering and dynamic path resolution.
+- **SEO Optimized**: Language-specific RSS feeds, automated robots.txt generation, and proper OpenGraph/Twitter metadata for every page.
+
+### 🎙️ Multimedia & Engagement
+- **Podcast Integration**: Automated detection and integration of language-specific audio (`.mp3`) with a native HTML5 player.
+- **YouTube Embedding**: Seamless support for video content within articles.
+- **E-Book Engine**: Specialized scripts to compile Markdown articles into professionally formatted PDF/EPUB e-books.
+- **Newsletter Automation**: Serverless newsletter subscription system via Netlify Forms.
+
+### 📊 Analytics & Insights
+- **Privacy-First Tracking**: Lightweight, cookie-less page view tracking via Netlify Functions and Netlify Blobs.
+- **Performance Dashboards**: Real-time statistics monitoring without third-party trackers.
+
+---
+
+## 📂 Project Structure
+
+```text
+├── articoli/           # Primary content database (Markdown + Media)
+├── content/            # Auxiliary data (Author biographies, profiles)
+├── ebook/              # E-book generation suite (Python + CSS)
+├── netlify/            # Serverless functions (Stats, Analytics)
+├── pages/              # Static informational pages (Legal, Cookies, Method)
+├── templates/          # HTML blueprints (Base, Article, Author, 404)
+├── public/             # Static assets (Flags, icons, logos)
+├── build.py            # Core SSG Engine
+├── build.sh            # Global build automation
+└── style.css           # Global design system
+```
+
+---
+
+## 🛠️ Development Workflow
+
+### Prerequisites
+- **Python 3.10+**
+- **pip** (Python Package Manager)
+
+### Local Environment Setup
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Build System
+- **Full Build (All Languages)**:
+  ```bash
+  ./build.sh
+  ```
+- **Targeted Build**:
+  ```bash
+  python build.py --lang [it|en|es|fr|de]
+  ```
+
+### Local Preview
+Launch a local development server to inspect the generated site in `dist/`:
+```bash
+cd dist
+python -m http.server 8000
+```
+Access the portal at: `http://localhost:8000`
+
+---
+
+## 📝 Content Management
+
+### Articles
+Every article resides in its own directory within `articoli/`, identified by a numeric prefix for chronological sorting (e.g., `105-slug/`).
+- **Translations**: Suffix files with language codes (e.g., `article_en.md`).
+- **Media**: Place images and audio files directly in the article folder. The engine handles optimization and format conversion (WebP/JPEG) automatically.
+
+### Authors
+Manage author profiles in `content/authors/`. Biographical data supports full Markdown formatting.
+
+---
+
+## ☁️ Deployment & CI/CD
+The portal is continuously deployed via **GitHub Actions**. Every push to the main branch triggers an automated build and deployment to **Netlify**. The workflow utilizes advanced caching strategies to ensure rapid deployment times.
+
+---
+© 2025 AITalk - Curated by **Dario Ferrero**
+"""
+with open('README.md', 'w', encoding='utf-8') as f:
+    f.write(readme)

@@ -1,92 +1,101 @@
-# AITalk - Generatore di Sito Statico
+# AITalk: Static Site Engine & Content Repository
 
-Questa repository contiene il codice sorgente e lo script di build per il sito di AITalk, un sito web statico e multilingua dedicato a notizie e analisi sull'Intelligenza Artificiale.
+[![Deployment Status](https://img.shields.io/github/actions/workflow/status/darioferrero/aitalk/deploy.yml?branch=main&label=Deploy)](https://github.com/darioferrero/aitalk/actions)
+[![Technology](https://img.shields.io/badge/Engine-Python%20SSG-blue.svg)](https://www.python.org/)
+[![Platform](https://img.shields.io/badge/Platform-Netlify-00ad9f.svg)](https://www.netlify.com/)
 
-A differenza delle versioni precedenti, questo generatore ora opera interamente in locale, leggendo i contenuti dalla cartella `articoli/` presente in questa stessa repository.
+AITalk is a professional, high-performance static site generator (SSG) specifically engineered for multi-language news portals focused on Artificial Intelligence. This repository contains the complete source code, automation scripts, and Markdown-based content database.
 
-## Funzionalità Principali
+---
 
-- **Generazione di Sito Statico**: Costruito con un semplice script Python (`build.py`), senza la necessità di framework complessi, per garantire massime performance e semplicità.
-- **Contenuti Locali in Markdown**: Gli articoli sono scritti in formato Markdown e gestiti direttamente all'interno del progetto, rendendo la gestione dei contenuti semplice e versionabile con Git.
-- **Supporto Multilingua**: Il sito è generato in Italiano (default), Inglese, Spagnolo, Francese e Tedesco. L'interfaccia e i template sono completamente tradotti.
-- **Build Stabili**: Le dipendenze Python nel file `requirements.txt` sono "pinnate" a versioni specifiche, garantendo che la build sia riproducibile e non si rompa a causa di aggiornamenti inaspettati delle librerie.
-- **Pagine Autore**: Genera automaticamente una pagina dedicata per ogni autore con biografia e lista degli articoli pubblicati.
-- **Integrazione Podcast**: Rileva e integra automaticamente file audio `.mp3` specifici per ogni lingua, mostrando un player dedicato nelle pagine degli articoli.
-- **Ottimizzazione Immagini**: Processa le immagini degli articoli, creando formati ottimizzati (WebP e JPEG) per migliorare i tempi di caricamento.
-- **Feed RSS**: Genera un feed RSS separato per ogni lingua, per permettere agli utenti di seguire gli aggiornamenti.
-- **Form "Serverless"**: Utilizza Netlify Forms per la gestione delle iscrizioni alla newsletter, senza bisogno di un backend.
+## 🚀 Key Features
 
-## Struttura del Progetto
+### ⚡ Performance & Architecture
+- **Pure Python SSG**: Customized build engine (`build.py`) designed for maximum speed and minimal overhead.
+- **Atomic Incremental Builds**: Intelligent change detection using SHA-1 hashing ensures only modified content is re-processed.
+- **Parallel Processing**: Utilizes `ProcessPoolExecutor` for high-speed HTML generation across multiple CPU cores.
 
-- `build.py`: Lo script Python principale che contiene tutta la logica di build.
-- `build.sh`: Uno script di supporto per avviare la compilazione di tutte le lingue con un solo comando.
-- `articoli/`: La cartella principale che contiene tutti i contenuti degli articoli (file markdown, immagini, audio).
-- `content/`: Contiene i dati ausiliari.
-  - `authors/`: File Markdown con le biografie degli autori (es. `dario-ferrero.md`, `dario-ferrero_en.md`).
-- `templates/`: Contiene i template HTML per la struttura delle pagine (es. `base.html`, `author.html`).
-- `pages/`: Contiene pagine HTML quasi-statiche come la privacy policy e la pagina di iscrizione alla newsletter.
-- `public/`: Contiene asset statici (come le bandiere delle lingue) che vengono copiati direttamente nella cartella di build.
-- `style.css`: Il foglio di stile principale del sito.
-- `requirements.txt`: Le dipendenze Python necessarie per eseguire lo script di build.
-- `dist/`: La cartella di output dove viene salvato il sito generato (non è tracciata da Git).
+### 🌐 Multilingual Excellence
+- **Native Support**: Full localized experiences for **Italian**, **English**, **Spanish**, **French**, and **German**.
+- **Live Search**: Integrated high-speed, client-side search engine with language-aware filtering and dynamic path resolution.
+- **SEO Optimized**: Language-specific RSS feeds, automated robots.txt generation, and proper OpenGraph/Twitter metadata for every page.
 
-## Gestione dei Contenuti
+### 🎙️ Multimedia & Engagement
+- **Podcast Integration**: Automated detection and integration of language-specific audio (`.mp3`) with a native HTML5 player.
+- **YouTube Embedding**: Seamless support for video content within articles.
+- **E-Book Engine**: Specialized scripts to compile Markdown articles into professionally formatted PDF/EPUB e-books.
+- **Newsletter Automation**: Serverless newsletter subscription system via Netlify Forms.
 
-### Articoli
+### 📊 Analytics & Insights
+- **Privacy-First Tracking**: Lightweight, cookie-less page view tracking via Netlify Functions and Netlify Blobs.
+- **Performance Dashboards**: Real-time statistics monitoring without third-party trackers.
 
-Per aggiungere o modificare un articolo, è necessario creare una nuova sottocartella all'interno di `articoli/`.
-- **File Markdown**: Il file per la lingua italiana non ha suffisso (es. `mio-articolo.md`). Le traduzioni devono avere il suffisso della lingua (es. `mio-articolo_en.md` per l'inglese).
-- **Immagini**: Le immagini relative a un articolo vanno inserite nella stessa cartella.
+---
 
-### Podcast
+## 📂 Project Structure
 
-Per associare un podcast a un articolo, inserire un file `.mp3` nella stessa cartella dell'articolo. Il file audio **deve avere lo stesso nome base** del file Markdown a cui si riferisce.
-- Per `mio-articolo.md` (Italiano), il file audio deve chiamarsi `mio-articolo.mp3`.
-- Per `mio-articolo_en.md` (Inglese), il file audio deve chiamarsi `mio-articolo_en.mp3`.
-
-Lo script di build rileverà automaticamente il file audio e mostrerà il player nella pagina dell'articolo corrispondente.
-
-### Autori
-
-Per aggiungere o modificare un autore, creare o modificare i file Markdown presenti nella cartella `content/authors/`.
-
-## Sviluppo e Build in Locale
-
-### Prerequisiti
-
-- Python 3.x
-- `pip`
-
-### Setup
-
-1.  Clonare la repository.
-2.  Installare le dipendenze Python:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    Non è più necessario un token di GitHub, poiché tutti i contenuti sono locali.
-
-### Esecuzione del Build
-
-Per compilare il sito per tutte le lingue supportate, eseguire lo script:
-```bash
-./build.sh
+```text
+├── articoli/           # Primary content database (Markdown + Media)
+├── content/            # Auxiliary data (Author biographies, profiles)
+├── ebook/              # E-book generation suite (Python + CSS)
+├── netlify/            # Serverless functions (Stats, Analytics)
+├── pages/              # Static informational pages (Legal, Cookies, Method)
+├── templates/          # HTML blueprints (Base, Article, Author, 404)
+├── public/             # Static assets (Flags, icons, logos)
+├── build.py            # Core SSG Engine
+├── build.sh            # Global build automation
+└── style.css           # Global design system
 ```
-Per compilare una singola lingua (es. italiano):
-```bash
-python build.py --lang it
-```
-Il sito generato si troverà nella cartella `dist/`.
 
-### Visualizzazione in Locale
+---
 
-Per visualizzare il sito generato, è possibile avviare un semplice server web locale dalla cartella `dist/`:
+## 🛠️ Development Workflow
+
+### Prerequisites
+- **Python 3.10+**
+- **pip** (Python Package Manager)
+
+### Local Environment Setup
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Build System
+- **Full Build (All Languages)**:
+  ```bash
+  ./build.sh
+  ```
+- **Targeted Build**:
+  ```bash
+  python build.py --lang [it|en|es|fr|de]
+  ```
+
+### Local Preview
+Launch a local development server to inspect the generated site in `dist/`:
 ```bash
 cd dist
-python -m http.server
+python -m http.server 8000
 ```
-Il sito sarà quindi accessibile all'indirizzo `http://localhost:8000`.
+Access the portal at: `http://localhost:8000`
 
-## Deployment
+---
 
-Il deployment è gestito automaticamente tramite GitHub Actions e avviene su Netlify.
+## 📝 Content Management
+
+### Articles
+Every article resides in its own directory within `articoli/`, identified by a numeric prefix for chronological sorting (e.g., `105-slug/`).
+- **Translations**: Suffix files with language codes (e.g., `article_en.md`).
+- **Media**: Place images and audio files directly in the article folder. The engine handles optimization and format conversion (WebP/JPEG) automatically.
+
+### Authors
+Manage author profiles in `content/authors/`. Biographical data supports full Markdown formatting.
+
+---
+
+## ☁️ Deployment & CI/CD
+The portal is continuously deployed via **GitHub Actions**. Every push to the main branch triggers an automated build and deployment to **Netlify**. The workflow utilizes advanced caching strategies to ensure rapid deployment times.
+
+---
+© 2025 AITalk - Curated by **Dario Ferrero**

@@ -125,8 +125,8 @@
             let currentPage = 0;
             const articlesPerPage = 15;
             let activeTag = 'all';
-            let searchIndexLoaded = false;
 
+            let searchIndexLoaded = false;
             // --- DOM Elements ---
             const grid = document.getElementById('articles-grid');
             const viewMoreContainer = document.getElementById('view-more-container');
@@ -137,6 +137,79 @@
             const searchResults = document.getElementById('search-results');
 
             // --- Core Functions ---
+            /**
+             * Loads the articles JSON index for search if not already loaded.
+             */
+            const ensureSearchIndexLoaded = async () => {
+                if (searchIndexLoaded) return;
+                try {
+                    const depth = parseInt('{{depth}}' || '1');
+                    const prefix = "../".repeat(depth - 1);
+                    const response = await fetch(`${prefix}articles.json`);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    allArticles = await response.json();
+                    searchIndexLoaded = true;
+                } catch (error) {
+                    console.error('Failed to load search index:', error);
+                }
+            };
+
+            /**
+             * Performs search and updates results dropdown.
+             */
+            const performSearch = (query) => {
+                if (!query || query.length < 2) {
+                    searchResults.style.display = 'none';
+                    searchResults.innerHTML = '';
+                    return;
+                }
+
+                const normalizedQuery = query.toLowerCase().trim();
+                const currentLang = window.APP_CONFIG.lang;
+                const filteredResults = allArticles.filter(article => {
+                    if (article.lang && article.lang !== currentLang) return false;
+                    return (article.title && article.title.toLowerCase().includes(normalizedQuery)) ||
+                           (article.summary && article.summary.toLowerCase().includes(normalizedQuery)) ||
+                           (article.tags && article.tags.some(tag => tag.toLowerCase().includes(normalizedQuery)));
+                }).slice(0, 8);
+
+                renderSearchResults(filteredResults);
+            };
+
+            /**
+             * Renders results into the dropdown.
+             */
+            const renderSearchResults = (results) => {
+                searchResults.innerHTML = '';
+                if (results.length === 0) {
+                    searchResults.innerHTML = `<div class="search-no-results">${window.APP_CONFIG.searchNoResultsText}</div>`;
+                } else {
+                    const depth = parseInt('{{depth}}' || '1');
+                    const prefix = "../".repeat(depth - 1);
+                    const assetPrefix = "../".repeat(depth);
+                    results.forEach(article => {
+                        const item = document.createElement('a');
+                        item.href = prefix + article.path;
+                        item.className = 'search-result-item';
+
+                        let imageHtml = '';
+                        if (article.image_paths) {
+                            imageHtml = `<img src="${assetPrefix}${article.image_paths.thumb_jpeg}" alt="">`;
+                        }
+
+                        item.innerHTML = `
+                            ${imageHtml}
+                            <div class="search-result-info">
+                                <div class="search-result-title">${article.title}</div>
+                                <div class="search-result-summary">${article.summary}</div>
+                            </div>
+                        `;
+                        searchResults.appendChild(item);
+                    });
+                }
+                searchResults.style.display = 'block';
+            };
+
 
             /**
              * Renders a page of articles to the grid.
@@ -235,83 +308,10 @@
             };
 
             /**
-             * Loads the articles JSON index for search if not already loaded.
-             */
-            const ensureSearchIndexLoaded = async () => {
-                if (searchIndexLoaded) return;
-                try {
-                    const depth = parseInt('{{depth}}' || '1');
-                    const prefix = "../".repeat(depth - 1);
-                    const response = await fetch(`${prefix}articles.json`);
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    allArticles = await response.json();
-                    searchIndexLoaded = true;
-                } catch (error) {
-                    console.error('Failed to load search index:', error);
-                }
-            };
-
-            /**
-             * Performs search and updates results dropdown.
-             */
-            const performSearch = (query) => {
-                if (!query || query.length < 2) {
-                    searchResults.style.display = 'none';
-                    searchResults.innerHTML = '';
-                    return;
-                }
-
-                const normalizedQuery = query.toLowerCase().trim();
-                const currentLang = window.APP_CONFIG.lang;
-                const filteredResults = allArticles.filter(article => {
-                    // Filter by language first
-                    if (article.lang && article.lang !== currentLang) return false;
-
-                    return (article.title && article.title.toLowerCase().includes(normalizedQuery)) ||
-                           (article.summary && article.summary.toLowerCase().includes(normalizedQuery)) ||
-                           (article.tags && article.tags.some(tag => tag.toLowerCase().includes(normalizedQuery)));
-                }).slice(0, 8); // Limit to top 8 results
-
-                renderSearchResults(filteredResults);
-            };
-
-            /**
-             * Renders results into the dropdown.
-             */
-            const renderSearchResults = (results) => {
-                searchResults.innerHTML = '';
-                if (results.length === 0) {
-                    searchResults.innerHTML = `<div class="search-no-results">${window.APP_CONFIG.searchNoResultsText}</div>`;
-                } else {
-                    const depth = parseInt('{{depth}}' || '1');
-                    const prefix = "../".repeat(depth - 1);
-                    results.forEach(article => {
-                        const item = document.createElement('a');
-                        item.href = prefix + article.path;
-                        item.className = 'search-result-item';
-
-                        let imageHtml = '';
-                        if (article.image_paths) {
-                            imageHtml = `<img src="${prefix}${article.image_paths.thumb_jpeg}" alt="">`;
-                        }
-
-                        item.innerHTML = `
-                            ${imageHtml}
-                            <div class="search-result-info">
-                                <div class="search-result-title">${article.title}</div>
-                                <div class="search-result-summary">${article.summary}</div>
-                            </div>
-                        `;
-                        searchResults.appendChild(item);
-                    });
-                }
-                searchResults.style.display = 'block';
-            };
-
-            /**
              * Initializes the entire application.
              */
             const initialize = async () => {
+
                 // Search UI Handlers
                 if (searchToggle) {
                     searchToggle.addEventListener('click', async () => {
@@ -372,22 +372,19 @@
                     applyFilter(decodeURIComponent(tag));
                 });
 
-                // Fetch data and perform initial render if on homepage
-                if (grid) {
-                    try {
-                        const response = await fetch('articles.json');
-                        if (!response.ok) throw new Error('Network response was not ok');
-                        allArticles = await response.json();
-                        searchIndexLoaded = true;
+                // Fetch data and perform initial render
+                try {
+                    const response = await fetch('articles.json');
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    allArticles = await response.json();
 
-                        // Trigger initial filter based on current URL hash
-                        const initialTag = window.location.hash.substring(1) || 'all';
-                        applyFilter(decodeURIComponent(initialTag));
+                    // Trigger initial filter based on current URL hash
+                    const initialTag = window.location.hash.substring(1) || 'all';
+                    applyFilter(decodeURIComponent(initialTag));
 
-                    } catch (error) {
-                        console.error('Failed to load articles:', error);
-                        if (grid) grid.innerHTML = '<p>Error loading articles. Please try again later.</p>';
-                    }
+                } catch (error) {
+                    console.error('Failed to load articles:', error);
+                    if (grid) grid.innerHTML = '<p>Error loading articles. Please try again later.</p>';
                 }
             };
 

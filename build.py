@@ -336,7 +336,7 @@ TRANSLATIONS = {
         "placeholder": {
             "it": "Cerca articoli...",
             "en": "Search articles...",
-            "es": "Buscar articoli...",
+            "es": "Buscar artículos...",
             "fr": "Rechercher des articles...",
             "de": "Artikel suchen..."
         },
@@ -350,8 +350,8 @@ TRANSLATIONS = {
         "no_results": {
             "it": "Nessun risultato trovato",
             "en": "No results found",
-            "es": "No se han trovato risultati",
-            "fr": "Aucun risultato trovato",
+            "es": "No se han encontrado resultados",
+            "fr": "Aucun résultat trouvé",
             "de": "Keine Ergebnisse gefunden"
         }
     },

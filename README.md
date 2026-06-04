@@ -1,101 +1,101 @@
-# AITalk: Static Site Engine & Content Repository
+# AITalk: Motore per Sito Statico e Repository dei Contenuti
 
-[![Deployment Status](https://img.shields.io/github/actions/workflow/status/darioferrero/aitalk/deploy.yml?branch=main&label=Deploy)](https://github.com/darioferrero/aitalk/actions)
-[![Technology](https://img.shields.io/badge/Engine-Python%20SSG-blue.svg)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/Platform-Netlify-00ad9f.svg)](https://www.netlify.com/)
+[![Stato Deployment](https://img.shields.io/github/actions/workflow/status/darioferrero/aitalk/deploy.yml?branch=main&label=Deploy)](https://github.com/darioferrero/aitalk/actions)
+[![Tecnologia](https://img.shields.io/badge/Motore-Python%20SSG-blue.svg)](https://www.python.org/)
+[![Piattaforma](https://img.shields.io/badge/Piattaforma-Netlify-00ad9f.svg)](https://www.netlify.com/)
 
-AITalk is a professional, high-performance static site generator (SSG) specifically engineered for multi-language news portals focused on Artificial Intelligence. This repository contains the complete source code, automation scripts, and Markdown-based content database.
-
----
-
-## 🚀 Key Features
-
-### ⚡ Performance & Architecture
-- **Pure Python SSG**: Customized build engine (`build.py`) designed for maximum speed and minimal overhead.
-- **Atomic Incremental Builds**: Intelligent change detection using SHA-1 hashing ensures only modified content is re-processed.
-- **Parallel Processing**: Utilizes `ProcessPoolExecutor` for high-speed HTML generation across multiple CPU cores.
-
-### 🌐 Multilingual Excellence
-- **Native Support**: Full localized experiences for **Italian**, **English**, **Spanish**, **French**, and **German**.
-- **Live Search**: Integrated high-speed, client-side search engine with language-aware filtering and dynamic path resolution.
-- **SEO Optimized**: Language-specific RSS feeds, automated robots.txt generation, and proper OpenGraph/Twitter metadata for every page.
-
-### 🎙️ Multimedia & Engagement
-- **Podcast Integration**: Automated detection and integration of language-specific audio (`.mp3`) with a native HTML5 player.
-- **YouTube Embedding**: Seamless support for video content within articles.
-- **E-Book Engine**: Specialized scripts to compile Markdown articles into professionally formatted PDF/EPUB e-books.
-- **Newsletter Automation**: Serverless newsletter subscription system via Netlify Forms.
-
-### 📊 Analytics & Insights
-- **Privacy-First Tracking**: Lightweight, cookie-less page view tracking via Netlify Functions and Netlify Blobs.
-- **Performance Dashboards**: Real-time statistics monitoring without third-party trackers.
+AITalk è un generatore di siti statici (SSG) professionale ad alte prestazioni, specificamente progettato per portali di notizie multilingua focalizzati sull'Intelligenza Artificiale. Questa repository contiene il codice sorgente completo, gli script di automazione e il database dei contenuti in formato Markdown.
 
 ---
 
-## 📂 Project Structure
+## 🚀 Funzionalità Principali
+
+### ⚡ Prestazioni e Architettura
+- **SSG in Pure Python**: Motore di build personalizzato (`build.py`) progettato per la massima velocità e il minimo sovraccarico.
+- **Build Incrementali Atomiche**: Il rilevamento intelligente dei cambiamenti tramite hashing SHA-1 garantisce che solo i contenuti modificati vengano rielaborati.
+- **Elaborazione Parallela**: Utilizza `ProcessPoolExecutor` per la generazione ultra-veloce delle pagine HTML su più core della CPU.
+
+### 🌐 Eccellenza Multilingua
+- **Supporto Nativo**: Esperienza completamente localizzata per **Italiano**, **Inglese**, **Spagnolo**, **Francese** e **Tedesco**.
+- **Ricerca Live**: Motore di ricerca integrato lato client ad alta velocità, con filtraggio per lingua e risoluzione dinamica dei percorsi.
+- **Ottimizzazione SEO**: Feed RSS specifici per lingua, generazione automatica di robots.txt e metadati OpenGraph/Twitter corretti per ogni pagina.
+
+### 🎙️ Multimedia e Engagement
+- **Integrazione Podcast**: Rilevamento e integrazione automatica di file audio (`.mp3`) specifici per lingua con player HTML5 nativo.
+- **Embed YouTube**: Supporto integrato per i contenuti video all'interno degli articoli.
+- **Motore E-Book**: Script specializzati per compilare gli articoli Markdown in e-book professionali nei formati PDF/EPUB.
+- **Automazione Newsletter**: Sistema di iscrizione alla newsletter serverless tramite Netlify Forms.
+
+### 📊 Analisi e Insight
+- **Tracciamento Privacy-First**: Monitoraggio leggero delle visualizzazioni di pagina senza cookie, tramite Netlify Functions e Netlify Blobs.
+- **Dashboard Prestazioni**: Monitoraggio delle statistiche in tempo reale senza tracker di terze parti.
+
+---
+
+## 📂 Struttura del Progetto
 
 ```text
-├── articoli/           # Primary content database (Markdown + Media)
-├── content/            # Auxiliary data (Author biographies, profiles)
-├── ebook/              # E-book generation suite (Python + CSS)
-├── netlify/            # Serverless functions (Stats, Analytics)
-├── pages/              # Static informational pages (Legal, Cookies, Method)
-├── templates/          # HTML blueprints (Base, Article, Author, 404)
-├── public/             # Static assets (Flags, icons, logos)
-├── build.py            # Core SSG Engine
-├── build.sh            # Global build automation
-└── style.css           # Global design system
+├── articoli/           # Database principale (Markdown + Media)
+├── content/            # Dati ausiliari (Biografie e profili autori)
+├── ebook/              # Suite per la generazione di E-book
+├── netlify/            # Funzioni serverless (Statistiche, Analytics)
+├── pages/              # Pagine informative statiche (Legali, Cookie, Metodo)
+├── templates/          # Template HTML (Base, Articolo, Autore, 404)
+├── public/             # Asset statici (Bandiere, icone, loghi)
+├── build.py            # Motore SSG principale
+├── build.sh            # Automazione globale della build
+└── style.css           # Sistema di design globale
 ```
 
 ---
 
-## 🛠️ Development Workflow
+## 🛠️ Flusso di Lavoro per lo Sviluppo
 
-### Prerequisites
+### Prerequisiti
 - **Python 3.10+**
 - **pip** (Python Package Manager)
 
-### Local Environment Setup
-1. Clone the repository.
-2. Install dependencies:
+### Configurazione Locale
+1. Clona la repository.
+2. Installa le dipendenze:
    ```bash
    pip install -r requirements.txt
    ```
 
-### Build System
-- **Full Build (All Languages)**:
+### Sistema di Build
+- **Build Completa (Tutte le lingue)**:
   ```bash
   ./build.sh
   ```
-- **Targeted Build**:
+- **Build Mirata**:
   ```bash
   python build.py --lang [it|en|es|fr|de]
   ```
 
-### Local Preview
-Launch a local development server to inspect the generated site in `dist/`:
+### Anteprima Locale
+Avvia un server web locale per ispezionare il sito generato nella cartella `dist/`:
 ```bash
 cd dist
 python -m http.server 8000
 ```
-Access the portal at: `http://localhost:8000`
+Accedi al portale all'indirizzo: `http://localhost:8000`
 
 ---
 
-## 📝 Content Management
+## 📝 Gestione dei Contenuti
 
-### Articles
-Every article resides in its own directory within `articoli/`, identified by a numeric prefix for chronological sorting (e.g., `105-slug/`).
-- **Translations**: Suffix files with language codes (e.g., `article_en.md`).
-- **Media**: Place images and audio files directly in the article folder. The engine handles optimization and format conversion (WebP/JPEG) automatically.
+### Articoli
+Ogni articolo risiede nella propria directory all'interno di `articoli/`, identificato da un prefisso numerico per l'ordinamento cronologico (es. `105-slug/`).
+- **Traduzioni**: Aggiungi il suffisso del codice lingua ai file (es. `articolo_en.md`).
+- **Media**: Inserisci immagini e file audio direttamente nella cartella dell'articolo. Il motore gestisce automaticamente l'ottimizzazione e la conversione dei formati (WebP/JPEG).
 
-### Authors
-Manage author profiles in `content/authors/`. Biographical data supports full Markdown formatting.
-
----
-
-## ☁️ Deployment & CI/CD
-The portal is continuously deployed via **GitHub Actions**. Every push to the main branch triggers an automated build and deployment to **Netlify**. The workflow utilizes advanced caching strategies to ensure rapid deployment times.
+### Autori
+Gestisci i profili degli autori in `content/authors/`. I dati biografici supportano la formattazione completa in Markdown.
 
 ---
-© 2025 AITalk - Curated by **Dario Ferrero**
+
+## ☁️ Deployment e CI/CD
+Il portale viene distribuito automaticamente tramite **GitHub Actions**. Ogni push sul ramo main avvia una build automatica e il deployment su **Netlify**. Il workflow utilizza strategie di caching avanzate per garantire tempi di distribuzione rapidi.
+
+---
+© 2025 AITalk - A cura di **Dario Ferrero**

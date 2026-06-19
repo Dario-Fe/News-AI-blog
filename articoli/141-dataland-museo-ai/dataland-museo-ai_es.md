@@ -1,0 +1,68 @@
+---
+tags: ["Ethics & Society", "Generative AI", "Copyright"]
+date: 2026-06-19
+author: "Dario Ferrero"
+---
+
+# Dataland, el primer museo de obras de AI
+![dataland-museo-ai.jpg](dataland-museo-ai.jpg)
+
+*¿Os estáis preguntando si la imagen de portada está extraída del catálogo oficial de presentación del museo? La respuesta es no. Ha sido generada con una AI gratuita, en pocos segundos, desde cero. Tenedlo en cuenta mientras leéis. El 20 de junio Los Ángeles inaugura el primer espacio museístico del mundo dedicado íntegramente al arte generativo. Entre datasets éticos, selvas amazónicas reconstruidas en píxeles y una pregunta que nadie logra aún cerrar: ¿todo esto es arte? Hay una crítica que circula desde hace meses en los estudios de los artistas digitales y en los hilos más ruidosos de internet, y que se podría condensar así: "Estáis construyendo un museo sobre instrucciones que la gente da a la AI y lo estáis llamando arte." Es una frase punzante. Y el 20 de junio de 2026 encontrará su respuesta más concreta, o quizás su provocación más costosa, en la apertura de [Dataland](https://dataland.art/about), el primer museo mundial íntegramente dedicado al arte generativo por inteligencia artificial.*
+
+La sede es aquella que, en términos de simbolismo arquitectónico, no podría estar más cargada: The Grand LA, el complejo diseñado por Frank Gehry en el corazón del Grand Avenue Cultural District de Los Ángeles, a pocos pasos del Walt Disney Concert Hall, del Broad Museum y del MOCA. Un barrio donde cada edificio ya es un manifiesto estético incluso antes de abrir las puertas. Dataland, cofundado por el artista turco-estadounidense Refik Anadol y por su socia y compañera Efsun Erkılıç, ocupa unos 25.000 metros cuadrados, casi un tercio de los cuales, detalle no secundario, está destinado al hardware necesario para hacer funcionar todo el conjunto.
+
+La muestra inaugural se llama *Machine Dreams: Rainforest* y funciona así: un modelo de inteligencia artificial entrenado con datos ecológicos recogidos en dieciséis selvas tropicales del planeta genera, en tiempo real, visiones de naturaleza que no existen, sonidos de especies que quizás ya no existen, perfumes sintetizados por un algoritmo. La Infinity Room, una de las cinco galerías, ha sido descrita como el lugar donde se pueden escuchar grabaciones de 1987 de un pájaro hawaiano ahora extinguido mientras se respira un olor a selva que ninguna nariz humana ha olido jamás en esa precisa combinación. Como en ciertos capítulos de *Aniquilación* de Jeff VanderMeer, esa sensación de estar dentro de un ecosistema que responde a reglas propias, no del todo hostil, no del todo comprensible.
+
+## El hombre que pinta con datos
+
+Refik Anadol, nacido en Estambul en 1985 y trasladado a Los Ángeles en 2012 para estudiar diseño de medios en la UCLA, no ha llegado a este punto por casualidad. Ha construido una carrera en torno a una idea precisa: los datos no son solo información, son material plástico, capaz de convertirse en forma, color, movimiento. Lo que él llama *data painting* es un enfoque en el que archivos digitales enormes, colecciones museísticas, registros climáticos, memorias urbanas, son procesados por sistemas de machine learning para producir instalaciones visuales a escala arquitectónica.
+
+El momento de la consagración institucional llegó en 2022, cuando el MoMA de Nueva York acogió *Unsupervised*, una instalación en el vestíbulo del museo que reelaboraba doscientos años de colección en flujos generativos continuos. Era la primera vez que el templo del arte moderno neoyorquino abrazaba tan explícitamente un trabajo construido íntegramente en torno a la inteligencia artificial. En 2025, *TIME* lo incluyó en los 100 AI Impact Awards. Sus instalaciones han recorrido setenta ciudades, desde la Serpentine Gallery de Londres hasta la Sphere de Las Vegas, pasando por el Guggenheim de Bilbao.
+
+Con Dataland, Anadol y Erkılıç no están abriendo otra exposición temporal. Están declarando que el arte de AI merece un hogar permanente, una institución que lo trate no como experimento de laboratorio o curiosidad de feria tecnológica, sino como un medio con el mismo estatus que la escultura o la fotografía. "Dataland no es solo un espacio para mostrar arte terminado," declaró Anadol. "Es una institución viva dedicada a la investigación, a la educación y a la experimentación ética."
+
+## La máquina perfecta (o casi)
+
+El proyecto tiene una arquitectura ética declarada con un cuidado que, a ratos, recuerda a las especificaciones técnicas de un producto de Silicon Valley más que al comunicado de prensa de un museo. El motor de todo es el Large Nature Model (LNM), descrito como el primer modelo de inteligencia artificial open-source entrenado exclusivamente con datos naturales. Los datasets provienen de colaboraciones con el Smithsonian, el Cornell Lab of Ornithology y el Natural History Museum de Londres, recogidos, se precisa, con protocolos éticos verificables. Nada de scraping salvaje de internet, nada de datos sustraídos sin consentimiento.
+
+En el frente energético, [Artnet informa](https://news.artnet.com/art-world/dataland-refik-anadol-opening-date-2767486) que el Large Nature Model corre sobre una infraestructura cloud alimentada al 87% por fuentes libres de carbono, en Oregón, y que el impacto energético de una visita al museo equivale a cargar un smartphone. Un dato comunicativo brillante, del tipo que sirve para desarmar de antemano las objeciones de quienes, legítimamente, recuerdan que entrenar un gran modelo lingüístico consume cuántos cientos de vuelos transcontinentales.
+
+La estructura societaria comienza como entidad comercial, con una posible transición futura hacia el non-profit. Las membresías parten de los 350 dólares al año. El complejo en el que está inserto alberga también apartamentos de lujo y un hotel de cinco estrellas. Todo esto es conocido, todo esto es público. Y es precisamente aquí donde comienza la parte interesante del análisis.
+
+## "Lo estáis llamando arte"
+
+Thomas Brummett es un artista digital con obras en las colecciones del Museum of Fine Arts de Houston, del Philadelphia Museum of Art y del Museu de Arte Moderna de Río de Janeiro. Cuando Dataland anunció su apertura, escribió en Instagram, según informa [NPR](https://www.npr.org/2026/04/25/nx-s1-5799511/dataland-refik-anadol-los-angeles-ai-art-museum): "Construimos un museo basado en instrucciones dadas a la AI y lo llamamos arte. No lo es y no lo será nunca. En el mejor de los casos, es entretenimiento de segunda clase."
+
+Brummett no es un ludista. Utiliza técnicas digitales en su trabajo. Pero su objeción toca un nervio antiguo: la cuestión de la autoría. ¿Qué hace, exactamente, el artista en un proceso generativo? Selecciona un dataset, configura unos parámetros, elige qué mostrar y qué descartar. Es curador, programador, director, ¿pero es autor en el sentido en que Rembrandt era autor de un lienzo, o Coltrane lo era de un solo? La pregunta no tiene respuesta consensuada, y probablemente sea así como deba ser.
+
+Ya hemos encontrado esta tensión en estas páginas, hablando de [música generada por la AI](https://aitalk.it/it/AI-Musica-Copyright.html) con el caso The Velvet Sundown, y de [Tilly Norwood](https://aitalk.it/it/tilly-norwood-ai-actor.html), la primera actriz completamente sintética en interesar a las agencias de Hollywood. En todos estos casos, el punto de fricción es el mismo: cuando la máquina hace el trabajo "visible", la melodía, el rostro, la imagen, ¿dónde se encuentra la intención humana que transforma técnica en expresión?
+
+La comparación histórica que se evoca en estos debates es siempre la fotografía, despachada durante décadas como "mecánica" y, por tanto, no-arte, antes de que Cartier-Bresson y Diane Arbus demostraran que el medio es irrelevante respecto a la intención. Pero hay una diferencia estructural: el fotógrafo elige el momento, la luz, la composición, cada disparo es irrepetible. Una obra generativa es, por definición, replicable, mutable, evolutiva. ¿Quién posee la versión "auténtica" de *Machine Dreams: Rainforest* que corre el 20 de junio de 2026 a las 15:00? ¿Y la de las 15:01?
+
+## La tensión que la entrada no cubre
+
+Hay otra grieta en la arquitectura ética de Dataland, más sutil pero no menos relevante. [El debate sobre la autoría en la AI creativa](https://aitalk.it/it/ai-creativity-ethics.html) que exploramos anteriormente planteaba una pregunta precisa: ¿quién se beneficia, y quién paga el precio, cuando un sistema automatizado ocupa un espacio que antes pertenecía al trabajo humano?
+
+Dataland nace como entidad for-profit dentro de un complejo inmobiliario de lujo. La membresía anual de 350 dólares ya define un perfil de visitante. Mientras tanto, cientos de artistas que trabajan con la AI, sin el pedigrí de Anadol, sin la colaboración con el Smithsonian, sin la capacidad de construir un Large Nature Model propietario, continúan operando en un mercado donde, según un estudio de Artsy, solo el 9% de las galerías mundiales considera el arte de AI un medio plenamente legítimo. Dataland podría mover este número. Pero también podría cristalizar una jerarquía: el arte de AI "certificado" de quien puede permitirse la operación institucional, y todo lo demás.
+
+La promesa de transparencia sobre los datos es real y verificable, al menos en parte, el Large Nature Model es open-source, los datasets están documentados. Pero la pregunta sobre quién verifica permanece abierta. Los socios institucionales (Smithsonian, Cornell, Natural History Museum) aportan credibilidad, no capacidad de auditoría continua. Y la propiedad intelectual de una obra que evoluciona en tiempo real, generando configuraciones siempre nuevas, es un territorio jurídico sobre el cual el derecho de autor global no tiene aún coordenadas estables. Como vimos analizando [la creatividad en la era de la AI generativa](https://aitalk.it/it/AI-Creazione-Contenuti.html), la distancia entre lo que la tecnología hace posible y lo que el marco normativo logra gobernar continúa ensanchándose.
+
+## La AI que no entra por la puerta
+
+Aquí se llega al problema más interesante, el que ninguna membresía de 350 dólares logra comprar: la brecha entre la AI que Dataland muestra y la AI que actúa en el mundo.
+
+Dentro del museo habrá una AI decorosa. Datos éticos, selvas amazónicas elaboradas con cuidado, perfumes sintéticos no invasivos, todo cuidado, todo bellísimo, todo "con curaduría certificada", para usar una fórmula que circula en la crítica de arte digital. Una AI que tranquiliza, que muestra cómo la tecnología puede ser bella y controlada e incluso conmovedora en su intento de recrear la voz de un pájaro extinguido.
+
+Fuera de la puerta, en la misma semana de junio de 2026 en que abre Dataland, existe otra AI. Aquella que el Foro Económico Mundial ha definido como protagonista del "primer ciclo electoral en el que los deepfakes superan el umbral más allá del cual ya no se distinguen de lo real." Aquella que genera vídeos de personajes públicos muertos, con las consecuencias que Zelda Williams ha descrito públicamente a propósito de su padre Robin, difundidos en plataformas que tienen dificultades para seguir el ritmo de la velocidad de producción. Aquella que se usa en los tribunales, en las campañas electorales, en la desinformación sanitaria.
+
+Esta AI no entrará en Dataland. No porque alguien se lo impida deliberadamente, sino porque un museo por su naturaleza selecciona, encuadra, valoriza, y lo que valoriza inevitablemente define por contraste lo que excluye. El problema no es que Dataland muestre cosas bellas. El problema es que "bello" e "ético" y "sostenibile" corren el riesgo de convertirse en una coartada para no ocuparse de la misma tecnología en sus manifestaciones menos presentables.
+
+Barry Threw, director artístico de la Gray Area Foundation de San Francisco, institución que trabaja desde hace años en la intersección entre arte y tecnología sin el lujoso marco de un complejo Gehry, dijo a NPR que Dataland es interesante porque convierte "datos complejos en experiencia." Es un resumen honesto. Pero también hace compleja la pregunta sobre qué queda fuera de la experiencia.
+
+## Lo que queda abierto
+
+Un museo es siempre un argumento, incluso antes de ser un edificio. Dataland argumenta que el arte de AI ha alcanzado la madurez institucional, que puede estar al lado del Broad y del MOCA sin sentirse un pariente pobre de la contemporaneidad, que la tecnología generativa puede estar éticamente fundada, ecológicamente ser responsable y culturalmente relevante.
+
+Es un argumento sólido, construido con cuidado y recursos considerables. Pero los argumentos sólidos merecen preguntas sólidas. ¿El arte de AI "certificado" por Dataland ayudará u oscurecerá el debate sobre el no certificado? ¿Es un modelo open-source realmente transparente cuando la competencia necesaria para verificarlo es accesible para pocos? ¿El hecho de que una visita consuma la energía de una recarga telefónica cambia algo sobre la cuestión más amplia del coste computacional de la AI a escala global? Y sobre todo: un museo que nace for-profit en un complejo de lujo, y que plantea su misión educativa como objetivo futuro, ¿está construyendo cultura o está construyendo un mercado?
+
+Refik Anadol ha dicho que Dataland será "una institución viva." Las instituciones vivas cambian, se adaptan, a veces traicionan las premisas iniciales y a veces las superan. El 20 de junio es un inicio, no una respuesta. Y quizás sea exactamente este el punto: los mejores museos no resuelven las preguntas. Las hacen imposibles de ignorar.

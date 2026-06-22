@@ -51,6 +51,8 @@ Ho creato un repository su GitHub, caricato i file, collegato il repository al m
 A quel punto ho fatto una cosa che consiglio sempre quando si lavora con codice generato dall'AI: un controllo incrociato con un altro strumento. Ho collegato Jules, l'agente AI asincrono di Google integrato direttamente in GitHub, e gli ho chiesto un'analisi del codice. Jules non ha segnalato problemi rilevanti, il che non è una garanzia assoluta ma è comunque un secondo paio di occhi computazionali sul lavoro fatto.
 
 Con Jules ho poi apportato alcune integrazioni che rendessero l'app più simile a un'applicazione nativa. È stato aggiunto un file manifest JSON che consente l'installazione sul telefono direttamente dal browser, senza passare dagli store, un'icona personalizzata, e una pagina dedicata alle informazioni utili, con spiegazione del funzionamento, della provenienza dei dati, dei limiti del sistema e delle istruzioni per l'installazione su Android e iPhone. Quella pagina, come vedremo, si è rivelata più importante del previsto.
+
+
 ![benzup-screenshot.jpg](benzup-screenshot.jpg)
 [Screenshot di BenzUp](https://benzup.netlify.app)
 

@@ -1,0 +1,69 @@
+---
+tags: ["Ethics & Society", "Generative AI", "Business"]
+date: 2026-07-08
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/56KAa9xIy-c?si=vM4rJkttPYoxnzd2"
+---
+
+# GLM-5.2: l'open-weight cinese che chiude il gap, almeno nel coding
+![glm5.2.jpg](glm5.2.jpg)
+
+*Quando Z.ai, il laboratorio che in Cina tutti conoscono ancora come Zhipu AI, ha rilasciato [GLM-5](https://aitalk.it/it/glm-5.html) lo scorso febbraio, il messaggio era già chiaro: la serie GLM non puntava a essere semplicemente competitiva, puntava a essere rilevante per chi fa software. Quel modello da 744 miliardi di parametri con architettura Mixture-of-Experts aveva messo sul tavolo prestazioni che non sfiguravano accanto ai grandi proprietari, con la differenza tutt'altro che secondaria dei pesi aperti sotto licenza MIT. Poco più di quattro mesi dopo, il 13 giugno 2026, Z.ai ha alzato nuovamente la posta: GLM-5.2 è arrivato prima sui tier del GLM Coding Plan, i piani di abbonamento dedicati agli sviluppatori, e poi, il 16 giugno, su API pubblica e su [Hugging Face](https://huggingface.co/zai-org/GLM-5.2) con i pesi liberamente scaricabili.*
+
+Il salto da 5.1 a 5.2 potrebbe sembrare un aggiornamento incrementale, il tipo di rilascio che le aziende usano per restare visibili tra un ciclo e l'altro. Non lo è. GLM-5.2 porta con sé un contesto da un milione di token che, per la prima volta nella serie, Z.ai dichiara "solido", una parola scelta con cura, in contrasto con la tendenza del settore a pubblicizzare finestre enormi che nella pratica si degradano già oltre le centomila posizioni. E porta con sé una serie di risultati sui benchmark di coding a lungo orizzonte che meritano di essere letti con attenzione, senza enfasi ma senza minimizzare.
+
+## Architettura: 753 miliardi con cervello sparso
+
+GLM-5.2 è un modello MoE da 753 miliardi di parametri totali con circa 40 miliardi attivi per token. Significa che a ogni inferenza il modello "accende" solo una frazione specializzata della sua rete neurale, un po' come un'orchestra in cui suonano insieme solo i musicisti che servono per quel brano, non tutti i centotrenta. Questo consente di avere la capacità espressiva di un modello enorme con costi computazionali molto più contenuti rispetto a un'architettura densa equivalente.
+
+La novità architetturale principale rispetto a GLM-5.1 è una tecnica che Z.ai chiama IndexShare nella propria documentazione, descritta nel paper come [IndexCache](https://arxiv.org/abs/2603.12201). Nelle architetture con attenzione sparsa, quelle che permettono al modello di "guardare" selettivamente porzioni del contesto anziché tutto quanto, il componente che decide dove guardare si chiama indexer. In GLM-5.2, ogni quattro layer di attenzione sparsa condividono lo stesso indexer invece di calcolarne uno separato. Il risultato è una riduzione dei calcoli per token di 2,9 volte a contesto di un milione di token: un risparmio computazionale che rende davvero utilizzabile, non solo pubblicizzabile, quella finestra enorme.
+
+L'altro miglioramento è sul layer MTP, il meccanismo di decodifica speculativa che permette di generare più token in anticipo e poi verificarli. Combinando IndexShare con un sistema di KV-cache condivisa e un training con TV loss end-to-end, Z.ai ha aumentato il tasso di accettazione dei token speculativi del 20%. In pratica: risposte più veloci a parità di qualità, un dettaglio rilevante per chi usa il modello in pipeline agentiche dove la latenza si moltiplica per centinaia di chiamate.
+
+Il contesto da un milione di token non è solo una cifra per i comunicati stampa. Z.ai ha condotto mesi di training specializzato su scenari da coding-agent: implementazioni su larga scala, ricerca automatizzata, ottimizzazione di performance, debugging complesso. L'obiettivo dichiarato era che il modello non si limitasse ad accettare più token in input, ma mantenesse qualità e coerenza lungo tutta la traiettoria, il che è tutt'altra cosa. La documentazione tecnica parla esplicitamente di "engineering judgments formed earlier" che il modello deve saper "carry forward into subsequent execution": capire architetture, ricordare vincoli API, rispettare convenzioni di codice stabilite venti schermate prima.
+
+## I benchmark: dove batte, dove insegue
+
+Il modo più onesto di leggere i numeri di GLM-5.2 è separarli per categoria, perché il modello non è uniformemente forte su tutto, ed è proprio questa selettività che lo rende interessante come segnale di tendenza più che come oggetto di hype.
+
+Sul coding standard, GLM-5.2 è il modello open-weight più forte disponibile. Su [Terminal-Bench 2.1](https://terminal-bench.com) ottiene 81.0 contro il 63.5 di GLM-5.1, un salto di quasi 18 punti che non si spiega con aggiustamenti marginali. Su SWE-bench Pro segna 62.1 contro 58.4 del predecessore, superando Qwen3.7-Max (60.6), MiniMax M3 (59) e DeepSeek-V4-Pro (55.4). Claude Opus 4.8 resta davanti con 69.2, GPT-5.5 si ferma a 58.6.
+
+Dove GLM-5.2 fa la cosa più sorprendente è sui benchmark a lungo orizzonte, quelli che misurano la capacità di completare progetti ingegneristici complessi, non singole funzioni. Su [FrontierSWE](https://www.frontierswe.com), che misura la capacità di portare avanti progetti tecnici della durata di ore o decine di ore, GLM-5.2 segna 74.4 contro il 30.5 della versione precedente: più che raddoppiato. Dista solo un punto percentuale da Claude Opus 4.8 (75.1) e supera GPT-5.5 (72.6) di quasi due punti. Su [PostTrainBench](https://posttrainbench.com), dove a ogni agente viene assegnata una GPU H100 per migliorare modelli più piccoli tramite post-training, GLM-5.2 segna 34.3 battendo sia GPT-5.5 (28.4) che Claude Opus 4.7, secondo solo a Opus 4.8 (37.2). Su [SWE-Marathon](https://swe-marathon.vercel.app), il banco di prova più brutale, con task come costruire compilatori e sviluppare servizi production-grade, il modello sale a 13.0 dal precedente 1.0, ma qui il distacco da Claude Opus 4.8 (26.0) è ancora netto.
+
+Sul ragionamento generale il quadro è più mosso. Su HLE (Humanity's Last Exam) GLM-5.2 ottiene 40.5, in linea con GPT-5.5 (41.4) ma distante da Claude Opus 4.8 (49.8) e Gemini 3.1 Pro (45). Su AIME 2026 segna 99.2, terzo assoluto nella tabella. Il profilo complessivo è quello di un modello ottimizzato con precisione per i carichi di lavoro ingegneristici, non di un generalista tuttofare.
+
+Un dettaglio importante riguarda il controllo del "livello di sforzo": GLM-5.2 espone due preset, High e Max, che permettono di bilanciare prestazioni e latenza. Con impostazione Max il modello consuma più token, e il dato di Artificial Analysis è illuminante: nella valutazione dell'Intelligence Index ha generato 140 milioni di token contro una media di 110 milioni. Più verboso del necessario, quindi, e questo si traduce in costi più alti per sessione. Non è un difetto nascosto, è una caratteristica da conoscere prima di costruire pipeline di produzione.
+![bench.jpg](bench.jpg)
+[Immagine tratta dal repository github.com](https://github.com/zai-org/GLM-5)
+
+## Test sul campo: venti minuti di Giro d'Italia
+
+Vale la pena raccontare un test diretto, con tutti i suoi limiti dichiarati in partenza. Ho usato la versione gratuita del chatbot su [chat.z.ai](https://chat.z.ai), che non espone le performance massime del modello, usa un contesto ridotto e non ha accesso agli effort level, con una richiesta volutamente scarna: costruire una web app che, prendendo dati storici dal Giro d'Italia, visualizzasse con una semplice animazione grafica i distacchi tra corridori scelti dall'utente in una edizione specificata dall'utente.
+
+In circa venti minuti il modello ha prodotto un progetto completo: Next.js 16 con App Router, TypeScript, Tailwind CSS, componenti SVG animati per i ciclisti, architettura con route handler, dataset di 37 edizioni storiche, animazione proporzionale dei distacchi, controlli di velocità e amplificazione del gap. Una specifica tecnica articolata su più livelli, con scelte architetturali coerenti e codice funzionante. Il livello di organizzazione e ragionamento strutturale era genuinamente impressionante.
+
+Il limite si è manifestato sui dati: molti tempi di corridori e alcune classifiche storiche contenevano errori, richiedendo richieste di correzione. Non è una sorpresa, si tratta di informazioni fattuali specifiche su cui i modelli allucinano con regolarità, e la versione gratuita sicuramente non offre la massima performance del modello. Tuttavia, i test condotti da noti divulgatori con piani a pagamento e accesso completo restituiscono risultati di coding nettamente superiori, confermando che il tier gratuito è un punto d'ingresso, non una rappresentazione fedele delle capacità del modello.
+![immagine1.jpg](immagine1.jpg)
+*Screenshot dell'applicazione sviluppata con GLM 5.2*
+
+## Il prezzo che cambia il discorso
+
+Il dettaglio che rende GLM-5.2 una conversazione seria per i team di sviluppo non è nessuno dei benchmark citati sopra. È il prezzo. L'API standalone, attiva dal 16 giugno, costa 1,40 dollari per milione di token in input e 4,40 in output, con input cache a 0,26 dollari, circa un quinto del costo normale per contesto ripetuto. A titolo di confronto: GPT-5.5 costa 5 dollari per milione in input e 30 in output; Claude Opus 4.8 5 dollari in input e 25 in output. Il costo medio di GLM-5.2 è circa un sesto di GPT-5.5.
+
+Per un team che fa coding agentico con pipeline intensive, centinaia di migliaia di token per sessione, più sessioni al giorno, la differenza non è marginale. È la differenza tra un servizio che bilancia faticosamente i conti e uno che li fa tornare con margine.
+
+Esiste anche il GLM Coding Plan, il modello di abbonamento flat pensato per chi usa il modello direttamente dentro strumenti come Claude Code, Cline, OpenCode, Roo Code e una decina di altri ambienti di sviluppo compatibili. Il tier base parte da circa 10-18 dollari al mese, con quote in prompt per ciclo orario anziché per token, un modello di pricing più prevedibile per sviluppatori individuali. Il tier Max sale verso gli 80 dollari mensili con volumi molto più alti. Durante l'orario di picco (14:00-18:00 ora di Pechino) il consumo di quota è moltiplicato; fuori picco, almeno fino a fine settembre 2026, la promozione in corso azzera il moltiplicatore.
+
+Per chi vuole eliminare del tutto la voce di costo: i pesi sono disponibili sotto licenza MIT, nessun vincolo di campo d'uso, nessuna soglia di utenti attivi mensili, nessun accordo commerciale separato. Il modello completo in FP8 occupa circa 800 GB su disco e gira in produzione su 8 GPU H200 con headroom sufficiente per il contesto da un milione di token. Una versione quantizzata INT4 scende a circa 200 GB e funziona su 4 H200 con una regressione di circa l'1-3% sui benchmark di coding, una perdita accettabile per molti scenari aziendali, soprattutto considerando la scomparsa del costo per token. Il modello è disponibile anche su [OpenRouter](https://openrouter.ai/z-ai/glm-5.2) con prezzi leggermente inferiori e accesso a più di tredici provider che si fanno concorrenza sui costi d'inferenza.
+
+## Chi vince, chi perde, cosa resta aperto
+
+Il lancio di GLM-5.2 non ha un solo protagonista e non produce un solo effetto. Vale la pena guardarlo da più angolazioni.
+
+Per i team di sviluppo che usano coding assistant o pipeline agentiche, il messaggio più concreto è che esiste ora un modello open-weight con prestazioni nel territorio dei top proprietari su task di engineering, a un costo che cambia significativamente il calcolo economico. Non è detto che sia la scelta giusta per ogni contesto, la verbosità, i costi effettivi con effort Max e la varianza run-to-run restano fattori da valutare caso per caso, ma è la prima volta che la conversazione può svolgersi su basi di parità tecnica reale, non solo ideologica.
+
+Per il mercato open-weight nel suo insieme, GLM-5.2 consolida una tendenza che aveva già mostrato segnali chiari con GLM-5.1 e con Kimi K2.7 di Moonshot AI: i modelli cinesi ad architettura aperta non inseguono più i proprietari occidentali con sei mesi di ritardo su benchmark generici. Su specifiche verticali, coding, task agentici, contesti lunghi, stanno costruendo vantaggi propri, e lo fanno con strutture di costo che il duopolio OpenAI-Anthropic non può replicare facilmente.
+
+Ci sono però ombre che è scorretto ignorare. Z.ai è sulla lista Entity List del Bureau of Industry and Security statunitense dal 15 gennaio 2025: i pesi MIT sono legalmente utilizzabili da aziende private, ma i clienti federali americani e la maggior parte dei prime della difesa trattano di fatto i modelli di origine cinese come inaccessibili, indipendentemente dalla licenza. Per le imprese europee in settori regolamentati, l'assenza di un AI Act GPAI Code of Practice firmato da Zhipu, e la mancanza di una scheda tecnica Annex XI, scarica il peso della conformità trasparenza sui deployer a valle. Non sono veti assoluti, ma sono costi e rischi che vanno messi in conto insieme a quelli per token.
+
+La domanda che resta aperta è quella più interessante: GLM-5.2 è il segnale che il vantaggio competitivo dei modelli proprietari di fascia alta si sta erodendo specificamente sul coding, o è un'eccellenza verticale che lascia intatte differenze significative su tutto il resto? La risposta onesta, al momento, è che sui task fuori dal coding e dall'agenticità i benchmark mostrano un modello forte ma non eccezionale. Il posizionamento è dichiarato e coerente: Z.ai non sta cercando di fare il modello generale più bravo del mondo, sta cercando di essere il riferimento per chi costruisce software. Se ci sta riuscendo, lo misurerà l'adozione nei prossimi mesi, nei log di produzione dei team che useranno GLM-5.2 come backbone delle loro pipeline, non nelle tabelle di confronto che ogni laboratorio prepara per far bella figura.

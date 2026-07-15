@@ -17,6 +17,45 @@ function generateHTML(statsData, lastUpdate) {
             h1 { text-align: center; color: #0056b3; margin-bottom: 5px; }
             .last-update { text-align: center; color: #65676b; font-size: 0.9em; margin-bottom: 20px; }
             #stats-container { max-width: 900px; margin: 20px auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; }
+            
+            /* Stili della Barra di Ricerca */
+            .search-wrapper {
+                position: relative;
+                margin-top: 20px;
+                margin-bottom: 15px;
+            }
+            .search-input {
+                width: 100%;
+                padding: 12px 40px 12px 16px;
+                font-size: 1em;
+                border: 1px solid #dddfe2;
+                border-radius: 8px;
+                box-sizing: border-box;
+                outline: none;
+                transition: border-color 0.2s, box-shadow 0.2s;
+            }
+            .search-input:focus {
+                border-color: #0056b3;
+                box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.1);
+            }
+            .search-clear {
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                font-size: 1.2em;
+                color: #8a8d91;
+                cursor: pointer;
+                display: none;
+                padding: 4px;
+                line-height: 1;
+            }
+            .search-clear:hover {
+                color: #1c1e21;
+            }
+
             table { width: 100%; border-collapse: collapse; margin-top: 20px; }
             th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
             th { background-color: #f8f9fa; font-weight: bold; }
@@ -52,6 +91,13 @@ function generateHTML(statsData, lastUpdate) {
         <div id="stats-container">
             <h1>Statistiche Visite Anonime</h1>
             <div class="last-update">Ultimo aggiornamento: ${formattedDate}</div>
+            
+            <!-- Barra di Ricerca -->
+            <div class="search-wrapper">
+                <input type="text" id="search-input" class="search-input" placeholder="Cerca una pagina o articolo (es. /en/ o titolo)..." autocomplete="off">
+                <button id="search-clear" class="search-clear" title="Cancella ricerca">&times;</button>
+            </div>
+
             <table>
                 <thead>
                     <tr>
@@ -68,22 +114,34 @@ function generateHTML(statsData, lastUpdate) {
                 <button id="view-more-button" class="view-more-button">Visualizza altro</button>
             </div>
 
-            <div class="total">Visite Totali: ${totalViews}</div>
+            <div class="total" id="total-views">Visite Totali: ${totalViews}</div>
         </div>
 
         <script>
             const statsData = ${JSON.stringify(statsData)};
+            let filteredData = [...statsData];
             let currentPage = 0;
             const rowsPerPage = 25;
             
             const statsBody = document.getElementById('stats-body');
             const viewMoreButton = document.getElementById('view-more-button');
             const viewMoreContainer = document.getElementById('view-more-container');
+            const searchInput = document.getElementById('search-input');
+            const searchClear = document.getElementById('search-clear');
+            const totalElement = document.getElementById('total-views');
+
+            const totalViews = ${totalViews};
 
             function renderNextRows() {
                 const start = currentPage * rowsPerPage;
                 const end = start + rowsPerPage;
-                const rowsToRender = statsData.slice(start, end);
+                const rowsToRender = filteredData.slice(start, end);
+
+                if (filteredData.length === 0 && currentPage === 0) {
+                    statsBody.innerHTML = '<tr><td colspan="2" style="text-align: center; color: #65676b; padding: 20px;">Nessun risultato trovato</td></tr>';
+                    viewMoreContainer.style.display = 'none';
+                    return;
+                }
 
                 rowsToRender.forEach(item => {
                     const row = document.createElement('tr');
@@ -94,13 +152,54 @@ function generateHTML(statsData, lastUpdate) {
 
                 currentPage++;
 
-                if (currentPage * rowsPerPage >= statsData.length) {
+                if (currentPage * rowsPerPage >= filteredData.length) {
                     viewMoreContainer.style.display = 'none';
+                } else {
+                    viewMoreContainer.style.display = 'flex';
                 }
             }
 
+            function updateSummary() {
+                const query = searchInput.value.toLowerCase().trim();
+                
+                if (query) {
+                    searchClear.style.display = 'block';
+                    filteredData = statsData.filter(item => {
+                        const displayPath = item.path.startsWith('/') ? item.path : '/' + item.path;
+                        return displayPath.toLowerCase().includes(query);
+                    });
+                } else {
+                    searchClear.style.display = 'none';
+                    filteredData = [...statsData];
+                }
+
+                // Ricalcola il totale delle visite filtrate
+                let filteredTotal = 0;
+                filteredData.forEach(item => filteredTotal += item.count);
+
+                if (query) {
+                    totalElement.innerHTML = 'Visite Totali filtrate: ' + filteredTotal + ' <span style="font-weight: normal; font-size: 0.9em; color: #65676b;">(su un totale di ' + totalViews + ')</span>';
+                } else {
+                    totalElement.textContent = 'Visite Totali: ' + totalViews;
+                }
+
+                currentPage = 0;
+                statsBody.innerHTML = '';
+                renderNextRows();
+            }
+
+            searchInput.addEventListener('input', updateSummary);
+
+            searchClear.addEventListener('click', () => {
+                searchInput.value = '';
+                updateSummary();
+                searchInput.focus();
+            });
+
             viewMoreButton.addEventListener('click', renderNextRows);
-            renderNextRows();
+
+            // Caricamento iniziale
+            updateSummary();
         </script>
     </body>
     </html>

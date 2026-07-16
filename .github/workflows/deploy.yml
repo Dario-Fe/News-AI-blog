@@ -4,6 +4,8 @@ on:
   # Runs on pushes targeting the default branch (for changes to the site itself)
   push:
     branches: ["main"]
+    paths-ignore:
+      - 'public/stats_history.json'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

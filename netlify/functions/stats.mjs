@@ -235,9 +235,26 @@ export default async (req, context) => {
 
     // Se il riepilogo non esiste ancora, mostriamo un messaggio di attesa
     if (!summary) {
+      if (req.url && new URL(req.url).searchParams.get('format') === 'json') {
+        return new Response(JSON.stringify({ statsData: [], lastUpdate: null }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store, max-age=0' },
+        });
+      }
       return new Response(generateHTML([], null), {
         status: 200,
         headers: { 'Content-Type': 'text/html' },
+      });
+    }
+
+    // Se è stato richiesto il formato JSON
+    if (req.url && new URL(req.url).searchParams.get('format') === 'json') {
+      return new Response(JSON.stringify(summary), {
+        status: 200,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store, max-age=0'
+        },
       });
     }
 

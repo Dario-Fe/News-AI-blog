@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-07-16T12:01:13.621137+00:00",
+  "last_update": "2026-07-17T03:49:17.224122+00:00",
   "portal_snapshot": {
     "total_articles": 765,
     "articles_by_lang": {
@@ -20,28 +20,28 @@
     "total_tags": 10,
     "tags_popularity": {
       "Generative AI": 475,
-      "Training": 180,
-      "Business": 335,
-      "Research": 290,
       "Applications": 200,
-      "Ethics & Society": 435,
-      "Security": 185,
+      "Training": 180,
+      "Research": 290,
       "Startups": 60,
-      "Copyright": 35,
-      "E-learning": 45
+      "Ethics & Society": 435,
+      "Business": 335,
+      "Security": 185,
+      "E-learning": 45,
+      "Copyright": 35
     },
     "podcast_articles_count": 153,
     "video_articles_count": 153
   },
   "cumulative_history": {
-    "it/index.html": 2185,
-    "it": 903,
+    "it/index.html": 2190,
+    "it": 904,
     "fr": 288,
     "it/newsletter": 199,
     "en": 194,
     "de": 186,
     "fr/trm-samsung-fr.html": 156,
-    "es": 154,
+    "es": 155,
     "it/thank-you": 104,
     "en/grief-tech-en.html": 84,
     "it/agent-hospital.html": 78,
@@ -60,7 +60,7 @@
     "it/ai-bournout.html": 46,
     "it/robotica-2025.html": 46,
     "fr/ai-epanortosi-fr.html": 45,
-    "en/ai-epanortosi-en": 43,
+    "en/ai-epanortosi-en": 44,
     "it/robot-tax-sanders.html": 43,
     "it/bodo-glimt-fokus-ai.html": 41,
     "it/kimi-k2-thinking.html": 41,
@@ -95,11 +95,11 @@
     "it/trm-samsung.html": 29,
     "it/ai-epanortosi.html": 28,
     "it/eset-apt-report.html": 28,
+    "it/graphify.html": 27,
     "it/agenti-marxisti.html": 26,
     "it/chatgpt-ads.html": 26,
     "it/cookie": 26,
     "it/esodo-silenzioso.html": 26,
-    "it/graphify.html": 26,
     "it/humanebench.html": 26,
     "it/mercury2.html": 26,
     "en/malattie-mentali-ai-en.html": 25,
@@ -142,6 +142,7 @@
     "it/codespeak.html": 20,
     "en/ai-video-generativa-ovi-en": 19,
     "it/ai-slop-entropia.html": 19,
+    "it/alibaba-qwen3": 19,
     "it/convergenza-modelli-scientifici.html": 19,
     "it/introspection-anthropic.html": 19,
     "it/mdash-microsoft.html": 19,
@@ -150,7 +151,6 @@
     "it/steering-llm.html": 19,
     "en/agent-hospital-en.html": 18,
     "it/ai-creativity-ethics.html": 18,
-    "it/alibaba-qwen3": 18,
     "it/amodei-intervista-parte2.html": 18,
     "it/cyborg-centauri-automi.html": 18,
     "it/headroom.html": 18,
@@ -201,7 +201,9 @@
     "it/ai-video-generativa-ovi.html": 12,
     "it/mistral-devstral": 12,
     "it/robot-tax-sanders": 12,
+    "it/sistema-sicurezza-ai.html": 12,
     "it/steerling.html": 12,
+    "en/kimik2.5-en.html": 11,
     "es/robotica-2025-es.html": 11,
     "it/ai-cosciente": 11,
     "it/ai-metacognition.html": 11,
@@ -225,7 +227,6 @@
     "it/ai-water-consumption": 9,
     "it/google-ue-indagine.html": 9,
     "it/longcat-video": 9,
-    "it/sistema-sicurezza-ai.html": 9,
     "en/ai-valutazione-ed-etica-en": 8,
     "en/index.html": 8,
     "en/intervista-ricco-ai-en": 8,
@@ -260,7 +261,6 @@
     "en/antigravity-security-en.html": 6,
     "en/contributo-automazione-bacchiocchi-en": 6,
     "en/gina-assistente-vocale-en.html": 6,
-    "en/kimik2.5-en.html": 6,
     "en/rlm-ai-en": 6,
     "es/agentic-ai-foundation-es": 6,
     "es/agentic-ai-foundation-es.html": 6,
@@ -317,6 +317,7 @@
     "en/ai-bournout-en.html": 4,
     "en/chatgpt-ads-en.html": 4,
     "en/contributo-automazione-bacchiocchi-en.html": 4,
+    "en/diffusion-vs-autoregressive-en.html": 4,
     "en/eset-apt-report-en.html": 4,
     "en/humanebench-en": 4,
     "en/introspection-anthropic-en": 4,
@@ -380,7 +381,6 @@
     "en/browser-ai-en": 3,
     "en/cyborg-centauri-automi-en.html": 3,
     "en/deepseek-mhc-en.html": 3,
-    "en/diffusion-vs-autoregressive-en.html": 3,
     "en/eset-apt-report-en": 3,
     "en/european-tech-map-en.html": 3,
     "en/fda-ema-aim-nash-ai-en.html": 3,
@@ -1031,26 +1031,98 @@
           "it/ai-musica-copyright": 1,
           "it/sistema-sicurezza-ai.html": 1
         }
+      },
+      "2026-07-16": {
+        "total_views": 19,
+        "views_by_lang": {
+          "it": 12,
+          "en": 7
+        },
+        "views_by_tag": {
+          "Research": 7,
+          "Applications": 4,
+          "Generative AI": 10,
+          "Security": 3,
+          "Ethics & Society": 5,
+          "Training": 1
+        },
+        "top_articles": [
+          {
+            "path": "en/kimik2.5-en.html",
+            "views": 5
+          },
+          {
+            "path": "it/sistema-sicurezza-ai.html",
+            "views": 3
+          },
+          {
+            "path": "en/ai-epanortosi-en",
+            "views": 1
+          },
+          {
+            "path": "it/graphify.html",
+            "views": 1
+          },
+          {
+            "path": "it/alibaba-qwen3",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 5,
+          "it": 1,
+          "es": 1,
+          "en/ai-epanortosi-en": 1,
+          "it/graphify.html": 1,
+          "it/alibaba-qwen3": 1,
+          "it/sistema-sicurezza-ai.html": 3,
+          "en/kimik2.5-en.html": 5,
+          "en/diffusion-vs-autoregressive-en.html": 1
+        }
       }
     },
     "monthly": {
       "2026-07": {
-        "total_views": 5,
+        "total_views": 24,
         "views_by_lang": {
-          "it": 5
+          "it": 17,
+          "en": 7
         },
         "views_by_tag": {
-          "Generative AI": 1,
-          "Applications": 1,
-          "Security": 1
+          "Generative AI": 11,
+          "Applications": 5,
+          "Security": 4,
+          "Research": 7,
+          "Ethics & Society": 5,
+          "Training": 1
         },
         "top_articles": [
+          {
+            "path": "en/kimik2.5-en.html",
+            "views": 5
+          },
+          {
+            "path": "it/sistema-sicurezza-ai.html",
+            "views": 4
+          },
           {
             "path": "it/ai-musica-copyright",
             "views": 1
           },
           {
-            "path": "it/sistema-sicurezza-ai.html",
+            "path": "en/ai-epanortosi-en",
+            "views": 1
+          },
+          {
+            "path": "it/graphify.html",
+            "views": 1
+          },
+          {
+            "path": "it/alibaba-qwen3",
+            "views": 1
+          },
+          {
+            "path": "en/diffusion-vs-autoregressive-en.html",
             "views": 1
           }
         ]
@@ -1058,14 +1130,18 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 5,
+        "total_views": 24,
         "views_by_lang": {
-          "it": 5
+          "it": 17,
+          "en": 7
         },
         "views_by_tag": {
-          "Generative AI": 1,
-          "Applications": 1,
-          "Security": 1
+          "Generative AI": 11,
+          "Applications": 5,
+          "Security": 4,
+          "Research": 7,
+          "Ethics & Society": 5,
+          "Training": 1
         }
       }
     }

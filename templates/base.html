@@ -123,7 +123,6 @@
             let allArticles = [];
             let currentFilteredArticles = [];
             let currentPage = 0;
-            const articlesPerPage = 16;
             let activeTag = 'all';
 
             let searchIndexLoaded = false;
@@ -265,7 +264,8 @@
              */
             const updateViewMoreButton = () => {
                 if (!viewMoreContainer) return;
-                const moreArticlesExist = (currentPage * articlesPerPage) < currentFilteredArticles.length;
+                const nextStart = currentPage === 0 ? 0 : 16 + (currentPage - 1) * 15;
+                const moreArticlesExist = nextStart < currentFilteredArticles.length;
                 viewMoreContainer.style.display = moreArticlesExist ? 'flex' : 'none';
             };
             
@@ -273,8 +273,8 @@
              * Renders the next page of articles from the current filtered list.
              */
             const renderNextPage = () => {
-                const start = currentPage * articlesPerPage;
-                const end = start + articlesPerPage;
+                const start = currentPage === 0 ? 0 : 16 + (currentPage - 1) * 15;
+                const end = currentPage === 0 ? 16 : start + 15;
                 const articlesToRender = currentFilteredArticles.slice(start, end);
                 
                 renderArticles(articlesToRender);

@@ -1761,7 +1761,7 @@ def generate_index_page(articles, output_dir, lang='it'):
         filter_bar_html += f'<button class="tag-filter-button" data-tag="{tag}">{tag}</button>'
     filter_bar_html += '</div>'
 
-    ARTICLES_PER_PAGE = 15
+    ARTICLES_PER_PAGE = 16
     initial_articles = articles[:ARTICLES_PER_PAGE]
     
     grid_html = '<div id="articles-grid" data-is-home="true">\n'

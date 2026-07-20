@@ -1764,7 +1764,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     ARTICLES_PER_PAGE = 15
     initial_articles = articles[:ARTICLES_PER_PAGE]
     
-    grid_html = '<div id="articles-grid" data-is-home="true" data-is-home="true">\n'
+    grid_html = '<div id="articles-grid" data-is-home="true">\n'
     for article in initial_articles:
         date_html = ""
         if article.get('date'):

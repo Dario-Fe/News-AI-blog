@@ -1466,7 +1466,8 @@ def process_article(md_file_info, output_dir_base, lang):
             "date": post.metadata.get('date', None),
             "author": post.metadata.get('author', None),
             "audio_path": audio_path,
-            "youtube_url": post.metadata.get('youtube_url', None)
+            "youtube_url": post.metadata.get('youtube_url', None),
+            "parent_dir": md_file_info['parent_dir']
         }
 
     except Exception as e:
@@ -1735,6 +1736,136 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         write_if_changed(output_path, temp_html)
 
 
+def load_popular_articles(lang='it'):
+    """
+    Loads popular articles based on stats_history.json.
+    Sums view counts across language variations of each article parent directory,
+    and returns a localized list of the top 5 most read articles.
+    """
+    stats_path = "public/stats_history.json"
+    if not os.path.exists(stats_path):
+        return []
+
+    try:
+        with open(stats_path, 'r', encoding='utf-8') as f:
+            stats = json.load(f)
+    except Exception as e:
+        print(f"  - Error reading stats_history.json: {e}")
+        return []
+
+    cumulative = stats.get("cumulative_history", {})
+
+    # We want to identify and aggregate view counts by their base article directory
+    # Format of cumulative keys can be:
+    # "it/agent-hospital.html", "it/agent-hospital.html\"", "en/agent-hospital-en.html", "fr/ai-epanortosi-fr.html"
+    # Or directory names directly, or service pages
+    exclusions = [
+        "index.html", "newsletter", "thank-you", "privacy", "cookie", "metodo-editoriale",
+        "authors/dario-ferrero", "stats", "sitemap.xml", "feed.xml", "feed.rss", "rss.xml"
+    ]
+
+    # Map popular paths back to their parent folder using a normalized slug
+    # E.g. "agent-hospital.html" or "agent-hospital-en.html" -> parent folder
+    # We can fetch articles_db to map parent folder to their respective localized file slugs
+    articles_db = get_local_articles_db()
+
+    # For every article directory, find all its associated slugs (e.g. {'agent-hospital', 'agent-hospital-en', ...})
+    dir_to_slugs = {}
+    slug_to_dir = {}
+    for parent_dir, langs in articles_db.items():
+        dir_to_slugs[parent_dir] = set()
+        for l, files in langs.items():
+            for f in files:
+                slug = os.path.splitext(f['name'])[0].strip().replace('_', '-')
+                dir_to_slugs[parent_dir].add(slug)
+                slug_to_dir[slug] = parent_dir
+
+    # Aggregate views per parent directory
+    dir_views = {}
+    for path, views in cumulative.items():
+        # Strip query params, quotes, leading/trailing slashes, and .html
+        clean_path = path.replace('"', '').strip('/')
+        if clean_path.endswith('.html'):
+            clean_path = clean_path[:-5]
+
+        # Check if it is a service page
+        if any(ex in clean_path for ex in exclusions) or clean_path in ["it", "en", "es", "fr", "de", ""]:
+            continue
+
+        # Get slug
+        parts = clean_path.split('/')
+        slug = parts[-1]
+
+        # Find matching parent dir
+        parent_dir = slug_to_dir.get(slug)
+        if not parent_dir:
+            # Let's try matching with substring or ending with language prefix
+            # e.g., if slug is "kimik2.5", match it with "kimik2.5"
+            matched = False
+            for p_dir, slugs in dir_to_slugs.items():
+                if slug in slugs:
+                    parent_dir = p_dir
+                    matched = True
+                    break
+            if not matched:
+                # Strip common lang suffixes from slug
+                stripped_slug = re.sub(r'-(en|es|fr|de)$', '', slug)
+                for p_dir, slugs in dir_to_slugs.items():
+                    if any(s.startswith(stripped_slug) or stripped_slug in s for s in slugs):
+                        parent_dir = p_dir
+                        matched = True
+                        break
+
+        if parent_dir:
+            dir_views[parent_dir] = dir_views.get(parent_dir, 0) + views
+
+    # Sort parent directories by aggregated views descending
+    sorted_dirs = sorted(dir_views.items(), key=lambda x: x[1], reverse=True)
+
+    # Resolve localized article details for top 5 parent directories
+    popular_list = []
+    for parent_dir, views in sorted_dirs:
+        # We need the article data in the requested language
+        langs_available = articles_db.get(parent_dir, {})
+        if not langs_available:
+            continue
+
+        # Get for current language, fallback to 'it' or first available
+        target_lang = lang if lang in langs_available else ('it' if 'it' in langs_available else list(langs_available.keys())[0])
+        file_list = langs_available[target_lang]
+        if not file_list:
+            continue
+
+        file_info = file_list[0]
+        slug = os.path.splitext(file_info['name'])[0].strip().replace('_', '-')
+
+        # Let's read the frontmatter to get the exact title
+        try:
+            with open(file_info['path'], 'r', encoding='utf-8') as f:
+                post = frontmatter.load(f)
+            # Find first h1 or use frontmatter title if available, or extract from file content
+            content_lines = post.content.split('\n')
+            title = None
+            for line in content_lines:
+                if line.strip().startswith('# '):
+                    title = line.strip('# ').strip()
+                    break
+            if not title:
+                title = slug.replace('-', ' ').title()
+
+            popular_list.append({
+                "title": title,
+                "path": f"{slug}.html",
+                "views": views
+            })
+            if len(popular_list) >= 5:
+                break
+        except Exception as e:
+            print(f"  - Error reading popular article file {file_info['path']}: {e}")
+
+    return popular_list
+
+
 def generate_index_page(articles, output_dir, lang='it'):
     """
     Generates the index page with the first batch of articles and a JSON
@@ -1761,11 +1892,78 @@ def generate_index_page(articles, output_dir, lang='it'):
         filter_bar_html += f'<button class="tag-filter-button" data-tag="{tag}">{tag}</button>'
     filter_bar_html += '</div>'
 
+    # Translate headers for popular sidebar
+    pop_title_by_lang = {
+        "it": "I più letti",
+        "en": "Most popular",
+        "es": "Más leídos",
+        "fr": "Les plus lus",
+        "de": "Beliebteste"
+    }
+    pop_title_text = pop_title_by_lang.get(lang, pop_title_by_lang["it"])
+
+    # Load popular articles list
+    popular_articles = load_popular_articles(lang)
+    popular_list_html = ""
+    for i, pop in enumerate(popular_articles, 1):
+        popular_list_html += f"""
+        <li class="popular-item">
+            <span class="popular-rank">{i}</span>
+            <a href="{pop['path']}" class="popular-link">{pop['title']}</a>
+        </li>"""
+
+    # Format the featured article card
+    featured_article_html = ""
+    featured_article = articles[0] if articles else None
+    if featured_article:
+        date_html = ""
+        if featured_article.get('date'):
+            formatted_date = featured_article['date'].strftime('%d %B %Y')
+            date_html = f'<p class="article-card-date">{formatted_date}</p>'
+
+        tags_html = ""
+        if featured_article.get('tags'):
+            tags_html = '<div class="article-card-tags">' + "".join([f'<span class="tag">{tag}</span>' for tag in featured_article['tags']]) + '</div>'
+
+        image_html = f'<img src="logo_vn_ia.png" alt="{featured_article["title"]}" loading="lazy">'
+        if featured_article.get('image_paths'):
+            paths = featured_article['image_paths']
+            image_html = f"""
+                <picture>
+                    <source srcset="../{paths['thumb_webp']}" type="image/webp">
+                    <source srcset="../{paths['thumb_jpeg']}" type="image/jpeg">
+                    <img src="../{paths['thumb_jpeg']}" alt="{featured_article['title']}" loading="lazy">
+                </picture>
+            """
+        tags_data_attr = " ".join(featured_article.get('tags', []))
+        featured_article_html = f"""
+        <a href="{featured_article['path']}" class="featured-article-card" data-tags="{tags_data_attr}">
+            {image_html}
+            <div class="article-card-content">
+                {date_html}
+                <h3>{featured_article['title']}</h3>
+                <p>{featured_article['summary']}</p>
+                {tags_html}
+            </div>
+        </a>"""
+
+    featured_row_html = f"""
+    <div id="home-featured-row">
+        {featured_article_html}
+        <aside class="popular-sidebar">
+            <h2 class="popular-sidebar-title">{pop_title_text}</h2>
+            <ol class="popular-list">
+                {popular_list_html}
+            </ol>
+        </aside>
+    </div>"""
+
+    # Grid contains articles from index 1 to 16 (exactly 15 articles)
     ARTICLES_PER_PAGE = 16
-    initial_articles = articles[:ARTICLES_PER_PAGE]
+    initial_grid_articles = articles[1:ARTICLES_PER_PAGE]
     
     grid_html = '<div id="articles-grid" data-is-home="true">\n'
-    for article in initial_articles:
+    for article in initial_grid_articles:
         date_html = ""
         if article.get('date'):
             formatted_date = article['date'].strftime('%d %B %Y')
@@ -1818,7 +2016,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     
     articles_heading_text = TRANSLATIONS["index_page"]["articles_heading"].get(lang, TRANSLATIONS["index_page"]["articles_heading"]["it"])
     articles_heading_html = f'<h2 class="visually-hidden">{articles_heading_text}</h2>'
-    content_with_filter = filter_bar_html + articles_heading_html + grid_html
+    content_with_filter = filter_bar_html + featured_row_html + articles_heading_html + grid_html
     temp_html = base_template.replace("{{content}}", content_with_filter)
     temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
 

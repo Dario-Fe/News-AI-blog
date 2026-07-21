@@ -264,7 +264,16 @@
              */
             const updateViewMoreButton = () => {
                 if (!viewMoreContainer) return;
-                const nextStart = currentPage === 0 ? 0 : 16 + (currentPage - 1) * 15;
+                let nextStart;
+                if (activeTag === 'all') {
+                    // Page 0 has been rendered (the first featured post + first 15 standard posts: indices 0 to 15).
+                    // Next pages render in increments of 15 standard posts starting at index 16.
+                    nextStart = currentPage === 0 ? 0 : 16 + (currentPage - 1) * 15;
+                } else {
+                    // Tag filtered view doesn't have the popular sidebar / featured layout block.
+                    // It uses standard pages of 15 articles.
+                    nextStart = currentPage * 15;
+                }
                 const moreArticlesExist = nextStart < currentFilteredArticles.length;
                 viewMoreContainer.style.display = moreArticlesExist ? 'flex' : 'none';
             };
@@ -273,8 +282,46 @@
              * Renders the next page of articles from the current filtered list.
              */
             const renderNextPage = () => {
-                const start = currentPage === 0 ? 0 : 16 + (currentPage - 1) * 15;
-                const end = currentPage === 0 ? 16 : start + 15;
+                let start, end;
+                if (activeTag === 'all') {
+                    // Under 'all' view, page 0 corresponds to slicing index 1 to 16 from the main articles array
+                    // (since article 0 is featured separately in the static html block).
+                    // Wait, on initial static HTML load, the grid is ALREADY populated with articles 1 to 15 (indices 1 to 15).
+                    // So when the user first clicks "Carica Altri Articoli" (which runs renderNextPage for currentPage=1),
+                    // we want to load starting at index 16.
+                    // Let's make sure currentPage starts at 1 if initial load already has 16 articles (1 featured + 15 in grid).
+                    // Let's trace: applyFilter('all') will clear the grid, hide the featured row if tag is not 'all', and run renderNextPage.
+                    // Wait! If applyFilter('all') runs, it clears the grid and we want to render the initial set:
+                    // In applyFilter('all'), we WANT to render the first page of standard articles inside `#articles-grid`.
+                    // The first page of standard articles inside the grid are indices 1 to 16.
+                    // So, under activeTag === 'all':
+                    // - page 0: indices 1 to 16 (15 articles)
+                    // - page 1: indices 16 to 31 (15 articles)
+                    // - page 2: indices 31 to 46 (15 articles)
+                    // Wait, let's look at the math!
+                    // If currentPage === 0: start = 1, end = 16.
+                    // If currentPage === 1: start = 16, end = 31.
+                    // If currentPage === 2: start = 31, end = 46.
+                    // Let's generalize for activeTag === 'all':
+                    // start = 1 + currentPage * 15
+                    // end = start + 15
+                    // Let's check this:
+                    // For page 0: start = 1, end = 16. Perfect!
+                    // For page 1: start = 16, end = 31. Perfect!
+                    // For page 2: start = 31, end = 46. Perfect!
+                    start = 1 + currentPage * 15;
+                    end = start + 15;
+                } else {
+                    // Under tag filtered view:
+                    // - page 0: indices 0 to 15 (15 articles)
+                    // - page 1: indices 15 to 30 (15 articles)
+                    // - page 2: indices 30 to 45 (15 articles)
+                    // Generalizing for tag filtered view:
+                    // start = currentPage * 15
+                    // end = start + 15
+                    start = currentPage * 15;
+                    end = start + 15;
+                }
                 const articlesToRender = currentFilteredArticles.slice(start, end);
                 
                 renderArticles(articlesToRender);
@@ -295,6 +342,12 @@
                     btn.classList.toggle('active', btn.getAttribute('data-tag') === tag);
                 });
 
+                // Show/hide home-featured-row based on tag filter
+                const featuredRow = document.getElementById('home-featured-row');
+                if (featuredRow) {
+                    featuredRow.style.display = (tag === 'all') ? 'flex' : 'none';
+                }
+
                 // Get the new filtered list
                 if (tag === 'all') {
                     currentFilteredArticles = [...allArticles];
@@ -304,6 +357,14 @@
 
                 // Render the new view
                 grid.innerHTML = ''; // Clear the grid
+
+                // If it is initial page load (where HTML is already statically pre-rendered with 1 featured + 15 grid articles),
+                // we DO NOT want to re-render page 0, because it is already there. We just want to initialize state.
+                // Wait, how do we distinguish initial load from subsequent applyFilter?
+                // On initial load, grid already contains 15 child nodes. But initialize() calls applyFilter(initialTag).
+                // If we clear grid in applyFilter, we lose the static html and need to render.
+                // Let's check: if we just render it, it's very fast and ensures consistency between hash change and load!
+                // So let's always render on applyFilter.
                 renderNextPage(); // Render page 0 of the new list
             };
 
@@ -380,7 +441,17 @@
                     
                     // Trigger initial filter based on current URL hash
                     const initialTag = window.location.hash.substring(1) || 'all';
-                    applyFilter(decodeURIComponent(initialTag));
+
+                    // To avoid flicker and preserve the static server-side rendered HTML content on first load,
+                    // we can just load the state and only applyFilter dynamically if initialTag is NOT 'all'.
+                    if (initialTag !== 'all') {
+                        applyFilter(decodeURIComponent(initialTag));
+                    } else {
+                        // Just initialize states for 'all'
+                        currentFilteredArticles = [...allArticles];
+                        currentPage = 1; // 1 page (0) is already rendered statically
+                        updateViewMoreButton();
+                    }
 
                 } catch (error) {
                     console.error('Failed to load articles:', error);

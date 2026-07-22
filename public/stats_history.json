@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-07-21T03:58:06.461860+00:00",
+  "last_update": "2026-07-22T03:59:24.544772+00:00",
   "portal_snapshot": {
     "total_articles": 775,
     "articles_by_lang": {
@@ -34,22 +34,22 @@
     "video_articles_count": 155
   },
   "cumulative_history": {
-    "it/index.html": 2215,
-    "it": 925,
+    "it/index.html": 2222,
+    "it": 926,
     "fr": 292,
-    "it/newsletter": 203,
+    "it/newsletter": 205,
     "en": 197,
     "de": 188,
     "es": 158,
     "fr/trm-samsung-fr.html": 157,
-    "it/thank-you": 107,
+    "it/thank-you": 109,
     "en/grief-tech-en.html": 84,
     "it/agent-hospital.html": 78,
     "it/papalini-interview.html": 73,
     "it/memvid-ai-memory": 66,
     "it/authors/dario-ferrero": 59,
     "it/intervista-ricco-ai.html": 59,
-    "it/ai-epanortosi": 57,
+    "it/ai-epanortosi": 58,
     "it/google-threat-intelligence.html": 56,
     "it/anthropic-hacker.html": 55,
     "en/memvid-ai-memory-en": 53,
@@ -109,6 +109,7 @@
     "it/ai-water-consumption.html": 25,
     "it/amazon-down.html": 25,
     "it/antigravity-security": 25,
+    "it/sistema-sicurezza-ai.html": 25,
     "it/10-regole-ai": 24,
     "it/ai-rsponsabilit%C3%A0.html": 24,
     "it/ai-rsponsabilità.html": 24,
@@ -125,6 +126,7 @@
     "it/anthropic-fear.html": 23,
     "it/cina-universita.html": 23,
     "it/claude-code.html": 23,
+    "it/dspark.html": 23,
     "it/longcat-video.html": 23,
     "it/recursivemas.html": 23,
     "it/rlm-ai.html": 23,
@@ -135,14 +137,12 @@
     "it/mistral-devstral.html": 22,
     "it/pentagono-anthropic-openai.html": 22,
     "it/pignataro-intervista1.html": 22,
-    "it/sistema-sicurezza-ai.html": 22,
     "it/browser-ai.html": 21,
     "it/emergence-world.html": 21,
     "it/glm-5.html": 21,
     "it/licenziamenti-ai-2026.html": 21,
     "it/mit-ai-umile.html": 21,
     "it/codespeak.html": 20,
-    "it/dspark.html": 20,
     "it/ornith-1.0.html": 20,
     "en/ai-video-generativa-ovi-en": 19,
     "it/ai-slop-entropia.html": 19,
@@ -176,14 +176,16 @@
     "it/subliminal-learning.html": 17,
     "en/iceberg-index-en": 16,
     "en/steering-llm-en.html": 16,
+    "it/ai-creazione-contenuti": 16,
+    "it/colibri.html": 16,
     "it/contributo-automazione-bacchiocchi": 16,
     "it/datacenter-proteste-usa.html": 16,
     "it/degregori-ai-war.html": 16,
     "it/glm5.2.html": 16,
     "it/iceberg-index.html": 16,
     "it/startup-europa-2025.html": 16,
+    "en/trm-samsung-en": 15,
     "fr/malattie-mentali-ai-fr.html": 15,
-    "it/ai-creazione-contenuti": 15,
     "it/chartnet.html": 15,
     "it/guerra-algoritmica.html": 15,
     "it/malattie-mentali-ai.html": 15,
@@ -192,7 +194,6 @@
     "it/power-sampling.html": 15,
     "it/stanford-ai-index-2026.html": 15,
     "en/alibaba-qwen3-en": 14,
-    "en/trm-samsung-en": 14,
     "es/antigravity-security-es": 14,
     "it/agenti-multipli-stanford.html": 14,
     "en/amodei-intervista-parte2-en.html": 13,
@@ -225,6 +226,7 @@
     "de/authors/dario-ferrero": 9,
     "en/longcat-video-en": 9,
     "en/prompt-repetition-en.html": 9,
+    "en/shutdown-resistance-en.html": 9,
     "it/agentic-ai-foundation": 9,
     "it/ai-water-consumption": 9,
     "it/google-ue-indagine.html": 9,
@@ -233,11 +235,9 @@
     "en/index.html": 8,
     "en/intervista-ricco-ai-en": 8,
     "en/legge-ai-italia-en": 8,
-    "en/shutdown-resistance-en.html": 8,
     "es/ai-winter-es.html": 8,
     "fr/agentic-ai-foundation-fr.html": 8,
     "it/ai-consumer-2025": 8,
-    "it/colibri.html": 8,
     "de/index.html": 7,
     "en/ai-aziende-e-servizi-en": 7,
     "en/ai-metacognition-en.html": 7,
@@ -295,6 +295,7 @@
     "es/authors/dario-ferrero": 5,
     "es/legge-ai-italia-es": 5,
     "es/qwen3-tts-es": 5,
+    "fr/anthropic-hacker-fr.html": 5,
     "fr/authors/dario-ferrero": 5,
     "fr/newsletter": 5,
     "it/ai-aziende-e-servizi": 5,
@@ -321,6 +322,7 @@
     "en/chatgpt-ads-en.html": 4,
     "en/contributo-automazione-bacchiocchi-en.html": 4,
     "en/eset-apt-report-en.html": 4,
+    "en/fda-ema-aim-nash-ai-en.html": 4,
     "en/humanebench-en": 4,
     "en/introspection-anthropic-en": 4,
     "en/rsl-really-simple-licensing-en.html": 4,
@@ -337,7 +339,6 @@
     "es/robot-tax-sanders-es": 4,
     "fr/ai-deepconf-fr": 4,
     "fr/ai-water-consumption-fr.html": 4,
-    "fr/anthropic-hacker-fr.html": 4,
     "fr/index.html": 4,
     "fr/strumenti-oracoli-caso-deloitte-fr": 4,
     "it/ai-killed-mtv-star": 4,
@@ -388,7 +389,6 @@
     "en/deepseek-mhc-en.html": 3,
     "en/eset-apt-report-en": 3,
     "en/european-tech-map-en.html": 3,
-    "en/fda-ema-aim-nash-ai-en.html": 3,
     "en/glm-5-en": 3,
     "en/kimik2.5-en": 3,
     "en/longcat-video-en.html": 3,
@@ -426,6 +426,7 @@
     "fr/legge-ai-italia-fr.html": 3,
     "fr/machine learning, deep learning e algoritmi generativi-fr": 3,
     "fr/mit-adaptive-scaling-fr.html": 3,
+    "fr/prompt-repetition-fr.html": 3,
     "fr/strumenti-oracoli-caso-deloitte-fr.html": 3,
     "fr/subliminal-learning-fr.html": 3,
     "it/agent-hospital.html\"": 3,
@@ -441,6 +442,7 @@
     "it/programmatori-vs-ai": 3,
     "it/prompt-repetition": 3,
     "it/qwen35-locale-puntata1.html": 3,
+    "it/robotica-2025": 3,
     "it/silicon-valley-ai-pac.html": 3,
     "it/steering-llm": 3,
     "it/strumenti-oracoli-caso-deloitte": 3,
@@ -617,7 +619,6 @@
     "fr/pignataro-intervista2-fr.html": 2,
     "fr/poesia-ai-security-fr.html": 2,
     "fr/power-sampling-fr.html": 2,
-    "fr/prompt-repetition-fr.html": 2,
     "fr/qwen3-tts-fr.html": 2,
     "fr/rlm-ai-fr.html": 2,
     "fr/robotica-2025-fr": 2,
@@ -644,7 +645,6 @@
     "it/msa-100m-token": 2,
     "it/qwen36-35b-ai": 2,
     "it/rapporto-leonardo-2026-parte1": 2,
-    "it/robotica-2025": 2,
     "it/rsl-really-simple-licensing": 2,
     "it/startup-europa-2025": 2,
     "it/tilly-norwood-ai-actor": 2,
@@ -793,6 +793,7 @@
     "en/kimi-k2-thinking-en": 1,
     "en/last30days-en.html": 1,
     "en/llm-knowledge-base-en.html": 1,
+    "en/magnifica-humanitas-en.html": 1,
     "en/malta-openai-en": 1,
     "en/mdash-microsoft-en": 1,
     "en/mercury2-en": 1,
@@ -1402,26 +1403,83 @@
           "fr/dspark-fr.html": 1,
           "it/european-tech-map": 1
         }
+      },
+      "2026-07-21": {
+        "total_views": 35,
+        "views_by_lang": {
+          "it": 29,
+          "en": 4,
+          "fr": 2
+        },
+        "views_by_tag": {
+          "Generative AI": 17,
+          "Applications": 15,
+          "Security": 5,
+          "Research": 14,
+          "Ethics & Society": 4,
+          "Business": 1,
+          "Training": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/colibri.html",
+            "views": 8
+          },
+          {
+            "path": "it/sistema-sicurezza-ai.html",
+            "views": 3
+          },
+          {
+            "path": "it/dspark.html",
+            "views": 3
+          },
+          {
+            "path": "it/newsletter",
+            "views": 2
+          },
+          {
+            "path": "it/thank-you",
+            "views": 2
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 7,
+          "it": 1,
+          "it/newsletter": 2,
+          "it/thank-you": 2,
+          "it/ai-epanortosi": 1,
+          "it/sistema-sicurezza-ai.html": 3,
+          "it/dspark.html": 3,
+          "it/ai-creazione-contenuti": 1,
+          "it/colibri.html": 8,
+          "en/trm-samsung-en": 1,
+          "en/shutdown-resistance-en.html": 1,
+          "fr/anthropic-hacker-fr.html": 1,
+          "en/fda-ema-aim-nash-ai-en.html": 1,
+          "fr/prompt-repetition-fr.html": 1,
+          "it/robotica-2025": 1,
+          "en/magnifica-humanitas-en.html": 1
+        }
       }
     },
     "monthly": {
       "2026-07": {
-        "total_views": 235,
+        "total_views": 270,
         "views_by_lang": {
-          "it": 149,
-          "en": 55,
+          "it": 178,
+          "en": 59,
           "de": 9,
-          "fr": 13,
+          "fr": 15,
           "es": 9
         },
         "views_by_tag": {
-          "Generative AI": 123,
-          "Applications": 70,
-          "Security": 16,
-          "Research": 82,
-          "Ethics & Society": 59,
-          "Training": 23,
-          "Business": 18,
+          "Generative AI": 140,
+          "Applications": 85,
+          "Security": 21,
+          "Research": 96,
+          "Ethics & Society": 63,
+          "Training": 24,
+          "Business": 19,
           "Copyright": 2,
           "Startups": 2,
           "E-learning": 1
@@ -1433,31 +1491,31 @@
           },
           {
             "path": "it/dspark.html",
-            "views": 20
+            "views": 23
           },
           {
             "path": "it/sistema-sicurezza-ai.html",
-            "views": 14
+            "views": 17
           },
           {
             "path": "it/colibri.html",
-            "views": 8
+            "views": 16
           },
           {
             "path": "en/ai-epanortosi-en",
             "views": 6
           },
           {
-            "path": "it/ornith-1.0.html",
-            "views": 5
-          },
-          {
             "path": "it/newsletter",
-            "views": 4
+            "views": 6
           },
           {
             "path": "it/thank-you",
-            "views": 3
+            "views": 5
+          },
+          {
+            "path": "it/ornith-1.0.html",
+            "views": 5
           },
           {
             "path": "en/diffusion-vs-autoregressive-en.html",
@@ -1472,22 +1530,22 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 235,
+        "total_views": 270,
         "views_by_lang": {
-          "it": 149,
-          "en": 55,
+          "it": 178,
+          "en": 59,
           "de": 9,
-          "fr": 13,
+          "fr": 15,
           "es": 9
         },
         "views_by_tag": {
-          "Generative AI": 123,
-          "Applications": 70,
-          "Security": 16,
-          "Research": 82,
-          "Ethics & Society": 59,
-          "Training": 23,
-          "Business": 18,
+          "Generative AI": 140,
+          "Applications": 85,
+          "Security": 21,
+          "Research": 96,
+          "Ethics & Society": 63,
+          "Training": 24,
+          "Business": 19,
           "Copyright": 2,
           "Startups": 2,
           "E-learning": 1

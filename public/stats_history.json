@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-07-25T03:51:12.159837+00:00",
+  "last_update": "2026-07-26T04:08:23.841504+00:00",
   "portal_snapshot": {
     "total_articles": 785,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 157
   },
   "cumulative_history": {
-    "it/index.html": 2252,
-    "it": 939,
+    "it/index.html": 2257,
+    "it": 940,
     "fr": 296,
     "it/newsletter": 208,
     "en": 199,
@@ -51,9 +51,9 @@
     "it/intervista-ricco-ai.html": 59,
     "it/ai-epanortosi": 58,
     "it/google-threat-intelligence.html": 57,
+    "en/ai-epanortosi-en": 55,
     "it/anthropic-hacker.html": 55,
     "en/memvid-ai-memory-en": 53,
-    "en/ai-epanortosi-en": 52,
     "it/apply-ai-eu-strategy.html": 51,
     "en/robotica-2025-en.html": 50,
     "it/gina-assistente-vocale.html": 49,
@@ -93,10 +93,10 @@
     "it/aaio-floridi.html": 29,
     "it/agentic-ai-foundation.html": 29,
     "it/kv-cache-approach.html": 29,
+    "it/sistema-sicurezza-ai.html": 29,
     "it/trm-samsung.html": 29,
     "it/ai-epanortosi.html": 28,
     "it/eset-apt-report.html": 28,
-    "it/sistema-sicurezza-ai.html": 28,
     "it/agenti-marxisti.html": 27,
     "it/cookie": 27,
     "it/dspark.html": 27,
@@ -116,6 +116,7 @@
     "it/ai-rsponsabilità.html": 24,
     "it/antigravity-security.html": 24,
     "it/caveman.html": 24,
+    "it/colibri.html": 24,
     "it/european-tech-map.html": 24,
     "it/fda-ema-aim-nash-ai.html": 24,
     "it/msa-100m-token.html": 24,
@@ -127,21 +128,20 @@
     "it/anthropic-fear.html": 23,
     "it/cina-universita.html": 23,
     "it/claude-code.html": 23,
-    "it/colibri.html": 23,
     "it/longcat-video.html": 23,
+    "it/ornith-1.0.html": 23,
     "it/recursivemas.html": 23,
     "it/rlm-ai.html": 23,
     "it/talkie-vintage-llm.html": 23,
     "it/waymo-blackout-analysis.html": 23,
     "it/agenti-al-lavoro.html": 22,
     "it/ai-consumer-2025.html": 22,
+    "it/gemma4-12b-q8.html": 22,
     "it/mistral-devstral.html": 22,
-    "it/ornith-1.0.html": 22,
     "it/pentagono-anthropic-openai.html": 22,
     "it/pignataro-intervista1.html": 22,
     "it/browser-ai.html": 21,
     "it/emergence-world.html": 21,
-    "it/gemma4-12b-q8.html": 21,
     "it/glm-5.html": 21,
     "it/licenziamenti-ai-2026.html": 21,
     "it/mit-ai-umile.html": 21,
@@ -196,10 +196,10 @@
     "en/alibaba-qwen3-en": 14,
     "es/antigravity-security-es": 14,
     "it/agenti-multipli-stanford.html": 14,
+    "it/aisi-benchmark.html": 14,
     "en/amodei-intervista-parte2-en.html": 13,
     "en/papalini-interview-en.html": 13,
     "fr/toon-fr.html": 13,
-    "it/aisi-benchmark.html": 13,
     "it/anthropic-hacker": 13,
     "it/dataland-museo-ai.html": 13,
     "it/memvid-ai-memory.html": 13,
@@ -213,6 +213,8 @@
     "it/ai-metacognition.html": 11,
     "it/ai-winter.html": 11,
     "it/humanebench": 11,
+    "it/loop-engineering.html": 11,
+    "it/machine learning, deep learning e algoritmi generativi": 11,
     "it/poesia-ai-security": 11,
     "it/trm-samsung": 11,
     "de/poesia-ai-security-de.html": 10,
@@ -221,8 +223,6 @@
     "it/ai-deepconf": 10,
     "it/eset-apt-report": 10,
     "it/iceberg-index": 10,
-    "it/loop-engineering.html": 10,
-    "it/machine learning, deep learning e algoritmi generativi": 10,
     "it/subliminal-learning": 10,
     "it/tilly-norwood-ai-actor.html": 10,
     "de/ai-cosciente-de": 9,
@@ -360,6 +360,7 @@
     "it/qwen3.5-locale-puntata1": 4,
     "it/rsl-really-simple-licensing.html": 4,
     "it/turboquant": 4,
+    "it/wave-former-raggix": 4,
     "de/ai-coding-security-de": 3,
     "de/ai-consumer-2025-de.html": 3,
     "de/ai-creazione-contenuti-de": 3,
@@ -454,7 +455,6 @@
     "it/silicon-valley-ai-pac.html": 3,
     "it/steering-llm": 3,
     "it/strumenti-oracoli-caso-deloitte": 3,
-    "it/wave-former-raggix": 3,
     "de/aaio-floridi-de.html": 2,
     "de/agent-hospital-de.html": 2,
     "de/agenti-al-lavoro-de.html": 2,
@@ -757,6 +757,7 @@
     "en/AI_fronte_Cyber_en.html": 1,
     "en/aaio-floridi-en.html": 1,
     "en/agenti-al-lavoro-en.html": 1,
+    "en/agenti-marxisti-en": 1,
     "en/agenti-marxisti.html": 1,
     "en/agenti-multipli-stanford-en.html": 1,
     "en/agentic-ai-foundation-en.html": 1,
@@ -781,6 +782,7 @@
     "en/claude-code-en": 1,
     "en/claude-code-en.html": 1,
     "en/codespeak-en.html": 1,
+    "en/colibri-en.html": 1,
     "en/convergenza-modelli-scientifici-en.html": 1,
     "en/cookie": 1,
     "en/dalle applicazioni consolidate alle frontiere del futuro-en": 1,
@@ -971,6 +973,7 @@
     "fr/caveman-fr.html": 1,
     "fr/claude-code-fr": 1,
     "fr/codespeak-fr.html": 1,
+    "fr/colibri-fr": 1,
     "fr/contributo-automazione-bacchiocchi-fr": 1,
     "fr/contributo-automazione-bacchiocchi-fr.html": 1,
     "fr/cookie": 1,
@@ -1001,6 +1004,7 @@
     "fr/intervista-ricco-ai-fr.html": 1,
     "fr/kimi-k2-thinking-fr.html": 1,
     "fr/kimik2.5-fr.html": 1,
+    "fr/kv-cache-approach-fr.html": 1,
     "fr/licenziamenti-ai-2026-fr.html": 1,
     "fr/longcat-video-fr.html": 1,
     "fr/malattie-mentali-ai-fr": 1,
@@ -1057,6 +1061,7 @@
     "it/cina-universita": 1,
     "it/convergenza-modelli-scientifici": 1,
     "it/deepseek-mhc": 1,
+    "it/dspark": 1,
     "it/esodo-silenzioso": 1,
     "it/european-tech-map": 1,
     "it/google-ai-revolution": 1,
@@ -1072,6 +1077,7 @@
     "it/pocketos-disaster": 1,
     "it/project-glasswing-mythos": 1,
     "it/rapporto-leonardo-2026-parte2": 1,
+    "it/sistema-sicurezza-ai": 1,
     "it/sitemap.xml": 1,
     "it/stats": 1,
     "it/stats.html": 1
@@ -1720,25 +1726,82 @@
           "it/kv-cache-approach": 1,
           "it/last30days": 1
         }
+      },
+      "2026-07-25": {
+        "total_views": 23,
+        "views_by_lang": {
+          "it": 16,
+          "en": 5,
+          "fr": 2
+        },
+        "views_by_tag": {
+          "Generative AI": 8,
+          "Applications": 7,
+          "Security": 1,
+          "Research": 5,
+          "Training": 2,
+          "Ethics & Society": 1
+        },
+        "top_articles": [
+          {
+            "path": "en/ai-epanortosi-en",
+            "views": 3
+          },
+          {
+            "path": "it/sistema-sicurezza-ai.html",
+            "views": 1
+          },
+          {
+            "path": "it/colibri.html",
+            "views": 1
+          },
+          {
+            "path": "it/ornith-1.0.html",
+            "views": 1
+          },
+          {
+            "path": "it/gemma4-12b-q8.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 5,
+          "it": 1,
+          "en/ai-epanortosi-en": 3,
+          "it/sistema-sicurezza-ai.html": 1,
+          "it/colibri.html": 1,
+          "it/ornith-1.0.html": 1,
+          "it/gemma4-12b-q8.html": 1,
+          "it/aisi-benchmark.html": 1,
+          "it/loop-engineering.html": 1,
+          "it/machine learning, deep learning e algoritmi generativi": 1,
+          "it/wave-former-raggix": 1,
+          "en/agenti-marxisti-en": 1,
+          "en/colibri-en.html": 1,
+          "fr/colibri-fr": 1,
+          "fr/kv-cache-approach-fr.html": 1,
+          "it/dspark": 1,
+          "it/sistema-sicurezza-ai": 1
+        }
       }
     },
     "monthly": {
       "2026-07": {
-        "total_views": 448,
+        "total_views": 471,
         "views_by_lang": {
-          "it": 303,
-          "en": 83,
+          "it": 319,
+          "en": 88,
           "de": 19,
-          "fr": 24,
+          "fr": 26,
           "es": 19
         },
         "views_by_tag": {
-          "Generative AI": 224,
-          "Applications": 131,
-          "Security": 37,
-          "Research": 152,
-          "Ethics & Society": 108,
-          "Training": 41,
+          "Generative AI": 232,
+          "Applications": 138,
+          "Security": 38,
+          "Research": 157,
+          "Ethics & Society": 109,
+          "Training": 43,
           "Business": 36,
           "Copyright": 2,
           "Startups": 3,
@@ -1755,23 +1818,23 @@
           },
           {
             "path": "it/colibri.html",
-            "views": 23
+            "views": 24
           },
           {
             "path": "it/sistema-sicurezza-ai.html",
-            "views": 20
+            "views": 21
           },
           {
             "path": "it/aisi-benchmark.html",
-            "views": 13
-          },
-          {
-            "path": "it/loop-engineering.html",
-            "views": 10
+            "views": 14
           },
           {
             "path": "en/ai-epanortosi-en",
-            "views": 9
+            "views": 12
+          },
+          {
+            "path": "it/loop-engineering.html",
+            "views": 11
           },
           {
             "path": "it/newsletter",
@@ -1783,28 +1846,28 @@
           },
           {
             "path": "it/ornith-1.0.html",
-            "views": 7
+            "views": 8
           }
         ]
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 448,
+        "total_views": 471,
         "views_by_lang": {
-          "it": 303,
-          "en": 83,
+          "it": 319,
+          "en": 88,
           "de": 19,
-          "fr": 24,
+          "fr": 26,
           "es": 19
         },
         "views_by_tag": {
-          "Generative AI": 224,
-          "Applications": 131,
-          "Security": 37,
-          "Research": 152,
-          "Ethics & Society": 108,
-          "Training": 41,
+          "Generative AI": 232,
+          "Applications": 138,
+          "Security": 38,
+          "Research": 157,
+          "Ethics & Society": 109,
+          "Training": 43,
           "Business": 36,
           "Copyright": 2,
           "Startups": 3,

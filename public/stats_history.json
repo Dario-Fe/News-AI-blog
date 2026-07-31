@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-07-30T03:43:32.122241+00:00",
+  "last_update": "2026-07-31T04:03:20.727844+00:00",
   "portal_snapshot": {
     "total_articles": 795,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 159
   },
   "cumulative_history": {
-    "it/index.html": 2299,
-    "it": 950,
+    "it/index.html": 2309,
+    "it": 952,
     "fr": 297,
     "it/newsletter": 208,
     "en": 201,
@@ -177,33 +177,34 @@
     "it/degregori-ai-war.html": 17,
     "it/glm-5": 17,
     "it/glm5.2.html": 17,
+    "it/meetily.html": 17,
     "it/mit-adaptive-scaling.html": 17,
     "it/quantum-echoes.html": 17,
     "it/startup-europa-2025.html": 17,
     "en/iceberg-index-en": 16,
     "it/ai-creazione-contenuti": 16,
+    "it/chartnet.html": 16,
     "it/contributo-automazione-bacchiocchi": 16,
     "it/iceberg-index.html": 16,
     "it/pignataro-intervista2.html": 16,
     "en/alibaba-qwen3-en": 15,
+    "en/amodei-intervista-parte2-en.html": 15,
     "en/trm-samsung-en": 15,
     "fr/malattie-mentali-ai-fr.html": 15,
-    "it/chartnet.html": 15,
     "it/guerra-algoritmica.html": 15,
     "it/malattie-mentali-ai.html": 15,
     "it/mit-adaptive-scaling": 15,
     "it/power-sampling.html": 15,
     "it/stanford-ai-index-2026.html": 15,
-    "en/amodei-intervista-parte2-en.html": 14,
     "en/papalini-interview-en.html": 14,
     "es/antigravity-security-es": 14,
     "it/agenti-multipli-stanford.html": 14,
     "it/aisi-benchmark.html": 14,
     "it/anthropic-hacker": 14,
+    "it/jacobian-lens.html": 14,
     "it/memvid-ai-memory.html": 14,
     "fr/toon-fr.html": 13,
     "it/dataland-museo-ai.html": 13,
-    "it/meetily.html": 13,
     "it/steerling.html": 13,
     "it/tml-determinism": 13,
     "en/shutdown-resistance-en.html": 12,
@@ -215,7 +216,6 @@
     "it/ai-metacognition.html": 11,
     "it/ai-winter.html": 11,
     "it/humanebench": 11,
-    "it/jacobian-lens.html": 11,
     "it/loop-engineering.html": 11,
     "it/machine learning, deep learning e algoritmi generativi": 11,
     "it/poesia-ai-security": 11,
@@ -337,9 +337,11 @@
     "en/ai-bournout-en.html": 4,
     "en/ai-creativity-ethics-en.html": 4,
     "en/ai-safety-report-2026-en.html": 4,
+    "en/anthropic-fear-en.html": 4,
     "en/contributo-automazione-bacchiocchi-en.html": 4,
     "en/cyborg-centauri-automi-en.html": 4,
     "en/deepseek-mhc-en.html": 4,
+    "en/gemma4-12b-q8-en": 4,
     "en/humanebench-en": 4,
     "en/introspection-anthropic-en": 4,
     "en/ornith-1.0-en": 4,
@@ -417,14 +419,12 @@
     "en/ai-prompt-scandalo-en.html": 3,
     "en/ai-winter-en.html": 3,
     "en/amodei-intervista-parte2-en": 3,
-    "en/anthropic-fear-en.html": 3,
     "en/bodo-glimt-fokus-ai-en.html": 3,
     "en/browser-ai-en": 3,
     "en/cassieri-remoti-ai-en.html": 3,
     "en/emergence-world-en.html": 3,
     "en/eset-apt-report-en": 3,
     "en/european-tech-map-en.html": 3,
-    "en/gemma4-12b-q8-en": 3,
     "en/glm-5-en": 3,
     "en/introspection-anthropic-en.html": 3,
     "en/kimi-k2-article-en.html": 3,
@@ -578,6 +578,7 @@
     "en/datacenter-proteste-usa-en.html": 2,
     "en/deepseek-mhc-en": 2,
     "en/esodo-silenzioso-en.html": 2,
+    "en/gemma4-12b-q8-en.html": 2,
     "en/giganti-ai-bocciati-seconda-puntata-en": 2,
     "en/gina-assistente-vocale-en": 2,
     "en/glm-5-en.html": 2,
@@ -589,6 +590,7 @@
     "en/intervista-ricco-ai-en.html": 2,
     "en/kimi-k2-thinking-en.html": 2,
     "en/kv-cache-approach-en.html": 2,
+    "en/last30days-en.html": 2,
     "en/licenziamenti-ai-2026-en": 2,
     "en/llm-knowledge-base-en": 2,
     "en/metodo-editoriale": 2,
@@ -746,6 +748,7 @@
     "it/ai-bournout": 2,
     "it/ai-creativity-ethics": 2,
     "it/ai-fronte-cyber": 2,
+    "it/ai-metacognition": 2,
     "it/ai-prompt-scandalo": 2,
     "it/ai-rsponsabilit": 2,
     "it/ai-slop-entropia": 2,
@@ -873,7 +876,6 @@
     "en/european-tech-map-en": 1,
     "en/fda-ema-aim-nash-ai-en": 1,
     "en/feed": 1,
-    "en/gemma4-12b-q8-en.html": 1,
     "en/gemma4-26b-en.html": 1,
     "en/glm5.2-en": 1,
     "en/glm5.2-en.html": 1,
@@ -885,7 +887,6 @@
     "en/jacobian-lens-en.html": 1,
     "en/kimi-k2-article-en": 1,
     "en/kimi-k2-thinking-en": 1,
-    "en/last30days-en.html": 1,
     "en/llm-knowledge-base-en.html": 1,
     "en/loop-engineering-en.html": 1,
     "en/magnifica-humanitas-en.html": 1,
@@ -1033,6 +1034,7 @@
     "fr/kv-cache-approach-fr.html": 1,
     "fr/licenziamenti-ai-2026-fr.html": 1,
     "fr/longcat-video-fr.html": 1,
+    "fr/loop-engineering-fr.html": 1,
     "fr/malattie-mentali-ai-fr": 1,
     "fr/malta-openai-fr.html": 1,
     "fr/mercury2-fr": 1,
@@ -1063,7 +1065,6 @@
     "it/10-regole-AI.html": 1,
     "it/aaio-floridi": 1,
     "it/agenti-al-lavoro": 1,
-    "it/ai-metacognition": 1,
     "it/ai-safety-report-2026": 1,
     "it/amodei-intervista-parte2": 1,
     "it/assets/images/YWktY29uc3": 1,
@@ -2270,28 +2271,82 @@
           "es/cyborg-centauri-automi-es.html": 1,
           "fr/anthropic-hacker-fr": 1
         }
+      },
+      "2026-07-30": {
+        "total_views": 27,
+        "views_by_lang": {
+          "it": 21,
+          "en": 5,
+          "fr": 1
+        },
+        "views_by_tag": {
+          "Generative AI": 11,
+          "Startups": 4,
+          "Applications": 7,
+          "Research": 5,
+          "Training": 2,
+          "Ethics & Society": 6,
+          "Security": 2,
+          "Business": 2
+        },
+        "top_articles": [
+          {
+            "path": "it/meetily.html",
+            "views": 4
+          },
+          {
+            "path": "it/jacobian-lens.html",
+            "views": 3
+          },
+          {
+            "path": "it/chartnet.html",
+            "views": 1
+          },
+          {
+            "path": "en/amodei-intervista-parte2-en.html",
+            "views": 1
+          },
+          {
+            "path": "en/anthropic-fear-en.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 10,
+          "it": 2,
+          "it/meetily.html": 4,
+          "it/chartnet.html": 1,
+          "en/amodei-intervista-parte2-en.html": 1,
+          "it/jacobian-lens.html": 3,
+          "en/anthropic-fear-en.html": 1,
+          "en/gemma4-12b-q8-en": 1,
+          "en/gemma4-12b-q8-en.html": 1,
+          "en/last30days-en.html": 1,
+          "it/ai-metacognition": 1,
+          "fr/loop-engineering-fr.html": 1
+        }
       }
     },
     "monthly": {
       "2026-07": {
-        "total_views": 838,
+        "total_views": 865,
         "views_by_lang": {
-          "it": 472,
-          "en": 152,
+          "it": 493,
+          "en": 157,
           "de": 68,
-          "fr": 77,
+          "fr": 78,
           "es": 69
         },
         "views_by_tag": {
-          "Generative AI": 431,
-          "Applications": 204,
-          "Security": 107,
-          "Research": 268,
-          "Ethics & Society": 292,
-          "Training": 94,
-          "Business": 171,
+          "Generative AI": 442,
+          "Applications": 211,
+          "Security": 109,
+          "Research": 273,
+          "Ethics & Society": 298,
+          "Training": 96,
+          "Business": 173,
           "Copyright": 12,
-          "Startups": 34,
+          "Startups": 38,
           "E-learning": 13
         },
         "top_articles": [
@@ -2312,7 +2367,15 @@
             "views": 22
           },
           {
+            "path": "it/meetily.html",
+            "views": 17
+          },
+          {
             "path": "it/aisi-benchmark.html",
+            "views": 14
+          },
+          {
+            "path": "it/jacobian-lens.html",
             "views": 14
           },
           {
@@ -2320,15 +2383,7 @@
             "views": 13
           },
           {
-            "path": "it/meetily.html",
-            "views": 13
-          },
-          {
             "path": "it/loop-engineering.html",
-            "views": 11
-          },
-          {
-            "path": "it/jacobian-lens.html",
             "views": 11
           },
           {
@@ -2340,24 +2395,24 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 838,
+        "total_views": 865,
         "views_by_lang": {
-          "it": 472,
-          "en": 152,
+          "it": 493,
+          "en": 157,
           "de": 68,
-          "fr": 77,
+          "fr": 78,
           "es": 69
         },
         "views_by_tag": {
-          "Generative AI": 431,
-          "Applications": 204,
-          "Security": 107,
-          "Research": 268,
-          "Ethics & Society": 292,
-          "Training": 94,
-          "Business": 171,
+          "Generative AI": 442,
+          "Applications": 211,
+          "Security": 109,
+          "Research": 273,
+          "Ethics & Society": 298,
+          "Training": 96,
+          "Business": 173,
           "Copyright": 12,
-          "Startups": 34,
+          "Startups": 38,
           "E-learning": 13
         }
       }

@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-01T04:05:03.273970+00:00",
+  "last_update": "2026-08-02T04:05:53.494022+00:00",
   "portal_snapshot": {
     "total_articles": 800,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 160
   },
   "cumulative_history": {
-    "it/index.html": 2314,
-    "it": 959,
+    "it/index.html": 2317,
+    "it": 960,
     "fr": 298,
     "it/newsletter": 208,
     "en": 202,
@@ -107,11 +107,11 @@
     "it/esodo-silenzioso.html": 27,
     "it/humanebench.html": 27,
     "it/mercury2.html": 27,
+    "it/10-regole-ai": 26,
     "it/ai-killed-mtv-star.html": 26,
     "it/ai-water-consumption.html": 26,
     "it/amazon-down.html": 26,
     "it/llm-knowledge-base.html": 26,
-    "it/10-regole-ai": 25,
     "it/ai-rsponsabilit%C3%A0.html": 25,
     "it/ai-rsponsabilità.html": 25,
     "it/antigravity-security": 25,
@@ -147,10 +147,10 @@
     "it/emergence-world.html": 21,
     "it/introspection-anthropic.html": 21,
     "it/licenziamenti-ai-2026.html": 21,
+    "it/meetily.html": 21,
     "it/ai-slop-entropia.html": 20,
     "it/codespeak.html": 20,
     "it/convergenza-modelli-scientifici.html": 20,
-    "it/meetily.html": 20,
     "it/mistral-forge.html": 20,
     "it/steering-llm.html": 20,
     "it/switching-task.html": 20,
@@ -205,6 +205,7 @@
     "it/memvid-ai-memory.html": 14,
     "fr/toon-fr.html": 13,
     "it/dataland-museo-ai.html": 13,
+    "it/prompt-injection-camel.html": 13,
     "it/steerling.html": 13,
     "it/tml-determinism": 13,
     "en/shutdown-resistance-en.html": 12,
@@ -219,11 +220,11 @@
     "it/loop-engineering.html": 11,
     "it/machine learning, deep learning e algoritmi generativi": 11,
     "it/poesia-ai-security": 11,
-    "it/prompt-injection-camel.html": 11,
     "it/trm-samsung": 11,
     "de/poesia-ai-security-de.html": 10,
     "de/tml-determinism-de": 10,
     "en/longcat-video-en": 10,
+    "it/agentic-ai-foundation": 10,
     "it/ai-deepconf": 10,
     "it/eset-apt-report": 10,
     "it/iceberg-index": 10,
@@ -233,11 +234,11 @@
     "de/authors/dario-ferrero": 9,
     "en/prompt-repetition-en.html": 9,
     "fr/agentic-ai-foundation-fr.html": 9,
-    "it/agentic-ai-foundation": 9,
     "it/ai-water-consumption": 9,
     "it/google-ue-indagine.html": 9,
     "it/longcat-video": 9,
     "en/ai-valutazione-ed-etica-en": 8,
+    "en/diffusion-vs-autoregressive-en": 8,
     "en/index.html": 8,
     "en/intervista-ricco-ai-en": 8,
     "en/legge-ai-italia-en": 8,
@@ -253,7 +254,6 @@
     "en/antigravity-security-en.html": 7,
     "en/authors/dario-ferrero": 7,
     "en/deepseek-ocr-en.html": 7,
-    "en/diffusion-vs-autoregressive-en": 7,
     "en/diffusion-vs-autoregressive-en.html": 7,
     "en/newsletter": 7,
     "es/agentic-ai-foundation-es.html": 7,
@@ -347,6 +347,7 @@
     "en/introspection-anthropic-en": 4,
     "en/mistral-devstral-en.html": 4,
     "en/ornith-1.0-en": 4,
+    "en/qwen3.5-locale-puntata1-en.html": 4,
     "en/rlm-ai-en.html": 4,
     "en/rsl-really-simple-licensing-en.html": 4,
     "en/slm-2026-en": 4,
@@ -386,6 +387,7 @@
     "it/silicon-valley-ai-pac.html": 4,
     "it/turboquant": 4,
     "it/wave-former-raggix": 4,
+    "de/10-regole-ai-de": 3,
     "de/aaio-floridi-de.html": 3,
     "de/agenti-al-lavoro-de.html": 3,
     "de/agentic-ai-foundation-de.html": 3,
@@ -444,7 +446,6 @@
     "en/poesia-ai-security-en.html": 3,
     "en/quantum-echoes-en.html": 3,
     "en/qwen3.5-locale-puntata1-en": 3,
-    "en/qwen3.5-locale-puntata1-en.html": 3,
     "en/rapporto-leonardo-2026-parte2-en.html": 3,
     "en/robot-tax-sanders-en": 3,
     "en/robotica-2025-en": 3,
@@ -510,7 +511,6 @@
     "it/robotica-2025": 3,
     "it/steering-llm": 3,
     "it/strumenti-oracoli-caso-deloitte": 3,
-    "de/10-regole-ai-de": 2,
     "de/agent-hospital-de.html": 2,
     "de/ai-bournout-de.html": 2,
     "de/ai-fronte-cyber-de": 2,
@@ -534,6 +534,7 @@
     "de/degregori-ai-war-de.html": 2,
     "de/gemma4-26b-de.html": 2,
     "de/introspection-anthropic-de.html": 2,
+    "de/last30days-de.html": 2,
     "de/llm-knowledge-base-de": 2,
     "de/magnifica-humanitas-de.html": 2,
     "de/mini-max-m2.7-de.html": 2,
@@ -545,6 +546,7 @@
     "de/pocketos-disaster-de.html": 2,
     "de/power-sampling-de.html": 2,
     "de/prompt-repetition-de.html": 2,
+    "de/qwen3-tts-de": 2,
     "de/qwen3.5-locale-puntata1-de.html": 2,
     "de/rapporto-leonardo-2026-parte2-de.html": 2,
     "de/robot-tax-sanders-de.html": 2,
@@ -625,6 +627,7 @@
     "en/turboquant-en.html": 2,
     "en/wave-former-raggix-en": 2,
     "en/wave-former-raggix-en.html": 2,
+    "es/10-regole-ai-es": 2,
     "es/aaio-floridi-es.html": 2,
     "es/agenti-al-lavoro-es.html": 2,
     "es/agenti-multipli-stanford-es.html": 2,
@@ -709,6 +712,7 @@
     "fr/ai-coding-security-fr": 2,
     "fr/ai-cosciente-fr": 2,
     "fr/ai-fronte-cyber-fr": 2,
+    "fr/ai-lutto-digitale-fr.html": 2,
     "fr/ai-musica-copyright-fr": 2,
     "fr/ai-rsponsabilità-fr.html": 2,
     "fr/ai-safety-report-2026-fr": 2,
@@ -823,7 +827,6 @@
     "de/iceberg-index-de.html": 1,
     "de/intervista-ricco-ai-de": 1,
     "de/introspection-anthropic-de": 1,
-    "de/last30days-de.html": 1,
     "de/legge-ai-italia-de": 1,
     "de/machine learning, deep learning e algoritmi generativi-de": 1,
     "de/malattie-mentali-ai-de.html": 1,
@@ -839,7 +842,6 @@
     "de/poesia-ai-security-de": 1,
     "de/programmers-vs-ai-de": 1,
     "de/project-glasswing-mythos-de.html": 1,
-    "de/qwen3-tts-de": 1,
     "de/qwen3.5-locale-puntata2-de": 1,
     "de/qwen36-35b-ai-de.html": 1,
     "de/rapporto-leonardo-2026-parte1-de.html": 1,
@@ -939,7 +941,6 @@
     "en/tml-determinism-en": 1,
     "en/tml-determinism-en.html": 1,
     "en/turboquant-en": 1,
-    "es/10-regole-ai-es": 1,
     "es/agenti-marxisti-es.html": 1,
     "es/ai-bournout-es": 1,
     "es/ai-creativity-ethics-es": 1,
@@ -1004,7 +1005,6 @@
     "fr/agenti-marxisti-fr.html": 1,
     "fr/agenti-multipli-stanford-fr.html": 1,
     "fr/ai-consumer-2025-fr.html": 1,
-    "fr/ai-lutto-digitale-fr.html": 1,
     "fr/ai-metacognition-fr": 1,
     "fr/amodei-intervista-parte1-fr": 1,
     "fr/andon-fm-fr.html": 1,
@@ -2434,6 +2434,63 @@
           "fr/chatgpt-ads-fr.html": 1,
           "it/meetily.htmlhttps://aitalk.it/it/prompt-injection-camel.html": 1
         }
+      },
+      "2026-08-01": {
+        "total_views": 16,
+        "views_by_lang": {
+          "it": 9,
+          "en": 2,
+          "de": 3,
+          "es": 1,
+          "fr": 1
+        },
+        "views_by_tag": {
+          "Generative AI": 6,
+          "Startups": 1,
+          "Applications": 3,
+          "Research": 2,
+          "Security": 2,
+          "E-learning": 1,
+          "Ethics & Society": 2,
+          "Business": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/prompt-injection-camel.html",
+            "views": 2
+          },
+          {
+            "path": "it/10-regole-ai",
+            "views": 1
+          },
+          {
+            "path": "it/meetily.html",
+            "views": 1
+          },
+          {
+            "path": "it/agentic-ai-foundation",
+            "views": 1
+          },
+          {
+            "path": "en/diffusion-vs-autoregressive-en",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 3,
+          "it": 1,
+          "it/10-regole-ai": 1,
+          "it/meetily.html": 1,
+          "it/prompt-injection-camel.html": 2,
+          "it/agentic-ai-foundation": 1,
+          "en/diffusion-vs-autoregressive-en": 1,
+          "en/qwen3.5-locale-puntata1-en.html": 1,
+          "de/10-regole-ai-de": 1,
+          "de/last30days-de.html": 1,
+          "de/qwen3-tts-de": 1,
+          "es/10-regole-ai-es": 1,
+          "fr/ai-lutto-digitale-fr.html": 1
+        }
       }
     },
     "monthly": {
@@ -2500,29 +2557,91 @@
             "views": 11
           }
         ]
+      },
+      "2026-08": {
+        "total_views": 16,
+        "views_by_lang": {
+          "it": 9,
+          "en": 2,
+          "de": 3,
+          "es": 1,
+          "fr": 1
+        },
+        "views_by_tag": {
+          "Generative AI": 6,
+          "Startups": 1,
+          "Applications": 3,
+          "Research": 2,
+          "Security": 2,
+          "E-learning": 1,
+          "Ethics & Society": 2,
+          "Business": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/prompt-injection-camel.html",
+            "views": 2
+          },
+          {
+            "path": "it/10-regole-ai",
+            "views": 1
+          },
+          {
+            "path": "it/meetily.html",
+            "views": 1
+          },
+          {
+            "path": "it/agentic-ai-foundation",
+            "views": 1
+          },
+          {
+            "path": "en/diffusion-vs-autoregressive-en",
+            "views": 1
+          },
+          {
+            "path": "en/qwen3.5-locale-puntata1-en.html",
+            "views": 1
+          },
+          {
+            "path": "de/10-regole-ai-de",
+            "views": 1
+          },
+          {
+            "path": "de/last30days-de.html",
+            "views": 1
+          },
+          {
+            "path": "de/qwen3-tts-de",
+            "views": 1
+          },
+          {
+            "path": "es/10-regole-ai-es",
+            "views": 1
+          }
+        ]
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 946,
+        "total_views": 962,
         "views_by_lang": {
-          "it": 542,
-          "en": 171,
-          "de": 72,
-          "fr": 85,
-          "es": 76
+          "it": 551,
+          "en": 173,
+          "de": 75,
+          "fr": 86,
+          "es": 77
         },
         "views_by_tag": {
-          "Generative AI": 493,
-          "Applications": 223,
-          "Security": 129,
-          "Research": 299,
-          "Ethics & Society": 323,
+          "Generative AI": 499,
+          "Applications": 226,
+          "Security": 131,
+          "Research": 301,
+          "Ethics & Society": 325,
           "Training": 103,
-          "Business": 193,
+          "Business": 194,
           "Copyright": 13,
-          "Startups": 45,
-          "E-learning": 15
+          "Startups": 46,
+          "E-learning": 16
         }
       }
     }

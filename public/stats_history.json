@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-04T03:51:02.349752+00:00",
+  "last_update": "2026-08-05T03:46:39.512321+00:00",
   "portal_snapshot": {
     "total_articles": 805,
     "articles_by_lang": {
@@ -34,7 +34,7 @@
     "video_articles_count": 161
   },
   "cumulative_history": {
-    "it/index.html": 2333,
+    "it/index.html": 2345,
     "it": 965,
     "fr": 299,
     "it/newsletter": 208,
@@ -148,13 +148,15 @@
     "it/emergence-world.html": 21,
     "it/introspection-anthropic.html": 21,
     "it/licenziamenti-ai-2026.html": 21,
+    "en/agent-hospital-en.html": 20,
     "it/ai-slop-entropia.html": 20,
     "it/codespeak.html": 20,
     "it/convergenza-modelli-scientifici.html": 20,
+    "it/dwarfstar-antirez.html": 20,
     "it/mistral-forge.html": 20,
+    "it/prompt-injection-camel.html": 20,
     "it/steering-llm.html": 20,
     "it/switching-task.html": 20,
-    "en/agent-hospital-en.html": 19,
     "en/ai-video-generativa-ovi-en": 19,
     "it/ai-creativity-ethics.html": 19,
     "it/amodei-intervista-parte2.html": 19,
@@ -189,11 +191,9 @@
     "it/chartnet.html": 16,
     "it/contributo-automazione-bacchiocchi": 16,
     "it/pignataro-intervista2.html": 16,
-    "it/prompt-injection-camel.html": 16,
     "en/alibaba-qwen3-en": 15,
     "en/trm-samsung-en": 15,
     "fr/malattie-mentali-ai-fr.html": 15,
-    "it/dwarfstar-antirez.html": 15,
     "it/guerra-algoritmica.html": 15,
     "it/malattie-mentali-ai.html": 15,
     "it/mit-adaptive-scaling": 15,
@@ -222,6 +222,7 @@
     "it/humanebench": 11,
     "it/machine learning, deep learning e algoritmi generativi": 11,
     "it/poesia-ai-security": 11,
+    "it/tilly-norwood-ai-actor.html": 11,
     "it/trm-samsung": 11,
     "de/poesia-ai-security-de.html": 10,
     "de/tml-determinism-de": 10,
@@ -230,7 +231,6 @@
     "it/eset-apt-report": 10,
     "it/iceberg-index": 10,
     "it/subliminal-learning": 10,
-    "it/tilly-norwood-ai-actor.html": 10,
     "de/ai-cosciente-de": 9,
     "de/authors/dario-ferrero": 9,
     "en/prompt-repetition-en.html": 9,
@@ -328,6 +328,7 @@
     "de/agentic-ai-foundation-de": 4,
     "de/ai-consumer-2025-de.html": 4,
     "de/ai-deepconf-de": 4,
+    "de/ai-safety-report-2026-de": 4,
     "de/ai-valutazione-ed-etica-de": 4,
     "de/cyborg-centauri-automi-de.html": 4,
     "de/datacenter-proteste-usa-de.html": 4,
@@ -341,6 +342,7 @@
     "en/ai-creativity-ethics-en.html": 4,
     "en/ai-safety-report-2026-en.html": 4,
     "en/anthropic-fear-en.html": 4,
+    "en/bodo-glimt-fokus-ai-en.html": 4,
     "en/contributo-automazione-bacchiocchi-en.html": 4,
     "en/cyborg-centauri-automi-en.html": 4,
     "en/deepseek-mhc-en.html": 4,
@@ -397,7 +399,6 @@
     "de/ai-killed-mtv-star-de.html": 3,
     "de/ai-musica-copyright-de": 3,
     "de/ai-rsponsabilità-de.html": 3,
-    "de/ai-safety-report-2026-de": 3,
     "de/ai-safety-report-2026-de.html": 3,
     "de/anthropic-hacker-de.html": 3,
     "de/caveman-de": 3,
@@ -429,7 +430,6 @@
     "en/ai-prompt-scandalo-en.html": 3,
     "en/ai-winter-en.html": 3,
     "en/amodei-intervista-parte2-en": 3,
-    "en/bodo-glimt-fokus-ai-en.html": 3,
     "en/browser-ai-en": 3,
     "en/cassieri-remoti-ai-en.html": 3,
     "en/emergence-world-en.html": 3,
@@ -687,6 +687,7 @@
     "es/mistral-forge-es.html": 2,
     "es/mondiale-2026-gemini-es.html": 2,
     "es/msa-100m-token-es.html": 2,
+    "es/ornith-1.0-es": 2,
     "es/ornith-1.0-es.html": 2,
     "es/pentagono-anthropic-openai-es.html": 2,
     "es/pignataro-intervista1-es.html": 2,
@@ -2628,6 +2629,57 @@
           "fr/anthropic-fear-fr.html": 1,
           "it/papalini-interview": 1
         }
+      },
+      "2026-08-04": {
+        "total_views": 27,
+        "views_by_lang": {
+          "it": 22,
+          "en": 2,
+          "de": 1,
+          "es": 2
+        },
+        "views_by_tag": {
+          "Ethics & Society": 3,
+          "Generative AI": 6,
+          "Research": 10,
+          "Training": 5,
+          "Applications": 6,
+          "Security": 4,
+          "Business": 1,
+          "Startups": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/dwarfstar-antirez.html",
+            "views": 5
+          },
+          {
+            "path": "it/prompt-injection-camel.html",
+            "views": 4
+          },
+          {
+            "path": "es/ornith-1.0-es",
+            "views": 2
+          },
+          {
+            "path": "en/agent-hospital-en.html",
+            "views": 1
+          },
+          {
+            "path": "it/tilly-norwood-ai-actor.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 12,
+          "en/agent-hospital-en.html": 1,
+          "it/dwarfstar-antirez.html": 5,
+          "it/prompt-injection-camel.html": 4,
+          "it/tilly-norwood-ai-actor.html": 1,
+          "de/ai-safety-report-2026-de": 1,
+          "en/bodo-glimt-fokus-ai-en.html": 1,
+          "es/ornith-1.0-es": 2
+        }
       }
     },
     "monthly": {
@@ -2696,33 +2748,33 @@
         ]
       },
       "2026-08": {
-        "total_views": 91,
+        "total_views": 118,
         "views_by_lang": {
-          "it": 62,
-          "en": 14,
-          "de": 9,
-          "es": 3,
+          "it": 84,
+          "en": 16,
+          "de": 10,
+          "es": 5,
           "fr": 3
         },
         "views_by_tag": {
-          "Generative AI": 28,
-          "Startups": 6,
-          "Applications": 29,
-          "Research": 33,
-          "Security": 13,
+          "Generative AI": 34,
+          "Startups": 7,
+          "Applications": 35,
+          "Research": 43,
+          "Security": 17,
           "E-learning": 1,
-          "Ethics & Society": 14,
-          "Business": 6,
-          "Training": 17
+          "Ethics & Society": 17,
+          "Business": 7,
+          "Training": 22
         },
         "top_articles": [
           {
             "path": "it/dwarfstar-antirez.html",
-            "views": 15
+            "views": 20
           },
           {
             "path": "it/prompt-injection-camel.html",
-            "views": 5
+            "views": 9
           },
           {
             "path": "it/meetily.html",
@@ -2741,6 +2793,10 @@
             "views": 2
           },
           {
+            "path": "es/ornith-1.0-es",
+            "views": 2
+          },
+          {
             "path": "it/10-regole-ai",
             "views": 1
           },
@@ -2751,34 +2807,30 @@
           {
             "path": "en/diffusion-vs-autoregressive-en",
             "views": 1
-          },
-          {
-            "path": "en/qwen3.5-locale-puntata1-en.html",
-            "views": 1
           }
         ]
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 1037,
+        "total_views": 1064,
         "views_by_lang": {
-          "it": 604,
-          "en": 185,
-          "de": 81,
+          "it": 626,
+          "en": 187,
+          "de": 82,
           "fr": 88,
-          "es": 79
+          "es": 81
         },
         "views_by_tag": {
-          "Generative AI": 521,
-          "Applications": 252,
-          "Security": 142,
-          "Research": 332,
-          "Ethics & Society": 337,
-          "Training": 120,
-          "Business": 199,
+          "Generative AI": 527,
+          "Applications": 258,
+          "Security": 146,
+          "Research": 342,
+          "Ethics & Society": 340,
+          "Training": 125,
+          "Business": 200,
           "Copyright": 13,
-          "Startups": 51,
+          "Startups": 52,
           "E-learning": 16
         }
       }

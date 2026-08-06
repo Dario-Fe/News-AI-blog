@@ -1,46 +1,46 @@
 {
-  "last_update": "2026-08-05T03:46:39.512321+00:00",
+  "last_update": "2026-08-06T03:52:15.625395+00:00",
   "portal_snapshot": {
-    "total_articles": 805,
+    "total_articles": 810,
     "articles_by_lang": {
-      "it": 161,
-      "en": 161,
-      "es": 161,
-      "fr": 161,
-      "de": 161
+      "it": 162,
+      "en": 162,
+      "es": 162,
+      "fr": 162,
+      "de": 162
     },
     "total_words_by_lang": {
-      "it": 462414,
-      "en": 452033,
-      "es": 491889,
-      "fr": 527618,
-      "de": 452656
+      "it": 465533,
+      "en": 455140,
+      "es": 495208,
+      "fr": 531090,
+      "de": 455723
     },
     "total_authors": 1,
     "total_tags": 10,
     "tags_popularity": {
       "Research": 325,
-      "Ethics & Society": 445,
-      "Generative AI": 510,
+      "Ethics & Society": 450,
+      "Generative AI": 515,
       "Security": 190,
       "Startups": 65,
       "Business": 335,
-      "Training": 185,
+      "Training": 190,
       "Applications": 225,
       "Copyright": 35,
       "E-learning": 45
     },
-    "podcast_articles_count": 161,
-    "video_articles_count": 161
+    "podcast_articles_count": 162,
+    "video_articles_count": 162
   },
   "cumulative_history": {
-    "it/index.html": 2345,
-    "it": 965,
-    "fr": 299,
+    "it/index.html": 2366,
+    "it": 968,
+    "fr": 300,
     "it/newsletter": 208,
-    "en": 203,
-    "de": 193,
-    "es": 163,
+    "en": 204,
+    "de": 194,
+    "es": 164,
     "fr/trm-samsung-fr.html": 157,
     "it/thank-you": 112,
     "en/grief-tech-en.html": 84,
@@ -59,8 +59,8 @@
     "it/gina-assistente-vocale.html": 49,
     "it/ai-bournout.html": 47,
     "it/gemma4-26b.html": 47,
+    "fr/ai-epanortosi-fr.html": 46,
     "it/robotica-2025.html": 46,
-    "fr/ai-epanortosi-fr.html": 45,
     "it/robot-tax-sanders.html": 44,
     "en/kimik2.5-en.html": 42,
     "it/bodo-glimt-fokus-ai.html": 42,
@@ -127,6 +127,7 @@
     "it/meetily.html": 24,
     "it/msa-100m-token.html": 24,
     "it/pocketos-disaster.html": 24,
+    "it/prompt-injection-camel.html": 24,
     "it/rlm-ai.html": 24,
     "it/waymo-blackout-analysis.html": 24,
     "es/introspection-anthropic-es": 23,
@@ -134,6 +135,7 @@
     "it/ai-consumer-2025.html": 23,
     "it/andon-fm.html": 23,
     "it/claude-code.html": 23,
+    "it/dwarfstar-antirez.html": 23,
     "it/longcat-video.html": 23,
     "it/mistral-devstral.html": 23,
     "it/pentagono-anthropic-openai.html": 23,
@@ -152,12 +154,11 @@
     "it/ai-slop-entropia.html": 20,
     "it/codespeak.html": 20,
     "it/convergenza-modelli-scientifici.html": 20,
-    "it/dwarfstar-antirez.html": 20,
     "it/mistral-forge.html": 20,
-    "it/prompt-injection-camel.html": 20,
     "it/steering-llm.html": 20,
     "it/switching-task.html": 20,
     "en/ai-video-generativa-ovi-en": 19,
+    "en/memvid-ai-memory-en.html": 19,
     "it/ai-creativity-ethics.html": 19,
     "it/amodei-intervista-parte2.html": 19,
     "it/cyborg-centauri-automi.html": 19,
@@ -167,7 +168,6 @@
     "it/project-glasswing-mythos.html": 19,
     "it/slm-2026.html": 19,
     "en/amodei-intervista-parte2-en.html": 18,
-    "en/memvid-ai-memory-en.html": 18,
     "en/steering-llm-en.html": 18,
     "it/iceberg-index.html": 18,
     "it/last30days.html": 18,
@@ -208,13 +208,14 @@
     "it/memvid-ai-memory.html": 14,
     "fr/toon-fr.html": 13,
     "it/dataland-museo-ai.html": 13,
+    "it/loop-engineering.html": 13,
     "it/steerling.html": 13,
     "it/tml-determinism": 13,
     "it/ai-video-generativa-ovi.html": 12,
     "it/ai-winter.html": 12,
-    "it/loop-engineering.html": 12,
     "it/mistral-devstral": 12,
     "it/robot-tax-sanders": 12,
+    "it/soofi-s.html": 12,
     "en/longcat-video-en": 11,
     "es/robotica-2025-es.html": 11,
     "it/ai-cosciente": 11,
@@ -268,6 +269,7 @@
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 7,
     "it/onu-report-2026.html": 7,
     "it/qwen3-tts": 7,
+    "it/shutdown-resistance": 7,
     "it/tml-determinism.html": 7,
     "it/waymo-blackout-analysis": 7,
     "de/ai-aziende-e-servizi-de": 6,
@@ -289,7 +291,6 @@
     "it/deepseek-ocr": 6,
     "it/fda-ema-aim-nash-ai": 6,
     "it/malattie-mentali-ai": 6,
-    "it/shutdown-resistance": 6,
     "it/slm-2026": 6,
     "de/diffusion-vs-autoregressive-de.html": 5,
     "de/slm-2026-de.html": 5,
@@ -439,6 +440,7 @@
     "en/introspection-anthropic-en.html": 3,
     "en/kimi-k2-article-en.html": 3,
     "en/kimik2.5-en": 3,
+    "en/last30days-en.html": 3,
     "en/longcat-video-en.html": 3,
     "en/mercury2-en.html": 3,
     "en/mini-max-m2.7-en.html": 3,
@@ -535,6 +537,7 @@
     "de/deepseek-mhc-de.html": 2,
     "de/degregori-ai-war-de.html": 2,
     "de/gemma4-26b-de.html": 2,
+    "de/introspection-anthropic-de": 2,
     "de/introspection-anthropic-de.html": 2,
     "de/last30days-de.html": 2,
     "de/llm-knowledge-base-de": 2,
@@ -601,7 +604,6 @@
     "en/intervista-ricco-ai-en.html": 2,
     "en/kimi-k2-thinking-en.html": 2,
     "en/kv-cache-approach-en.html": 2,
-    "en/last30days-en.html": 2,
     "en/licenziamenti-ai-2026-en": 2,
     "en/llm-knowledge-base-en": 2,
     "en/metodo-editoriale": 2,
@@ -820,6 +822,7 @@
     "de/datacenter-proteste-usa-de": 1,
     "de/deepseek-ocr-de.html": 1,
     "de/degregori-ai-war-de": 1,
+    "de/dwarfstar-antirez-de.html": 1,
     "de/esodo-silenzioso-de.html": 1,
     "de/european-tech-map-de.html": 1,
     "de/gemma4-26b-de": 1,
@@ -830,7 +833,6 @@
     "de/graphify-de.html": 1,
     "de/iceberg-index-de.html": 1,
     "de/intervista-ricco-ai-de": 1,
-    "de/introspection-anthropic-de": 1,
     "de/jacobian-lens-de.html": 1,
     "de/legge-ai-italia-de": 1,
     "de/llm-knowledge-base-de.html": 1,
@@ -918,6 +920,7 @@
     "en/malta-openai-en": 1,
     "en/mdash-microsoft-en": 1,
     "en/mdash-microsoft-en.html": 1,
+    "en/meetily-en.html": 1,
     "en/mercury2-en": 1,
     "en/mit-ai-umile-en.html": 1,
     "en/mondiale-2026-gemini-en.html": 1,
@@ -977,6 +980,7 @@
     "es/deepseek-ocr-es.html": 1,
     "es/degregori-ai-war-es": 1,
     "es/diffusion-vs-autoregressive-es": 1,
+    "es/dwarfstar-antirez-es.html": 1,
     "es/esodo-silenzioso-es": 1,
     "es/gemma4-26b-es": 1,
     "es/gemma4-26b-es.html": 1,
@@ -2680,6 +2684,67 @@
           "en/bodo-glimt-fokus-ai-en.html": 1,
           "es/ornith-1.0-es": 2
         }
+      },
+      "2026-08-05": {
+        "total_views": 56,
+        "views_by_lang": {
+          "it": 49,
+          "fr": 1,
+          "en": 3,
+          "de": 2,
+          "es": 1
+        },
+        "views_by_tag": {
+          "Research": 12,
+          "Generative AI": 20,
+          "Training": 18,
+          "Security": 4,
+          "Applications": 9,
+          "Startups": 2,
+          "Ethics & Society": 13
+        },
+        "top_articles": [
+          {
+            "path": "it/soofi-s.html",
+            "views": 12
+          },
+          {
+            "path": "it/prompt-injection-camel.html",
+            "views": 4
+          },
+          {
+            "path": "it/dwarfstar-antirez.html",
+            "views": 3
+          },
+          {
+            "path": "fr/ai-epanortosi-fr.html",
+            "views": 1
+          },
+          {
+            "path": "en/memvid-ai-memory-en.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 21,
+          "it": 3,
+          "fr": 1,
+          "en": 1,
+          "de": 1,
+          "es": 1,
+          "fr/ai-epanortosi-fr.html": 1,
+          "it/prompt-injection-camel.html": 4,
+          "it/dwarfstar-antirez.html": 3,
+          "en/memvid-ai-memory-en.html": 1,
+          "it/loop-engineering.html": 1,
+          "it/soofi-s.html": 12,
+          "it/shutdown-resistance": 1,
+          "en/last30days-en.html": 1,
+          "de/introspection-anthropic-de": 1,
+          "de/dwarfstar-antirez-de.html": 1,
+          "en/meetily-en.html": 1,
+          "es/dwarfstar-antirez-es.html": 1
+        }
       }
     },
     "monthly": {
@@ -2748,33 +2813,37 @@
         ]
       },
       "2026-08": {
-        "total_views": 118,
+        "total_views": 174,
         "views_by_lang": {
-          "it": 84,
-          "en": 16,
-          "de": 10,
-          "es": 5,
-          "fr": 3
+          "it": 133,
+          "en": 19,
+          "de": 12,
+          "es": 6,
+          "fr": 4
         },
         "views_by_tag": {
-          "Generative AI": 34,
-          "Startups": 7,
-          "Applications": 35,
-          "Research": 43,
-          "Security": 17,
+          "Generative AI": 54,
+          "Startups": 9,
+          "Applications": 44,
+          "Research": 55,
+          "Security": 21,
           "E-learning": 1,
-          "Ethics & Society": 17,
+          "Ethics & Society": 30,
           "Business": 7,
-          "Training": 22
+          "Training": 40
         },
         "top_articles": [
           {
             "path": "it/dwarfstar-antirez.html",
-            "views": 20
+            "views": 23
           },
           {
             "path": "it/prompt-injection-camel.html",
-            "views": 9
+            "views": 13
+          },
+          {
+            "path": "it/soofi-s.html",
+            "views": 12
           },
           {
             "path": "it/meetily.html",
@@ -2793,19 +2862,15 @@
             "views": 2
           },
           {
+            "path": "it/loop-engineering.html",
+            "views": 2
+          },
+          {
             "path": "es/ornith-1.0-es",
             "views": 2
           },
           {
             "path": "it/10-regole-ai",
-            "views": 1
-          },
-          {
-            "path": "it/agentic-ai-foundation",
-            "views": 1
-          },
-          {
-            "path": "en/diffusion-vs-autoregressive-en",
             "views": 1
           }
         ]
@@ -2813,24 +2878,24 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 1064,
+        "total_views": 1120,
         "views_by_lang": {
-          "it": 626,
-          "en": 187,
-          "de": 82,
-          "fr": 88,
-          "es": 81
+          "it": 675,
+          "en": 190,
+          "de": 84,
+          "fr": 89,
+          "es": 82
         },
         "views_by_tag": {
-          "Generative AI": 527,
-          "Applications": 258,
-          "Security": 146,
-          "Research": 342,
-          "Ethics & Society": 340,
-          "Training": 125,
+          "Generative AI": 547,
+          "Applications": 267,
+          "Security": 150,
+          "Research": 354,
+          "Ethics & Society": 353,
+          "Training": 143,
           "Business": 200,
           "Copyright": 13,
-          "Startups": 52,
+          "Startups": 54,
           "E-learning": 16
         }
       }

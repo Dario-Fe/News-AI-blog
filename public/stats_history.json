@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-06T03:52:15.625395+00:00",
+  "last_update": "2026-08-07T03:31:58.815302+00:00",
   "portal_snapshot": {
     "total_articles": 810,
     "articles_by_lang": {
@@ -19,23 +19,23 @@
     "total_authors": 1,
     "total_tags": 10,
     "tags_popularity": {
-      "Research": 325,
-      "Ethics & Society": 450,
-      "Generative AI": 515,
       "Security": 190,
-      "Startups": 65,
-      "Business": 335,
-      "Training": 190,
+      "Generative AI": 515,
+      "Ethics & Society": 450,
+      "Research": 325,
       "Applications": 225,
       "Copyright": 35,
+      "Business": 335,
+      "Training": 190,
+      "Startups": 65,
       "E-learning": 45
     },
     "podcast_articles_count": 162,
     "video_articles_count": 162
   },
   "cumulative_history": {
-    "it/index.html": 2366,
-    "it": 968,
+    "it/index.html": 2371,
+    "it": 971,
     "fr": 300,
     "it/newsletter": 208,
     "en": 204,
@@ -52,8 +52,8 @@
     "it/ai-epanortosi": 58,
     "it/google-threat-intelligence.html": 57,
     "en/ai-epanortosi-en": 56,
+    "en/memvid-ai-memory-en": 55,
     "it/anthropic-hacker.html": 55,
-    "en/memvid-ai-memory-en": 54,
     "it/apply-ai-eu-strategy.html": 51,
     "en/robotica-2025-en.html": 50,
     "it/gina-assistente-vocale.html": 49,
@@ -96,9 +96,9 @@
     "it/kv-cache-approach.html": 30,
     "it/sistema-sicurezza-ai.html": 30,
     "it/eset-apt-report.html": 29,
+    "it/graphify.html": 29,
     "it/trm-samsung.html": 29,
     "it/ai-epanortosi.html": 28,
-    "it/graphify.html": 28,
     "en/malattie-mentali-ai-en.html": 27,
     "it/agenti-marxisti.html": 27,
     "it/chatgpt-ads.html": 27,
@@ -128,6 +128,7 @@
     "it/msa-100m-token.html": 24,
     "it/pocketos-disaster.html": 24,
     "it/prompt-injection-camel.html": 24,
+    "it/recursivemas.html": 24,
     "it/rlm-ai.html": 24,
     "it/waymo-blackout-analysis.html": 24,
     "es/introspection-anthropic-es": 23,
@@ -140,7 +141,6 @@
     "it/mistral-devstral.html": 23,
     "it/pentagono-anthropic-openai.html": 23,
     "it/pignataro-intervista1.html": 23,
-    "it/recursivemas.html": 23,
     "it/talkie-vintage-llm.html": 23,
     "it/gemma4-12b-q8.html": 22,
     "it/glm-5.html": 22,
@@ -185,6 +185,7 @@
     "it/glm5.2.html": 17,
     "it/mit-adaptive-scaling.html": 17,
     "it/quantum-echoes.html": 17,
+    "it/soofi-s.html": 17,
     "it/startup-europa-2025.html": 17,
     "en/iceberg-index-en": 16,
     "it/ai-creazione-contenuti": 16,
@@ -215,7 +216,6 @@
     "it/ai-winter.html": 12,
     "it/mistral-devstral": 12,
     "it/robot-tax-sanders": 12,
-    "it/soofi-s.html": 12,
     "en/longcat-video-en": 11,
     "es/robotica-2025-es.html": 11,
     "it/ai-cosciente": 11,
@@ -322,6 +322,7 @@
     "it/ai-prompt-scandalo.html": 5,
     "it/ai-valutazione-ed-etica": 5,
     "it/google-ai-revolution.html": 5,
+    "it/graphify": 5,
     "it/legge-ai-italia.html": 5,
     "it/power-sampling": 5,
     "it/qwen3.5-locale-puntata1": 5,
@@ -385,8 +386,9 @@
     "it/diffusion-vs-autoregressive": 4,
     "it/giganti-ai-bocciati-seconda-puntata": 4,
     "it/google-threat-intelligence": 4,
-    "it/graphify": 4,
+    "it/llm-knowledge-base": 4,
     "it/programmatori-vs-ai.html": 4,
+    "it/qwen35-locale-puntata1.html": 4,
     "it/rsl-really-simple-licensing.html": 4,
     "it/silicon-valley-ai-pac.html": 4,
     "it/turboquant": 4,
@@ -507,11 +509,9 @@
     "it/gemma4-26b": 3,
     "it/giganti-ai-bocciati-prima-puntata": 3,
     "it/legge-ai-italia": 3,
-    "it/llm-knowledge-base": 3,
     "it/pentagono-anthropic-openai": 3,
     "it/programmatori-vs-ai": 3,
     "it/prompt-repetition": 3,
-    "it/qwen35-locale-puntata1.html": 3,
     "it/robotica-2025": 3,
     "it/steering-llm": 3,
     "it/strumenti-oracoli-caso-deloitte": 3,
@@ -617,6 +617,7 @@
     "en/pocketos-disaster-en.html": 2,
     "en/power-sampling-en": 2,
     "en/qwen3-tts-en.html": 2,
+    "en/qwen36-35b-ai-en.html": 2,
     "en/rapporto-leonardo-2026-parte1-en.html": 2,
     "en/rapporto-leonardo-2026-parte2-en": 2,
     "en/recursivemas-en.html": 2,
@@ -908,6 +909,7 @@
     "en/glm5.2-en.html": 1,
     "en/google-ai-revolution-en": 1,
     "en/google-threat-intelligence-en": 1,
+    "en/guerra-algoritmica-en.html": 1,
     "en/headroom-en": 1,
     "en/humanebench-en.html": 1,
     "en/iceberg-index-en.html": 1,
@@ -938,7 +940,6 @@
     "en/qwen3.5-locale-puntata2-en": 1,
     "en/qwen3.5-locale-puntata2-en.html": 1,
     "en/qwen36-35b-ai-en": 1,
-    "en/qwen36-35b-ai-en.html": 1,
     "en/rapporto-leonardo-2026-parte1-en": 1,
     "en/rss": 1,
     "en/sistema-sicurezza-ai-en.html": 1,
@@ -1097,6 +1098,7 @@
     "it/autoresearch-karpathy": 1,
     "it/bodo-glimt-fokus-ai": 1,
     "it/cassieri-remoti-ai": 1,
+    "it/caveman": 1,
     "it/chatgpt-use-study": 1,
     "it/cina-universita": 1,
     "it/convergenza-modelli-scientifici": 1,
@@ -2745,6 +2747,57 @@
           "en/meetily-en.html": 1,
           "es/dwarfstar-antirez-es.html": 1
         }
+      },
+      "2026-08-06": {
+        "total_views": 22,
+        "views_by_lang": {
+          "it": 19,
+          "en": 3
+        },
+        "views_by_tag": {
+          "Research": 2,
+          "Applications": 3,
+          "Generative AI": 9,
+          "Training": 6,
+          "Ethics & Society": 6,
+          "Business": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/soofi-s.html",
+            "views": 5
+          },
+          {
+            "path": "en/memvid-ai-memory-en",
+            "views": 1
+          },
+          {
+            "path": "it/graphify.html",
+            "views": 1
+          },
+          {
+            "path": "it/recursivemas.html",
+            "views": 1
+          },
+          {
+            "path": "it/graphify",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 5,
+          "it": 3,
+          "en/memvid-ai-memory-en": 1,
+          "it/graphify.html": 1,
+          "it/recursivemas.html": 1,
+          "it/soofi-s.html": 5,
+          "it/graphify": 1,
+          "it/llm-knowledge-base": 1,
+          "it/qwen35-locale-puntata1.html": 1,
+          "en/qwen36-35b-ai-en.html": 1,
+          "en/guerra-algoritmica-en.html": 1,
+          "it/caveman": 1
+        }
       }
     },
     "monthly": {
@@ -2813,24 +2866,24 @@
         ]
       },
       "2026-08": {
-        "total_views": 174,
+        "total_views": 196,
         "views_by_lang": {
-          "it": 133,
-          "en": 19,
+          "it": 152,
+          "en": 22,
           "de": 12,
           "es": 6,
           "fr": 4
         },
         "views_by_tag": {
-          "Generative AI": 54,
+          "Generative AI": 63,
           "Startups": 9,
-          "Applications": 44,
-          "Research": 55,
+          "Applications": 47,
+          "Research": 57,
           "Security": 21,
           "E-learning": 1,
-          "Ethics & Society": 30,
-          "Business": 7,
-          "Training": 40
+          "Ethics & Society": 36,
+          "Business": 8,
+          "Training": 46
         },
         "top_articles": [
           {
@@ -2838,12 +2891,12 @@
             "views": 23
           },
           {
-            "path": "it/prompt-injection-camel.html",
-            "views": 13
+            "path": "it/soofi-s.html",
+            "views": 17
           },
           {
-            "path": "it/soofi-s.html",
-            "views": 12
+            "path": "it/prompt-injection-camel.html",
+            "views": 13
           },
           {
             "path": "it/meetily.html",
@@ -2878,22 +2931,22 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 1120,
+        "total_views": 1142,
         "views_by_lang": {
-          "it": 675,
-          "en": 190,
+          "it": 694,
+          "en": 193,
           "de": 84,
           "fr": 89,
           "es": 82
         },
         "views_by_tag": {
-          "Generative AI": 547,
-          "Applications": 267,
+          "Generative AI": 556,
+          "Applications": 270,
           "Security": 150,
-          "Research": 354,
-          "Ethics & Society": 353,
-          "Training": 143,
-          "Business": 200,
+          "Research": 356,
+          "Ethics & Society": 359,
+          "Training": 149,
+          "Business": 201,
           "Copyright": 13,
           "Startups": 54,
           "E-learning": 16

@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-08T02:30:35.118053+00:00",
+  "last_update": "2026-08-09T02:37:26.771231+00:00",
   "portal_snapshot": {
     "total_articles": 815,
     "articles_by_lang": {
@@ -34,7 +34,7 @@
     "video_articles_count": 163
   },
   "cumulative_history": {
-    "it/index.html": 2379,
+    "it/index.html": 2385,
     "it": 981,
     "fr": 301,
     "it/newsletter": 209,
@@ -99,6 +99,7 @@
     "it/graphify.html": 29,
     "it/trm-samsung.html": 29,
     "it/ai-epanortosi.html": 28,
+    "it/llm-knowledge-base.html": 28,
     "en/malattie-mentali-ai-en.html": 27,
     "it/agenti-marxisti.html": 27,
     "it/chatgpt-ads.html": 27,
@@ -106,7 +107,6 @@
     "it/dspark.html": 27,
     "it/esodo-silenzioso.html": 27,
     "it/humanebench.html": 27,
-    "it/llm-knowledge-base.html": 27,
     "it/mercury2.html": 27,
     "it/10-regole-ai": 26,
     "it/ai-killed-mtv-star.html": 26,
@@ -126,6 +126,7 @@
     "it/caveman.html": 24,
     "it/cina-universita.html": 24,
     "it/claude-code.html": 24,
+    "it/dwarfstar-antirez.html": 24,
     "it/european-tech-map.html": 24,
     "it/pocketos-disaster.html": 24,
     "it/prompt-injection-camel.html": 24,
@@ -136,7 +137,6 @@
     "it/agenti-al-lavoro.html": 23,
     "it/ai-consumer-2025.html": 23,
     "it/andon-fm.html": 23,
-    "it/dwarfstar-antirez.html": 23,
     "it/longcat-video.html": 23,
     "it/mistral-devstral.html": 23,
     "it/pentagono-anthropic-openai.html": 23,
@@ -150,6 +150,7 @@
     "it/emergence-world.html": 21,
     "it/introspection-anthropic.html": 21,
     "it/licenziamenti-ai-2026.html": 21,
+    "it/papalini-interview2.html": 21,
     "en/agent-hospital-en.html": 20,
     "it/ai-slop-entropia.html": 20,
     "it/codespeak.html": 20,
@@ -185,7 +186,6 @@
     "it/glm-5": 17,
     "it/glm5.2.html": 17,
     "it/mit-adaptive-scaling.html": 17,
-    "it/papalini-interview2.html": 17,
     "it/quantum-echoes.html": 17,
     "it/startup-europa-2025.html": 17,
     "en/iceberg-index-en": 16,
@@ -435,6 +435,7 @@
     "en/ai-prompt-scandalo-en.html": 3,
     "en/ai-winter-en.html": 3,
     "en/amodei-intervista-parte2-en": 3,
+    "en/anthropic-fear-en": 3,
     "en/browser-ai-en": 3,
     "en/cassieri-remoti-ai-en.html": 3,
     "en/emergence-world-en.html": 3,
@@ -449,6 +450,7 @@
     "en/mercury2-en.html": 3,
     "en/mini-max-m2.7-en.html": 3,
     "en/mistral-forge-en.html": 3,
+    "en/msa-100m-token-en.html": 3,
     "en/papalini-interview-en": 3,
     "en/pignataro-intervista1-en.html": 3,
     "en/poesia-ai-security-en.html": 3,
@@ -579,7 +581,6 @@
     "en/amazon-down-en.html": 2,
     "en/amodei-intervista-parte1-en": 2,
     "en/amodei-intervista-parte1-en.html": 2,
-    "en/anthropic-fear-en": 2,
     "en/antigravity-security-en": 2,
     "en/articolo-ai-lavoro-en.html": 2,
     "en/autoresearch-karpathy-en": 2,
@@ -598,6 +599,7 @@
     "en/giganti-ai-bocciati-seconda-puntata-en": 2,
     "en/gina-assistente-vocale-en": 2,
     "en/glm-5-en.html": 2,
+    "en/google-threat-intelligence-en": 2,
     "en/google-threat-intelligence-en.html": 2,
     "en/google-ue-indagine-en": 2,
     "en/google-ue-indagine-en.html": 2,
@@ -613,7 +615,6 @@
     "en/mit-adaptive-scaling-en": 2,
     "en/mit-adaptive-scaling-en.html": 2,
     "en/msa-100m-token-en": 2,
-    "en/msa-100m-token-en.html": 2,
     "en/ornith-1.0-en.html": 2,
     "en/pignataro-intervista2-en.html": 2,
     "en/pocketos-disaster-en.html": 2,
@@ -909,7 +910,6 @@
     "en/glm5.2-en": 1,
     "en/glm5.2-en.html": 1,
     "en/google-ai-revolution-en": 1,
-    "en/google-threat-intelligence-en": 1,
     "en/guerra-algoritmica-en.html": 1,
     "en/headroom-en": 1,
     "en/humanebench-en.html": 1,
@@ -2871,6 +2871,52 @@
           "en/soofi-s-en.html": 1,
           "es/prompt-injection-camel-es.html": 1
         }
+      },
+      "2026-08-08": {
+        "total_views": 15,
+        "views_by_lang": {
+          "it": 12,
+          "en": 3
+        },
+        "views_by_tag": {
+          "Research": 3,
+          "Generative AI": 6,
+          "Applications": 3,
+          "Training": 1,
+          "Security": 4,
+          "Ethics & Society": 4
+        },
+        "top_articles": [
+          {
+            "path": "it/papalini-interview2.html",
+            "views": 4
+          },
+          {
+            "path": "it/llm-knowledge-base.html",
+            "views": 1
+          },
+          {
+            "path": "it/dwarfstar-antirez.html",
+            "views": 1
+          },
+          {
+            "path": "en/anthropic-fear-en",
+            "views": 1
+          },
+          {
+            "path": "en/msa-100m-token-en.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 6,
+          "it/llm-knowledge-base.html": 1,
+          "it/dwarfstar-antirez.html": 1,
+          "it/papalini-interview2.html": 4,
+          "en/anthropic-fear-en": 1,
+          "en/msa-100m-token-en.html": 1,
+          "en/google-threat-intelligence-en": 1
+        }
       }
     },
     "monthly": {
@@ -2939,37 +2985,37 @@
         ]
       },
       "2026-08": {
-        "total_views": 257,
+        "total_views": 272,
         "views_by_lang": {
-          "it": 207,
-          "en": 25,
+          "it": 219,
+          "en": 28,
           "de": 12,
           "es": 8,
           "fr": 5
         },
         "views_by_tag": {
-          "Generative AI": 93,
+          "Generative AI": 99,
           "Startups": 11,
-          "Applications": 57,
-          "Research": 63,
-          "Security": 40,
+          "Applications": 60,
+          "Research": 66,
+          "Security": 44,
           "E-learning": 5,
-          "Ethics & Society": 59,
+          "Ethics & Society": 63,
           "Business": 10,
-          "Training": 49
+          "Training": 50
         },
         "top_articles": [
           {
             "path": "it/dwarfstar-antirez.html",
-            "views": 23
+            "views": 24
+          },
+          {
+            "path": "it/papalini-interview2.html",
+            "views": 21
           },
           {
             "path": "it/soofi-s.html",
             "views": 18
-          },
-          {
-            "path": "it/papalini-interview2.html",
-            "views": 17
           },
           {
             "path": "it/prompt-injection-camel.html",
@@ -3004,21 +3050,21 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 1203,
+        "total_views": 1218,
         "views_by_lang": {
-          "it": 749,
-          "en": 196,
+          "it": 761,
+          "en": 199,
           "de": 84,
           "fr": 90,
           "es": 84
         },
         "views_by_tag": {
-          "Generative AI": 586,
-          "Applications": 280,
-          "Security": 169,
-          "Research": 362,
-          "Ethics & Society": 382,
-          "Training": 152,
+          "Generative AI": 592,
+          "Applications": 283,
+          "Security": 173,
+          "Research": 365,
+          "Ethics & Society": 386,
+          "Training": 153,
           "Business": 203,
           "Copyright": 13,
           "Startups": 56,

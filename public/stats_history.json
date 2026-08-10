@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-09T02:37:26.771231+00:00",
+  "last_update": "2026-08-10T02:43:14.578818+00:00",
   "portal_snapshot": {
     "total_articles": 815,
     "articles_by_lang": {
@@ -34,14 +34,14 @@
     "video_articles_count": 163
   },
   "cumulative_history": {
-    "it/index.html": 2385,
-    "it": 981,
+    "it/index.html": 2391,
+    "it": 982,
     "fr": 301,
-    "it/newsletter": 209,
+    "it/newsletter": 210,
     "en": 205,
     "de": 195,
     "es": 165,
-    "fr/trm-samsung-fr.html": 157,
+    "fr/trm-samsung-fr.html": 158,
     "it/thank-you": 113,
     "en/grief-tech-en.html": 84,
     "it/agent-hospital.html": 78,
@@ -80,9 +80,9 @@
     "it/qwen36-35b-ai.html": 35,
     "it/ai-musica-copyright": 33,
     "it/deepseek-ocr.html": 33,
+    "it/qwen3-tts.html": 33,
     "it/autoresearch-karpathy.html": 32,
     "it/colibri.html": 32,
-    "it/qwen3-tts.html": 32,
     "en/trm-samsung-en.html": 31,
     "it/ai-safety-report-2026.html": 31,
     "it/benzup.html": 31,
@@ -98,9 +98,9 @@
     "it/eset-apt-report.html": 29,
     "it/graphify.html": 29,
     "it/trm-samsung.html": 29,
+    "en/malattie-mentali-ai-en.html": 28,
     "it/ai-epanortosi.html": 28,
     "it/llm-knowledge-base.html": 28,
-    "en/malattie-mentali-ai-en.html": 27,
     "it/agenti-marxisti.html": 27,
     "it/chatgpt-ads.html": 27,
     "it/cookie": 27,
@@ -128,6 +128,8 @@
     "it/claude-code.html": 24,
     "it/dwarfstar-antirez.html": 24,
     "it/european-tech-map.html": 24,
+    "it/longcat-video.html": 24,
+    "it/papalini-interview2.html": 24,
     "it/pocketos-disaster.html": 24,
     "it/prompt-injection-camel.html": 24,
     "it/recursivemas.html": 24,
@@ -137,7 +139,6 @@
     "it/agenti-al-lavoro.html": 23,
     "it/ai-consumer-2025.html": 23,
     "it/andon-fm.html": 23,
-    "it/longcat-video.html": 23,
     "it/mistral-devstral.html": 23,
     "it/pentagono-anthropic-openai.html": 23,
     "it/pignataro-intervista1.html": 23,
@@ -150,7 +151,6 @@
     "it/emergence-world.html": 21,
     "it/introspection-anthropic.html": 21,
     "it/licenziamenti-ai-2026.html": 21,
-    "it/papalini-interview2.html": 21,
     "en/agent-hospital-en.html": 20,
     "it/ai-slop-entropia.html": 20,
     "it/codespeak.html": 20,
@@ -178,6 +178,7 @@
     "it/mini-max-m2.7.html": 18,
     "it/poesia-ai-security.html": 18,
     "it/soofi-s.html": 18,
+    "it/startup-europa-2025.html": 18,
     "it/subliminal-learning.html": 18,
     "it/toon.html": 18,
     "it/turboquant.html": 18,
@@ -187,7 +188,6 @@
     "it/glm5.2.html": 17,
     "it/mit-adaptive-scaling.html": 17,
     "it/quantum-echoes.html": 17,
-    "it/startup-europa-2025.html": 17,
     "en/iceberg-index-en": 16,
     "it/ai-creazione-contenuti": 16,
     "it/chartnet.html": 16,
@@ -385,6 +385,7 @@
     "it/ai-winter": 4,
     "it/articolo-hrm": 4,
     "it/browser-ai": 4,
+    "it/chatgpt-use-study.html": 4,
     "it/diffusion-vs-autoregressive": 4,
     "it/giganti-ai-bocciati-seconda-puntata": 4,
     "it/google-threat-intelligence": 4,
@@ -508,7 +509,6 @@
     "it/amodei-intervista-parte1": 3,
     "it/articolo-hrm.html": 3,
     "it/chatgpt-ads": 3,
-    "it/chatgpt-use-study.html": 3,
     "it/gemma4-26b": 3,
     "it/giganti-ai-bocciati-prima-puntata": 3,
     "it/legge-ai-italia": 3,
@@ -604,6 +604,7 @@
     "en/google-ue-indagine-en": 2,
     "en/google-ue-indagine-en.html": 2,
     "en/graphify-en.html": 2,
+    "en/guerra-algoritmica-en.html": 2,
     "en/headroom-en.html": 2,
     "en/intervista-ricco-ai-en.html": 2,
     "en/kimi-k2-thinking-en.html": 2,
@@ -841,6 +842,7 @@
     "de/legge-ai-italia-de": 1,
     "de/llm-knowledge-base-de.html": 1,
     "de/machine learning, deep learning e algoritmi generativi-de": 1,
+    "de/magnifica-humanitas-de": 1,
     "de/malattie-mentali-ai-de.html": 1,
     "de/malta-openai-de.html": 1,
     "de/mdash-microsoft-de.html": 1,
@@ -910,7 +912,6 @@
     "en/glm5.2-en": 1,
     "en/glm5.2-en.html": 1,
     "en/google-ai-revolution-en": 1,
-    "en/guerra-algoritmica-en.html": 1,
     "en/headroom-en": 1,
     "en/humanebench-en.html": 1,
     "en/iceberg-index-en.html": 1,
@@ -1065,6 +1066,7 @@
     "fr/loop-engineering-fr.html": 1,
     "fr/malattie-mentali-ai-fr": 1,
     "fr/malta-openai-fr.html": 1,
+    "fr/meetily-fr.html": 1,
     "fr/mercury2-fr": 1,
     "fr/mit-ai-umile-fr.html": 1,
     "fr/mondiale-2026-gemini-fr.html": 1,
@@ -2917,6 +2919,63 @@
           "en/msa-100m-token-en.html": 1,
           "en/google-threat-intelligence-en": 1
         }
+      },
+      "2026-08-09": {
+        "total_views": 20,
+        "views_by_lang": {
+          "it": 15,
+          "fr": 2,
+          "en": 2,
+          "de": 1
+        },
+        "views_by_tag": {
+          "Research": 5,
+          "Training": 1,
+          "Generative AI": 9,
+          "Business": 3,
+          "Ethics & Society": 7,
+          "E-learning": 1,
+          "Applications": 2,
+          "Security": 3,
+          "Startups": 2
+        },
+        "top_articles": [
+          {
+            "path": "it/papalini-interview2.html",
+            "views": 3
+          },
+          {
+            "path": "it/newsletter",
+            "views": 1
+          },
+          {
+            "path": "fr/trm-samsung-fr.html",
+            "views": 1
+          },
+          {
+            "path": "it/qwen3-tts.html",
+            "views": 1
+          },
+          {
+            "path": "en/malattie-mentali-ai-en.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 6,
+          "it": 1,
+          "it/newsletter": 1,
+          "fr/trm-samsung-fr.html": 1,
+          "it/qwen3-tts.html": 1,
+          "en/malattie-mentali-ai-en.html": 1,
+          "it/longcat-video.html": 1,
+          "it/papalini-interview2.html": 3,
+          "it/startup-europa-2025.html": 1,
+          "it/chatgpt-use-study.html": 1,
+          "en/guerra-algoritmica-en.html": 1,
+          "de/magnifica-humanitas-de": 1,
+          "fr/meetily-fr.html": 1
+        }
       }
     },
     "monthly": {
@@ -2985,24 +3044,24 @@
         ]
       },
       "2026-08": {
-        "total_views": 272,
+        "total_views": 292,
         "views_by_lang": {
-          "it": 219,
-          "en": 28,
-          "de": 12,
+          "it": 234,
+          "en": 30,
+          "de": 13,
           "es": 8,
-          "fr": 5
+          "fr": 7
         },
         "views_by_tag": {
-          "Generative AI": 99,
-          "Startups": 11,
-          "Applications": 60,
-          "Research": 66,
-          "Security": 44,
-          "E-learning": 5,
-          "Ethics & Society": 63,
-          "Business": 10,
-          "Training": 50
+          "Generative AI": 108,
+          "Startups": 13,
+          "Applications": 62,
+          "Research": 71,
+          "Security": 47,
+          "E-learning": 6,
+          "Ethics & Society": 70,
+          "Business": 13,
+          "Training": 51
         },
         "top_articles": [
           {
@@ -3011,7 +3070,7 @@
           },
           {
             "path": "it/papalini-interview2.html",
-            "views": 21
+            "views": 24
           },
           {
             "path": "it/soofi-s.html",
@@ -3050,25 +3109,25 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 1218,
+        "total_views": 1238,
         "views_by_lang": {
-          "it": 761,
-          "en": 199,
-          "de": 84,
-          "fr": 90,
+          "it": 776,
+          "en": 201,
+          "de": 85,
+          "fr": 92,
           "es": 84
         },
         "views_by_tag": {
-          "Generative AI": 592,
-          "Applications": 283,
-          "Security": 173,
-          "Research": 365,
-          "Ethics & Society": 386,
-          "Training": 153,
-          "Business": 203,
+          "Generative AI": 601,
+          "Applications": 285,
+          "Security": 176,
+          "Research": 370,
+          "Ethics & Society": 393,
+          "Training": 154,
+          "Business": 206,
           "Copyright": 13,
-          "Startups": 56,
-          "E-learning": 20
+          "Startups": 58,
+          "E-learning": 21
         }
       }
     }

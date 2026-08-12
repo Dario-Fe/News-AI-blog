@@ -1,0 +1,94 @@
+---
+tags: ["Generative AI", "Applications", "Training"]
+date: 2026-06-15
+author: "Dario Ferrero"
+---
+
+# Gemini m'a dit qui gagnera la Coupe du Monde 2026
+![mondiale-2026-gemini.jpg](mondiale-2026-gemini.jpg)
+
+*Il était une fois un poulpe nommé Paul. Il vivait au Sea Life Centre d'Oberhausen, en Allemagne, et en 2010, il a deviné l'issue de quatorze matchs sur seize, dont la finale de la Coupe du Monde sud-africaine, en choisissant laquelle des deux caisses de nourriture ouvrir en fonction du drapeau national apposé dessus. Le monde est devenu fou. Les journaux l'ont qualifié d'« oracle ». Les bookmakers ont cessé de rire après le cinquième pronostic exact. L'Espagne l'a officiellement remercié après sa victoire contre les Pays-Bas. Paul est mort de mort naturelle en octobre 2010, emportant dans sa tombe le secret d'une méthode de prévision qu'aucune intelligence artificielle n'a encore reproduite avec le même charisme médiatique.*
+
+Nous avons tout de même essayé. Une expérience sans fondement scientifique, menée avec une méthode quasi scientifique, sur un tournoi qui commence maintenant et se termine en juillet. Résultats à vérifier fin juillet 2026.
+
+L'idée est simple, vaguement folle et tout à fait conforme à l'esprit du football : fournir à Gemini Deep Research, le système de recherche autonome de Google, un prompt détaillé avec toutes les variables imaginables — classement FIFA, histoire de la Coupe du Monde, conditions climatiques des sites, profils techniques des sélections, philosophies des entraîneurs, marché des paris, dynamiques géopolitiques — et lui demander d'élaborer une prévision argumentée sur le vainqueur de la Coupe du Monde 2026. Aucune base scientifique déclarée. Aucune prétention oraculaire. Juste une expérience à faire au début du tournoi et à rouvrir, comme une capsule temporelle, en juillet, quand la coupe sera déjà entre les mains de quelqu'un.
+
+Ce qui est ressorti de l'analyse est plus intéressant que le résultat final : un raisonnement stratifié, méthodique, par moments surprenant, qui dit des choses sensées sur le football moderne et quelque chose d'encore plus intéressant sur la manière dont un système d'IA construit une argumentation complexe à partir de données hétérogènes. Avant de révéler la sentence de l'algorithme, il vaut la peine de retracer le parcours.
+
+## Le monde en 48 équipes (et 48 problèmes)
+
+Le point de départ est le classement FIFA publié le 11 juin 2026, la photographie définitive des rapports de force mondiaux à la veille du plus grand tournoi de l'histoire. Pour la première fois, la compétition accueille quarante-huit sélections au lieu des trente-deux habituelles, avec douze groupes de quatre équipes et un tableau qui s'allonge jusqu'à huit matchs pour arriver au bout. Pas sept comme avant. Huit.
+
+Ce détail, qui semble à première vue un détail bureaucratique de la FIFA, est en réalité le premier nœud de l'analyse de Gemini. Un tour de plus signifie un match entier d'effort physique supplémentaire, une nuit de plus à l'hôtel, une autre séance de récupération, une blessure potentielle supplémentaire pour un titulaire. Dans un tournoi déjà compressé dans le temps et joué sous le soleil brûlant de l'Amérique du Nord, ce tour additionnel, les seizièmes de finale, de retour après des décennies d'absence, devient une variable sélective autant que la chaleur de Houston.
+
+En haut du classement, trois équipes se font face dans un équilibre presque moléculaire : l'Argentine mène avec 1877,27 points, l'Espagne suit à 1874,71 (un écart de 0,13 %, le genre de chose que dans les sondages politiques on appellerait « marge d'erreur statistique »), la France est troisième avec 1870,70 points après que le faux pas contre la Côte d'Ivoire en amical a réduit à néant la primauté temporaire d'avril. Derrière le trio, l'Angleterre se consolide à la quatrième place, tandis qu'un Brésil en « phase d'ajustement tactique », euphémisme poli pour une équipe qui a changé d'entraîneur, de philosophie et d'identité en l'espace de quelques mois, occupe la sixième position.
+
+La structure des groupes révèle quelques choix intéressants : le Groupe C réunit le Brésil (sixième mondial) et le Maroc (septième), deux équipes qui dans un tournoi classique s'affronteraient en demi-finale. Le Groupe L associe l'Angleterre et la Croatie, histoire récente d'une élimination anglaise douloureuse en 2018 que Gemini enregistre comme une donnée psychologique non négligeable.
+
+La grande histoire statistique que l'analyse met sur la table concerne cependant les champions en titre : trois des quatre derniers vainqueurs ont été éliminés dès la phase de groupes du tournoi suivant. L'Argentine de 2022 a encaissé huit buts au Qatar, a eu besoin de deux séances de tirs au but et a montré des fragilités structurelles qui, dans un parcours de huit matchs sous le soleil de l'Amérique du Nord, pourraient s'avérer fatales. Ce n'est pas une condamnation, mais c'est un poids que Gemini insère dans l'équation.
+
+## Chaleur, altitude et jet lag : les variables invisibles
+
+Si la partie sur le classement FIFA est la section prévisible de l'analyse, celle sur les conditions environnementales est celle où Gemini fait le travail le plus original, et le plus inquiétant pour certaines sélections.
+
+Le tournoi se joue dans trois pays, sur des sites allant de Miami (pratiquement au niveau de la mer, humidité au sommet) à Mexico (2 250 mètres d'altitude, air raréfié) en passant par Guadalajara (1 566 mètres) et Houston (plate et torride, mais avec le seul stade du tournoi doté d'une climatisation intégrale et d'un toit rétractable). Chaque site est un écosystème différent, et les équipes se déplacent entre ces écosystèmes sans aucune continuité physiologique.
+
+La littérature médico-sportive que Gemini cite est claire : la VO2max, la consommation maximale d'oxygène, indicateur clé de l'endurance aérobie, chute de 7 % à 8 % pour chaque millier de mètres d'altitude au-delà de 1 500 mètres. Lors de la Coupe du Monde 2010 en Afrique du Sud, on a enregistré une baisse de 21 % des courses à haute vitesse. La Tchécoslovaquie de 1970 ne s'est pas acclimatée et a perdu tous ses matchs de groupe. L'Angleterre d'Alf Ramsey a fait l'inverse, trois semaines de stage à Mexico, des matchs amicaux en altitude, des comprimés de sel, et a atteint les quarts : la préparation environnementale est un véritable facteur compétitif, pas une obsession des préparateurs physiques.
+
+La chaleur ajoute une complexité supplémentaire. Les données de Climate Central montrent que les sites de 2026 enregistrent une augmentation marquée des journées aux températures extrêmes : l'Estadio Azteca a vu la moyenne des journées à risque thermique passer de deux à onze par an, Miami combine chaleur et humidité dans un mélange qui déprime la thermorégulation corporelle, Dallas fixe le seuil de « chaleur extrême » à 31,8 degrés, ce qui pour une équipe européenne sortant d'une saison printanière est déjà un environnement hostile.
+
+C'est ici que Gemini introduit ce qu'il appelle le « multiplicateur de résistance » : un système de poids appliqué aux variables de stress (voyages transcontinentaux, burnout de fin de saison, climat) qui modifie sensiblement les hiérarchies par rapport aux modèles purement techniques. L'équipe techniquement la plus forte n'est pas nécessairement celle qui survit le mieux à ce hachoir à viande physique. Et cette observation renverse le classement.
+
+Une note géopolitique que l'analyse n'omet pas, car il serait malhonnête de le faire : le climat politique américain a généré des tensions concrètes autour de l'organisation du tournoi. Plus de 120 organisations de défense des droits civiques menées par l'ACLU ont émis des avis de voyage pour les dix millions de visiteurs attendus. Un arbitre d'origine somalienne s'est vu refuser un visa, l'attaquant irakien Aymen Hussein a été retenu sept heures à l'aéroport de Chicago, quinze membres du staff fédéral iranien n'ont pas pu entrer aux États-Unis. La coalition « No ICE in the Cup » manifeste devant les stades. Ce ne sont pas des données techniques au sens footballistique, mais ce sont des données réelles sur l'environnement dans lequel le tournoi se déroule, et un système d'analyse sérieux ne peut les ignorer.
+
+## Les protagonistes : qui gagne, qui s'effondre
+
+**L'Argentine** arrive avec dix-sept vétérans du triomphe de 2022 : une continuité qui est à la fois un point fort et une vulnérabilité. Messi a 38 ans et une fatigue chronique au biceps fémoral qui impose une gestion attentive de son temps de jeu. La structure défensive, Romero, Lisandro Martínez, Emiliano Martínez dans les buts, tient le coup, le milieu de terrain avec De Paul, Mac Allister et Enzo Fernández fonctionne. Mais les latéraux titulaires sont arrivés au stage amoindris, le défenseur Balerdi a été écarté pour une déchirure musculaire, et l'absence du charisme de Di María, retraité de la sélection, est un vide qui se fera sentir.
+
+**La France** est profondément renouvelée : seulement onze survivants de 2022, âge moyen descendu à 26,4 ans. Mbappé, 42 buts en 44 matchs au Real Madrid la saison dernière, est le centre de gravité, épaulé par le Ballon d'Or en titre Dembélé et le talent Michael Olise. Les exclusions de marque de Griezmann, Camavinga et Giroud témoignent d'un choix net en faveur du renouvellement. La question est de savoir si un groupe aussi jeune supportera la pression des éliminations directes.
+
+**Le Brésil** du nouveau cours dirigé par Carlo Ancelotti est l'opération la plus ambitieuse du tournoi : l'italien est le premier entraîneur étranger à diriger la Seleção lors d'une Coupe du Monde au cours du dernier siècle d'histoire. Lors des dix premiers matchs sur le banc, il a récolté cinq victoires, deux nuls et trois défaites, un début non triomphal, compensé par sa qualité principale que le gardien Alisson a décrite comme « une œuvre de pacification de l'environnement ». La force offensive est confiée à Vinícius Júnior, deuxième au Ballon d'Or 2024, et au jeune Estêvão, 19 ans, déjà cinq buts en onze sélections. Et Neymar, 34 ans, de retour d'une rupture des croisés en 2023, a été convoqué par Ancelotti comme symbole et arme tactique, même sans l'éclat athlétique de ses meilleurs jours.
+
+**L'Angleterre** de Thomas Tuchel est l'équipe que Gemini identifie comme la mieux structurée pour les tours éliminatoires. L'entraîneur allemand, arrivé en mars 2025 avec l'objectif déclaré de conquérir la deuxième étoile (« Operation second star »), a obtenu huit victoires en huit matchs de qualification sans encaisser de but, écartant délibérément des talents comme Palmer, Foden et Alexander-Arnold en faveur d'un bloc cohérent. Kane mène l'attaque, Bellingham et Saka garantissent la qualité, Ivan Toney est le sniper de la surface et le spécialiste des tirs au but en cas de dénouement par les penalties. La grande surprise est Morgan Rogers d'Aston Villa, titulaire lors de douze des treize défis de l'ère Tuchel.
+
+**L'Allemagne** emmène Neuer dans les buts à quarante ans et l'énigme Jamal Musiala : après sa fracture de la jambe lors de la Coupe du Monde des Clubs, il n'a disputé ses premières quatre-vingt-dix minutes entières que fin mai. Sur une distance de huit matchs sous la chaleur de l'Amérique du Nord, sa tenue athlétique est la question la plus difficile du tournoi allemand. L'hyper-dynamisme de Nagelsmann, construit sur des rythmes effrénés, est une philosophie qui à quarante degrés peut devenir un luxe insoutenable.
+
+Mention spéciale au classement de l'attractivité esthétique des quarante-huit entraîneurs, élaboré par l'institut Live Football Tickets, car c'est exactement le type de donnée qu'aucune analyse sérieuse ne devrait citer et qui pourtant dit quelque chose de vrai sur le cirque médiatique qui accompagne le football mondial. Tuchel est quatrième avec 8,43 sur 10. Il est devancé par le sélectionneur australien Tony Popovic (8,99), premier absolu. Nagelsmann est septième. Scaloni, Ancelotti et de la Fuente ne figurent pas dans le top dix. On ne sait pas dans quelle mesure l'attractivité de l'entraîneur influence les performances sur le terrain. Gemini, sagement, n'essaie même pas.
+
+## Les chiffres des bookmakers contre l'algorithme
+
+Avant d'écouter la sentence de l'IA, il vaut la peine de regarder ce que dit le marché des paris, qui est le système de prévision distribuée le plus honnête qui existe : il agrège des millions d'évaluations individuelles en une probabilité implicite, et l'argent ne ment pas.
+
+Le tableau est net : l'Espagne favorite absolue (+440/+450 sur FanDuel), la France dans la foulée (+450), l'Angleterre troisième (+600/+700). Le Brésil et l'Argentine, pénalisés par les inconnues logistiques et climatiques, partagent la tranche entre +800 et +1000, même évaluation, destins différents selon Gemini. Pour le Soulier d'Or, les bookmakers misent sur Mbappé (+600) et Kane (+700), avec Haaland à +1400 freiné par le manque de profondeur du parcours norvégien.
+
+Trois équipes européennes en tête, les sud-américaines en deuxième rideau. C'est précisément là que l'analyse de Gemini prend une direction divergente, et elle le fait avec un argument historique précis.
+![tabella1.jpg](tabella1.jpg)
+L'un des tableaux de l'analyse de Gemini
+
+## La sentence : le Brésil en triomphe
+
+La prévision finale de Gemini est la suivante : le Brésil gagnera la Coupe du Monde 2026. Finaliste l'Angleterre. Troisième l'Espagne.
+
+Le raisonnement qui soutient cette sentence s'articule en niveaux, et il vaut la peine de les suivre dans l'ordre où ils sont présentés.
+
+Le premier niveau est historique. Dans les Amériques, les équipes sud-américaines ont un taux de réussite disproportionné par rapport à leur poids dans le classement mondial. L'Uruguay a gagné en 1930 (à domicile) et en 1950 (au Brésil, contre les hôtes lors de la finale la plus douloureuse de l'histoire du football). Le Brésil a gagné en 1962 (au Chili) et en 1970 (au Mexique). L'Argentine a gagné en 1978 (à domicile) et en 1986 (au Mexique). Sur le continent américain, une seule équipe européenne a gagné : en 2014, au Brésil, l'Allemagne a remporté le titre, battant l'Argentine en finale. Sur 7 Coupes du Monde jouées sur le sol américain, 6 ont été remportées par des sud-américains et 1 (2014) par une européenne. Une seule équipe du continent américain (le Brésil) a réussi à gagner une Coupe du Monde en Europe : en 1958 en Suède, seul cas de victoire d'une sélection extra-européenne sur le sol européen. Ce sont des statistiques, mais elles racontent une longue histoire.
+
+Le deuxième niveau est physiologique. Les équipes sud-américaines sont structurellement plus habituées à jouer dans des conditions de chaleur et d'humidité élevées, en particulier celles qui proviennent de systèmes de qualification qui traversent le Brésil, la Colombie, l'Équateur, le Paraguay. L'acclimatation n'est pas un protocole à suivre en stage : c'est une compétence acquise avec le temps, dans le tissu musculaire, dans les mécanismes de thermorégulation.
+
+Le troisième niveau est tactique. Ancelotti, dans le système d'analyse de l'IA, est identifié comme l'entraîneur le mieux équipé pour le format étendu du tournoi. Non pas parce qu'il est le plus brillant tactiquement, cette couronne appartenant, selon Gemini, à Nagelsmann ou Tuchel, mais parce que sa philosophie de gestion, sa capacité à moduler les rythmes de match et à faire tourner les effectifs sans perdre en solidité, est exactement ce qu'il faut dans une compétition de huit matchs sous le soleil brûlant de l'Amérique du Nord. Le port salvateur dans une longue tempête.
+
+Le parcours que Gemini construit voit le Brésil franchir les poules avec une relative agilité, puis éliminer progressivement des adversaires européens accablés par la chaleur et l'usure. La demi-finale contre l'Argentine, le super-derby sud-américain, le match le plus chargé d'histoire du tournoi, est attribuée au Brésil pour la profondeur du banc et une meilleure gestion des rotations. La finale contre l'Angleterre de Tuchel est la confrontation entre deux modèles opposés : la « discipline créative » auriverde contre la « rigueur pragmatique » anglaise. L'Angleterre mise sur les prolongations ou les tirs au but pour exploiter la spécialisation d'Ivan Toney aux tirs au but. Elle n'y parvient pas.
+
+L'Espagne, décrite comme l'équipe ayant la plus haute qualité technique du tournoi, est éliminée en demi-finale par l'Angleterre : la possession de balle totale de Luis de la Fuente, sous la chape de chaleur de l'Amérique du Nord, finit par épuiser les Ibères eux-mêmes dans un paradoxe physiologique d'école.
+
+Le Brésil remporte son sixième titre mondial, vingt-quatre ans après 2002. L'analyse se termine par une phrase qui a le ton d'une déclaration poétique : « Dans les Amériques, le football reste un territoire où la résilience et le facteur environnemental l'emportent sur la théorie. 2026 marquera le retour de la couronne en Amérique du Sud, fermant le cercle commencé en 1958. »
+
+## Ce que cette expérience nous dit vraiment
+
+Il est juste de rappeler ce que cette expérience n'est pas : ce n'est pas une prévision scientifique, ce n'est pas un conseil de pari, ce n'est pas un oracle. Paul le poulpe avait l'avantage de ne pas avoir à se justifier : il ouvrait une caisse et c'était tout. Gemini doit construire une argumentation, et chaque argumentation porte en elle les biais des données sur lesquelles elle a été entraînée.
+
+Ce qui est intéressant, c'est la manière dont le système a géré la complexité : il ne s'est pas contenté de classer les équipes par classement FIFA et de déclarer la première gagnante, mais il a intégré des variables hétérogènes, climatologiques, physiologiques, historiques, géopolitiques, produisant une prévision qui diverge du consensus des bookmakers non par hasard, mais pour une raison argumentée. Cette raison peut être erronée. Elle l'est probablement sur certains points. Mais le processus est rigoureux de la manière dont seul celui qui n'a pas peur de se tromper peut se permettre de l'être.
+
+Si en juillet le Brésil soulève vraiment la coupe, la vraie question sera autre : qu'aurons-nous appris ? Que la donnée environnementale est systématiquement sous-estimée dans le football moderne ? Qu'Ancelotti porte chance même aux sélections ? Ou simplement qu'avec assez de variables et une pincée de chance, n'importe qui peut deviner ? Nous rouvrirons cet article en juillet. En attendant, le tournoi commence.
+
+*Note : cette analyse a été élaborée par Gemini Deep Research au début du tournoi (11 juin 2026), sur un prompt structuré avec des variables climatologiques, historiques, tactiques et de marché. Elle ne constitue ni une prévision scientifique ni un conseil de pari. Les données du classement FIFA sont à jour au 11 juin 2026.*

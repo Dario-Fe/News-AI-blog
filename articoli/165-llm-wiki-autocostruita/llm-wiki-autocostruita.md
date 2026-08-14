@@ -1,0 +1,85 @@
+---
+tags: ["Generative AI", "Applications", "E-learning"]
+date: 2026-08-14
+author: "Dario Ferrero"
+youtube_url: "https://youtu.be/LlM3OVTv1YY?si=PuuUyjuKZ6PkiAuN"
+---
+
+# Ho costruito da zero la LLM Wiki di Karpathy sui miei articoli
+![llm-wiki-autocostruita.jpg](llm-wiki-autocostruita.jpg)
+
+*Per un anno ho scritto su AiTalk accumulando, articolo dopo articolo, una specie di diario personale sull'intelligenza artificiale. A un certo punto mi sono trovato con 164 file in una cartella, ciascuno pieno di concetti, nomi, aziende, modelli, tutti citati e mai davvero collegati tra loro. Sapevo di aver scritto qualcosa su un certo argomento, non ricordavo dove, e ritrovarlo significava aprire file uno a uno, sperando nella memoria o in un fortunato "cerca nel testo". Un archivio, insomma, non una conoscenza.*
+
+Il problema mi ha ricordato certe scene di *Memento*, il film di Christopher Nolan in cui il protagonista si tatuava sulla pelle i fatti che non poteva più trattenere: ogni prova esisteva, isolata, senza però un filo che la tenesse insieme al resto. Io avevo lo stesso problema con dimensioni più modeste, un archivio di testo invece di tatuaggi, con una sensazione comunque simile: informazione presente, connessione assente.
+
+La soluzione a cui mi sono avvicinato non è nata da un'intuizione mia, bensì da un pattern molto noto che circola nella comunità degli sviluppatori sotto il nome dato dal suo ideatore, Andrej Karpathy: la [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). L'idea, in breve, è che invece di far ricercare a un modello i tuoi documenti ogni volta che fai una domanda, gli fai leggere i documenti una volta, gli fai costruire pagine strutturate e collegate tra loro, e poi lo lasci consultare quella conoscenza già compilata quando gli fai domande. Ne avevo già parlato in un [articolo precedente](https://aitalk.it/it/llm-knowledge-base.html), qui volevo raccontare cosa succede quando smetti di parlarne e provi a costruirla davvero, con i tuoi 164 file, i tuoi errori, i tuoi dubbi.
+
+Non partivo da esperto di questo genere di sistemi, partivo da curioso con un problema concreto da risolvere. Quello che segue è il resoconto onesto del percorso, comprese le scelte che ho scartato e quelle di cui, ancora oggi, non sono del tutto sicuro.
+
+## Il metodo che non cercavo
+
+La prima tentazione, quando hai un problema di questo tipo, è affidarti a uno script. Ho pensato a un'estrazione di concetti con librerie come spaCy o NLTK, un lavoro rapido di analisi del testo. L'ho scartato quasi subito, perché quel genere di strumenti riconosce entità e parole chiave, non il significato di un ragionamento lungo un intero articolo, e io avevo bisogno proprio di quello.
+
+Ho pensato anche a Obsidian, magari con qualche plugin della community pensato per costruire grafi di conoscenza. Lo avevo già provato in passato per altri progetti, e la sensazione era sempre la stessa: uno strato di configurazione tra me e il risultato che toglieva controllo più di quanto ne aggiungesse.
+
+Restava la strada più battuta, un sistema RAG classico con un database vettoriale come Chroma o Weaviate. Funziona, è collaudato, però risolve un problema diverso dal mio: recupera frammenti di testo pertinenti a ogni domanda, senza mai accumulare una comprensione che cresce nel tempo. Ogni interrogazione riparte da zero, un po' come il pesciolino Dory di *Alla ricerca di Nemo*, che ricomincia daccapo la scoperta del mondo ogni pochi secondi. Simpatico come personaggio, meno pratico come architettura di conoscenza.
+
+Ho guardato anche soluzioni più elaborate. [Graphify](https://aitalk.it/it/graphify.html), di cui avevo scritto in passato, costruisce grafi di conoscenza a partire dal parsing sintattico del codice, pensato per agenti come Claude Code o Cursor su codebase reali: uno strumento potente, orientato però a un caso d'uso diverso dal mio flusso di markdown puro. Microsoft GraphRAG mi è sembrato eccessivo per un progetto personale, con un'infrastruttura che avrei dovuto mantenere per anni solo per interrogare i miei stessi articoli. MeMex-Zero-RAG è pronto per la produzione, pensato però per agenti collegati via MCP, non per un uso autonomo come il mio. Il progetto community obsidian-llm-wiki si avvicinava di più a quello che cercavo, restava però legato a Obsidian, e io volevo qualcosa di ancora più minimale.
+
+Alla fine ho scartato tutte le soluzioni già confezionate, comprese quelle più vicine al mio caso d'uso, e ho deciso di costruire il pattern da zero. Non per snobismo verso gli strumenti esistenti, semplicemente perché l'idea di provarci con le mie mani, per gioco più che per necessità, mi sembrava il modo migliore per capire davvero come funziona il meccanismo sotto la superficie, con la possibilità di imparare qualcosa lungo la strada anche se il risultato finale fosse stato imperfetto.
+
+Come agente ho scelto OpenCode, open source e agnostico rispetto al modello, capace di lavorare sia con provider cloud sia con modelli locali: non una soluzione preconfezionata per costruire wiki, solo un buon esecutore a cui affidare le regole. Gli ho passato il pattern Karpathy nella sua forma più semplice, una cartella raw/ con i sorgenti immutabili, una cartella wiki/ con la conoscenza compilata, e ho iniziato a costruire tutto il resto da lì, un file di regole alla volta, senza database, senza sistemi di embedding da gestire, senza infrastruttura oltre al filesystem.
+
+## Come funziona, in pratica
+
+Il progetto vive in una struttura semplice: dentro `raw/articoli/` ci sono i 164 file markdown originali, dentro `wiki/` si sono formate nel tempo tre sottocartelle, `concepts/` per le idee e i temi ricorrenti, `entities/` per persone, aziende e strumenti, `synthesis/` per le pagine di confronto e analisi trasversale, oltre a un `index.md` che fa da mappa generale e un `log.md` che registra ogni operazione.
+
+Il cuore del sistema è un file che ho chiamato `AGENTS.md`, la bussola che OpenCode consulta prima di ogni intervento. Lì ho scritto le regole di base: i file in `raw/` restano immutabili, ogni pagina wiki deve avere una fonte citata nel formato `[Fonte: raw/nome-file.md]`, i collegamenti tra pagine seguono la sintassi dei wikilink `[[Nome della Pagina]]`, e ogni pagina porta un frontmatter YAML con titolo, date di creazione e aggiornamento, categoria, tag, fonti. Ho aggiunto anche uno standard minimo di qualità: ogni pagina deve collegarsi ad almeno altre due pagine esistenti, altrimenti resta orfana, isolata dal resto della rete.
+
+Scrivere quel file mi ha ricordato il lavoro di world-building che si fa in certi giochi di ruolo cartacei, dove prima di giocare devi stabilire le regole del mondo affinché tutto quello che accade dopo abbia una coerenza interna. `AGENTS.md` è esattamente questo: non contenuto, regole per generare contenuto in modo coerente.
+![immagine1 .jpg](immagine1 .jpg)
+*Schema della struttura della Wiki di AiTalk.it*
+
+## Dieci lotti, molte sorprese
+
+Per il lavoro di ingest ho scelto DeepSeek V4 Flash, gratuito tramite OpenCode Zen, una scelta pragmatica più che ideologica: i contenuti erano già pubblici, quindi nessun problema di privacy nel farli passare su un servizio cloud, e la velocità del modello si adattava bene a un progetto di questa scala.
+
+Ho proceduto per lotti, numerando i file progressivamente e lanciando ogni volta lo stesso comando, "processa il prossimo lotto di file non ancora elaborati seguendo AGENTS.md", seguito da un controllo di lint per verificare link rotti, citazioni mancanti, pagine orfane. Dieci lotti in tutto, dai primi quindici file fino agli ultimi ventiquattro, con una resa di pagine create decrescente lotto dopo lotto: molte pagine nuove all'inizio, quando i concetti fondamentali dovevano ancora prendere forma, sempre meno con il passare del tempo, perché gran parte delle nuove informazioni finiva ad arricchire pagine già esistenti invece di generarne di nuove. Segno, credo, che la rete di conoscenza stava effettivamente convergendo verso una struttura stabile.
+
+Il risultato finale, alla fine dei dieci lotti più un recupero mirato di file rimasti indietro, è stato di 154 pagine di contenuto a partire da 164 articoli sorgente: 68 pagine di concetti, 80 di entità, 5 di sintesi, zero link rotti, zero pagine orfane, frontmatter valido su tutte le 156 pagine totali (contando indice e log), una media di quasi otto collegamenti per pagina. Gli hub principali della rete, quelli con più link in entrata, sono risultati sicurezza-ai, large-language-models, regolamentazione-ai ed etica-ai: non una sorpresa, visto quanto quei temi tornano trasversalmente in gran parte di quello che scrivo, però vederlo confermato dalla struttura stessa della wiki mi ha fatto piacere, quasi una controprova di coerenza del mio stesso lavoro.
+
+La sorpresa più grande, però, è arrivata guardando lo spazio occupato su disco: l'intero progetto, tutte le 154 pagine più indice e log, pesa 4,4 megabyte. Un sistema RAG con embedding vettoriali, per lo stesso volume di articoli, avrebbe probabilmente occupato tra i 50 e i 200 megabyte, considerando gli indici e i vettori necessari per la ricerca semantica. Qui invece c'è solo testo strutturato, niente chunk, niente embedding da salvare: la conoscenza compilata pesa persino meno degli articoli sorgente che l'hanno generata. Una wiki che sta comodamente su una chiavetta USB, che si sincronizza via git in pochi secondi, che si sposta su un altro computer con un semplice copia-incolla. Difficile non pensarci in relazione a quanto, di solito, l'infrastruttura attorno all'intelligenza artificiale abbia la tendenza opposta, crescere costantemente in dimensione e complessità.
+![immagine2.jpg](immagine2.jpg)
+*Screenshot di una query al LLM Wiki di AiTalk.it, tramite OpenCode e un modello cloud (DeepSeek V4 Flash)*
+
+## Dove l'umano resta necessario
+
+Sarebbe comodo raccontare il progetto come un processo automatico, avviato e lasciato scorrere fino al risultato finale. Non è andata così, e proprio questo mi sembra il punto più interessante da condividere.
+
+Durante i dieci lotti ho dovuto intervenire più volte. Tre file erano rimasti indietro, presenti solo nell'indice e non ancora processati, e ho dovuto lanciare un ingest mirato per recuperarli. Alcune entità importanti, come Dario Amodei, Elon Musk, Sam Altman, Jensen Huang, Hugging Face, Tesla, Waymo, non avevano una pagina propria pur essendo citate in più articoli, quindici pagine che ho aggiunto in un secondo momento accorgendomi della lacuna solo interrogando la wiki. Ho corretto un problema di encoding nel nome di un file, sistemato diciannove pagine con la data di aggiornamento sbagliata, aggiunto una seconda fonte a trentuno concetti che ne avevano soltanto una, integrato una sezione di conclusioni in quattro pagine di sintesi che ne erano prive.
+
+Nessuno di questi interventi è stato drammatico, tutti però mi hanno insegnato qualcosa sul limite reale del sistema: quando i lotti sono corposi, con molti file processati in un'unica sessione, il modello tende a perdere di vista dettagli minori, un po' come succede quando leggi troppi capitoli di un romanzo corale in una sola seduta e alla fine confondi qualche personaggio secondario. Mi ha ricordato certi manga con decine di personaggi introdotti nello stesso arco narrativo, dove anche il lettore più attento finisce per perdere qualche filo secondario, salvo poi ritrovarlo qualche volume più avanti.
+
+Tuttavia, ora che ho allineato l'archivio nella Wiki, da qui in avanti, procederò con ingest di un articolo alla volta invece che per lotti ampi. È un'ipotesi che devo ancora verificare sul campo, la mia intuizione è che la precisione migliorerà con la gestione di meno informazioni a ingest, non ho però ancora dati sufficienti per dirlo con certezza. Resta comunque la lezione più importante di tutto il percorso: il pattern di Karpathy non è automazione totale, è collaborazione tra umano e modello, dove il primo supervisiona, corregge, arricchisce quello che il secondo genera.
+
+## Stessa wiki, senza il cloud
+
+Una volta completata la wiki con il modello cloud, mi sono chiesto se l'intero sistema potesse funzionare anche offline, con un modello privato caricato sul mio computer. Le ragioni erano diverse tra loro: la privacy, perché in quel caso i dati non lascerebbero mai la macchina, il controllo, perché potrei scegliere qualsiasi modello senza dipendere da un provider esterno, i costi, azzerati una volta caricato il modello.
+
+Ho usato [LM Studio](https://lmstudio.ai/) come motore locale, con il server attivo sulla porta 8001, e come modello ho scelto Ornith 1.0 a 35 miliardi di parametri, di cui avevo scritto in un [articolo dedicato](https://aitalk.it/it/ornith-1.0.html): nelle mie prove, sia nei test sia nell'uso quotidiano, si è dimostrato il più preciso tra quelli provati, resta comunque possibile selezionare qualunque altro modello caricato in LM Studio.
+
+Per collegare OpenCode al server locale ho scelto la strada manuale, modificando direttamente il file di configurazione con un nuovo provider che punta all'endpoint locale, invece di affidarmi al plugin `opencode-lmstudio`, che pure avrebbe offerto vantaggi concreti come l'individuazione automatica dei modelli caricati e la gestione dinamica di porta ed endpoint. Ho scelto la configurazione manuale per un motivo pratico, il mio caso d'uso prevede query occasionali su una wiki già completa, non un cambio frequente di modello, e per un motivo più personale, volevo capire fino in fondo cosa c'era scritto in quel file di configurazione, senza intermediari. Riconosco che per un uso più dinamico, con cambi frequenti di architettura, il plugin resterebbe la scelta più comoda.
+
+I test mi hanno sorpreso in senso positivo. Una domanda semplice su un concetto già trattato, come MTV, ha trovato correttamente riferimento nella pagina dedicata alla musica e intelligenza artificiale. Una domanda più complessa, che chiedeva di elencare le principali aziende del settore e i rispettivi amministratori delegati citando le fonti, ha prodotto una risposta accurata su otto aziende, con le citazioni che puntavano correttamente alle pagine della wiki compilata e non ai file grezzi originali, segno che il modello stava effettivamente usando la struttura che avevo costruito. Ha persino individuato da solo due lacune, Mark Zuckerberg citato solo marginalmente e Sundar Pichai del tutto assente, un dettaglio importante da sottolineare, perchè il modello ha, di fatto, scovato delle lacune durante una ricerca, e mi ha permesso di colmarle con una semplice richiesta.
+
+La prima risposta è arrivata lenta, il tempo necessario a caricare l'intero contesto della wiki, le successive molto più rapide grazie alla cache. Ho dovuto alzare il limite di contesto da 25 mila a 160 mila token per permettere al modello di leggere l'intera struttura senza tagli, e ho scoperto che, a differenza del modello cloud usato per l'ingest, quello locale non segue automaticamente il pattern se non gli indichi esplicitamente di leggere `AGENTS.md` e di attingere solo dalla cartella `wiki/`. Un dettaglio che sembra piccolo, in realtà definisce la differenza tra una risposta pertinente e una generica.
+![immagine3.jpg](immagine3.jpg)
+*Screenshot di una query al LLM Wiki di AiTalk.it, tramite OpenCode e un modello locale (LM Studio + Ornith 1.0 35B)*
+
+## Cosa manca ancora
+
+Alla fine del percorso mi porto a casa più domande aperte che certezze definitive, e credo sia giusto così. Ho imparato che il pattern di Karpathy funziona nella pratica, con strumenti interamente open source e senza infrastrutture complesse, ho imparato che la supervisione umana resta indispensabile, non un ripiego temporaneo in attesa di modelli migliori, ho imparato che la compattezza di questo approccio, quei 4,4 megabyte totali, non è un dettaglio tecnico marginale, è una qualità che rende il progetto davvero portabile e condivisibile.
+
+Restano questioni su cui non ho ancora risposta. L'ingest file per file, che ho appena iniziato ad adottare al posto dei lotti ampi, migliorerà davvero la precisione come credo, o introdurrà solo più lentezza senza benefici proporzionati? Vorrei automatizzare l'aggiunta alla wiki nel momento stesso in cui pubblico un nuovo articolo, invece di ricordarmene a distanza di settimane. Vorrei anche aggiungere una sezione dedicata ai modelli linguistici come entità a sé, ChatGPT e Claude tra i primi, oggi menzionati solo di passaggio dentro altre pagine.
+
+C'è infine una domanda più di fondo, quella che mi ha accompagnato durante tutto il percorso: quanto di questa conoscenza compilata rifletta davvero quello che penso, e quanto invece sia già una sintesi del modello che si è insinuata tra me e i miei stessi articoli. Non ho una risposta definitiva, per ora mi limito a controllare, correggere, arricchire, consapevole che il progetto stesso è pensato per migliorare imparando cose nuove lungo il percorso, proprio come sto cercando di fare io.

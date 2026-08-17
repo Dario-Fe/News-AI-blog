@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-16T02:08:48.109760+00:00",
+  "last_update": "2026-08-17T02:06:09.883622+00:00",
   "portal_snapshot": {
     "total_articles": 830,
     "articles_by_lang": {
@@ -34,7 +34,7 @@
     "video_articles_count": 166
   },
   "cumulative_history": {
-    "it/index.html": 2431,
+    "it/index.html": 2433,
     "it": 1003,
     "fr": 303,
     "it/newsletter": 210,
@@ -67,7 +67,7 @@
     "it/kimi-k2-thinking.html": 43,
     "it/qwen3.5-locale-puntata1.html": 43,
     "it/bodo-glimt-fokus-ai.html": 42,
-    "it/cassieri-remoti-ai.html": 41,
+    "it/cassieri-remoti-ai.html": 42,
     "it/privacy": 41,
     "it/rapporto-leonardo-2026-parte1.html": 41,
     "it/grief-tech.html": 40,
@@ -113,6 +113,7 @@
     "it/ai-killed-mtv-star.html": 26,
     "it/ai-water-consumption.html": 26,
     "it/amazon-down.html": 26,
+    "it/llm-wiki-autocostruita.html": 26,
     "it/meetily.html": 26,
     "it/msa-100m-token.html": 26,
     "it/ai-consumer-2025.html": 25,
@@ -145,7 +146,6 @@
     "it/talkie-vintage-llm.html": 23,
     "it/gemma4-12b-q8.html": 22,
     "it/glm-5.html": 22,
-    "it/llm-wiki-autocostruita.html": 22,
     "it/mit-ai-umile.html": 22,
     "it/alibaba-qwen3": 21,
     "it/browser-ai.html": 21,
@@ -154,6 +154,7 @@
     "it/licenziamenti-ai-2026.html": 21,
     "it/omnivoice-studio.html": 21,
     "en/agent-hospital-en.html": 20,
+    "en/ai-video-generativa-ovi-en": 20,
     "it/ai-slop-entropia.html": 20,
     "it/codespeak.html": 20,
     "it/convergenza-modelli-scientifici.html": 20,
@@ -161,7 +162,6 @@
     "it/mistral-forge.html": 20,
     "it/steering-llm.html": 20,
     "it/switching-task.html": 20,
-    "en/ai-video-generativa-ovi-en": 19,
     "en/memvid-ai-memory-en.html": 19,
     "it/ai-creativity-ethics.html": 19,
     "it/amodei-intervista-parte2.html": 19,
@@ -283,6 +283,7 @@
     "de/iceberg-index-de": 6,
     "de/trm-samsung-de.html": 6,
     "en/ai-deepconf-en": 6,
+    "en/ai-musica-copyright-en": 6,
     "en/ai-water-consumption-en.html": 6,
     "en/contributo-automazione-bacchiocchi-en": 6,
     "en/fda-ema-aim-nash-ai-en.html": 6,
@@ -303,7 +304,6 @@
     "de/slm-2026-de.html": 5,
     "de/subliminal-learning-de.html": 5,
     "en/ai-bournout-en.html": 5,
-    "en/ai-musica-copyright-en": 5,
     "en/ai-water-consumption-en": 5,
     "en/apply-ai-eu-strategy-en.html": 5,
     "en/chatgpt-ads-en.html": 5,
@@ -333,6 +333,7 @@
     "it/power-sampling": 5,
     "it/qwen3.5-locale-puntata1": 5,
     "it/qwen35-locale-puntata1.html)": 5,
+    "it/wave-former-raggix": 5,
     "de/agentic-ai-foundation-de": 4,
     "de/ai-consumer-2025-de.html": 4,
     "de/ai-deepconf-de": 4,
@@ -402,7 +403,6 @@
     "it/rsl-really-simple-licensing.html": 4,
     "it/silicon-valley-ai-pac.html": 4,
     "it/turboquant": 4,
-    "it/wave-former-raggix": 4,
     "de/10-regole-ai-de": 3,
     "de/aaio-floridi-de.html": 3,
     "de/agenti-al-lavoro-de.html": 3,
@@ -620,6 +620,7 @@
     "en/kimi-k2-thinking-en.html": 2,
     "en/kv-cache-approach-en.html": 2,
     "en/licenziamenti-ai-2026-en": 2,
+    "en/licenziamenti-ai-2026-en.html": 2,
     "en/llm-knowledge-base-en": 2,
     "en/magnifica-humanitas-en.html": 2,
     "en/mdash-microsoft-en.html": 2,
@@ -936,7 +937,7 @@
     "en/jacobian-lens-en.html": 1,
     "en/kimi-k2-article-en": 1,
     "en/kimi-k2-thinking-en": 1,
-    "en/licenziamenti-ai-2026-en.html": 1,
+    "en/laguna-s21-en.html": 1,
     "en/llm-knowledge-base-en.html": 1,
     "en/loop-engineering-en.html": 1,
     "en/malta-openai-en": 1,
@@ -1014,10 +1015,12 @@
     "es/gemma4-26b-es.html": 1,
     "es/gina-assistente-vocale-es.html": 1,
     "es/glm5.2-es.html": 1,
+    "es/graphify-es": 1,
     "es/graphify-es.html": 1,
     "es/grief-tech-es": 1,
     "es/grief-tech-es.html": 1,
     "es/iceberg-index-es.html": 1,
+    "es/laguna-s21-es.html": 1,
     "es/last30days-es.html": 1,
     "es/licenziamenti-ai-2026-es.html": 1,
     "es/llm-knowledge-base-es.html": 1,
@@ -1100,6 +1103,7 @@
     "fr/mit-ai-umile-fr.html": 1,
     "fr/mondiale-2026-gemini-fr.html": 1,
     "fr/ornith-1.0-fr.html": 1,
+    "fr/papalini-interview2-fr.html": 1,
     "fr/pocketos-disaster-fr.html": 1,
     "fr/programmatori-vs-ai-fr.html": 1,
     "fr/programmers-vs-ai-fr": 1,
@@ -3366,6 +3370,59 @@
           "es/andon-fm-es.html": 1,
           "fr/magnifica-humanitas-fr.html": 1
         }
+      },
+      "2026-08-16": {
+        "total_views": 15,
+        "views_by_lang": {
+          "it": 8,
+          "en": 4,
+          "es": 2,
+          "fr": 1
+        },
+        "views_by_tag": {
+          "Ethics & Society": 5,
+          "Business": 2,
+          "Generative AI": 9,
+          "Applications": 4,
+          "E-learning": 4,
+          "Training": 2,
+          "Security": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/llm-wiki-autocostruita.html",
+            "views": 4
+          },
+          {
+            "path": "it/cassieri-remoti-ai.html",
+            "views": 1
+          },
+          {
+            "path": "en/ai-video-generativa-ovi-en",
+            "views": 1
+          },
+          {
+            "path": "en/ai-musica-copyright-en",
+            "views": 1
+          },
+          {
+            "path": "it/wave-former-raggix",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 2,
+          "it/cassieri-remoti-ai.html": 1,
+          "it/llm-wiki-autocostruita.html": 4,
+          "en/ai-video-generativa-ovi-en": 1,
+          "en/ai-musica-copyright-en": 1,
+          "it/wave-former-raggix": 1,
+          "en/licenziamenti-ai-2026-en.html": 1,
+          "en/laguna-s21-en.html": 1,
+          "es/graphify-es": 1,
+          "es/laguna-s21-es.html": 1,
+          "fr/papalini-interview2-fr.html": 1
+        }
       }
     },
     "monthly": {
@@ -3434,27 +3491,31 @@
         ]
       },
       "2026-08": {
-        "total_views": 498,
+        "total_views": 513,
         "views_by_lang": {
-          "it": 389,
-          "en": 48,
+          "it": 397,
+          "en": 52,
           "de": 29,
-          "es": 14,
-          "fr": 18
+          "es": 16,
+          "fr": 19
         },
         "views_by_tag": {
-          "Generative AI": 211,
+          "Generative AI": 220,
           "Startups": 18,
-          "Applications": 122,
+          "Applications": 126,
           "Research": 88,
-          "Security": 58,
-          "E-learning": 28,
-          "Ethics & Society": 137,
-          "Business": 36,
-          "Training": 77,
+          "Security": 59,
+          "E-learning": 32,
+          "Ethics & Society": 142,
+          "Business": 38,
+          "Training": 79,
           "Copyright": 1
         },
         "top_articles": [
+          {
+            "path": "it/llm-wiki-autocostruita.html",
+            "views": 26
+          },
           {
             "path": "it/papalini-interview2.html",
             "views": 25
@@ -3462,10 +3523,6 @@
           {
             "path": "it/dwarfstar-antirez.html",
             "views": 24
-          },
-          {
-            "path": "it/llm-wiki-autocostruita.html",
-            "views": 22
           },
           {
             "path": "it/omnivoice-studio.html",
@@ -3500,25 +3557,25 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 1444,
+        "total_views": 1459,
         "views_by_lang": {
-          "it": 931,
-          "en": 219,
+          "it": 939,
+          "en": 223,
           "de": 101,
-          "fr": 103,
-          "es": 90
+          "fr": 104,
+          "es": 92
         },
         "views_by_tag": {
-          "Generative AI": 704,
-          "Applications": 345,
-          "Security": 187,
+          "Generative AI": 713,
+          "Applications": 349,
+          "Security": 188,
           "Research": 387,
-          "Ethics & Society": 460,
-          "Training": 180,
-          "Business": 229,
+          "Ethics & Society": 465,
+          "Training": 182,
+          "Business": 231,
           "Copyright": 14,
           "Startups": 63,
-          "E-learning": 43
+          "E-learning": 47
         }
       }
     }

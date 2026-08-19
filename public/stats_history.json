@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-18T02:00:50.620407+00:00",
+  "last_update": "2026-08-19T02:05:15.670062+00:00",
   "portal_snapshot": {
     "total_articles": 835,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 167
   },
   "cumulative_history": {
-    "it/index.html": 2438,
-    "it": 1009,
+    "it/index.html": 2441,
+    "it": 1013,
     "fr": 304,
     "it/newsletter": 210,
     "en": 208,
@@ -103,13 +103,13 @@
     "en/malattie-mentali-ai-en.html": 28,
     "it/ai-epanortosi.html": 28,
     "it/cookie": 28,
+    "it/llm-wiki-autocostruita.html": 28,
     "it/mercury2.html": 28,
     "it/agenti-marxisti.html": 27,
     "it/chatgpt-ads.html": 27,
     "it/dspark.html": 27,
     "it/esodo-silenzioso.html": 27,
     "it/humanebench.html": 27,
-    "it/llm-wiki-autocostruita.html": 27,
     "it/10-regole-ai": 26,
     "it/ai-consumer-2025.html": 26,
     "it/ai-killed-mtv-star.html": 26,
@@ -147,14 +147,14 @@
     "it/gemma4-12b-q8.html": 22,
     "it/glm-5.html": 22,
     "it/mit-ai-umile.html": 22,
+    "it/omnivoice-studio.html": 22,
+    "en/ai-video-generativa-ovi-en": 21,
     "it/alibaba-qwen3": 21,
     "it/browser-ai.html": 21,
     "it/emergence-world.html": 21,
     "it/introspection-anthropic.html": 21,
     "it/licenziamenti-ai-2026.html": 21,
-    "it/omnivoice-studio.html": 21,
     "en/agent-hospital-en.html": 20,
-    "en/ai-video-generativa-ovi-en": 20,
     "it/ai-slop-entropia.html": 20,
     "it/codespeak.html": 20,
     "it/convergenza-modelli-scientifici.html": 20,
@@ -189,19 +189,19 @@
     "it/datacenter-proteste-usa.html": 17,
     "it/degregori-ai-war.html": 17,
     "it/glm-5": 17,
+    "it/laguna-s21.html": 17,
     "it/mit-adaptive-scaling.html": 17,
     "it/quantum-echoes.html": 17,
     "en/iceberg-index-en": 16,
     "it/chartnet.html": 16,
     "it/contributo-automazione-bacchiocchi": 16,
-    "it/laguna-s21.html": 16,
+    "it/loop-engineering.html": 16,
     "it/pignataro-intervista2.html": 16,
     "en/alibaba-qwen3-en": 15,
     "en/shutdown-resistance-en.html": 15,
     "en/trm-samsung-en": 15,
     "fr/malattie-mentali-ai-fr.html": 15,
     "it/guerra-algoritmica.html": 15,
-    "it/loop-engineering.html": 15,
     "it/malattie-mentali-ai.html": 15,
     "it/mit-adaptive-scaling": 15,
     "it/power-sampling.html": 15,
@@ -214,13 +214,14 @@
     "it/dataland-museo-ai.html": 14,
     "it/memvid-ai-memory.html": 14,
     "fr/toon-fr.html": 13,
+    "it/agenti-ai-open-source-confronto.html": 13,
     "it/mistral-devstral": 13,
     "it/steerling.html": 13,
     "it/tml-determinism": 13,
+    "en/longcat-video-en": 12,
     "it/ai-video-generativa-ovi.html": 12,
     "it/ai-winter.html": 12,
     "it/robot-tax-sanders": 12,
-    "en/longcat-video-en": 11,
     "es/robotica-2025-es.html": 11,
     "it/ai-cosciente": 11,
     "it/ai-metacognition.html": 11,
@@ -240,7 +241,6 @@
     "de/ai-cosciente-de": 9,
     "en/prompt-repetition-en.html": 9,
     "fr/agentic-ai-foundation-fr.html": 9,
-    "it/agenti-ai-open-source-confronto.html": 9,
     "it/ai-water-consumption": 9,
     "it/google-ue-indagine.html": 9,
     "it/longcat-video": 9,
@@ -254,6 +254,7 @@
     "en/legge-ai-italia-en": 8,
     "es/ai-winter-es.html": 8,
     "it/ai-consumer-2025": 8,
+    "it/kimi-k2-article.html": 8,
     "it/shutdown-resistance": 8,
     "de/index.html": 7,
     "de/papalini-interview-de.html": 7,
@@ -271,7 +272,6 @@
     "it/ai-coding-security": 7,
     "it/ai-lutto-digitale.html": 7,
     "it/alibaba-qwen3.html": 7,
-    "it/kimi-k2-article.html": 7,
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 7,
     "it/onu-report-2026.html": 7,
     "it/qwen3-tts": 7,
@@ -340,6 +340,7 @@
     "de/ai-consumer-2025-de.html": 4,
     "de/ai-deepconf-de": 4,
     "de/ai-safety-report-2026-de": 4,
+    "de/ai-safety-report-2026-de.html": 4,
     "de/ai-valutazione-ed-etica-de": 4,
     "de/cyborg-centauri-automi-de.html": 4,
     "de/datacenter-proteste-usa-de.html": 4,
@@ -413,7 +414,6 @@
     "de/ai-killed-mtv-star-de.html": 3,
     "de/ai-musica-copyright-de": 3,
     "de/ai-rsponsabilità-de.html": 3,
-    "de/ai-safety-report-2026-de.html": 3,
     "de/anthropic-hacker-de.html": 3,
     "de/caveman-de": 3,
     "de/chatgpt-ads-de.html": 3,
@@ -804,11 +804,13 @@
     "it/articolo-ai-lavoro.html": 2,
     "it/assets/images/ZGlmZnVzaW": 2,
     "it/dalle applicazioni consolidate alle frontiere del futuro": 2,
+    "it/deepseek-mhc": 2,
     "it/emergence-world": 2,
     "it/grief-tech": 2,
     "it/index.html/rss.xml": 2,
     "it/intervista-ricco-ai": 2,
     "it/msa-100m-token": 2,
+    "it/omnivoice-studio": 2,
     "it/qwen36-35b-ai": 2,
     "it/rapporto-leonardo-2026-parte1": 2,
     "it/rsl-really-simple-licensing": 2,
@@ -846,6 +848,7 @@
     "de/degregori-ai-war-de": 1,
     "de/dspark-de.html": 1,
     "de/dwarfstar-antirez-de.html": 1,
+    "de/emergence-world-de": 1,
     "de/esodo-silenzioso-de.html": 1,
     "de/european-tech-map-de.html": 1,
     "de/gemma4-26b-de": 1,
@@ -1143,7 +1146,6 @@
     "it/chatgpt-use-study": 1,
     "it/cina-universita": 1,
     "it/convergenza-modelli-scientifici": 1,
-    "it/deepseek-mhc": 1,
     "it/dspark": 1,
     "it/esodo-silenzioso": 1,
     "it/european-tech-map": 1,
@@ -1158,7 +1160,6 @@
     "it/magnifica-humanitas": 1,
     "it/meetily.htmlhttps://aitalk.it/it/prompt-injection-camel.html": 1,
     "it/mit-ai-umile": 1,
-    "it/omnivoice-studio": 1,
     "it/ornith-1.0": 1,
     "it/papalini-interview": 1,
     "it/pocketos-disaster": 1,
@@ -3488,6 +3489,62 @@
           "fr/omnivoice-studio-fr.html": 1,
           "it/omnivoice-studio": 1
         }
+      },
+      "2026-08-18": {
+        "total_views": 22,
+        "views_by_lang": {
+          "it": 18,
+          "en": 2,
+          "de": 2
+        },
+        "views_by_tag": {
+          "Generative AI": 9,
+          "Applications": 8,
+          "E-learning": 1,
+          "Ethics & Society": 3,
+          "Training": 1,
+          "Research": 2,
+          "Security": 5,
+          "Startups": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/agenti-ai-open-source-confronto.html",
+            "views": 4
+          },
+          {
+            "path": "it/llm-wiki-autocostruita.html",
+            "views": 1
+          },
+          {
+            "path": "it/omnivoice-studio.html",
+            "views": 1
+          },
+          {
+            "path": "en/ai-video-generativa-ovi-en",
+            "views": 1
+          },
+          {
+            "path": "it/laguna-s21.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 3,
+          "it": 4,
+          "it/llm-wiki-autocostruita.html": 1,
+          "it/omnivoice-studio.html": 1,
+          "en/ai-video-generativa-ovi-en": 1,
+          "it/laguna-s21.html": 1,
+          "it/loop-engineering.html": 1,
+          "it/agenti-ai-open-source-confronto.html": 4,
+          "en/longcat-video-en": 1,
+          "it/kimi-k2-article.html": 1,
+          "de/ai-safety-report-2026-de.html": 1,
+          "it/deepseek-mhc": 1,
+          "it/omnivoice-studio": 1,
+          "de/emergence-world-de": 1
+        }
       }
     },
     "monthly": {
@@ -3556,30 +3613,30 @@
         ]
       },
       "2026-08": {
-        "total_views": 551,
+        "total_views": 573,
         "views_by_lang": {
-          "it": 429,
-          "en": 54,
-          "de": 29,
+          "it": 447,
+          "en": 56,
+          "de": 31,
           "es": 18,
           "fr": 21
         },
         "views_by_tag": {
-          "Generative AI": 239,
-          "Startups": 18,
-          "Applications": 141,
-          "Research": 88,
-          "Security": 70,
-          "E-learning": 33,
-          "Ethics & Society": 147,
+          "Generative AI": 248,
+          "Startups": 19,
+          "Applications": 149,
+          "Research": 90,
+          "Security": 75,
+          "E-learning": 34,
+          "Ethics & Society": 150,
           "Business": 39,
-          "Training": 84,
+          "Training": 85,
           "Copyright": 1
         },
         "top_articles": [
           {
             "path": "it/llm-wiki-autocostruita.html",
-            "views": 27
+            "views": 28
           },
           {
             "path": "it/papalini-interview2.html",
@@ -3591,7 +3648,7 @@
           },
           {
             "path": "it/omnivoice-studio.html",
-            "views": 21
+            "views": 22
           },
           {
             "path": "it/soofi-s.html",
@@ -3599,7 +3656,7 @@
           },
           {
             "path": "it/laguna-s21.html",
-            "views": 16
+            "views": 17
           },
           {
             "path": "it/prompt-injection-camel.html",
@@ -3607,14 +3664,14 @@
           },
           {
             "path": "it/agenti-ai-open-source-confronto.html",
-            "views": 9
+            "views": 13
           },
           {
             "path": "it/meetily.html",
             "views": 6
           },
           {
-            "path": "fr/stanford-ai-index-2026-fr",
+            "path": "it/loop-engineering.html",
             "views": 5
           }
         ]
@@ -3622,25 +3679,25 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 1497,
+        "total_views": 1519,
         "views_by_lang": {
-          "it": 971,
-          "en": 225,
-          "de": 101,
+          "it": 989,
+          "en": 227,
+          "de": 103,
           "fr": 106,
           "es": 94
         },
         "views_by_tag": {
-          "Generative AI": 732,
-          "Applications": 364,
-          "Security": 199,
-          "Research": 387,
-          "Ethics & Society": 470,
-          "Training": 187,
+          "Generative AI": 741,
+          "Applications": 372,
+          "Security": 204,
+          "Research": 389,
+          "Ethics & Society": 473,
+          "Training": 188,
           "Business": 232,
           "Copyright": 14,
-          "Startups": 63,
-          "E-learning": 48
+          "Startups": 64,
+          "E-learning": 49
         }
       }
     }

@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-22T02:00:40.122577+00:00",
+  "last_update": "2026-08-23T02:11:18.693759+00:00",
   "portal_snapshot": {
     "total_articles": 845,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 169
   },
   "cumulative_history": {
-    "it/index.html": 2464,
-    "it": 1027,
+    "it/index.html": 2467,
+    "it": 1028,
     "fr": 306,
     "en": 210,
     "it/newsletter": 210,
@@ -57,8 +57,8 @@
     "en/robotica-2025-en.html": 51,
     "it/apply-ai-eu-strategy.html": 51,
     "it/gina-assistente-vocale.html": 49,
+    "fr/ai-epanortosi-fr.html": 48,
     "it/gemma4-26b.html": 48,
-    "fr/ai-epanortosi-fr.html": 47,
     "it/ai-bournout.html": 47,
     "it/robotica-2025.html": 46,
     "it/robot-tax-sanders.html": 45,
@@ -88,25 +88,26 @@
     "it/ai-safety-report-2026.html": 31,
     "it/benzup.html": 31,
     "it/diffusion-vs-autoregressive.html": 31,
+    "it/kv-cache-approach.html": 31,
     "it/strumenti-oracoli-caso-deloitte.html": 31,
     "en/ai-epanortosi-en.html": 30,
     "en/cyborg-centauri-automi-en": 30,
     "it/aaio-floridi.html": 30,
     "it/agentic-ai-foundation.html": 30,
-    "it/kv-cache-approach.html": 30,
     "it/sistema-sicurezza-ai.html": 30,
     "it/trm-samsung.html": 30,
+    "en/malattie-mentali-ai-en.html": 29,
     "it/cookie": 29,
     "it/eset-apt-report.html": 29,
     "it/graphify.html": 29,
     "it/llm-knowledge-base.html": 29,
     "it/ornith-1.0.html": 29,
-    "en/malattie-mentali-ai-en.html": 28,
     "it/ai-epanortosi.html": 28,
     "it/llm-wiki-autocostruita.html": 28,
     "it/mercury2.html": 28,
     "it/agenti-marxisti.html": 27,
     "it/ai-consumer-2025.html": 27,
+    "it/ars-notoria-e-ai.html": 27,
     "it/chatgpt-ads.html": 27,
     "it/dspark.html": 27,
     "it/esodo-silenzioso.html": 27,
@@ -116,7 +117,6 @@
     "it/ai-killed-mtv-star.html": 26,
     "it/ai-water-consumption.html": 26,
     "it/amazon-down.html": 26,
-    "it/ars-notoria-e-ai.html": 26,
     "it/dwarfstar-antirez.html": 26,
     "it/fda-ema-aim-nash-ai.html": 26,
     "it/msa-100m-token.html": 26,
@@ -239,6 +239,7 @@
     "it/ai-water-consumption": 10,
     "it/eset-apt-report": 10,
     "it/iceberg-index": 10,
+    "it/kimi-k2-article.html": 10,
     "it/subliminal-learning": 10,
     "de/ai-cosciente-de": 9,
     "en/prompt-repetition-en.html": 9,
@@ -250,13 +251,13 @@
     "en/antigravity-security-en.html": 8,
     "en/authors/dario-ferrero": 8,
     "en/diffusion-vs-autoregressive-en": 8,
+    "en/diffusion-vs-autoregressive-en.html": 8,
     "en/index.html": 8,
     "en/intervista-ricco-ai-en": 8,
     "en/legge-ai-italia-en": 8,
     "es/ai-winter-es.html": 8,
     "it/agente-attacco-gym.html": 8,
     "it/ai-consumer-2025": 8,
-    "it/kimi-k2-article.html": 8,
     "it/shutdown-resistance": 8,
     "de/index.html": 7,
     "de/papalini-interview-de.html": 7,
@@ -265,7 +266,6 @@
     "en/ai-slop-entropia-en.html": 7,
     "en/anthropic-hacker-en": 7,
     "en/deepseek-ocr-en.html": 7,
-    "en/diffusion-vs-autoregressive-en.html": 7,
     "en/gina-assistente-vocale-en.html": 7,
     "en/newsletter": 7,
     "es/agentic-ai-foundation-es.html": 7,
@@ -305,6 +305,7 @@
     "it/deepseek-ocr": 6,
     "it/fda-ema-aim-nash-ai": 6,
     "it/graphify": 6,
+    "it/legge-ai-italia.html": 6,
     "it/malattie-mentali-ai": 6,
     "de/diffusion-vs-autoregressive-de.html": 5,
     "de/slm-2026-de.html": 5,
@@ -334,7 +335,6 @@
     "it/ai-critiche-sutton": 5,
     "it/ai-prompt-scandalo.html": 5,
     "it/google-ai-revolution.html": 5,
-    "it/legge-ai-italia.html": 5,
     "it/power-sampling": 5,
     "it/qwen3.5-locale-puntata1": 5,
     "it/qwen35-locale-puntata1.html)": 5,
@@ -347,6 +347,7 @@
     "de/ai-valutazione-ed-etica-de": 4,
     "de/cyborg-centauri-automi-de.html": 4,
     "de/datacenter-proteste-usa-de.html": 4,
+    "de/fda-ema-aim-nash-ai-de.html": 4,
     "de/glm5.2-de.html": 4,
     "de/metodo-editoriale": 4,
     "de/newsletter": 4,
@@ -417,6 +418,7 @@
     "de/ai-coding-security-de": 3,
     "de/ai-creazione-contenuti-de": 3,
     "de/ai-killed-mtv-star-de.html": 3,
+    "de/ai-lutto-digitale-de.html": 3,
     "de/ai-musica-copyright-de": 3,
     "de/ai-rsponsabilità-de.html": 3,
     "de/ai-slop-entropia-de": 3,
@@ -424,7 +426,6 @@
     "de/caveman-de": 3,
     "de/chatgpt-ads-de.html": 3,
     "de/contributo-automazione-bacchiocchi-de.html": 3,
-    "de/fda-ema-aim-nash-ai-de.html": 3,
     "de/glm-5-de.html": 3,
     "de/google-threat-intelligence-de.html": 3,
     "de/grief-tech-de.html": 3,
@@ -481,6 +482,7 @@
     "en/shutdown-resistance-en": 3,
     "en/steering-llm-en": 3,
     "en/tilly-norwood-ai-actor-en": 3,
+    "en/wave-former-raggix-en.html": 3,
     "en/waymo-blackout-analysis-en.html": 3,
     "es/ai-creazione-contenuti-es": 3,
     "es/ai-fronte-cyber-es": 3,
@@ -519,6 +521,7 @@
     "fr/pignataro-intervista2-fr.html": 3,
     "fr/qwen3-tts-fr.html": 3,
     "fr/rlm-ai-fr.html": 3,
+    "fr/shutdown-resistance-fr.html": 3,
     "fr/startup-europa-2025-fr.html": 3,
     "fr/strumenti-oracoli-caso-deloitte-fr.html": 3,
     "fr/turboquant-fr": 3,
@@ -540,7 +543,6 @@
     "de/agent-hospital-de.html": 2,
     "de/ai-bournout-de.html": 2,
     "de/ai-fronte-cyber-de": 2,
-    "de/ai-lutto-digitale-de.html": 2,
     "de/ai-prompt-scandalo-de": 2,
     "de/ai-slop-entropia-de.html": 2,
     "de/alibaba-qwen3-de": 2,
@@ -605,6 +607,7 @@
     "en/autoresearch-karpathy-en": 2,
     "en/cassieri-remoti-ai-en": 2,
     "en/chatgpt-use-study-en": 2,
+    "en/cina-universita-en.html": 2,
     "en/claude-code-en.html": 2,
     "en/codespeak-en.html": 2,
     "en/convergenza-modelli-scientifici-en": 2,
@@ -655,7 +658,6 @@
     "en/toon-en": 2,
     "en/turboquant-en.html": 2,
     "en/wave-former-raggix-en": 2,
-    "en/wave-former-raggix-en.html": 2,
     "es/10-regole-ai-es": 2,
     "es/aaio-floridi-es.html": 2,
     "es/agenti-al-lavoro-es.html": 2,
@@ -790,7 +792,6 @@
     "fr/qwen3.5-locale-puntata2-fr.html": 2,
     "fr/rapporto-leonardo-2026-parte1-fr.html": 2,
     "fr/robotica-2025-fr": 2,
-    "fr/shutdown-resistance-fr.html": 2,
     "fr/slm-2026-fr.html": 2,
     "fr/steering-llm-fr.html": 2,
     "fr/steerling-fr.html": 2,
@@ -884,6 +885,7 @@
     "de/meetily-de.html": 1,
     "de/memvid-ai-memory-de": 1,
     "de/mistral-devstral-de": 1,
+    "de/mistral-forge-de": 1,
     "de/mit-adaptive-scaling-de.html": 1,
     "de/mit-ai-umile-de": 1,
     "de/mondiale-2026-gemini-de.html": 1,
@@ -927,7 +929,6 @@
     "en/caveman-en.html": 1,
     "en/chartnet-en.html": 1,
     "en/chatgpt-ads-en": 1,
-    "en/cina-universita-en.html": 1,
     "en/claude-code-en": 1,
     "en/codespeak-en": 1,
     "en/colibri-en.html": 1,
@@ -1039,6 +1040,7 @@
     "es/last30days-es.html": 1,
     "es/licenziamenti-ai-2026-es.html": 1,
     "es/llm-knowledge-base-es.html": 1,
+    "es/llm-wiki-autocostruita-es.html": 1,
     "es/mdash-microsoft-es.html": 1,
     "es/meetily-es.html": 1,
     "es/mit-ai-umile-es": 1,
@@ -3769,6 +3771,67 @@
           "it/meetily": 1,
           "it/quantum-echoes": 1
         }
+      },
+      "2026-08-22": {
+        "total_views": 19,
+        "views_by_lang": {
+          "it": 9,
+          "fr": 2,
+          "en": 4,
+          "de": 3,
+          "es": 1
+        },
+        "views_by_tag": {
+          "Research": 9,
+          "Generative AI": 9,
+          "Training": 2,
+          "Applications": 4,
+          "Ethics & Society": 7,
+          "E-learning": 3,
+          "Startups": 2,
+          "Security": 3,
+          "Business": 3
+        },
+        "top_articles": [
+          {
+            "path": "it/kimi-k2-article.html",
+            "views": 2
+          },
+          {
+            "path": "fr/ai-epanortosi-fr.html",
+            "views": 1
+          },
+          {
+            "path": "it/kv-cache-approach.html",
+            "views": 1
+          },
+          {
+            "path": "en/malattie-mentali-ai-en.html",
+            "views": 1
+          },
+          {
+            "path": "it/ars-notoria-e-ai.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 3,
+          "it": 1,
+          "fr/ai-epanortosi-fr.html": 1,
+          "it/kv-cache-approach.html": 1,
+          "en/malattie-mentali-ai-en.html": 1,
+          "it/ars-notoria-e-ai.html": 1,
+          "it/kimi-k2-article.html": 2,
+          "en/diffusion-vs-autoregressive-en.html": 1,
+          "it/legge-ai-italia.html": 1,
+          "de/fda-ema-aim-nash-ai-de.html": 1,
+          "de/ai-lutto-digitale-de.html": 1,
+          "en/wave-former-raggix-en.html": 1,
+          "fr/shutdown-resistance-fr.html": 1,
+          "en/cina-universita-en.html": 1,
+          "de/mistral-forge-de": 1,
+          "es/llm-wiki-autocostruita-es.html": 1
+        }
       }
     },
     "monthly": {
@@ -3837,24 +3900,24 @@
         ]
       },
       "2026-08": {
-        "total_views": 710,
+        "total_views": 729,
         "views_by_lang": {
-          "it": 559,
-          "en": 69,
-          "de": 35,
-          "es": 20,
-          "fr": 27
+          "it": 568,
+          "en": 73,
+          "de": 38,
+          "es": 21,
+          "fr": 29
         },
         "views_by_tag": {
-          "Generative AI": 312,
-          "Startups": 21,
-          "Applications": 165,
-          "Research": 104,
-          "Security": 88,
-          "E-learning": 62,
-          "Ethics & Society": 201,
-          "Business": 47,
-          "Training": 94,
+          "Generative AI": 321,
+          "Startups": 23,
+          "Applications": 169,
+          "Research": 113,
+          "Security": 91,
+          "E-learning": 65,
+          "Ethics & Society": 208,
+          "Business": 50,
+          "Training": 96,
           "Copyright": 3
         },
         "top_articles": [
@@ -3863,15 +3926,15 @@
             "views": 28
           },
           {
+            "path": "it/ars-notoria-e-ai.html",
+            "views": 27
+          },
+          {
             "path": "it/dwarfstar-antirez.html",
             "views": 26
           },
           {
             "path": "it/papalini-interview2.html",
-            "views": 26
-          },
-          {
-            "path": "it/ars-notoria-e-ai.html",
             "views": 26
           },
           {
@@ -3903,25 +3966,25 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 1656,
+        "total_views": 1675,
         "views_by_lang": {
-          "it": 1101,
-          "en": 240,
-          "de": 107,
-          "fr": 112,
-          "es": 96
+          "it": 1110,
+          "en": 244,
+          "de": 110,
+          "fr": 114,
+          "es": 97
         },
         "views_by_tag": {
-          "Generative AI": 805,
-          "Applications": 388,
-          "Security": 217,
-          "Research": 403,
-          "Ethics & Society": 524,
-          "Training": 197,
-          "Business": 240,
+          "Generative AI": 814,
+          "Applications": 392,
+          "Security": 220,
+          "Research": 412,
+          "Ethics & Society": 531,
+          "Training": 199,
+          "Business": 243,
           "Copyright": 16,
-          "Startups": 66,
-          "E-learning": 77
+          "Startups": 68,
+          "E-learning": 80
         }
       }
     }

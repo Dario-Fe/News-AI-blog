@@ -487,8 +487,13 @@
                     if (isPodcastActive) {
                         hidePlayer();
                     } else {
+                        const spotifyEmbed = podcastButton.dataset.spotifyEmbed;
                         const audioSrc = podcastButton.dataset.src;
-                        mediaPlayerContainer.innerHTML = `<audio id="podcast-player" controls src="${audioSrc}" style="width: 100%;">Your browser does not support the audio element.</audio>`;
+                        if (spotifyEmbed) {
+                            mediaPlayerContainer.innerHTML = `<iframe id="podcast-player" src="${spotifyEmbed}" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>`;
+                        } else if (audioSrc) {
+                            mediaPlayerContainer.innerHTML = `<audio id="podcast-player" controls src="${audioSrc}" style="width: 100%;">Your browser does not support the audio element.</audio>`;
+                        }
                         mediaPlayerContainer.style.display = 'block';
                     }
                 });

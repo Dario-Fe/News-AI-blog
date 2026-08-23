@@ -263,6 +263,28 @@ def pre_process_article_media(md_file_info, output_dir_base):
         # We don't raise here to allow the build to attempt to continue, 
         # but errors will likely resurface in the main phase.
 
+def format_spotify_embed_url(url):
+    """
+    Formats various Spotify episode URL formats into a standardized Spotify embed URL.
+    Example input: https://open.spotify.com/episode/4tfO06cZytVq26rIOOSCnB?si=...
+    Example output: https://open.spotify.com/embed/episode/4tfO06cZytVq26rIOOSCnB
+    """
+    if not url or not isinstance(url, str):
+        return None
+    url = url.strip()
+    if 'open.spotify.com/episode/' in url:
+        episode_part = url.split('open.spotify.com/episode/')[1].split('?')[0].split('/')[0]
+        return f"https://open.spotify.com/embed/episode/{episode_part}"
+    elif 'open.spotify.com/embed/episode/' in url:
+        episode_part = url.split('open.spotify.com/embed/episode/')[1].split('?')[0].split('/')[0]
+        return f"https://open.spotify.com/embed/episode/{episode_part}"
+    elif url.startswith('spotify:episode:'):
+        episode_part = url.split('spotify:episode:')[1].split('?')[0].split('/')[0]
+        return f"https://open.spotify.com/embed/episode/{episode_part}"
+    elif url.startswith('http://') or url.startswith('https://'):
+        return url
+    return None
+
 def process_audio(audio_path, output_dir_base):
     """
     Copies a local audio file and saves it, returning its relative path
@@ -1421,8 +1443,11 @@ def process_article(md_file_info, output_dir_base, lang):
                 picture_tag.append(fallback_img)
                 img.replace_with(picture_tag)
 
+        raw_spotify_url = post.metadata.get('spotify') or post.metadata.get('spotify_url')
+        spotify_embed_url = format_spotify_embed_url(raw_spotify_url)
+
         audio_path = None
-        if md_file_info.get('audio_path'):
+        if not spotify_embed_url and md_file_info.get('audio_path') and os.path.exists(md_file_info['audio_path']):
             audio_path = process_audio(md_file_info['audio_path'], output_dir_base)
 
         # Inject newsletter box
@@ -1466,6 +1491,7 @@ def process_article(md_file_info, output_dir_base, lang):
             "date": post.metadata.get('date', None),
             "author": post.metadata.get('author', None),
             "audio_path": audio_path,
+            "spotify_embed_url": spotify_embed_url,
             "youtube_url": post.metadata.get('youtube_url', None),
             "parent_dir": md_file_info['parent_dir']
         }
@@ -1521,9 +1547,15 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
 
         media_container_html = ""
         podcast_button_html = ""
-        if article.get("audio_path"):
-            podcast_button_text = TRANSLATIONS["article_page"]["listen_to_podcast"].get(lang, TRANSLATIONS["article_page"]["listen_to_podcast"]["it"])
-            headset_icon_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3z"></path><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3z"></path></svg>"""
+        headset_icon_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3z"></path><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v3z"></path></svg>"""
+        podcast_button_text = TRANSLATIONS["article_page"]["listen_to_podcast"].get(lang, TRANSLATIONS["article_page"]["listen_to_podcast"]["it"])
+
+        if article.get("spotify_embed_url"):
+            podcast_button_html = f"""<button id="podcast-button" class="podcast-button" data-spotify-embed="{article['spotify_embed_url']}">
+                    {headset_icon_svg}
+                    <span>{podcast_button_text}</span>
+                </button>"""
+        elif article.get("audio_path"):
             podcast_button_html = f"""<button id="podcast-button" class="podcast-button" data-src="../{article['audio_path']}">
                     {headset_icon_svg}
                     <span>{podcast_button_text}</span>

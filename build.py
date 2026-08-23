@@ -1738,9 +1738,9 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
 
 def load_popular_articles(lang='it'):
     """
-    Loads popular articles based on stats_history.json.
-    Sums view counts across language variations of each article parent directory,
-    and returns a localized list of the top 5 most read articles.
+    Loads popular articles based on stats_history.json specifically for the requested language.
+    Sums view counts across URL variants for that language, and returns a localized list
+    of top 5 most read articles. If fewer than 5 have views, pads with the most recent articles.
     """
     stats_path = "public/stats_history.json"
     if not os.path.exists(stats_path):
@@ -1754,96 +1754,65 @@ def load_popular_articles(lang='it'):
         return []
 
     cumulative = stats.get("cumulative_history", {})
-    
-    # We want to identify and aggregate view counts by their base article directory
-    # Format of cumulative keys can be:
-    # "it/agent-hospital.html", "it/agent-hospital.html\"", "en/agent-hospital-en.html", "fr/ai-epanortosi-fr.html"
-    # Or directory names directly, or service pages
+    articles_db = get_local_articles_db()
+
+    # Map parent_dir and slug to local article files for target language
+    slug_to_parent_dir = {}
+    parent_dir_to_file_info = {}
+
+    for parent_dir, langs in articles_db.items():
+        if lang in langs and langs[lang]:
+            file_info = langs[lang][0]
+            parent_dir_to_file_info[parent_dir] = file_info
+            art_slug = os.path.splitext(file_info['name'])[0].strip().replace('_', '-')
+            slug_to_parent_dir[art_slug] = parent_dir
+            
+            slug_no_suffix = re.sub(r'-(en|es|fr|de)$', '', art_slug)
+            if slug_no_suffix not in slug_to_parent_dir:
+                slug_to_parent_dir[slug_no_suffix] = parent_dir
+
     exclusions = [
-        "index.html", "newsletter", "thank-you", "privacy", "cookie", "metodo-editoriale",
-        "authors/dario-ferrero", "stats", "sitemap.xml", "feed.xml", "feed.rss", "rss.xml"
+        "index", "newsletter", "thank-you", "privacy", "cookie", "metodo-editoriale",
+        "stats", "sitemap.xml", "feed.xml", "feed.rss", "rss.xml", "404"
     ]
 
-    # Map popular paths back to their parent folder using a normalized slug
-    # E.g. "agent-hospital.html" or "agent-hospital-en.html" -> parent folder
-    # We can fetch articles_db to map parent folder to their respective localized file slugs
-    articles_db = get_local_articles_db()
-    
-    # For every article directory, find all its associated slugs (e.g. {'agent-hospital', 'agent-hospital-en', ...})
-    dir_to_slugs = {}
-    slug_to_dir = {}
-    for parent_dir, langs in articles_db.items():
-        dir_to_slugs[parent_dir] = set()
-        for l, files in langs.items():
-            for f in files:
-                slug = os.path.splitext(f['name'])[0].strip().replace('_', '-')
-                dir_to_slugs[parent_dir].add(slug)
-                slug_to_dir[slug] = parent_dir
-
-    # Aggregate views per parent directory
+    # Aggregate views strictly for the requested language prefix
     dir_views = {}
     for path, views in cumulative.items():
-        # Strip query params, quotes, leading/trailing slashes, and .html
         clean_path = path.replace('"', '').strip('/')
         if clean_path.endswith('.html'):
             clean_path = clean_path[:-5]
-        
-        # Check if it is a service page
-        if any(ex in clean_path for ex in exclusions) or clean_path in ["it", "en", "es", "fr", "de", ""]:
-            continue
-            
-        # Get slug
-        parts = clean_path.split('/')
-        slug = parts[-1]
-        
-        # Find matching parent dir
-        parent_dir = slug_to_dir.get(slug)
-        if not parent_dir:
-            # Let's try matching with substring or ending with language prefix
-            # e.g., if slug is "kimik2.5", match it with "kimik2.5"
-            matched = False
-            for p_dir, slugs in dir_to_slugs.items():
-                if slug in slugs:
-                    parent_dir = p_dir
-                    matched = True
-                    break
-            if not matched:
-                # Strip common lang suffixes from slug
-                stripped_slug = re.sub(r'-(en|es|fr|de)$', '', slug)
-                for p_dir, slugs in dir_to_slugs.items():
-                    if any(s.startswith(stripped_slug) or stripped_slug in s for s in slugs):
-                        parent_dir = p_dir
-                        matched = True
-                        break
-        
-        if parent_dir:
-            dir_views[parent_dir] = dir_views.get(parent_dir, 0) + views
 
-    # Sort parent directories by aggregated views descending
+        parts = clean_path.split('/')
+        if len(parts) >= 2 and parts[0] == lang:
+            if 'authors' in parts:
+                continue
+            slug = parts[-1]
+            if slug in exclusions or slug in ["it", "en", "es", "fr", "de", ""]:
+                continue
+
+            parent_dir = slug_to_parent_dir.get(slug)
+            if not parent_dir:
+                slug_no_suffix = re.sub(r'-(en|es|fr|de)$', '', slug)
+                parent_dir = slug_to_parent_dir.get(slug_no_suffix)
+
+            if parent_dir:
+                dir_views[parent_dir] = dir_views.get(parent_dir, 0) + views
+
     sorted_dirs = sorted(dir_views.items(), key=lambda x: x[1], reverse=True)
-    
-    # Resolve localized article details for top 5 parent directories
+
     popular_list = []
+    used_parent_dirs = set()
+
     for parent_dir, views in sorted_dirs:
-        # We need the article data in the requested language
-        langs_available = articles_db.get(parent_dir, {})
-        if not langs_available:
+        file_info = parent_dir_to_file_info.get(parent_dir)
+        if not file_info:
             continue
-            
-        # Get for current language, fallback to 'it' or first available
-        target_lang = lang if lang in langs_available else ('it' if 'it' in langs_available else list(langs_available.keys())[0])
-        file_list = langs_available[target_lang]
-        if not file_list:
-            continue
-            
-        file_info = file_list[0]
+
         slug = os.path.splitext(file_info['name'])[0].strip().replace('_', '-')
-        
-        # Let's read the frontmatter to get the exact title
         try:
             with open(file_info['path'], 'r', encoding='utf-8') as f:
                 post = frontmatter.load(f)
-            # Find first h1 or use frontmatter title if available, or extract from file content
             content_lines = post.content.split('\n')
             title = None
             for line in content_lines:
@@ -1852,16 +1821,51 @@ def load_popular_articles(lang='it'):
                     break
             if not title:
                 title = slug.replace('-', ' ').title()
-                
+
             popular_list.append({
                 "title": title,
                 "path": f"{slug}.html",
                 "views": views
             })
+            used_parent_dirs.add(parent_dir)
             if len(popular_list) >= 5:
                 break
         except Exception as e:
             print(f"  - Error reading popular article file {file_info['path']}: {e}")
+
+    # Option B: if fewer than 5 popular articles exist with views, pad with most recent articles
+    if len(popular_list) < 5:
+        all_lang_articles = []
+        for p_dir, file_info in parent_dir_to_file_info.items():
+            if p_dir not in used_parent_dirs:
+                all_lang_articles.append((p_dir, file_info))
+
+        all_lang_articles.sort(key=lambda x: natural_sort_key(x[0]), reverse=True)
+
+        for p_dir, file_info in all_lang_articles:
+            slug = os.path.splitext(file_info['name'])[0].strip().replace('_', '-')
+            try:
+                with open(file_info['path'], 'r', encoding='utf-8') as f:
+                    post = frontmatter.load(f)
+                content_lines = post.content.split('\n')
+                title = None
+                for line in content_lines:
+                    if line.strip().startswith('# '):
+                        title = line.strip('# ').strip()
+                        break
+                if not title:
+                    title = slug.replace('-', ' ').title()
+
+                popular_list.append({
+                    "title": title,
+                    "path": f"{slug}.html",
+                    "views": 0
+                })
+                used_parent_dirs.add(p_dir)
+                if len(popular_list) >= 5:
+                    break
+            except Exception as e:
+                pass
 
     return popular_list
 

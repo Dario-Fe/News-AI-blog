@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Security"]
 date: 2026-08-17
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/RGgFLXhMF2Q?si=fjftRI60A-gu7kwd"
+spotify_url: "https://open.spotify.com/episode/7Cj8AFERLP1mySBpYzsOsK?si=40c0051121094598"
 ---
 
 # Agenti AI open source a confronto: OpenClaw, Hermes, Prime Agent, OpenCode...

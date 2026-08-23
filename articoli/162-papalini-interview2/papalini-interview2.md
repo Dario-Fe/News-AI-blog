@@ -3,6 +3,7 @@ tags: ["Generative AI", "Security", "Ethics & Society"]
 date: 2026-08-07
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/hr-tVWpuFxg?si=EunQuImFrkHe-wIv"
+spotify_url: "https://open.spotify.com/episode/14vcQSBE06yLZ8wivSeIyU?si=21f46fc56ccc46d6"
 ---
 
 # Conversazione con Enrico Papalini su 'Non-Deterministic Loop Engineering'

@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "E-learning", "Generative AI"]
 date: 2026-08-19
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/onkxaMX_xSg?si=aqJp5bN89QJaYLGI"
+spotify_url: "https://open.spotify.com/episode/4B74LUdcwoYCwWmBbSjtd3?si=f6908daccb0a49b1"
 ---
 
 # Un manoscritto del XIII secolo prometteva quello che oggi promette l'AI

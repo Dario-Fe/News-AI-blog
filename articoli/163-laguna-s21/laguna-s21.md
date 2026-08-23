@@ -3,6 +3,7 @@ tags: ["Training", "Generative AI", "Ethics & Society"]
 date: 2026-08-10
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/I1cTQxT3jrk?si=ApdzvYW0tdNKfY-L"
+spotify_url: "https://open.spotify.com/episode/5iaX30ZrV7Ax7r5vT71V3l?si=ac2fc54d39e5454a"
 ---
 
 # Laguna S2.1: il modello americano open-weight

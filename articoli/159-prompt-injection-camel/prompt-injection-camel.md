@@ -3,6 +3,7 @@ tags: ["Research", "Security", "Generative AI"]
 date: 2026-07-31
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/2Yu-6GVmA88?si=KyUpOIEvrfTmi-Fr"
+spotify_url: "https://open.spotify.com/episode/2FYxS9tEqrH4U7TMlWhPOY?si=b0bb978a561446d3"
 ---
 
 # Prompt injection e agenti AI: il problema è architetturale, cosa propone CaMeL

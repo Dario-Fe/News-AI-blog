@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Ethics & Society"]
 date: 2026-08-12
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/jxLPxQDqvP0?si=0qqC7SNSviHPVN0B"
+spotify_url: "https://open.spotify.com/episode/4yHfGkbka96jdPSNtRErcB?si=75ffa3c69fc14083"
 ---
 
 # OmniVoice Studio: clonare voci in locale

@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "E-learning"]
 date: 2026-08-14
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/LlM3OVTv1YY?si=PuuUyjuKZ6PkiAuN"
+spotify_url: "https://open.spotify.com/episode/7F2fLrLCdms7lYZt3L82d7?si=24bb04bb4ed348a7"
 ---
 
 # Ho costruito da zero la LLM Wiki di Karpathy sui miei articoli

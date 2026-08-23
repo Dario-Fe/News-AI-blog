@@ -3,6 +3,7 @@ tags: ["Generative AI", "Startups", "Applications"]
 date: 2026-07-29
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/fyxrFxu1PSA?si=3oXyN0fIZR4jxgK2"
+spotify_url: "https://open.spotify.com/episode/4gqn8vDtDlEW7Xaw0tazdp?si=1bd5e755f05e42e6"
 ---
 
 # Meetily, l'assistente per riunioni in locale

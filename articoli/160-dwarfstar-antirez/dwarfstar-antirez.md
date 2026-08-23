@@ -3,6 +3,7 @@ tags: ["Research", "Training", "Applications"]
 date: 2026-08-03
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/VlNJRV7IhZI?si=0asNuC6LALBh3P6U"
+spotify_url: "https://open.spotify.com/episode/7nCCOc4QzlnoyeVoLLhHop?si=c036e711930c44bf"
 ---
 
 # DwarfStar: la stella nana che illumina l'AI di frontiera locale

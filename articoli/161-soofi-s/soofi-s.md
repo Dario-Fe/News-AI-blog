@@ -3,6 +3,7 @@ tags: ["Training", "Generative AI", "Ethics & Society"]
 date: 2026-08-05
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/yH_cV0zFChE?si=EuNiFEeZqz8HbuIF"
+spotify_url: "https://open.spotify.com/episode/3G22AVbitVVJjhQstT1VhG?si=1288bc3fa48b4b2b"
 ---
 
 # Soofi S: un modello tedesco, e l'ambizione continentale

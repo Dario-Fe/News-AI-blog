@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Ethics & Society"]
 date: 2026-07-27
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/RKGt_Pf5mmA?si=x0nvUgbYGf0ioPLI"
+spotify_url: "https://open.spotify.com/episode/71ThGTii3np51nybOIpg0y"
 ---
 
 # Jacobian lens: quello che Claude 'pensa' e non dice

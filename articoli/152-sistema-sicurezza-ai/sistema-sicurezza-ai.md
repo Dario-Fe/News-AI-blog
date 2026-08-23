@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Security"]
 date: 2026-07-15
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/mlf76oZhQPw?si=2HdUJbVqEyHpBdlL"
+spotify_url: "https://open.spotify.com/episode/0gYIAHFJOpMGidLFqV3nU3"
 ---
 
 # Ho insegnato all'AI a fare la guardia: come ho costruito un sistema di sicurezza a costo zero

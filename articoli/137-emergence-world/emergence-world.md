@@ -3,6 +3,7 @@ tags: ["Research", "Security", "Startups"]
 date: 2026-06-10
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/z8MB5cFVmJ0?si=JQtBiAWcN07TcGFr"
+spotify_url: "https://open.spotify.com/episode/17REGeYWuUYPeY0MfGI9ch"
 ---
 
 # Hanno dato 5 città alle AI. Ecco cos'è successo

@@ -3,6 +3,7 @@ tags: ["Applications", "Generative AI", "Research"]
 date: 2026-07-03
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/Eg_el1hechI?si=G1x0utkl7lJDGlat"
+spotify_url: "https://open.spotify.com/episode/7aO5Hd5HvvjWeLgIBVP9ra"
 ---
 
 # Headroom: il compressore di token che non usa l'IA per comprimere l'IA

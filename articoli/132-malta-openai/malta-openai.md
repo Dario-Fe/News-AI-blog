@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-05-29
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/4v6NWoxKtpo?si=cR7dq6tmC7_soohc"
+spotify_url: "https://open.spotify.com/episode/0IcDM1eaqG4c2IxWOowjlG"
 ---
 
 # Malta - OpenAI: Quando uno Stato diventa cliente

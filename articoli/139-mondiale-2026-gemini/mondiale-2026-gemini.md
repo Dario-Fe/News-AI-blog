@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Training"]
 date: 2026-06-15
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/VxQkQKWz5gY?si=-1_VXVNCG1O9XuMR"
+spotify_url: "https://open.spotify.com/episode/55ne05guZm3m0dUO1socj7"
 ---
 
 # Gemini mi ha detto chi vince il Mondiale 2026

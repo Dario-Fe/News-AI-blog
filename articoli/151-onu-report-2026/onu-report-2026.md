@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Business"]
 date: 2026-07-13
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/uFfhl9Lamrg?si=FN9DqzkOPRxwuZxk"
+spotify_url: "https://open.spotify.com/episode/0pf92vmWXvbkvsZMQ8ZiM6"
 ---
 
 # L'IA corre, il mondo cammina: cosa dice il primo rapporto scientifico dell'ONU

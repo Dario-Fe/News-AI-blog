@@ -3,6 +3,7 @@ tags: ["Generative AI", "Training", "Applications"]
 date: 2026-07-10
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/ipbzwLyi6fE?si=YQ5ja--4zQjntLFB"
+spotify_url: "https://open.spotify.com/episode/1sdIk37H5CVUspahIcnLjI"
 ---
 
 # Ornith-1.0 35B in locale: lo sconosciuto che batte tutti

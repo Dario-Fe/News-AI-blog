@@ -3,6 +3,7 @@ tags: ["Business", "Security", "Ethics & Society"]
 date: 2026-06-08
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/oTFv1aIzv54?si=aAebGYP8WT6MbaiT"
+spotify_url: "https://open.spotify.com/episode/37XWQSRSD3DE0zgzFhy7Qf"
 ---
 
 # Anthropic ha paura di ciò che ha costruito. Paura vera o mossa strategica?

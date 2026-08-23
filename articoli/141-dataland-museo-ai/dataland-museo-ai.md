@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Copyright"]
 date: 2026-06-19
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/VTV9SMixyEg?si=WZjxvncmqTTR_zqF"
+spotify_url: "https://open.spotify.com/episode/5jzYZbUZ9ckLEi3AVxCfW8"
 ---
 
 # Dataland, il primo museo di opere AI

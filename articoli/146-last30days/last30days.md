@@ -3,6 +3,7 @@ tags: ["Applications", "Generative AI", "Ethics & Society"]
 date: 2026-07-01
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/PBFmRSx_E30?si=x112sp9O2BBNhNLY"
+spotify_url: "https://open.spotify.com/episode/0KAtOBVsgraydeUcX9rkXQ"
 ---
 
 # Last30days: quando un agente di codice diventa un motore di ricerca sociale

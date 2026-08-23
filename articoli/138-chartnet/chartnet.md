@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Training"]
 date: 2026-06-12
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/QHNwVfUAp00?si=YKHjApbnbQLQ82Tr"
+spotify_url: "https://open.spotify.com/episode/51yNEc013bFl5hekjB4yrQ"
 ---
 
 # ChartNet: l'analisi dei grafici non è più roba da grandi budget

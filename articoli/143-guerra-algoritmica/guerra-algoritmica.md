@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-06-24
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/ueotin4KZKY?si=wr5_TJ-vI1L2J68c"
+spotify_url: "https://open.spotify.com/episode/6Ks8x2AozOiM7KltSU176L"
 ---
 
 # La guerra algoritmica. Fable 5 il dito, l'Europa la Luna

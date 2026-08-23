@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Ethics & Society"]
 date: 2026-07-22
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/OtKMUgOlCGc?si=SP9IfYiEFXP3PVsC"
+spotify_url: "https://open.spotify.com/episode/6SzeK8zMvni2BeqHREgVFr"
 ---
 
 # Perché i benchmark degli agenti AI sottostimano le capacità reali

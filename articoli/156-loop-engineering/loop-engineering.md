@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Research"]
 date: 2026-07-24
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/QSnO_SITmZo?si=V-rqaYLiWW23Bchn"
+spotify_url: "https://open.spotify.com/episode/3CD01e2Lp2GQs3BETDt5gp"
 ---
 
 # Loop Engineering: moda del momento o prossimo salto?

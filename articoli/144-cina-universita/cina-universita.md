@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-06-26
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/qmZO-5frlBE?si=y8UtSdCY01c_uVTc"
+spotify_url: "https://open.spotify.com/episode/7KTNn3Jh01fdsz7rwMZctW"
 ---
 
 # Corsi cancellati a favore dell'AI: la Cina riscrive l'università

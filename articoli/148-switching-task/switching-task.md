@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Business"]
 date: 2026-07-06
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/NM1mr5gZBVE?si=e7GIF-iDzrLP51xc"
+spotify_url: "https://open.spotify.com/episode/0wjO0BcXxUbb0CRIoxo5v7"
 ---
 
 # Ti serve davvero l'ultimo modello AI? O stai aggiornando il tuo ego tecnologico?

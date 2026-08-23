@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-06-03
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/UpjPSTBHZAw?si=t6GaKAKWNwr8FglV"
+spotify_url: "https://open.spotify.com/episode/3TeUyNcGBnVVXKQGnhhCpx"
 ---
 
 # RecursiveMAS ha abolito i token, gli agenti parlano nella loro lingua 

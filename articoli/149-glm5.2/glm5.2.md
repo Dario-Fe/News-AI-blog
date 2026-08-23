@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Business"]
 date: 2026-07-08
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/56KAa9xIy-c?si=vM4rJkttPYoxnzd2"
+spotify_url: "https://open.spotify.com/episode/4KnGcygvWIcuPhkMX68FQn"
 ---
 
 # GLM-5.2: l'open-weight cinese che chiude il gap, almeno nel coding

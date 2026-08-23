@@ -3,6 +3,7 @@ tags: ["Applications", "Ethics & Society", "Generative AI"]
 date: 2026-06-22
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/I2gE1utpvTI?si=WHXIWzHWQFCbfy8s"
+spotify_url: "https://open.spotify.com/episode/5vVmIqnoD4bvQuiqI7rDD8"
 ---
 
 # BenzUp: ho creato un'app senza scrivere una riga di codice

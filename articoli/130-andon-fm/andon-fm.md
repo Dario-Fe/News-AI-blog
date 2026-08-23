@@ -3,6 +3,7 @@ tags: ["Generative AI", "Research", "Startups"]
 date: 2026-05-25
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/BQRmmMxAshg?si=phzkF8cmJazcMPvI"
+spotify_url: "https://open.spotify.com/episode/3arMEUN2hBGj5eLDHGoBqq"
 ---
 
 # Andon FM: agenti IA gestiscono 4 radio, e non è andata bene

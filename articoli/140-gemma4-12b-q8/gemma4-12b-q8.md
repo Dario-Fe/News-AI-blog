@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Training"]
 date: 2026-06-17
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/x9ta8L9YYXw?si=9I8KZ8gLTsopV-sy"
+spotify_url: "https://open.spotify.com/episode/3sGbUYIlQmGMCS2B9Cdff5"
 ---
 
 # Gemma 4 12B in locale: meglio piccolo al massimo o grande strozzato?

@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Training"]
 date: 2026-06-05
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/VJ4pYRmbZBA?si=COTaErQllBreFTXS"
+spotify_url: "https://open.spotify.com/episode/0sHVgsHtLvmFDYYM1kRDaZ"
 ---
 
 # L'AI stressata che diventa Marxista: cosa ci racconta?

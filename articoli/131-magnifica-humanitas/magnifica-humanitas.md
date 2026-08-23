@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Training"]
 date: 2026-05-27
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/_td2dmJ2sdg?si=SUxCJwLXl98lwd2B"
+spotify_url: "https://open.spotify.com/episode/1jmtejynoxS4AMF44wXLr5"
 ---
 
 # Intervista immaginaria a Papa Leone XIV sull'enciclica 'Magnifica Humanitas' decicata all'IA

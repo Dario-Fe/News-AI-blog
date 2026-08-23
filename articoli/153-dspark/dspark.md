@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-07-17
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/wMyu7Fr8-oc?si=GVuHLMnA9ElATphm"
+spotify_url: "https://open.spotify.com/episode/6d8JIQM33cvjUMtkc8k65F"
 ---
 
 # DSpark: la scommessa di DeepSeek sulla velocità che non tradisce la qualità

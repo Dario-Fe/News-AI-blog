@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-07-20
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/TZgoP2e8Zm0?si=3d_VQvkQNg4kF90w"
+spotify_url: "https://open.spotify.com/episode/1KNs2KkNvbN1fGv8t8rIG2"
 ---
 
 # Colibrì: il mini motore che fa girare un modello da 744B su hardware consumer

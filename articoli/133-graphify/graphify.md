@@ -3,6 +3,7 @@ tags: ["Research", "Applications", "Generative AI"]
 date: 2026-06-01
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/hm37J3Xsnqo?si=6PyKivv8Cv21ItSm"
+spotify_url: "https://open.spotify.com/episode/1pEnMVvB8cseidKMNu0K7C"
 ---
 
 # Graphify e la memoria che gli LLM non hanno

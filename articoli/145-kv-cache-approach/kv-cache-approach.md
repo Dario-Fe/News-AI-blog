@@ -3,6 +3,7 @@ tags: ["Research", "Applications", "Generative AI"]
 date: 2026-06-29
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/HebtEkqz8M4?si=6QnkVwguRubVIP1A"
+spotify_url: "https://open.spotify.com/episode/6REgYfmg1EBPJPUnMFWA5W"
 ---
 
 # La KV cache e il peso dell'attenzione: tre strade un problema

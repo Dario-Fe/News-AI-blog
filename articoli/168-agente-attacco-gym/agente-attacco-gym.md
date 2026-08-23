@@ -3,6 +3,7 @@ tags: ["Security", "Generative AI", "Ethics & Society"]
 date: 2026-08-21
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/0GppbJbxF_Y?si=cOdNqdq4SoXRWsfM"
+spotify_url: "https://open.spotify.com/episode/4tfO06cZytVq26rIOOSCnB?si=HUUuXZtJT6qexdSwIAqsGA"
 ---
 
 # L'agente che ha cancellato un estraneo per fare posto in palestra

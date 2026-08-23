@@ -778,7 +778,7 @@ body {
         .popular-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .popular-rank {
@@ -799,10 +799,10 @@ body {
             text-decoration: none;
             color: #1c1e21;
             font-weight: 600;
-            font-size: 0.95em;
-            line-height: 1.4;
+            font-size: 0.90em;
+            line-height: 1.35;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             transition: color 0.2s;

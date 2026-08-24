@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Security", "Business"]
 date: 2026-02-09
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/u0taR0pvQvQ?si=FKApD1c8gRWo3TY2"
+spotify_url: "https://open.spotify.com/episode/1lQmnbiH1ey75qN4O0YHgo"
 ---
 
 # Dario Amodei e l'adolescenza tecnologica dell'umanità - Parte2

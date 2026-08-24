@@ -3,6 +3,7 @@ tags: ["Security", "Generative AI", "Ethics & Society"]
 date: 2026-02-11
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/EVN5q-K7wtA?si=SFreKION51vgMWkV"
+spotify_url: "https://open.spotify.com/episode/3GMqIn8kF6RBGlFOcCuRA5"
 ---
 
 # Il gap tra capacità e sicurezza: cosa ci dice il report internazionale sull'AI 2026

@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Security"]
 date: 2026-03-06
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/tbRMdi1IprY?si=QXeiCW6UYat3H3JV"
+spotify_url: "https://open.spotify.com/episode/3LjfQQ8iGYxSKojUMCKKpS"
 ---
 
 # Pentagono: Anthropic rifiuta, OpenAI accetta, chi scarica e chi disinstalla, e poi?

@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Business"]
 date: 2026-02-02
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/P2fdZomAfPw?si=vlsSIVA-ng57l5oD"
+spotify_url: "https://open.spotify.com/episode/0vl4n4PJ1udvXkeD2jDCIX"
 ---
 
 # Qwen3-TTS: la voce sintetica nata dall'assedio tecnologico

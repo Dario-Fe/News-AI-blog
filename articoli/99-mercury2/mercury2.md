@@ -3,6 +3,7 @@ tags: ["Generative AI", "Research", "Startups"]
 date: 2026-03-13
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/YY12j9vUxI4?si=cMRokLIguMBg59rk"
+spotify_url: "https://open.spotify.com/episode/0VTnWMtVU8GnKxYOmwxL8G"
 ---
 
 # Mille token al secondo: Mercury 2 vuole riscrivere le regole dell'AI

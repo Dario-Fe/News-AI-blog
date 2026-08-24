@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-02-27
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/3sLJIiNs7WA?si=0hcSN8gEHhOR74C2"
+spotify_url: "https://open.spotify.com/episode/5jakkQMZqjTzp15B0nEhfE"
 ---
 
 # Non nel mio cortile: l'America che si ribella ai data center dell'AI

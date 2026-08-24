@@ -3,6 +3,7 @@ tags: ["Generative AI", "Training", "Business"]
 date: 2026-02-25
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/rSnUKjcUzIA?si=_VLl8cccYbMLggU1"
+spotify_url: "https://open.spotify.com/episode/6WqVvT90FIVyCHZteIpXxw"
 ---
 
 # GLM-5: il modello addestrato su chip cinesi

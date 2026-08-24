@@ -3,6 +3,7 @@ tags: ["Business", "Generative AI", "Ethics & Society"]
 date: 2026-03-04
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/ov4w2W3Jrjs?si=i-WTu1S2_4irVudk"
+spotify_url: "https://open.spotify.com/episode/1XY1a9RneQjO0ueSDnm0jG"
 ---
 
 # Gli agenti AI lavorano. E i conti tornano

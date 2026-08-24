@@ -3,6 +3,7 @@ tags: ["Generative AI", "Research", "Ethics & Society"]
 date: 2026-02-04
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/M70QIUSF1Po?si=FzqRM3Z71biE5UL4"
+spotify_url: "https://open.spotify.com/episode/0pjRToCyuLTTo7fHMOJGO3"
 ---
 
 # Kimi K2.5 e la lunga marcia cinese nell'AI: quando l'embargo diventa trampolino

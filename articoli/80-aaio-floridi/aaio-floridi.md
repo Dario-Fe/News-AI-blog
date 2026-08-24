@@ -3,6 +3,7 @@ tags: ["Research", "Ethics & Society", "Business"]
 date: 2026-01-28
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/knPuBzfPLMw?si=2MMoIIH8zodt2N2M"
+spotify_url: "https://open.spotify.com/episode/4VwA2ba94iOr3nMiC9SZlu"
 ---
 
 # Quando gli Agenti imparano a navigare: benvenuti nell'era dell'AAIO

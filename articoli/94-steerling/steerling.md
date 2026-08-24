@@ -3,6 +3,7 @@ tags: ["Training", "Generative AI", "Research"]
 date: 2026-03-02
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/xSB0w1Lkh8U?si=DQLocbJnpNZxbcvZ"
+spotify_url: "https://open.spotify.com/episode/6NrXgHWvfCqepZL5GY8EH5"
 ---
 
 # Steerling: quando l'IA ti spiega i suoi pensieri

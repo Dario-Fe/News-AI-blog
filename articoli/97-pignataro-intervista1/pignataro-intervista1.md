@@ -3,6 +3,7 @@ tags: ["Business", "Generative AI", "Ethics & Society"]
 date: 2026-03-09
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/NEIh3XOCLms?si=lKN0DWmmUz5xeO8q"
+spotify_url: "https://open.spotify.com/episode/7LXRWyHB3Lj6lGN5eRI0GN"
 ---
 
 # L'apocalisse sbagliata: Andrea Pignataro risponde ad Amodei - Parte 1

@@ -3,6 +3,7 @@ tags: ["Copyright", "Business", "Ethics & Society"]
 date: 2026-02-23
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/f075qm6r0Rk?si=nQd4Am2RItXsp9ig"
+spotify_url: "https://open.spotify.com/episode/3hCyyKqrmETiGhLUnTc5z5"
 ---
 
 # Cosa c'entra De Gregori con la guerra dell'AI?

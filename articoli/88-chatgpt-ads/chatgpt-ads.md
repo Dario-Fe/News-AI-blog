@@ -3,6 +3,7 @@ tags: ["Business", "Generative AI", "Ethics & Society"]
 date: 2026-02-16
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/9R7iwTC1PaI?si=7-r7ziayf1cyztvv"
+spotify_url: "https://open.spotify.com/episode/75VNy2GjYBiFKAY6emAiQ1"
 ---
 
 # ChatGPT attiva la pubblicità, Zoë Hitzig lascia OpenAI

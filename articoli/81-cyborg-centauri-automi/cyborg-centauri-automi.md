@@ -3,6 +3,7 @@ tags: ["Research", "Ethics & Society", "Generative AI"]
 date: 2026-01-30
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/awptYGnr0AQ?si=sLpX3-7kor0qbFhg"
+spotify_url: "https://open.spotify.com/episode/6XLMwwhRb9doE2AJ1aB2nK"
 ---
 
 # Cyborg, Centauri o Automi: come usi l'AI rivela chi diventerai

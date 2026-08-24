@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Copyright"]
 date: 2026-02-18
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/IFq8IkOLOf0?si=VZ6xsA5hW3BHrDVk"
+spotify_url: "https://open.spotify.com/episode/5z7NMgkM7FlC0XPj459gBS"
 ---
 
 # Quando l'AI disegna al posto tuo. Progettista, non Autore?

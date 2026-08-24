@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Security"]
 date: 2026-02-20
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/f075qm6r0Rk?si=gGas1_Zkjm5Ovqvw"
+spotify_url: "https://open.spotify.com/episode/4jU9sb74ADMV7ELSXMTpsS"
 ---
 
 # L'esodo silenzioso: quando i creatori dell'AI abbandonano la nave

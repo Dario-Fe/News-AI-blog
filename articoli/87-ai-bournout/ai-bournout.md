@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Research"]
 date: 2026-02-13
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/3XVfdk5r9r0?si=6L43FXPV5Z7NRWi_"
+spotify_url: "https://open.spotify.com/episode/4DQCkmuSz7yZ2Il9kYioCB"
 ---
 
 # L'AI non ti libera: ti mette in catena (dorata)

@@ -3,6 +3,7 @@ tags: ["Business", "Startups", "Ethics & Society"]
 date: 2026-05-11
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/T310_5G5pUc?si=6bKDw_W_Z2Td-80T"
+spotify_url: "https://open.spotify.com/episode/5YkdVYFoufoKQJDlHBWWWP"
 ---
 
 # European Tech Map: la mappa per la sovranità digitale europea

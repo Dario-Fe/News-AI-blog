@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-05-18
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/zGk8nsjjCzs?si=YwZgsnD9J4FGpsP8"
+spotify_url: "https://open.spotify.com/episode/1ZLH1WdIo5wCvIX5Uk58UA"
 ---
 
 # Licenziamenti: AI e il conto che non torna

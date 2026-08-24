@@ -3,6 +3,7 @@ tags: ["Training", "Generative AI", "Business"]
 date: 2026-03-30
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/chWmMvQ2g-E?si=HU1eil5MPxr_GMUf"
+spotify_url: "https://open.spotify.com/episode/1DFY3KZr2xYp8Bl4MwW8Ku"
 ---
 
 # Il tuo modello, le tue regole: Mistral Forge e l'AI proprietaria

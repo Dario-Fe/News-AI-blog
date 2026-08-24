@@ -3,6 +3,7 @@ tags: ["Research", "Training", "Applications"]
 date: 2026-03-20
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/MnY3MtN4gaI?si=ecZ97tc0JyHEXixi"
+spotify_url: "https://open.spotify.com/episode/5ysNixw5LSVmx7I8kHBh0I"
 ---
 
 # Il ricercatore dorme. Autoresearch: come Andrej Karpathy ha insegnato alle macchine a fare ricerca autonoma

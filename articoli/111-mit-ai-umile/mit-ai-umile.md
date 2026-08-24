@@ -3,9 +3,10 @@ tags: ["Research", "Applications", "Ethics & Society"]
 date: 2026-04-10
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/dyDBOZ5EiCw?si=EiAYDXmVCOpwWemT"
+spotify_url: "https://open.spotify.com/episode/0TC2onEDRlI83PwKU3N0sX"
 ---
 
-# MIT e l’AI “umile”: come insegnare ai modelli a dire “non lo so”
+# MIT e l’AI 'umile': come insegnare ai modelli a dire 'non lo so'
 ![mit-ai-umile.jpg](mit-ai-umile.jpg)
 
 C'è un esperimento mentale che i ricercatori del MIT usano per spiegare il problema al cuore della loro ricerca. Immaginate un medico di terapia intensiva alle tre di notte, dopo dodici ore di turno. Sul monitor compare una diagnosi generata dall'AI: polmonite batterica, probabilità 94%. Il medico ha un dubbio, una sensazione viscerale che qualcosa non torni. Ma il numero è lì, preciso, autorevole. E il medico cede.

@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-04-24
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/TghyBXWlVBI?si=Nq1AYm_RRhMDHeLc"
+spotify_url: "https://open.spotify.com/episode/25Qjw7no0raJF3ay7ZM9KX"
 ---
 
 # La memoria che impara: Karpathy sfida il RAG con una knowledge base evolutiva

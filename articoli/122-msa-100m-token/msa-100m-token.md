@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-05-06
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/En2JF1pA-_M?si=n_dyHzdmcg326CmQ"
+spotify_url: "https://open.spotify.com/episode/1GzpCpgc1fhBJRCsqqocRA"
 ---
 
 # 100 milioni di token: memoria o miraggio?

@@ -3,6 +3,7 @@ tags: ["Generative AI", "Ethics & Society", "Applications"]
 date: 2026-05-13
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/yM7h0a9xDSw?si=LEv6gMCt2gDb7X7e"
+spotify_url: "https://open.spotify.com/episode/3apGzXOMUyEN3O3zcq8GRJ"
 ---
 
 # Alexa? No Gina! Il mio assistente vocale, locale e auto costruito

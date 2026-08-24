@@ -3,6 +3,7 @@ tags: ["Research", "Applications", "Generative AI"]
 date: 2026-04-13
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/DcHtDLC-5uA?si=GxxJ48VxRxoGJj25"
+spotify_url: "https://open.spotify.com/episode/6iJfDVdnkY1EfGg0rFbriA"
 ---
 
 # TurboQuant: un bit per ridefinire i limiti dell'intelligenza artificiale

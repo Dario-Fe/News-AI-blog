@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Security"]
 date: 2026-04-01
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/EBZ6ulYQt94?si=PyGeTQzM0qiSWN0T"
+spotify_url: "https://open.spotify.com/episode/3ajEb0lwcjH9QimfCiucZL"
 ---
 
 # Il MIT realizza la promessa degli occhiali a raggi X

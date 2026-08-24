@@ -3,6 +3,7 @@ tags: ["Business", "Security", "Ethics & Society"]
 date: 2026-03-23
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/UEHump67M0A?si=SxcPn9mkEy_Vg-wi"
+spotify_url: "https://open.spotify.com/episode/6XGPrYbVlTkkUF9PlmL4ez"
 ---
 
 # L'errore è dell'AI. La colpa è tua. Chiedere ad Amazon

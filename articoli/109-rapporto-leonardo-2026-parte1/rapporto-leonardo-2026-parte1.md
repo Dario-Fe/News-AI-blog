@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-04-06
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/ueWbdYH97uw?si=qTNdNOukCVQNA7HJ"
+spotify_url: "https://open.spotify.com/episode/4KDcamXMmhdW5rPvksS6Pf"
 ---
 
 # Fondazione Leonardo: L'Italia nell'era dell'IA - Parte 1

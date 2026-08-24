@@ -3,6 +3,7 @@ tags: ["Research", "Ethics & Society", "Training"]
 date: 2026-05-15
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/0qKJVbEZ1pg?si=f37zUNe3BJGGltQo"
+spotify_url: "https://open.spotify.com/episode/5BB4YkoD66rqwk5ODa6SCP"
 ---
 
 # Talkie: quando un LLM non sa nulla dopo il 1930

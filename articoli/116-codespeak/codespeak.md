@@ -3,6 +3,7 @@ tags: ["Generative AI", "Startups", "Applications"]
 date: 2026-04-22
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/ik1064AOFGY?si=MvXI6eN0467RNkd4"
+spotify_url: "https://open.spotify.com/episode/4yuLtihKZGqmmVh5zjX9xw"
 ---
 
 # Il codice che non si scrive: CodeSpeak e la rivoluzione delle specifiche

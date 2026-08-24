@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-05-04
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/SvxRfdNTHWs?si=NAEiTFjnAhNkCpt2"
+spotify_url: "https://open.spotify.com/episode/1MN2sjJHXzUIBisW956SHC"
 ---
 
 # Dentro Claude Code: conta il sistema, non il modello

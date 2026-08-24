@@ -3,6 +3,7 @@ tags: ["Startups", "Applications", "Ethics & Society"]
 date: 2026-03-25
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/QDUniWrYiCY?si=S69N9y_yEdjeC_we"
+spotify_url: "https://open.spotify.com/episode/7lQWpp7We7pNj4x5ud4zGJ"
 ---
 
 # Oltre il circolo polare: un'AI nata da una tesi universitaria sta riscrivendo il calcio europeo

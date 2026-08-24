@@ -3,6 +3,7 @@ tags: ["Research", "Applications", "Generative AI"]
 date: 2026-04-27
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/6oOD9Z_I9R0?si=oddDV3s9Chk2JBut"
+spotify_url: "https://open.spotify.com/episode/2oTgKqgth05sVnxp6L9KG3"
 ---
 
 # Caveman: l'AI che parla come un cavernicolo conviene

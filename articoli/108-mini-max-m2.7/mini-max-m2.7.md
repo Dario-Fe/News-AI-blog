@@ -3,6 +3,7 @@ tags: ["Generative AI", "Training", "Business"]
 date: 2026-04-03
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/YE1VawskH_A?si=QiCpH6LkwOXGEcFE"
+spotify_url: "https://open.spotify.com/episode/3sEQUnvRSjsxzamjXSmEgM"
 ---
 
 # MiniMax M2.7: l'AI che impara da sé stessa (quasi)

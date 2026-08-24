@@ -3,6 +3,7 @@ tags: ["Security", "Applications", "Generative AI"]
 date: 2026-05-22
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/UhGq0Y0ckcc?si=jWH_GzPF6qUSxgOD"
+spotify_url: "https://open.spotify.com/episode/6NUcGhIj1DhobdoNKA4T20"
 ---
 
 # MDASH, il sistema di Microsoft che sfida Mythos sulla sicurezza informatica

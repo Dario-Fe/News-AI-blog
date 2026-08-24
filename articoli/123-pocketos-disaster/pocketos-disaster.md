@@ -3,6 +3,7 @@ tags: ["Security", "Ethics & Society", "Business"]
 date: 2026-05-08
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/g0vjOytkGOI?si=Cv7OclVa1yhYxGFI"
+spotify_url: "https://open.spotify.com/episode/7haXSnYcteKm7YZoeT450B"
 ---
 
 # Agenti Autonomi: 9 secondi per cancellare tutto, cosa insegna il disastro PocketOS

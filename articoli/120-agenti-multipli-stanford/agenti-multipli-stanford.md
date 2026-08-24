@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-05-01
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/1XHCygCyq5c?si=jmk_dm-ZXg5jjZON"
+spotify_url: "https://open.spotify.com/episode/2ExqOhA4jhEoaK9VpgngKQ"
 ---
 
 # Più agenti, meno intelligenza? Stanford mette in discussione l'architettura multi-agent

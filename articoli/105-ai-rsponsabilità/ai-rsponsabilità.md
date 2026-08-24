@@ -3,6 +3,7 @@ tags: ["Generative AI", "Security", "Ethics & Society"]
 date: 2026-03-27
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/1b1IS4-QSzo?si=KJH7q77TCdgvwFsQ"
+spotify_url: "https://open.spotify.com/episode/5egZas00b1gyYjIUWvVrv7"
 ---
 
 # Come un LLM dice sempre la verità che vuoi sentire

@@ -3,6 +3,7 @@ tags: ["Security", "Business", "Generative AI"]
 date: 2026-04-15
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/0SpkvCDrN5g?si=nqX7XuTGoKCbz5Oe"
+spotify_url: "https://open.spotify.com/episode/5KjuO4EoZoZVlqsuI5WBYy"
 ---
 
 # Project Glasswing: Claude Mythos e il modello misterioso

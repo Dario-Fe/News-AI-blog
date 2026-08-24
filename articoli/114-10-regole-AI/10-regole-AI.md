@@ -3,6 +3,7 @@ tags: ["Generative AI", "Security", "Business"]
 date: 2026-04-17
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/SSQITcGdzB4?si=Mr9_U4Ckhg8yADYr"
+spotify_url: "https://open.spotify.com/episode/1dR8xJgs0NFpbN2loL9pge"
 ---
 
 # 10 regole per usare l'AI in azienda

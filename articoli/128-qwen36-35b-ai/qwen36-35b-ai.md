@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Training"]
 date: 2026-05-20
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/8nxskrXNlto?si=Kyz9i_DZ9sEzNSfx"
+spotify_url: "https://open.spotify.com/episode/4lwl8uZzmoEpxc8NWZ1VVm"
 ---
 
 # Qwen 3.6 in locale: 35 miliardi sul mio PC

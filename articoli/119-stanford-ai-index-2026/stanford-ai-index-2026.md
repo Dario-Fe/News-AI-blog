@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-04-29
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/dXcQar0heMM?si=3JNeryoeCzOa9RD7"
+spotify_url: "https://open.spotify.com/episode/1MeXroC1lqbV3od5mT3T4p"
 ---
 
 # AI Index Report 2026 di Stanford: l'AI accelera, la governance frena

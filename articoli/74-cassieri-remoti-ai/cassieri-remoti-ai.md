@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Generative AI"]
 date: 2026-01-14
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/GtlU7_T-lws?si=UxFzNSZ66hotncG6"
+spotify_url: "https://open.spotify.com/episode/2rGOzb0ebIYSm2nL5U4wku"
 ---
 
 # Il cassiere che non c'è: dalla delocalizzazione digitale all'inevitabile sostituzione con l'AI?

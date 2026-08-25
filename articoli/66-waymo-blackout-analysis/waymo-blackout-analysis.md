@@ -3,6 +3,7 @@ tags: ["Security", "Ethics & Society", "Applications"]
 date: 2025-12-26
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/0cNuMCfULHg?si=98MI49Vj4pMJglvA"
+spotify_url: "https://open.spotify.com/episode/59Q42A6Z2IEHrZRGMA4dG8"
 ---
 
 # Quando la città si ferma: le fragilità nascoste dell'età autonoma

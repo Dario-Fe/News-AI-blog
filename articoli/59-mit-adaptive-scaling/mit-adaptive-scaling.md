@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Training"]
 date: 2025-12-10
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/Ls-8wIkZnIo?si=mYQFAz7nICE0cpVn"
+spotify_url: "https://open.spotify.com/episode/7BFYannnvQYQg23xNDyXqC"
 ---
 
 # Dal MIT, i Modelli Imparano a Pensare Meno (e Meglio)

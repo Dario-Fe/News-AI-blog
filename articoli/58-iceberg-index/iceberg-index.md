@@ -3,6 +3,7 @@ tags: ["Security", "Generative AI", "Ethics & Society"]
 date: 2025-12-08
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/Wv8K0u_3_Hs?si=z5NQwNH6S6p_OCEe"
+spotify_url: "https://open.spotify.com/episode/117boCFYn5PbTz6XSVet0B"
 ---
 
 # Sotto l'Iceberg Digitale: Il MIT Quantifica l'Impatto dell'IA sul Lavoro

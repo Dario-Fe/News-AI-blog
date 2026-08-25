@@ -3,6 +3,7 @@ tags: ["Research", "Training", "Ethics & Society"]
 date: 2026-01-23
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/k2FN1_o1V5E?si=vhfR009b72JJJ0be"
+spotify_url: "https://open.spotify.com/episode/2Sq8KbNxVImMzVODebUSFd"
 ---
 
 # Quando i modelli scientifici iniziano a pensare uguale

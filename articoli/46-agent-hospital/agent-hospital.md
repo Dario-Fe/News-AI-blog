@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Research"]
 date: 2025-11-10
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/C9V4m2A57lk?si=DBm4y3hS8uo1p8RI"
+spotify_url: "https://open.spotify.com/episode/3XvZ4UHMfnYmSuV6mwdfYy"
 ---
 
 # L'Ospedale Virtuale: Quando l'Intelligenza Artificiale diventa Dottore

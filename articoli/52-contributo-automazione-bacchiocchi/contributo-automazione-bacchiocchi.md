@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Business", "Applications"]
 date: 2025-11-24
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/9ZT7cI3jE5Q?si=izD8IQuEPxxjsFqT"
+spotify_url: "https://open.spotify.com/episode/0nbTWnYWj0rb0mbQ9JvQEX"
 ---
 
 # 'Contributo Automazione': La proposta di legge di Stefano Bacchiocchi

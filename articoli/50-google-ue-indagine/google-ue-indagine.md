@@ -3,6 +3,7 @@ tags: ["Copyright", "Ethics & Society", "Business"]
 date: 2025-11-19
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/cw9uYcmHtLY?si=sUavCHQ6P42LXjP1"
+spotify_url: "https://open.spotify.com/episode/12B4w4f5ytZ7CXFgXxxKJq"
 ---
 
 # L'UE indaga su Google: Crollo degli Editori colpa dell'AI?

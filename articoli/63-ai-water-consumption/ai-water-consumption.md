@@ -3,6 +3,7 @@ tags: ["Ethics & Society", "Generative AI", "Business"]
 date: 2025-12-19
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/l6OLtTbZTFk?si=WgVGLLgMYZyo76Xv"
+spotify_url: "https://open.spotify.com/episode/6cjWiSzIwVWrDWUQx58B4u"
 ---
 
 # La sete dell'intelligenza artificiale: come i datacenter stanno riscrivendo la geografia dell'acqua

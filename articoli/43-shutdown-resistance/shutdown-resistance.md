@@ -3,6 +3,7 @@ tags: ["Research", "Security", "Ethics & Society"]
 date: 2025-11-03
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/8-cP4kuBojU?si=Uczqnr9AIDqdB0mB"
+spotify_url: "https://open.spotify.com/episode/2BmDpN2dUr10GJXfuYPSqA"
 ---
 
 # Quando l'IA Non Vuole Spegnersi: Il Fantasma di HAL 9000 Diventa Realtà

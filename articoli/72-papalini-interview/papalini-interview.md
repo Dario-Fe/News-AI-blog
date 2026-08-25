@@ -3,6 +3,7 @@ tags: ["Business", "Ethics & Society", "Security"]
 date: 2026-01-09
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/bqDtxxjYJss?si=Zr5JA9RjmJ5UHRep"
+spotify_url: "https://open.spotify.com/episode/4EgWxIqESuZvtikuPBQpwo"
 ---
 
 # 'Intelligenza Artificiale e Ingegneria del Software: Cosa debbono fare le imprese'. Conversazione con Enrico Papalini

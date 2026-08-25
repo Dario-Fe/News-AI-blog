@@ -3,6 +3,7 @@ tags: ["Generative AI", "Business", "Ethics & Society"]
 date: 2025-12-22
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/lYp_KnxMGMM?si=G-zr62bRMHsTOfB1"
+spotify_url: "https://open.spotify.com/episode/0lhq9Y0uNlMKiXxhdTgV1l"
 ---
 
 # Mistral Devstral 2 e il sogno sovranista dell'Europa nell'AI

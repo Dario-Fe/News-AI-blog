@@ -3,6 +3,7 @@ tags: ["Security", "Generative AI", "Ethics & Society"]
 date: 2025-12-05
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/a_qKH496654?si=QGctKrKAHfnmJLHz"
+spotify_url: "https://open.spotify.com/episode/2Y1X74TaIb8njxKpJJGNbI"
 ---
 
 # Claude Code trasformato in cyber-spia: la nuova frontiera della sicurezza informatica

@@ -3,6 +3,7 @@ tags: ["Research", "Security", "Generative AI"]
 date: 2025-12-12
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/-o-LWd1Afd0?si=p9byENa0X-3uyAMG"
+spotify_url: "https://open.spotify.com/episode/1A3GAnXagPCXPZbWAAc2iI"
 ---
 
 # I Fantasmi nell'AI: Quando l'Intelligenza Artificiale Eredita Bias Invisibili

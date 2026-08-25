@@ -3,6 +3,7 @@ tags: ["Generative AI", "Applications", "Business"]
 date: 2025-11-12
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/zIrCMaPktl0?si=AOfne7yBctKkx-qQ"
+spotify_url: "https://open.spotify.com/episode/61gm8Tm41qqZ5leOBQvgeg"
 ---
 
 # Kimi K2 Thinking: La Cina mette la freccia

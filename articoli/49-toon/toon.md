@@ -3,6 +3,7 @@ tags: ["Research", "Applications", "Training"]
 date: 2025-11-17
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/X8g-dlXG6w0?si=VL_GbNs1dAtg_1jM"
+spotify_url: "https://open.spotify.com/episode/5b1awuMqNsMicQ36wBXEj8"
 ---
 
 # TOON riscrive le regole dei dati per l'era dell'AI. Che ne sarà del JSON?

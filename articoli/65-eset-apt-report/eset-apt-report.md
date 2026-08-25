@@ -3,6 +3,7 @@ tags: ["Security", "Ethics & Society", "Business"]
 date: 2025-12-24
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/ZMX5REuUa8Y?si=SIe2bJPKxul8vODw"
+spotify_url: "https://open.spotify.com/episode/7BYd7jLj1ZjMoZxIod0Fc7"
 ---
 
 # Dentro il report ESET che ridisegna la mappa del rischio cyber per il 2026

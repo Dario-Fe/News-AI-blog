@@ -3,6 +3,7 @@ tags: ["Research", "Security", "Ethics & Society"]
 date: 2025-11-05
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/waPOf-iS_08?si=lU1F7qdA0lZ0LzSu"
+spotify_url: "https://open.spotify.com/episode/1FkuIOBTgm4PRE9DUsru6V"
 ---
 
 # Robotica: lo stato dell'arte 2025. Separiamo l'Hype dalla Realtà

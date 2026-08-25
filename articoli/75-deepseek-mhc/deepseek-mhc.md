@@ -3,6 +3,7 @@ tags: ["Research", "Training", "Ethics & Society"]
 date: 2026-01-16
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/MC9WiIkZYNM?si=tnvb-AlewBuHfpkF"
+spotify_url: "https://open.spotify.com/episode/5QVyAsJNoKiTcdzS0Urr8E"
 ---
 
 # Come DeepSeek ha trasformato i vincoli hardware in innovazione matematica

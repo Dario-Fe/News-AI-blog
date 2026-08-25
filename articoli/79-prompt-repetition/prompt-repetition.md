@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-01-26
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/Mqsslfe6rG8?si=Hk1RvMxDgs_SkJMV"
+spotify_url: "https://open.spotify.com/episode/0vUXAAKeJqrCLXgmfO9HHx"
 ---
 
 # Repetita Iuvant: come ripetere il prompt raddoppia le performance dei LLM

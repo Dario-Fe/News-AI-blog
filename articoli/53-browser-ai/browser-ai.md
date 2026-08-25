@@ -3,6 +3,7 @@ tags: ["Security", "Applications"]
 date: 2025-11-26
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/tnD4ZPtAkEo?si=03iob_J0zwCQNDTR"
+spotify_url: "https://open.spotify.com/episode/6oIyVcjllSV9IBQVz8QS60"
 ---
 
 # Browser AI: assistenti intelligenti o cavalli di Troia digitali?

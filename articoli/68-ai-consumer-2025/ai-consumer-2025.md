@@ -1,8 +1,9 @@
 ---
-tags: ["Generative AI", "Ethics & Society", "Business"]
+tags: ["Generative A", "Ethics & Society", "Business"]
 date: 2025-12-31
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/i8yEIUoOVQY?si=7eATsfuPfJbnry9s"
+spotify_url: "https://open.spotify.com/episode/3qzD3LOr5XY4WMAiGnfiBe"
 ---
 
 # L'AI consumer nel 2025: Perché più scelta non ha creato più cambiamento

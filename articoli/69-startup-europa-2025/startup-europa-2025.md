@@ -3,6 +3,7 @@ tags: ["Startups", "Business", "Ethics & Society"]
 date: 2026-01-02
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/tCIdbOkBox0?si=ThTRkExE_Dt_7PUH"
+spotify_url: "https://open.spotify.com/episode/68XUEaClh4wGXanxx82Eqc"
 ---
 
 # L'entusiasmo europeo dell'AI: ma i numeri raccontano un'altra storia

@@ -3,6 +3,7 @@ tags: ["Generative AI", "Research", "Applications"]
 date: 2025-12-01
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/qw1b6xuEcFQ?si=BBM4jmOg95K0teWh"
+spotify_url: "https://open.spotify.com/episode/4Z2skeBV2zndBHB6BSlQWk"
 ---
 
 # LongCat-Video, il Gigante silenzioso della Generazione video OpenSource

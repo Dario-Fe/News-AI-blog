@@ -3,6 +3,7 @@ tags: ["Research", "Training", "Generative AI"]
 date: 2026-01-05
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/O4LDG9NBc8o?si=N7JrdmBhLPsFw5R0"
+spotify_url: "https://open.spotify.com/episode/0zED7krJI8thYbknQVaLVv"
 ---
 
 # Si crede la Tour Eiffel. Pilotare un'IA dall'Interno: Lo Steering negli LLM

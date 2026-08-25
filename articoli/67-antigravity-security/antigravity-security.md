@@ -3,6 +3,7 @@ tags: ["Security", "Ethics & Society", "Business"]
 date: 2025-12-29
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/rZRd3Ld-MRQ?si=KKfByn6X3J3d7Xas"
+spotify_url: "https://open.spotify.com/episode/5zQmajF5TT5CpupKv8P7FW"
 ---
 
 # Google lancia Antigravity. I ricercatori la bucano in 24 ore

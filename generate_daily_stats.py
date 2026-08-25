@@ -71,8 +71,9 @@ def scan_local_articles():
                     tags = post.metadata.get('tags', [])
                     author = post.metadata.get('author')
                     youtube_url = post.metadata.get('youtube_url')
+                    spotify_url = post.metadata.get('spotify') or post.metadata.get('spotify_url')
                     
-                    has_podcast = md_basename in mp3_names
+                    has_podcast = bool(spotify_url) or (md_basename in mp3_names)
                     has_video = bool(youtube_url)
 
                     # Conteggio parole

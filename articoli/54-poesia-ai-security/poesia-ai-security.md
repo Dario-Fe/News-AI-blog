@@ -3,6 +3,7 @@ tags: ["Research", "Security", "Generative AI"]
 date: 2025-11-28
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/30tnbFClgGY?si=QN3zqyGPMBdy_5Ao"
+spotify_url: "https://open.spotify.com/episode/4pSZ1sh6LGRuQdDtfpUprq"
 ---
 
 # La Poesia: il debole dell'Intelligenza Artificiale

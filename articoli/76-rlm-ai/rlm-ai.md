@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Applications"]
 date: 2026-01-19
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/MTrg2JlV_4Y?si=7CQqFA1gVCz57RMa"
+spotify_url: "https://open.spotify.com/episode/2nila4tXLMG9lSlX5DZj0I"
 ---
 
 # Oltre il muro del contesto: i Recursive Language Models sfidano il limite invisibile dell'AI

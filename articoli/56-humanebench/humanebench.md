@@ -3,6 +3,7 @@ tags: ["Research", "Security", "Ethics & Society"]
 date: 2025-12-03
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/194-heBwmVU?si=hIKMSX68YiuzoJNR"
+spotify_url: "https://open.spotify.com/episode/1sqCRQHCHOs9HD4eKh6J4i"
 ---
 
 # Quando l'AI dimentica l'umano: HumaneBench e la misurazione del benessere nei chatbot

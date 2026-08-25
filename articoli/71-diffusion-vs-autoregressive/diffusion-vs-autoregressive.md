@@ -3,6 +3,7 @@ tags: ["Research", "Training", "Generative AI"]
 date: 2026-01-07
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/1ZKjnmkuG2Q?si=ZXmL8Wb4NtlPAL8d"
+spotify_url: "https://open.spotify.com/episode/2u5k7ht6ISyw1wW9tktwfI"
 ---
 
 # Diffusion vs Autoregressione: Diamo un occhiata sotto il cofano degli LLM

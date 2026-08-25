@@ -3,6 +3,7 @@ tags: ["Generative AI", "Business", "Ethics & Society"]
 date: 2026-01-21
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/bY81jY3FWto?si=51TZso7B8Tae-xiz"
+spotify_url: "https://open.spotify.com/episode/1g7fdGzeV8bDqGYj9yT3WL"
 ---
 
 # L'internet che si mangia la coda: quando l'AI genera spazzatura che alimenta altra AI

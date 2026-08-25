@@ -3,6 +3,7 @@ tags: ["Research", "Training", "Applications"]
 date: 2025-10-31
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/as9vLVDYK_U?si=EIZx5il41w4vtQsR"
+spotify_url: "https://open.spotify.com/episode/4SAvs7bb5nx3ubxdlh0Vvp"
 ---
 
 # Il Modello Base Sapeva Già Ragionare (Bastava Chiederlo nel Modo Giusto)

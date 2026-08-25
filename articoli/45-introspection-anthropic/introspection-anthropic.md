@@ -3,6 +3,7 @@ tags: ["Research", "Generative AI", "Ethics & Society"]
 date: 2025-11-07
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/wc_ysSCEynQ?si=v6ZNYWNEW1romSaD"
+spotify_url: "https://open.spotify.com/episode/0Oln2vOTbUIdQ0cEfrMi7Y"
 ---
 
 # Quando l'AI si guarda dentro: l'introspezione artificiale tra scienza e illusione

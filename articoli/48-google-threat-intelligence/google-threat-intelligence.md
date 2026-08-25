@@ -3,6 +3,7 @@ tags: ["Security", "Generative AI", "Ethics & Society"]
 date: 2025-11-14
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/8Y-gykIFKnc?si=vb3a-IOBkOKQxEIy"
+spotify_url: "https://open.spotify.com/episode/4zxyZoM2eeEbhWqCkzA0OB"
 ---
 
 # I Virus hanno imparato a 'pensare'. La nuova frontiera dei Virus AI

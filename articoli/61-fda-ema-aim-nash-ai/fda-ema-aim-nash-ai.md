@@ -3,6 +3,7 @@ tags: ["Research", "Ethics & Society", "Generative AI"]
 date: 2025-12-15
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/zvh7Zm2-EjY?si=LtJ04VmkFLPXYC4r"
+spotify_url: "https://open.spotify.com/episode/1sCtgaKsmih8QJRGCulAcB"
 ---
 
 # Se l'algoritmo fa diagnosi: FDA e EMA sdoganano l'AI nei trial farmaceutici

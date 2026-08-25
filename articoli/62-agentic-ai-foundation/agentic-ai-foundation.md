@@ -3,6 +3,7 @@ tags: ["Business", "Ethics & Society", "Generative AI"]
 date: 2025-12-17
 author: "Dario Ferrero"
 youtube_url: "https://youtu.be/S2mlnEf8wcU?si=7GIiJb-yj5YRdalQ"
+spotify_url: "https://open.spotify.com/episode/4wUZ6O7utDtayKIlClMUGq"
 ---
 
 # Il Cartello degli Agenti: Quando l'Open Source Diventa un Monopolio Preventivo

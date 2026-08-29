@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-08-28T11:41:25.343223+00:00",
+  "last_update": "2026-08-29T07:17:45.230198+00:00",
   "portal_snapshot": {
     "total_articles": 860,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 172
   },
   "cumulative_history": {
-    "it/index.html": 2525,
-    "it": 1087,
+    "it/index.html": 2526,
+    "it": 1090,
     "fr": 311,
     "en": 221,
     "it/newsletter": 210,
@@ -62,7 +62,7 @@
     "it/ai-bournout.html": 48,
     "it/robotica-2025.html": 47,
     "it/robot-tax-sanders.html": 46,
-    "it/deepseek-mhc.html": 44,
+    "it/deepseek-mhc.html": 45,
     "it/kimi-k2-thinking.html": 44,
     "it/qwen3.5-locale-puntata1.html": 44,
     "en/kimik2.5-en.html": 43,
@@ -71,13 +71,13 @@
     "it/rapporto-leonardo-2026-parte1.html": 42,
     "it/grief-tech.html": 41,
     "it/privacy": 41,
+    "it/kimik2.5.html": 39,
+    "it/qwen36-35b-ai.html": 39,
     "it/amodei-intervista-parte1.html": 38,
-    "it/kimik2.5.html": 38,
+    "it/contributo-automazione-bacchiocchi.html": 38,
     "it/qwen3.5-locale-puntata2.html": 38,
-    "it/qwen36-35b-ai.html": 38,
     "it/rapporto-leonardo-2026-parte2.html": 38,
     "it/shutdown-resistance.html": 38,
-    "it/contributo-automazione-bacchiocchi.html": 37,
     "it/qwen3-tts.html": 35,
     "it/ars-notoria-e-ai.html": 34,
     "it/deepseek-ocr.html": 34,
@@ -94,6 +94,7 @@
     "it/ornith-1.0.html": 32,
     "en/trm-samsung-en.html": 31,
     "it/agentic-ai-foundation.html": 31,
+    "it/llm-knowledge-base.html": 31,
     "it/sistema-sicurezza-ai.html": 31,
     "it/strumenti-oracoli-caso-deloitte.html": 31,
     "en/ai-epanortosi-en.html": 30,
@@ -101,7 +102,6 @@
     "it/ai-consumer-2025.html": 30,
     "it/eset-apt-report.html": 30,
     "it/graphify.html": 30,
-    "it/llm-knowledge-base.html": 30,
     "it/mercury2.html": 30,
     "it/trm-samsung.html": 30,
     "it/cookie": 29,
@@ -250,6 +250,7 @@
     "de/ai-cosciente-de": 9,
     "en/prompt-repetition-en.html": 9,
     "fr/agentic-ai-foundation-fr.html": 9,
+    "it/claude-watermark.html": 9,
     "it/longcat-video": 9,
     "it/mind-viruses.html": 9,
     "en/ai-aziende-e-servizi-en": 8,
@@ -264,9 +265,9 @@
     "es/ai-winter-es.html": 8,
     "it/ai-coding-security": 8,
     "it/ai-consumer-2025": 8,
-    "it/claude-watermark.html": 8,
     "it/graphify": 8,
     "it/onu-report-2026.html": 8,
+    "it/qwen38-27b.html": 8,
     "it/shutdown-resistance": 8,
     "it/tml-determinism.html": 8,
     "de/index.html": 7,
@@ -276,6 +277,7 @@
     "en/ai-slop-entropia-en.html": 7,
     "en/anthropic-hacker-en": 7,
     "en/deepseek-ocr-en.html": 7,
+    "en/gemma4-12b-q8-en": 7,
     "en/gina-assistente-vocale-en.html": 7,
     "en/newsletter": 7,
     "en/rlm-ai-en": 7,
@@ -288,7 +290,6 @@
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 7,
     "it/omnivoice-studio": 7,
     "it/qwen3-tts": 7,
-    "it/qwen38-27b.html": 7,
     "it/slm-2026": 7,
     "it/waymo-blackout-analysis": 7,
     "de/ai-aziende-e-servizi-de": 6,
@@ -303,7 +304,6 @@
     "en/ai-water-consumption-en.html": 6,
     "en/contributo-automazione-bacchiocchi-en": 6,
     "en/fda-ema-aim-nash-ai-en.html": 6,
-    "en/gemma4-12b-q8-en": 6,
     "en/pignataro-intervista2-en": 6,
     "es/agentic-ai-foundation-es": 6,
     "es/prompt-repetition-es": 6,
@@ -320,6 +320,7 @@
     "it/qwen38-27b": 6,
     "it/startup-europa-2025": 6,
     "de/diffusion-vs-autoregressive-de.html": 5,
+    "de/newsletter": 5,
     "de/slm-2026-de.html": 5,
     "de/subliminal-learning-de.html": 5,
     "en/ai-bournout-en.html": 5,
@@ -367,7 +368,6 @@
     "de/fda-ema-aim-nash-ai-de.html": 4,
     "de/glm5.2-de.html": 4,
     "de/metodo-editoriale": 4,
-    "de/newsletter": 4,
     "de/pentagono-anthropic-openai-de.html": 4,
     "de/privacy": 4,
     "de/robotica-2025-de.html": 4,
@@ -431,6 +431,7 @@
     "it/giganti-ai-bocciati-seconda-puntata": 4,
     "it/google-threat-intelligence": 4,
     "it/llm-knowledge-base": 4,
+    "it/llm-wiki-autocostruita": 4,
     "it/programmatori-vs-ai.html": 4,
     "it/rsl-really-simple-licensing.html": 4,
     "it/silicon-valley-ai-pac.html": 4,
@@ -563,7 +564,6 @@
     "it/chatgpt-ads": 3,
     "it/giganti-ai-bocciati-prima-puntata": 3,
     "it/legge-ai-italia": 3,
-    "it/llm-wiki-autocostruita": 3,
     "it/pentagono-anthropic-openai": 3,
     "it/programmatori-vs-ai": 3,
     "it/prompt-repetition": 3,
@@ -884,6 +884,7 @@
     "de/cina-universita-de.html": 1,
     "de/claude-code-de": 1,
     "de/claude-code-de.html": 1,
+    "de/claude-watermark-de.html": 1,
     "de/colibri-de.html": 1,
     "de/dalle applicazioni consolidate alle frontiere del futuro-de": 1,
     "de/datacenter-proteste-usa-de": 1,
@@ -918,6 +919,7 @@
     "de/mdash-microsoft-de.html": 1,
     "de/meetily-de.html": 1,
     "de/memvid-ai-memory-de": 1,
+    "de/mind-viruses-de.html": 1,
     "de/mistral-devstral-de": 1,
     "de/mistral-forge-de": 1,
     "de/mit-adaptive-scaling-de.html": 1,
@@ -929,6 +931,7 @@
     "de/poesia-ai-security-de": 1,
     "de/programmers-vs-ai-de": 1,
     "de/project-glasswing-mythos-de.html": 1,
+    "de/prompt-injection-camel-de": 1,
     "de/prompt-injection-camel-de.html": 1,
     "de/qwen3.5-locale-puntata2-de": 1,
     "de/qwen36-35b-ai-de.html": 1,
@@ -965,6 +968,7 @@
     "en/chartnet-en.html": 1,
     "en/chatgpt-ads-en": 1,
     "en/claude-code-en": 1,
+    "en/claude-watermark-en.html": 1,
     "en/codespeak-en": 1,
     "en/colibri-en.html": 1,
     "en/dalle applicazioni consolidate alle frontiere del futuro-en": 1,
@@ -1080,6 +1084,7 @@
     "es/llm-wiki-autocostruita-es.html": 1,
     "es/mdash-microsoft-es.html": 1,
     "es/meetily-es.html": 1,
+    "es/mind-viruses-es.html": 1,
     "es/mit-ai-umile-es": 1,
     "es/mit-ai-umile-es.html": 1,
     "es/omnivoice-studio-es.html": 1,
@@ -1107,6 +1112,7 @@
     "es/turboquant-es": 1,
     "es/wave-former-raggix-es": 1,
     "es/waymo-blackout-analysis-es": 1,
+    "fr/agente-attacco-gym-fr.html": 1,
     "fr/agenti-marxisti-fr.html": 1,
     "fr/agenti-multipli-stanford-fr.html": 1,
     "fr/ai-consumer-2025-fr.html": 1,
@@ -4357,6 +4363,68 @@
           "en/degregori-ai-war-en.html": 1,
           "it/ars-notoria-e-ai.htmlhttps://aitalk.it/it/ars-notoria-e-ai.html": 1
         }
+      },
+      "2026-08-28": {
+        "total_views": 20,
+        "views_by_lang": {
+          "it": 12,
+          "en": 2,
+          "de": 4,
+          "es": 1,
+          "fr": 1
+        },
+        "views_by_tag": {
+          "Research": 3,
+          "Training": 3,
+          "Ethics & Society": 9,
+          "Generative AI": 10,
+          "Applications": 4,
+          "Business": 1,
+          "Copyright": 3,
+          "Security": 3
+        },
+        "top_articles": [
+          {
+            "path": "it/deepseek-mhc.html",
+            "views": 1
+          },
+          {
+            "path": "it/kimik2.5.html",
+            "views": 1
+          },
+          {
+            "path": "it/qwen36-35b-ai.html",
+            "views": 1
+          },
+          {
+            "path": "it/contributo-automazione-bacchiocchi.html",
+            "views": 1
+          },
+          {
+            "path": "it/llm-knowledge-base.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 1,
+          "it": 3,
+          "it/deepseek-mhc.html": 1,
+          "it/kimik2.5.html": 1,
+          "it/qwen36-35b-ai.html": 1,
+          "it/contributo-automazione-bacchiocchi.html": 1,
+          "it/llm-knowledge-base.html": 1,
+          "it/claude-watermark.html": 1,
+          "it/qwen38-27b.html": 1,
+          "en/gemma4-12b-q8-en": 1,
+          "de/newsletter": 1,
+          "it/llm-wiki-autocostruita": 1,
+          "de/claude-watermark-de.html": 1,
+          "de/mind-viruses-de.html": 1,
+          "de/prompt-injection-camel-de": 1,
+          "en/claude-watermark-en.html": 1,
+          "es/mind-viruses-es.html": 1,
+          "fr/agente-attacco-gym-fr.html": 1
+        }
       }
     },
     "monthly": {
@@ -4425,25 +4493,25 @@
         ]
       },
       "2026-08": {
-        "total_views": 1201,
+        "total_views": 1221,
         "views_by_lang": {
-          "it": 983,
-          "en": 110,
-          "de": 47,
-          "es": 28,
-          "fr": 33
+          "it": 995,
+          "en": 112,
+          "de": 51,
+          "es": 29,
+          "fr": 34
         },
         "views_by_tag": {
-          "Generative AI": 463,
+          "Generative AI": 473,
           "Startups": 32,
-          "Applications": 221,
-          "Research": 175,
-          "Security": 143,
+          "Applications": 225,
+          "Research": 178,
+          "Security": 146,
           "E-learning": 82,
-          "Ethics & Society": 326,
-          "Business": 114,
-          "Training": 135,
-          "Copyright": 13
+          "Ethics & Society": 335,
+          "Business": 115,
+          "Training": 138,
+          "Copyright": 16
         },
         "top_articles": [
           {
@@ -4491,23 +4559,23 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 2147,
+        "total_views": 2167,
         "views_by_lang": {
-          "it": 1525,
-          "en": 281,
-          "de": 119,
-          "fr": 118,
-          "es": 104
+          "it": 1537,
+          "en": 283,
+          "de": 123,
+          "fr": 119,
+          "es": 105
         },
         "views_by_tag": {
-          "Generative AI": 956,
-          "Applications": 444,
-          "Security": 272,
-          "Research": 474,
-          "Ethics & Society": 649,
-          "Training": 238,
-          "Business": 307,
-          "Copyright": 26,
+          "Generative AI": 966,
+          "Applications": 448,
+          "Security": 275,
+          "Research": 477,
+          "Ethics & Society": 658,
+          "Training": 241,
+          "Business": 308,
+          "Copyright": 29,
           "Startups": 77,
           "E-learning": 97
         }

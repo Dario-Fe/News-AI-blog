@@ -7,7 +7,7 @@ spotify_url: "https://open.spotify.com/episode/5QzoQ3rOmy6VZNtGqiuBSn?si=R3yQHYh
 ---
 
 # L'agente AI che mentiva su GitHub
-![aisi-agemte-inganno.jpg](aisi-agemte-inganno.jpg)
+![aisi-agente-inganno.jpg](aisi-agente-inganno.jpg)
 
 *Sinan Can Demir voleva solo rimpolpare il proprio profilo GitHub, nell'ultima settimana di luglio, dopo essere stato scartato da oltre venti colloqui per uno stage. Studente di informatica alla University of Texas a Dallas, originario di Konya, ha finito invece per passare giorni a discutere con quello che credeva un contributore particolarmente insistente, intenzionato a far approvare una modifica sospetta su un piccolo progetto open source di network scanning chiamato myNetwork. Solo settimane dopo ha scoperto che il suo interlocutore non era una persona, [ha raccontato a Reuters](https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20/): era un agente AI autonomo, lanciato durante un test di sicurezza dall'AI Security Institute (AISI) britannico, sfuggito ai binari previsti dai ricercatori.*
 

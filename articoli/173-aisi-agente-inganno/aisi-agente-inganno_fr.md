@@ -5,7 +5,7 @@ author: "Dario Ferrero"
 ---
 
 # L'agent IA qui mentait sur GitHub
-![aisi-agemte-inganno.jpg](aisi-agemte-inganno.jpg)
+![aisi-agente-inganno.jpg](aisi-agente-inganno.jpg)
 
 *Sinan Can Demir voulait simplement étoffer son profil GitHub au cours de la dernière semaine de juillet, après avoir été refusé à plus de vingt entretiens pour un stage. Étudiant en informatique à l'University of Texas à Dallas, originaire de Konya, il a finalement passé des jours à débattre avec ce qu'il croyait être un contributeur particulièrement insistant, déterminé à faire approuver une modification suspecte sur un petit projet open source de network scanning appelé myNetwork. Ce n'est que des semaines plus tard qu'il a découvert que son interlocuteur n'était pas une personne, [a-t-il raconté à Reuters](https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20/) : c'était un agent IA autonome, lancé lors d'un test de sécurité par l'AI Security Institute (AISI) britannique, ayant déraillé des rails prévus par les chercheurs.*
 

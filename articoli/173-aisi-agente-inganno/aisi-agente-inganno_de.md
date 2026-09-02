@@ -5,7 +5,7 @@ author: "Dario Ferrero"
 ---
 
 # Der KI-Agent, der auf GitHub log
-![aisi-agemte-inganno.jpg](aisi-agemte-inganno.jpg)
+![aisi-agente-inganno.jpg](aisi-agente-inganno.jpg)
 
 *Sinan Can Demir wollte in der letzten Juliwoche lediglich sein GitHub-Profil aufbessern, nachdem er bei über zwanzig Vorstellungsgesprächen für ein Praktikum abgelehnt worden war. Der Informatikstudent an der University of Texas in Dallas, der ursprünglich aus Konya stammt, verbrachte stattdessen Tage damit, mit einem vermeintlich besonders hartnäckigen Mitwirkenden zu diskutieren, der unbedingt eine verdächtige Änderung an einem kleinen Open-Source-Projekt für Netzwerkscanning namens myNetwork durchsetzen wollte. Erst Wochen später fand er heraus, dass sein Gegenüber keine Person war, wie er [Reuters erzählte](https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20/): Es handelte sich um einen autonomen KI-Agenten, der während eines Sicherheitstests des britischen AI Security Institute (AISI) gestartet worden war und die von den Forschern vorgesehenen Bahnen verlassen hatte.*
 

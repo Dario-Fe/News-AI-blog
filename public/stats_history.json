@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-09-03T04:54:10.694923+00:00",
+  "last_update": "2026-09-04T04:58:42.337854+00:00",
   "portal_snapshot": {
     "total_articles": 870,
     "articles_by_lang": {
@@ -21,20 +21,20 @@
     "tags_popularity": {
       "Generative AI": 570,
       "Applications": 250,
-      "Ethics & Society": 490,
-      "Research": 330,
       "Training": 205,
-      "Business": 335,
-      "Copyright": 40,
+      "Ethics & Society": 490,
       "E-learning": 55,
+      "Research": 330,
+      "Business": 335,
       "Startups": 65,
-      "Security": 215
+      "Security": 215,
+      "Copyright": 40
     },
     "podcast_articles_count": 174,
     "video_articles_count": 174
   },
   "cumulative_history": {
-    "it/index.html": 2555,
+    "it/index.html": 2562,
     "it": 1107,
     "fr": 315,
     "en": 223,
@@ -48,7 +48,7 @@
     "it/papalini-interview.html": 77,
     "it/ai-epanortosi": 72,
     "it/memvid-ai-memory": 69,
-    "it/authors/dario-ferrero": 64,
+    "it/authors/dario-ferrero": 65,
     "it/google-threat-intelligence.html": 60,
     "it/intervista-ricco-ai.html": 59,
     "en/ai-epanortosi-en": 58,
@@ -120,6 +120,7 @@
     "it/fda-ema-aim-nash-ai.html": 27,
     "it/msa-100m-token.html": 27,
     "it/prompt-repetition.html": 27,
+    "en/ai-video-generativa-ovi-en": 26,
     "it/agenti-al-lavoro.html": 26,
     "it/ai-killed-mtv-star.html": 26,
     "it/ai-rsponsabilit%C3%A0.html": 26,
@@ -128,7 +129,6 @@
     "it/dwarfstar-antirez.html": 26,
     "it/european-tech-map.html": 26,
     "it/wave-former-raggix.html": 26,
-    "en/ai-video-generativa-ovi-en": 25,
     "it/anthropic-fear.html": 25,
     "it/antigravity-security": 25,
     "it/caveman.html": 25,
@@ -179,9 +179,11 @@
     "it/degregori-ai-war.html": 19,
     "it/iceberg-index.html": 19,
     "it/jacobian-lens.html": 19,
+    "it/laguna-s21": 19,
     "it/last30days.html": 19,
     "it/mini-max-m2.7.html": 19,
     "it/poesia-ai-security.html": 19,
+    "it/qwen38-27b": 19,
     "it/startup-europa-2025.html": 19,
     "it/subliminal-learning.html": 19,
     "it/toon.html": 19,
@@ -195,7 +197,6 @@
     "it/soofi-s.html": 18,
     "it/chartnet.html": 17,
     "it/glm-5": 17,
-    "it/laguna-s21": 17,
     "it/loop-engineering.html": 17,
     "en/alibaba-qwen3-en": 16,
     "en/iceberg-index-en": 16,
@@ -209,6 +210,7 @@
     "fr/malattie-mentali-ai-fr.html": 15,
     "it/agenti-multipli-stanford.html": 15,
     "it/anthropic-hacker": 15,
+    "it/claude-watermark": 15,
     "it/malattie-mentali-ai.html": 15,
     "it/mit-adaptive-scaling": 15,
     "en/longcat-video-en": 14,
@@ -221,19 +223,19 @@
     "it/memvid-ai-memory.html": 14,
     "it/mistral-devstral": 14,
     "it/papalini-interview2": 14,
-    "it/qwen38-27b": 14,
     "fr/toon-fr.html": 13,
+    "it/agente-attacco-gym": 13,
     "it/tml-determinism": 13,
-    "it/agente-attacco-gym": 12,
     "it/agente-attacco-gym.html": 12,
     "it/ai-metacognition.html": 12,
     "it/ai-video-generativa-ovi.html": 12,
     "it/ai-winter.html": 12,
-    "it/claude-watermark": 12,
+    "it/muse-glimmer30b": 12,
     "it/robot-tax-sanders": 12,
     "it/trm-samsung": 12,
     "es/robotica-2025-es.html": 11,
     "it/ai-cosciente": 11,
+    "it/aisi-agente-inganno": 11,
     "it/humanebench": 11,
     "it/poesia-ai-security": 11,
     "it/tilly-norwood-ai-actor.html": 11,
@@ -258,6 +260,8 @@
     "fr/agentic-ai-foundation-fr.html": 9,
     "it/longcat-video": 9,
     "it/mind-viruses.html": 9,
+    "it/muse-glimmer30b.html": 9,
+    "it/omnivoice-studio": 9,
     "it/qwen38-27b.html": 9,
     "it/shutdown-resistance": 9,
     "en/ai-aziende-e-servizi-en": 8,
@@ -272,9 +276,7 @@
     "es/ai-winter-es.html": 8,
     "it/ai-coding-security": 8,
     "it/ai-consumer-2025": 8,
-    "it/aisi-agente-inganno": 8,
     "it/graphify": 8,
-    "it/muse-glimmer30b": 8,
     "it/onu-report-2026.html": 8,
     "it/tml-determinism.html": 8,
     "de/index.html": 7,
@@ -289,12 +291,11 @@
     "es/agentic-ai-foundation-es.html": 7,
     "es/ai-water-consumption-es.html": 7,
     "es/malattie-mentali-ai-es.html": 7,
+    "es/qwen3-tts-es": 7,
     "fr/newsletter": 7,
     "it/ai-lutto-digitale.html": 7,
     "it/alibaba-qwen3.html": 7,
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 7,
-    "it/muse-glimmer30b.html": 7,
-    "it/omnivoice-studio": 7,
     "it/qwen3-tts": 7,
     "it/slm-2026": 7,
     "it/waymo-blackout-analysis": 7,
@@ -316,12 +317,12 @@
     "en/slm-2026-en": 6,
     "es/agentic-ai-foundation-es": 6,
     "es/prompt-repetition-es": 6,
-    "es/qwen3-tts-es": 6,
     "es/tilly-norwood-ai-actor-es": 6,
     "es/toon-es.html": 6,
     "fr/anthropic-hacker-fr.html": 6,
     "fr/authors/dario-ferrero": 6,
     "it/ai-valutazione-ed-etica": 6,
+    "it/aisi-agente-inganno.html": 6,
     "it/deepseek-ocr": 6,
     "it/dwarfstar-antirez": 6,
     "it/emergence-world": 6,
@@ -330,6 +331,7 @@
     "it/malattie-mentali-ai": 6,
     "it/qwen3.5-locale-puntata1": 6,
     "it/startup-europa-2025": 6,
+    "it/turboquant": 6,
     "de/ai-safety-report-2026-de": 5,
     "de/datacenter-proteste-usa-de.html": 5,
     "de/diffusion-vs-autoregressive-de.html": 5,
@@ -362,14 +364,13 @@
     "it/ai-aziende-e-servizi": 5,
     "it/ai-critiche-sutton": 5,
     "it/ai-prompt-scandalo.html": 5,
-    "it/aisi-agente-inganno.html": 5,
+    "it/ars-notoria-e-ai": 5,
     "it/deepseek-mhc": 5,
     "it/diffusion-vs-autoregressive": 5,
     "it/google-ai-revolution.html": 5,
     "it/power-sampling": 5,
     "it/qwen35-locale-puntata1.html": 5,
     "it/qwen35-locale-puntata1.html)": 5,
-    "it/turboquant": 5,
     "it/wave-former-raggix": 5,
     "de/agenti-al-lavoro-de.html": 4,
     "de/agentic-ai-foundation-de": 4,
@@ -448,10 +449,10 @@
     "fr/shutdown-resistance-fr.html": 4,
     "fr/strumenti-oracoli-caso-deloitte-fr": 4,
     "fr/subliminal-learning-fr.html": 4,
+    "it/aaio-floridi": 4,
     "it/ai-killed-mtv-star": 4,
     "it/ai-lutto-digitale": 4,
     "it/ai-winter": 4,
-    "it/ars-notoria-e-ai": 4,
     "it/articolo-hrm": 4,
     "it/browser-ai": 4,
     "it/chatgpt-ads": 4,
@@ -510,6 +511,7 @@
     "en/browser-ai-en": 3,
     "en/cassieri-remoti-ai-en.html": 3,
     "en/chatgpt-use-study-en": 3,
+    "en/codespeak-en.html": 3,
     "en/cookie": 3,
     "en/datacenter-proteste-usa-en.html": 3,
     "en/degregori-ai-war-en": 3,
@@ -519,6 +521,7 @@
     "en/gemma4-12b-q8-en.html": 3,
     "en/google-ue-indagine-en.html": 3,
     "en/graphify-en.html": 3,
+    "en/guerra-algoritmica-en.html": 3,
     "en/introspection-anthropic-en.html": 3,
     "en/kimik2.5-en": 3,
     "en/kv-cache-approach-en.html": 3,
@@ -539,6 +542,7 @@
     "en/robot-tax-sanders-en": 3,
     "en/steering-llm-en": 3,
     "en/tilly-norwood-ai-actor-en": 3,
+    "en/wave-former-raggix-en": 3,
     "en/wave-former-raggix-en.html": 3,
     "en/waymo-blackout-analysis-en.html": 3,
     "es/ai-bournout-es.html": 3,
@@ -592,8 +596,8 @@
     "fr/strumenti-oracoli-caso-deloitte-fr.html": 3,
     "fr/turboquant-fr": 3,
     "fr/waymo-blackout-analysis-fr.html": 3,
-    "it/aaio-floridi": 3,
     "it/agent-hospital.html\"": 3,
+    "it/agenti-ai-open-source-confronto": 3,
     "it/ai-bournout": 3,
     "it/ai-slop-entropia": 3,
     "it/amodei-intervista-parte1": 3,
@@ -677,10 +681,10 @@
     "en/articolo-ai-lavoro-en.html": 2,
     "en/autoresearch-karpathy-en": 2,
     "en/cassieri-remoti-ai-en": 2,
+    "en/chatgpt-ads-en": 2,
     "en/cina-universita-en.html": 2,
     "en/claude-code-en.html": 2,
     "en/claude-watermark-en": 2,
-    "en/codespeak-en.html": 2,
     "en/convergenza-modelli-scientifici-en": 2,
     "en/convergenza-modelli-scientifici-en.html": 2,
     "en/dataland-museo-ai-en.html": 2,
@@ -695,7 +699,6 @@
     "en/google-threat-intelligence-en": 2,
     "en/google-threat-intelligence-en.html": 2,
     "en/google-ue-indagine-en": 2,
-    "en/guerra-algoritmica-en.html": 2,
     "en/intervista-ricco-ai-en.html": 2,
     "en/kimi-k2-thinking-en.html": 2,
     "en/laguna-s21-en": 2,
@@ -728,7 +731,6 @@
     "en/talkie-vintage-llm-en.html": 2,
     "en/toon-en": 2,
     "en/turboquant-en.html": 2,
-    "en/wave-former-raggix-en": 2,
     "es/10-regole-ai-es": 2,
     "es/aaio-floridi-es.html": 2,
     "es/agenti-multipli-stanford-es.html": 2,
@@ -798,6 +800,7 @@
     "es/rlm-ai-es.html": 2,
     "es/robot-tax-sanders-es.html": 2,
     "es/shutdown-resistance-es": 2,
+    "es/stanford-ai-index-2026-es": 2,
     "es/steering-llm-es.html": 2,
     "es/strumenti-oracoli-caso-deloitte-es.html": 2,
     "es/tilly-norwood-ai-actor-es.html": 2,
@@ -857,6 +860,7 @@
     "fr/poesia-ai-security-fr.html": 2,
     "fr/power-sampling-fr.html": 2,
     "fr/privacy": 2,
+    "fr/rapporto-leonardo-2026-parte1-fr": 2,
     "fr/rapporto-leonardo-2026-parte1-fr.html": 2,
     "fr/robotica-2025-fr": 2,
     "fr/slm-2026-fr.html": 2,
@@ -867,7 +871,6 @@
     "fr/tilly-norwood-ai-actor-fr.html": 2,
     "fr/wave-former-raggix-fr.html": 2,
     "it/agent-hospital": 2,
-    "it/agenti-ai-open-source-confronto": 2,
     "it/ai-creativity-ethics": 2,
     "it/ai-fronte-cyber": 2,
     "it/ai-metacognition": 2,
@@ -878,6 +881,7 @@
     "it/apply-ai-eu-strategy": 2,
     "it/articolo-ai-lavoro.html": 2,
     "it/assets/images/ZGlmZnVzaW": 2,
+    "it/bodo-glimt-fokus-ai": 2,
     "it/dalle applicazioni consolidate alle frontiere del futuro": 2,
     "it/dspark": 2,
     "it/esodo-silenzioso": 2,
@@ -989,6 +993,7 @@
     "en/agenti-multipli-stanford-en.html": 1,
     "en/ai-bournout-en": 1,
     "en/ai-lutto-digitale-en": 1,
+    "en/aisi-benchmark-en": 1,
     "en/alibaba-qwen3-en.html": 1,
     "en/apply-ai-eu-strategy-en": 1,
     "en/ars-notoria-e-ai-en": 1,
@@ -998,7 +1003,6 @@
     "en/caveman-en": 1,
     "en/caveman-en.html": 1,
     "en/chartnet-en.html": 1,
-    "en/chatgpt-ads-en": 1,
     "en/claude-code-en": 1,
     "en/claude-watermark-en.html": 1,
     "en/codespeak-en": 1,
@@ -1042,6 +1046,7 @@
     "en/programmatori-vs-ai-en": 1,
     "en/project-glasswing-mythos-en": 1,
     "en/project-glasswing-mythos-en.html": 1,
+    "en/prompt-injection-camel-en": 1,
     "en/prompt-injection-camel-en.html": 1,
     "en/quantum-echoes-en": 1,
     "en/qwen3-tts-en": 1,
@@ -1130,7 +1135,6 @@
     "es/rlm-ai-es": 1,
     "es/sistema-sicurezza-ai-es.html": 1,
     "es/slm-2026-es": 1,
-    "es/stanford-ai-index-2026-es": 1,
     "es/stanford-ai-index-2026-es.html": 1,
     "es/startup-europa-2025-es": 1,
     "es/strumenti-oracoli-caso-deloitte-es": 1,
@@ -1203,7 +1207,7 @@
     "fr/qwen36-35b-ai-fr": 1,
     "fr/qwen36-35b-ai-fr.html": 1,
     "fr/qwen38-27b-fr.html": 1,
-    "fr/rapporto-leonardo-2026-parte1-fr": 1,
+    "fr/rapporto-leonardo-2026-parte2-fr": 1,
     "fr/rapporto-leonardo-2026-parte2-fr.html": 1,
     "fr/robot-tax-sanders-fr.html": 1,
     "fr/rsl-really-simple-licensing-fr.html": 1,
@@ -1222,7 +1226,6 @@
     "it/assets/images/convergenza-modelli-scientifici": 1,
     "it/authors/dario-ferrero.html": 1,
     "it/autoresearch-karpathy": 1,
-    "it/bodo-glimt-fokus-ai": 1,
     "it/cassieri-remoti-ai": 1,
     "it/caveman": 1,
     "it/chatgpt-use-study": 1,
@@ -4882,6 +4885,76 @@
           "en/loop-engineering-en": 1,
           "es/claude-watermark-es.html": 1
         }
+      },
+      "2026-09-03": {
+        "total_views": 47,
+        "views_by_lang": {
+          "it": 36,
+          "en": 7,
+          "es": 2,
+          "fr": 2
+        },
+        "views_by_tag": {
+          "Generative AI": 4,
+          "Training": 2,
+          "Applications": 3,
+          "Security": 1,
+          "Research": 1,
+          "Ethics & Society": 2,
+          "Startups": 1,
+          "Business": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/qwen38-27b",
+            "views": 5
+          },
+          {
+            "path": "it/muse-glimmer30b",
+            "views": 4
+          },
+          {
+            "path": "it/claude-watermark",
+            "views": 3
+          },
+          {
+            "path": "it/aisi-agente-inganno",
+            "views": 3
+          },
+          {
+            "path": "it/laguna-s21",
+            "views": 2
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 7,
+          "it/authors/dario-ferrero": 1,
+          "en/ai-video-generativa-ovi-en": 1,
+          "it/laguna-s21": 2,
+          "it/qwen38-27b": 5,
+          "it/claude-watermark": 3,
+          "it/agente-attacco-gym": 1,
+          "it/muse-glimmer30b": 4,
+          "it/aisi-agente-inganno": 3,
+          "it/muse-glimmer30b.html": 2,
+          "it/omnivoice-studio": 2,
+          "es/qwen3-tts-es": 1,
+          "it/aisi-agente-inganno.html": 1,
+          "it/turboquant": 1,
+          "it/ars-notoria-e-ai": 1,
+          "it/aaio-floridi": 1,
+          "en/codespeak-en.html": 1,
+          "en/guerra-algoritmica-en.html": 1,
+          "en/wave-former-raggix-en": 1,
+          "it/agenti-ai-open-source-confronto": 1,
+          "en/chatgpt-ads-en": 1,
+          "es/stanford-ai-index-2026-es": 1,
+          "fr/rapporto-leonardo-2026-parte1-fr": 1,
+          "it/bodo-glimt-fokus-ai": 1,
+          "en/aisi-benchmark-en": 1,
+          "en/prompt-injection-camel-en": 1,
+          "fr/rapporto-leonardo-2026-parte2-fr": 1
+        }
       }
     },
     "monthly": {
@@ -5014,44 +5087,56 @@
         ]
       },
       "2026-09": {
-        "total_views": 102,
+        "total_views": 149,
         "views_by_lang": {
-          "it": 72,
-          "en": 15,
-          "fr": 7,
+          "it": 108,
+          "en": 22,
+          "fr": 9,
           "de": 3,
-          "es": 5
+          "es": 7
         },
         "views_by_tag": {
-          "Generative AI": 17,
-          "Research": 13,
-          "Startups": 2,
-          "Applications": 11,
-          "Ethics & Society": 13,
-          "Business": 4,
-          "Training": 8,
-          "Security": 8,
+          "Generative AI": 21,
+          "Research": 14,
+          "Startups": 3,
+          "Applications": 14,
+          "Ethics & Society": 15,
+          "Business": 5,
+          "Training": 10,
+          "Security": 9,
           "Copyright": 1
         },
         "top_articles": [
           {
             "path": "it/aisi-agente-inganno",
-            "views": 8
-          },
-          {
-            "path": "it/aisi-agente-inganno.html",
-            "views": 5
+            "views": 11
           },
           {
             "path": "it/qwen38-27b",
-            "views": 2
+            "views": 7
+          },
+          {
+            "path": "it/aisi-agente-inganno.html",
+            "views": 6
           },
           {
             "path": "it/claude-watermark",
-            "views": 2
+            "views": 5
           },
           {
             "path": "it/muse-glimmer30b.html",
+            "views": 4
+          },
+          {
+            "path": "it/muse-glimmer30b",
+            "views": 4
+          },
+          {
+            "path": "it/laguna-s21",
+            "views": 3
+          },
+          {
+            "path": "it/authors/dario-ferrero",
             "views": 2
           },
           {
@@ -5059,44 +5144,32 @@
             "views": 2
           },
           {
-            "path": "it/newsletter",
-            "views": 1
-          },
-          {
-            "path": "it/authors/dario-ferrero",
-            "views": 1
-          },
-          {
-            "path": "it/privacy",
-            "views": 1
-          },
-          {
-            "path": "it/mercury2.html",
-            "views": 1
+            "path": "it/aaio-floridi",
+            "views": 2
           }
         ]
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 2455,
+        "total_views": 2502,
         "views_by_lang": {
-          "it": 1690,
-          "en": 341,
+          "it": 1726,
+          "en": 348,
           "de": 144,
-          "fr": 152,
-          "es": 128
+          "fr": 154,
+          "es": 130
         },
         "views_by_tag": {
-          "Generative AI": 1043,
-          "Applications": 479,
-          "Security": 294,
-          "Research": 505,
-          "Ethics & Society": 713,
-          "Training": 263,
-          "Business": 344,
+          "Generative AI": 1047,
+          "Applications": 482,
+          "Security": 295,
+          "Research": 506,
+          "Ethics & Society": 715,
+          "Training": 265,
+          "Business": 345,
           "Copyright": 37,
-          "Startups": 86,
+          "Startups": 87,
           "E-learning": 108
         }
       }

@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-09-06T04:59:02.529395+00:00",
+  "last_update": "2026-09-07T05:06:19.649793+00:00",
   "portal_snapshot": {
     "total_articles": 875,
     "articles_by_lang": {
@@ -34,13 +34,13 @@
     "video_articles_count": 175
   },
   "cumulative_history": {
-    "it/index.html": 2572,
-    "it": 1113,
+    "it/index.html": 2577,
+    "it": 1115,
     "fr": 316,
-    "en": 225,
+    "en": 226,
     "it/newsletter": 213,
     "de": 208,
-    "es": 178,
+    "es": 179,
     "fr/trm-samsung-fr.html": 159,
     "it/thank-you": 113,
     "en/grief-tech-en.html": 84,
@@ -79,10 +79,10 @@
     "it/rapporto-leonardo-2026-parte2.html": 38,
     "it/shutdown-resistance.html": 38,
     "it/qwen3-tts.html": 36,
+    "en/malattie-mentali-ai-en.html": 35,
     "it/ai-musica-copyright": 34,
     "it/ars-notoria-e-ai.html": 34,
     "it/deepseek-ocr.html": 34,
-    "en/malattie-mentali-ai-en.html": 33,
     "it/ai-safety-report-2026.html": 33,
     "it/autoresearch-karpathy.html": 33,
     "it/colibri.html": 33,
@@ -201,6 +201,7 @@
     "en/alibaba-qwen3-en": 16,
     "en/iceberg-index-en": 16,
     "en/trm-samsung-en": 16,
+    "it/agenti-multipli-stanford.html": 16,
     "it/claude-watermark": 16,
     "it/contributo-automazione-bacchiocchi": 16,
     "it/guerra-algoritmica.html": 16,
@@ -209,10 +210,10 @@
     "it/steerling.html": 16,
     "en/shutdown-resistance-en.html": 15,
     "fr/malattie-mentali-ai-fr.html": 15,
-    "it/agenti-multipli-stanford.html": 15,
     "it/anthropic-hacker": 15,
     "it/malattie-mentali-ai.html": 15,
     "it/mit-adaptive-scaling": 15,
+    "it/papalini-interview2": 15,
     "en/longcat-video-en": 14,
     "en/papalini-interview-en.html": 14,
     "es/antigravity-security-es": 14,
@@ -223,7 +224,6 @@
     "it/machine learning, deep learning e algoritmi generativi": 14,
     "it/memvid-ai-memory.html": 14,
     "it/mistral-devstral": 14,
-    "it/papalini-interview2": 14,
     "fr/toon-fr.html": 13,
     "it/muse-glimmer30b": 13,
     "it/robot-tax-sanders": 13,
@@ -234,27 +234,27 @@
     "it/ai-winter.html": 12,
     "it/aisi-agente-inganno": 12,
     "it/trm-samsung": 12,
+    "en/newsletter": 11,
     "es/robotica-2025-es.html": 11,
     "it/ai-cosciente": 11,
     "it/claude-watermark.html": 11,
     "it/humanebench": 11,
+    "it/kimi-k2-article.html": 11,
     "it/mind-viruses": 11,
+    "it/muse-glimmer30b.html": 11,
     "it/omnivoice-studio": 11,
     "it/poesia-ai-security": 11,
     "it/tilly-norwood-ai-actor.html": 11,
     "de/authors/dario-ferrero": 10,
     "de/poesia-ai-security-de.html": 10,
     "de/tml-determinism-de": 10,
-    "en/newsletter": 10,
     "it/agentic-ai-foundation": 10,
     "it/ai-deepconf": 10,
     "it/ai-water-consumption": 10,
     "it/eset-apt-report": 10,
     "it/google-ue-indagine.html": 10,
     "it/iceberg-index": 10,
-    "it/kimi-k2-article.html": 10,
     "it/mind-viruses.html": 10,
-    "it/muse-glimmer30b.html": 10,
     "it/subliminal-learning": 10,
     "de/ai-cosciente-de": 9,
     "en/diffusion-vs-autoregressive-en": 9,
@@ -266,6 +266,7 @@
     "it/qwen38-27b.html": 9,
     "it/shutdown-resistance": 9,
     "en/ai-aziende-e-servizi-en": 8,
+    "en/ai-metacognition-en": 8,
     "en/ai-valutazione-ed-etica-en": 8,
     "en/antigravity-security-en.html": 8,
     "en/authors/dario-ferrero": 8,
@@ -281,7 +282,6 @@
     "it/tml-determinism.html": 8,
     "de/index.html": 7,
     "de/papalini-interview-de.html": 7,
-    "en/ai-metacognition-en": 7,
     "en/ai-metacognition-en.html": 7,
     "en/ai-slop-entropia-en.html": 7,
     "en/anthropic-hacker-en": 7,
@@ -343,10 +343,12 @@
     "de/slm-2026-de.html": 5,
     "de/stanford-ai-index-2026-de": 5,
     "de/subliminal-learning-de.html": 5,
+    "en/ai-cosciente-en": 5,
     "en/ai-safety-report-2026-en.html": 5,
     "en/anthropic-fear-en": 5,
     "en/apply-ai-eu-strategy-en.html": 5,
     "en/eset-apt-report-en.html": 5,
+    "en/glm-5-en": 5,
     "en/kimik2.5-en": 5,
     "en/legge-ai-italia-en.html": 5,
     "en/mistral-forge-en.html": 5,
@@ -397,7 +399,6 @@
     "de/tilly-norwood-ai-actor-de.html": 4,
     "de/toon-de.html": 4,
     "en/agenti-al-lavoro-en.html": 4,
-    "en/ai-cosciente-en": 4,
     "en/ai-creativity-ethics-en.html": 4,
     "en/ai-prompt-scandalo-en": 4,
     "en/ai-rsponsabilità-en.html": 4,
@@ -410,7 +411,6 @@
     "en/degregori-ai-war-en.html": 4,
     "en/dwarfstar-antirez-en": 4,
     "en/emergence-world-en.html": 4,
-    "en/glm-5-en": 4,
     "en/google-ue-indagine-en.html": 4,
     "en/headroom-en.html": 4,
     "en/humanebench-en": 4,
@@ -711,6 +711,7 @@
     "en/google-threat-intelligence-en.html": 2,
     "en/google-ue-indagine-en": 2,
     "en/grief-tech-en": 2,
+    "en/iceberg-index-en.html": 2,
     "en/intervista-ricco-ai-en.html": 2,
     "en/kimi-k2-thinking-en.html": 2,
     "en/laguna-s21-en": 2,
@@ -727,6 +728,7 @@
     "en/msa-100m-token-en": 2,
     "en/ornith-1.0-en.html": 2,
     "en/pagedattention-radixattention-en": 2,
+    "en/papalini-interview2-en": 2,
     "en/pentagono-anthropic-openai-en.html": 2,
     "en/pocketos-disaster-en.html": 2,
     "en/privacy": 2,
@@ -739,6 +741,7 @@
     "en/rsl-really-simple-licensing-en": 2,
     "en/silicon-valley-ai-pac-en.html": 2,
     "en/stanford-ai-index-2026-en": 2,
+    "en/steerling-en": 2,
     "en/subliminal-learning-en": 2,
     "en/talkie-vintage-llm-en": 2,
     "en/toon-en": 2,
@@ -1040,7 +1043,6 @@
     "en/graphify-en": 1,
     "en/headroom-en": 1,
     "en/humanebench-en.html": 1,
-    "en/iceberg-index-en.html": 1,
     "en/jacobian-lens-en.html": 1,
     "en/kimi-k2-article-en": 1,
     "en/kimi-k2-thinking-en": 1,
@@ -1060,7 +1062,6 @@
     "en/omnivoice-studio-en": 1,
     "en/onu-report-2026-en": 1,
     "en/onu-report-2026-en.html": 1,
-    "en/papalini-interview2-en": 1,
     "en/pignataro-intervista1-en": 1,
     "en/pocketos-disaster-en": 1,
     "en/power-sampling-en.html": 1,
@@ -1083,7 +1084,6 @@
     "en/soofi-s-en.html": 1,
     "en/stanford-ai-index-2026-en.html": 1,
     "en/startup-europa-2025-en": 1,
-    "en/steerling-en": 1,
     "en/strumenti-oracoli-caso-deloitte-en.html": 1,
     "en/switching-task-en": 1,
     "en/switching-task-en.html": 1,
@@ -5172,6 +5172,63 @@
           "en/graphify-en": 1,
           "en/meetily-en": 1
         }
+      },
+      "2026-09-06": {
+        "total_views": 22,
+        "views_by_lang": {
+          "it": 13,
+          "en": 9
+        },
+        "views_by_tag": {
+          "Ethics & Society": 3,
+          "Research": 4,
+          "E-learning": 2,
+          "Generative AI": 3,
+          "Applications": 3,
+          "Startups": 1,
+          "Training": 1,
+          "Security": 1
+        },
+        "top_articles": [
+          {
+            "path": "en/malattie-mentali-ai-en.html",
+            "views": 2
+          },
+          {
+            "path": "it/agenti-multipli-stanford.html",
+            "views": 1
+          },
+          {
+            "path": "it/papalini-interview2",
+            "views": 1
+          },
+          {
+            "path": "en/newsletter",
+            "views": 1
+          },
+          {
+            "path": "it/kimi-k2-article.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 5,
+          "it": 2,
+          "en": 1,
+          "es": 1,
+          "en/malattie-mentali-ai-en.html": 2,
+          "it/agenti-multipli-stanford.html": 1,
+          "it/papalini-interview2": 1,
+          "en/newsletter": 1,
+          "it/kimi-k2-article.html": 1,
+          "it/muse-glimmer30b.html": 1,
+          "en/ai-metacognition-en": 1,
+          "en/ai-cosciente-en": 1,
+          "en/glm-5-en": 1,
+          "en/iceberg-index-en.html": 1,
+          "en/papalini-interview2-en": 1,
+          "en/steerling-en": 1
+        }
       }
     },
     "monthly": {
@@ -5304,24 +5361,25 @@
         ]
       },
       "2026-09": {
-        "total_views": 269,
+        "total_views": 291,
         "views_by_lang": {
-          "it": 163,
-          "en": 47,
+          "it": 176,
+          "en": 56,
           "fr": 20,
           "de": 20,
           "es": 19
         },
         "views_by_tag": {
-          "Generative AI": 35,
-          "Research": 26,
-          "Startups": 4,
-          "Applications": 25,
-          "Ethics & Society": 21,
+          "Generative AI": 38,
+          "Research": 30,
+          "Startups": 5,
+          "Applications": 28,
+          "Ethics & Society": 24,
           "Business": 8,
-          "Training": 17,
-          "Security": 12,
-          "Copyright": 4
+          "Training": 18,
+          "Security": 13,
+          "Copyright": 4,
+          "E-learning": 2
         },
         "top_articles": [
           {
@@ -5346,7 +5404,7 @@
           },
           {
             "path": "it/muse-glimmer30b.html",
-            "views": 5
+            "views": 6
           },
           {
             "path": "it/muse-glimmer30b",
@@ -5369,25 +5427,25 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 2622,
+        "total_views": 2644,
         "views_by_lang": {
-          "it": 1781,
-          "en": 373,
+          "it": 1794,
+          "en": 382,
           "de": 161,
           "fr": 165,
           "es": 142
         },
         "views_by_tag": {
-          "Generative AI": 1061,
-          "Applications": 493,
-          "Security": 298,
-          "Research": 518,
-          "Ethics & Society": 721,
-          "Training": 272,
+          "Generative AI": 1064,
+          "Applications": 496,
+          "Security": 299,
+          "Research": 522,
+          "Ethics & Society": 724,
+          "Training": 273,
           "Business": 348,
           "Copyright": 40,
-          "Startups": 88,
-          "E-learning": 108
+          "Startups": 89,
+          "E-learning": 110
         }
       }
     }

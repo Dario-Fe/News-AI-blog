@@ -1,46 +1,46 @@
 {
-  "last_update": "2026-09-07T05:06:19.649793+00:00",
+  "last_update": "2026-09-08T05:03:40.353328+00:00",
   "portal_snapshot": {
-    "total_articles": 875,
+    "total_articles": 880,
     "articles_by_lang": {
-      "it": 175,
-      "en": 175,
-      "es": 175,
-      "fr": 175,
-      "de": 175
+      "it": 176,
+      "en": 176,
+      "es": 176,
+      "fr": 176,
+      "de": 176
     },
     "total_words_by_lang": {
-      "it": 500423,
-      "en": 488949,
-      "es": 531942,
-      "fr": 570469,
-      "de": 490285
+      "it": 503007,
+      "en": 491352,
+      "es": 534684,
+      "fr": 573321,
+      "de": 492828
     },
     "total_authors": 1,
     "total_tags": 10,
     "tags_popularity": {
-      "Generative AI": 575,
+      "Generative AI": 580,
       "Applications": 255,
       "Training": 205,
-      "Ethics & Society": 490,
+      "Ethics & Society": 495,
       "E-learning": 55,
       "Research": 335,
-      "Business": 335,
+      "Business": 340,
       "Startups": 65,
       "Security": 215,
       "Copyright": 40
     },
-    "podcast_articles_count": 175,
-    "video_articles_count": 175
+    "podcast_articles_count": 176,
+    "video_articles_count": 176
   },
   "cumulative_history": {
-    "it/index.html": 2577,
-    "it": 1115,
-    "fr": 316,
-    "en": 226,
+    "it/index.html": 2584,
+    "it": 1123,
+    "fr": 317,
+    "en": 228,
     "it/newsletter": 213,
-    "de": 208,
-    "es": 179,
+    "de": 209,
+    "es": 180,
     "fr/trm-samsung-fr.html": 159,
     "it/thank-you": 113,
     "en/grief-tech-en.html": 84,
@@ -91,13 +91,13 @@
     "it/benzup.html": 32,
     "it/diffusion-vs-autoregressive.html": 32,
     "it/kv-cache-approach.html": 32,
+    "it/meetily.html": 32,
     "it/mercury2.html": 32,
     "it/ornith-1.0.html": 32,
     "en/trm-samsung-en.html": 31,
     "it/agentic-ai-foundation.html": 31,
     "it/cookie": 31,
     "it/llm-knowledge-base.html": 31,
-    "it/meetily.html": 31,
     "it/sistema-sicurezza-ai.html": 31,
     "it/strumenti-oracoli-caso-deloitte.html": 31,
     "en/ai-epanortosi-en.html": 30,
@@ -149,12 +149,12 @@
     "es/introspection-anthropic-es": 23,
     "it/gemma4-12b-q8.html": 23,
     "it/introspection-anthropic.html": 23,
+    "it/metodo-editoriale": 23,
     "it/mit-ai-umile.html": 23,
     "it/omnivoice-studio.html": 23,
     "it/browser-ai.html": 22,
     "it/emergence-world.html": 22,
     "it/licenziamenti-ai-2026.html": 22,
-    "it/metodo-editoriale": 22,
     "it/switching-task.html": 22,
     "it/ai-creativity-ethics.html": 21,
     "it/ai-slop-entropia.html": 21,
@@ -198,6 +198,7 @@
     "it/chartnet.html": 17,
     "it/glm-5": 17,
     "it/loop-engineering.html": 17,
+    "it/papalini-interview2": 17,
     "en/alibaba-qwen3-en": 16,
     "en/iceberg-index-en": 16,
     "en/trm-samsung-en": 16,
@@ -213,7 +214,6 @@
     "it/anthropic-hacker": 15,
     "it/malattie-mentali-ai.html": 15,
     "it/mit-adaptive-scaling": 15,
-    "it/papalini-interview2": 15,
     "en/longcat-video-en": 14,
     "en/papalini-interview-en.html": 14,
     "es/antigravity-security-es": 14,
@@ -297,6 +297,7 @@
     "it/ai-lutto-digitale.html": 7,
     "it/aisi-agente-inganno.html": 7,
     "it/alibaba-qwen3.html": 7,
+    "it/fable5-opus5-switching-task": 7,
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 7,
     "it/pagedattention-radixattention": 7,
     "it/qwen3-tts": 7,
@@ -347,6 +348,7 @@
     "en/ai-safety-report-2026-en.html": 5,
     "en/anthropic-fear-en": 5,
     "en/apply-ai-eu-strategy-en.html": 5,
+    "en/degregori-ai-war-en.html": 5,
     "en/eset-apt-report-en.html": 5,
     "en/glm-5-en": 5,
     "en/kimik2.5-en": 5,
@@ -376,6 +378,7 @@
     "it/ars-notoria-e-ai": 5,
     "it/deepseek-mhc": 5,
     "it/diffusion-vs-autoregressive": 5,
+    "it/fable5-opus5-switching-task.html": 5,
     "it/google-ai-revolution.html": 5,
     "it/llm-wiki-autocostruita": 5,
     "it/power-sampling": 5,
@@ -408,7 +411,6 @@
     "en/contributo-automazione-bacchiocchi-en.html": 4,
     "en/cyborg-centauri-automi-en.html": 4,
     "en/deepseek-mhc-en.html": 4,
-    "en/degregori-ai-war-en.html": 4,
     "en/dwarfstar-antirez-en": 4,
     "en/emergence-world-en.html": 4,
     "en/google-ue-indagine-en.html": 4,
@@ -464,6 +466,7 @@
     "it/chatgpt-ads": 4,
     "it/chatgpt-use-study.html": 4,
     "it/gemma4-26b": 4,
+    "it/giganti-ai-bocciati-prima-puntata": 4,
     "it/giganti-ai-bocciati-seconda-puntata": 4,
     "it/google-threat-intelligence": 4,
     "it/llm-knowledge-base": 4,
@@ -608,7 +611,6 @@
     "it/ai-slop-entropia": 3,
     "it/amodei-intervista-parte1": 3,
     "it/articolo-hrm.html": 3,
-    "it/giganti-ai-bocciati-prima-puntata": 3,
     "it/jacobian-lens": 3,
     "it/legge-ai-italia": 3,
     "it/meetily": 3,
@@ -726,6 +728,7 @@
     "en/mit-adaptive-scaling-en": 2,
     "en/mit-adaptive-scaling-en.html": 2,
     "en/msa-100m-token-en": 2,
+    "en/onu-report-2026-en.html": 2,
     "en/ornith-1.0-en.html": 2,
     "en/pagedattention-radixattention-en": 2,
     "en/papalini-interview2-en": 2,
@@ -733,6 +736,7 @@
     "en/pocketos-disaster-en.html": 2,
     "en/privacy": 2,
     "en/qwen3-tts-en.html": 2,
+    "en/qwen3.5-locale-puntata2-en": 2,
     "en/qwen3.5-locale-puntata2-en.html": 2,
     "en/qwen36-35b-ai-en.html": 2,
     "en/rapporto-leonardo-2026-parte2-en": 2,
@@ -816,6 +820,7 @@
     "es/rlm-ai-es.html": 2,
     "es/robot-tax-sanders-es.html": 2,
     "es/shutdown-resistance-es": 2,
+    "es/sistema-sicurezza-ai-es.html": 2,
     "es/stanford-ai-index-2026-es": 2,
     "es/steering-llm-es.html": 2,
     "es/strumenti-oracoli-caso-deloitte-es.html": 2,
@@ -1016,6 +1021,7 @@
     "en/ai-bournout-en": 1,
     "en/ai-lutto-digitale-en": 1,
     "en/aisi-benchmark-en": 1,
+    "en/aisi-benchmark-en.html": 1,
     "en/alibaba-qwen3-en.html": 1,
     "en/apply-ai-eu-strategy-en": 1,
     "en/ars-notoria-e-ai-en": 1,
@@ -1034,6 +1040,7 @@
     "en/dwarfstar-antirez-en.html": 1,
     "en/emergence-world-en": 1,
     "en/european-tech-map-en": 1,
+    "en/fable5-opus5-switching-task-en": 1,
     "en/fda-ema-aim-nash-ai-en": 1,
     "en/feed": 1,
     "en/gemma4-26b-en": 1,
@@ -1043,6 +1050,7 @@
     "en/graphify-en": 1,
     "en/headroom-en": 1,
     "en/humanebench-en.html": 1,
+    "en/jacobian-lens-en": 1,
     "en/jacobian-lens-en.html": 1,
     "en/kimi-k2-article-en": 1,
     "en/kimi-k2-thinking-en": 1,
@@ -1061,7 +1069,6 @@
     "en/mondiale-2026-gemini-en.html": 1,
     "en/omnivoice-studio-en": 1,
     "en/onu-report-2026-en": 1,
-    "en/onu-report-2026-en.html": 1,
     "en/pignataro-intervista1-en": 1,
     "en/pocketos-disaster-en": 1,
     "en/power-sampling-en.html": 1,
@@ -1072,7 +1079,6 @@
     "en/prompt-injection-camel-en.html": 1,
     "en/quantum-echoes-en": 1,
     "en/qwen3-tts-en": 1,
-    "en/qwen3.5-locale-puntata2-en": 1,
     "en/qwen36-35b-ai-en": 1,
     "en/qwen38-27b-en": 1,
     "en/qwen38-27b-en.html": 1,
@@ -1112,6 +1118,7 @@
     "es/chatgpt-use-study-es": 1,
     "es/cina-universita-es.html": 1,
     "es/claude-code-es.html": 1,
+    "es/claude-watermark-es": 1,
     "es/claude-watermark-es.html": 1,
     "es/codespeak-es.html": 1,
     "es/colibri-es": 1,
@@ -1161,7 +1168,6 @@
     "es/rapporto-leonardo-2026-parte2-es": 1,
     "es/rapporto-leonardo-2026-parte2-es.html": 1,
     "es/rlm-ai-es": 1,
-    "es/sistema-sicurezza-ai-es.html": 1,
     "es/slm-2026-es": 1,
     "es/soofi-s-es": 1,
     "es/stanford-ai-index-2026-es.html": 1,
@@ -1224,6 +1230,7 @@
     "fr/meetily-fr": 1,
     "fr/meetily-fr.html": 1,
     "fr/mercury2-fr": 1,
+    "fr/mind-viruses-fr.html": 1,
     "fr/mit-ai-umile-fr.html": 1,
     "fr/mondiale-2026-gemini-fr.html": 1,
     "fr/msa-100m-token-fr": 1,
@@ -1270,6 +1277,7 @@
     "it/cina-universita": 1,
     "it/colibri": 1,
     "it/convergenza-modelli-scientifici": 1,
+    "it/dataland-museo-ai": 1,
     "it/google-ai-revolution": 1,
     "it/index.html/feed.rss": 1,
     "it/index.html/feed.xml": 1,
@@ -5229,6 +5237,71 @@
           "en/papalini-interview2-en": 1,
           "en/steerling-en": 1
         }
+      },
+      "2026-09-07": {
+        "total_views": 47,
+        "views_by_lang": {
+          "it": 38,
+          "en": 6,
+          "es": 2,
+          "fr": 1
+        },
+        "views_by_tag": {
+          "Generative AI": 10,
+          "Startups": 1,
+          "Applications": 2,
+          "Copyright": 1,
+          "Business": 7,
+          "Ethics & Society": 9,
+          "Security": 2,
+          "Research": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/fable5-opus5-switching-task",
+            "views": 7
+          },
+          {
+            "path": "it/fable5-opus5-switching-task.html",
+            "views": 5
+          },
+          {
+            "path": "it/papalini-interview2",
+            "views": 2
+          },
+          {
+            "path": "it/meetily.html",
+            "views": 1
+          },
+          {
+            "path": "it/metodo-editoriale",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 7,
+          "it": 8,
+          "fr": 1,
+          "en": 2,
+          "de": 1,
+          "es": 1,
+          "it/meetily.html": 1,
+          "it/metodo-editoriale": 1,
+          "it/papalini-interview2": 2,
+          "it/fable5-opus5-switching-task": 7,
+          "en/degregori-ai-war-en.html": 1,
+          "it/fable5-opus5-switching-task.html": 5,
+          "it/giganti-ai-bocciati-prima-puntata": 1,
+          "en/onu-report-2026-en.html": 1,
+          "en/qwen3.5-locale-puntata2-en": 1,
+          "es/sistema-sicurezza-ai-es.html": 1,
+          "en/aisi-benchmark-en.html": 1,
+          "en/fable5-opus5-switching-task-en": 1,
+          "en/jacobian-lens-en": 1,
+          "es/claude-watermark-es": 1,
+          "fr/mind-viruses-fr.html": 1,
+          "it/dataland-museo-ai": 1
+        }
       }
     },
     "monthly": {
@@ -5361,24 +5434,24 @@
         ]
       },
       "2026-09": {
-        "total_views": 291,
+        "total_views": 338,
         "views_by_lang": {
-          "it": 176,
-          "en": 56,
-          "fr": 20,
+          "it": 214,
+          "en": 62,
+          "fr": 21,
           "de": 20,
-          "es": 19
+          "es": 21
         },
         "views_by_tag": {
-          "Generative AI": 38,
-          "Research": 30,
-          "Startups": 5,
-          "Applications": 28,
-          "Ethics & Society": 24,
-          "Business": 8,
+          "Generative AI": 48,
+          "Research": 31,
+          "Startups": 6,
+          "Applications": 30,
+          "Ethics & Society": 33,
+          "Business": 15,
           "Training": 18,
-          "Security": 13,
-          "Copyright": 4,
+          "Security": 15,
+          "Copyright": 5,
           "E-learning": 2
         },
         "top_articles": [
@@ -5399,6 +5472,10 @@
             "views": 7
           },
           {
+            "path": "it/fable5-opus5-switching-task",
+            "views": 7
+          },
+          {
             "path": "it/claude-watermark",
             "views": 6
           },
@@ -5411,40 +5488,36 @@
             "views": 5
           },
           {
+            "path": "it/fable5-opus5-switching-task.html",
+            "views": 5
+          },
+          {
             "path": "it/omnivoice-studio",
             "views": 4
-          },
-          {
-            "path": "it/laguna-s21",
-            "views": 3
-          },
-          {
-            "path": "it/pagedattention-radixattention.html",
-            "views": 3
           }
         ]
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 2644,
+        "total_views": 2691,
         "views_by_lang": {
-          "it": 1794,
-          "en": 382,
+          "it": 1832,
+          "en": 388,
           "de": 161,
-          "fr": 165,
-          "es": 142
+          "fr": 166,
+          "es": 144
         },
         "views_by_tag": {
-          "Generative AI": 1064,
-          "Applications": 496,
-          "Security": 299,
-          "Research": 522,
-          "Ethics & Society": 724,
+          "Generative AI": 1074,
+          "Applications": 498,
+          "Security": 301,
+          "Research": 523,
+          "Ethics & Society": 733,
           "Training": 273,
-          "Business": 348,
-          "Copyright": 40,
-          "Startups": 89,
+          "Business": 355,
+          "Copyright": 41,
+          "Startups": 90,
           "E-learning": 110
         }
       }

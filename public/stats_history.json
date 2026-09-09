@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-09-08T05:03:40.353328+00:00",
+  "last_update": "2026-09-09T05:02:50.857723+00:00",
   "portal_snapshot": {
     "total_articles": 880,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 176
   },
   "cumulative_history": {
-    "it/index.html": 2584,
-    "it": 1123,
+    "it/index.html": 2590,
+    "it": 1126,
     "fr": 317,
     "en": 228,
     "it/newsletter": 213,
@@ -155,6 +155,7 @@
     "it/browser-ai.html": 22,
     "it/emergence-world.html": 22,
     "it/licenziamenti-ai-2026.html": 22,
+    "it/qwen38-27b": 22,
     "it/switching-task.html": 22,
     "it/ai-creativity-ethics.html": 21,
     "it/ai-slop-entropia.html": 21,
@@ -166,7 +167,6 @@
     "it/magnifica-humanitas.html": 21,
     "it/mdash-microsoft.html": 21,
     "it/mistral-forge.html": 21,
-    "it/qwen38-27b": 21,
     "it/steering-llm.html": 21,
     "en/agent-hospital-en.html": 20,
     "it/amodei-intervista-parte2.html": 20,
@@ -233,6 +233,7 @@
     "it/ai-video-generativa-ovi.html": 12,
     "it/ai-winter.html": 12,
     "it/aisi-agente-inganno": 12,
+    "it/fable5-opus5-switching-task": 12,
     "it/trm-samsung": 12,
     "en/newsletter": 11,
     "es/robotica-2025-es.html": 11,
@@ -243,6 +244,7 @@
     "it/mind-viruses": 11,
     "it/muse-glimmer30b.html": 11,
     "it/omnivoice-studio": 11,
+    "it/pagedattention-radixattention": 11,
     "it/poesia-ai-security": 11,
     "it/tilly-norwood-ai-actor.html": 11,
     "de/authors/dario-ferrero": 10,
@@ -297,9 +299,7 @@
     "it/ai-lutto-digitale.html": 7,
     "it/aisi-agente-inganno.html": 7,
     "it/alibaba-qwen3.html": 7,
-    "it/fable5-opus5-switching-task": 7,
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 7,
-    "it/pagedattention-radixattention": 7,
     "it/qwen3-tts": 7,
     "it/slm-2026": 7,
     "it/waymo-blackout-analysis": 7,
@@ -319,6 +319,7 @@
     "en/contributo-automazione-bacchiocchi-en": 6,
     "en/fda-ema-aim-nash-ai-en.html": 6,
     "en/pignataro-intervista2-en": 6,
+    "en/rlm-ai-en.html": 6,
     "en/slm-2026-en": 6,
     "es/prompt-repetition-es": 6,
     "es/tilly-norwood-ai-actor-es": 6,
@@ -329,6 +330,7 @@
     "it/deepseek-ocr": 6,
     "it/dwarfstar-antirez": 6,
     "it/emergence-world": 6,
+    "it/fable5-opus5-switching-task.html": 6,
     "it/fda-ema-aim-nash-ai": 6,
     "it/legge-ai-italia.html": 6,
     "it/malattie-mentali-ai": 6,
@@ -339,6 +341,7 @@
     "de/caveman-de": 5,
     "de/datacenter-proteste-usa-de.html": 5,
     "de/diffusion-vs-autoregressive-de.html": 5,
+    "de/mercury2-de.html": 5,
     "de/metodo-editoriale": 5,
     "de/newsletter": 5,
     "de/slm-2026-de.html": 5,
@@ -356,7 +359,6 @@
     "en/mistral-forge-en.html": 5,
     "en/poesia-ai-security-en": 5,
     "en/qwen3.5-locale-puntata1-en.html": 5,
-    "en/rlm-ai-en.html": 5,
     "en/steerling-en.html": 5,
     "es/agent-hospital-es.html": 5,
     "es/ai-coding-security-es": 5,
@@ -378,7 +380,6 @@
     "it/ars-notoria-e-ai": 5,
     "it/deepseek-mhc": 5,
     "it/diffusion-vs-autoregressive": 5,
-    "it/fable5-opus5-switching-task.html": 5,
     "it/google-ai-revolution.html": 5,
     "it/llm-wiki-autocostruita": 5,
     "it/power-sampling": 5,
@@ -394,7 +395,6 @@
     "de/cyborg-centauri-automi-de.html": 4,
     "de/fda-ema-aim-nash-ai-de.html": 4,
     "de/glm5.2-de.html": 4,
-    "de/mercury2-de.html": 4,
     "de/pentagono-anthropic-openai-de.html": 4,
     "de/privacy": 4,
     "de/qwen3.5-locale-puntata2-de.html": 4,
@@ -514,6 +514,7 @@
     "en/ai-winter-en": 3,
     "en/ai-winter-en.html": 3,
     "en/amodei-intervista-parte1-en": 3,
+    "en/amodei-intervista-parte1-en.html": 3,
     "en/antigravity-security-en": 3,
     "en/autoresearch-karpathy-en": 3,
     "en/browser-ai-en": 3,
@@ -692,7 +693,6 @@
     "en/ai-fronte-cyber-en": 2,
     "en/ai-video-generativa-ovi-en.html": 2,
     "en/amazon-down-en.html": 2,
-    "en/amodei-intervista-parte1-en.html": 2,
     "en/andon-fm-en.html": 2,
     "en/articolo-ai-lavoro-en.html": 2,
     "en/cassieri-remoti-ai-en": 2,
@@ -745,6 +745,7 @@
     "en/rsl-really-simple-licensing-en": 2,
     "en/silicon-valley-ai-pac-en.html": 2,
     "en/stanford-ai-index-2026-en": 2,
+    "en/startup-europa-2025-en": 2,
     "en/steerling-en": 2,
     "en/subliminal-learning-en": 2,
     "en/talkie-vintage-llm-en": 2,
@@ -1089,7 +1090,7 @@
     "en/soofi-s-en": 1,
     "en/soofi-s-en.html": 1,
     "en/stanford-ai-index-2026-en.html": 1,
-    "en/startup-europa-2025-en": 1,
+    "en/strumenti-oracoli-caso-deloitte-en": 1,
     "en/strumenti-oracoli-caso-deloitte-en.html": 1,
     "en/switching-task-en": 1,
     "en/switching-task-en.html": 1,
@@ -5302,6 +5303,58 @@
           "fr/mind-viruses-fr.html": 1,
           "it/dataland-museo-ai": 1
         }
+      },
+      "2026-09-08": {
+        "total_views": 25,
+        "views_by_lang": {
+          "it": 20,
+          "en": 4,
+          "de": 1
+        },
+        "views_by_tag": {
+          "Research": 2,
+          "Generative AI": 3,
+          "Applications": 1,
+          "Business": 2,
+          "Ethics & Society": 2,
+          "Startups": 1,
+          "Security": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/fable5-opus5-switching-task",
+            "views": 5
+          },
+          {
+            "path": "it/pagedattention-radixattention",
+            "views": 4
+          },
+          {
+            "path": "it/qwen38-27b",
+            "views": 1
+          },
+          {
+            "path": "en/rlm-ai-en.html",
+            "views": 1
+          },
+          {
+            "path": "it/fable5-opus5-switching-task.html",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 6,
+          "it": 3,
+          "it/qwen38-27b": 1,
+          "it/fable5-opus5-switching-task": 5,
+          "it/pagedattention-radixattention": 4,
+          "en/rlm-ai-en.html": 1,
+          "it/fable5-opus5-switching-task.html": 1,
+          "de/mercury2-de.html": 1,
+          "en/amodei-intervista-parte1-en.html": 1,
+          "en/startup-europa-2025-en": 1,
+          "en/strumenti-oracoli-caso-deloitte-en": 1
+        }
       }
     },
     "monthly": {
@@ -5434,23 +5487,23 @@
         ]
       },
       "2026-09": {
-        "total_views": 338,
+        "total_views": 363,
         "views_by_lang": {
-          "it": 214,
-          "en": 62,
+          "it": 234,
+          "en": 66,
           "fr": 21,
-          "de": 20,
+          "de": 21,
           "es": 21
         },
         "views_by_tag": {
-          "Generative AI": 48,
-          "Research": 31,
-          "Startups": 6,
-          "Applications": 30,
-          "Ethics & Society": 33,
-          "Business": 15,
+          "Generative AI": 51,
+          "Research": 33,
+          "Startups": 7,
+          "Applications": 31,
+          "Ethics & Society": 35,
+          "Business": 17,
           "Training": 18,
-          "Security": 15,
+          "Security": 16,
           "Copyright": 5,
           "E-learning": 2
         },
@@ -5460,19 +5513,19 @@
             "views": 12
           },
           {
-            "path": "it/qwen38-27b",
-            "views": 9
-          },
-          {
-            "path": "it/aisi-agente-inganno.html",
-            "views": 7
+            "path": "it/fable5-opus5-switching-task",
+            "views": 12
           },
           {
             "path": "it/pagedattention-radixattention",
-            "views": 7
+            "views": 11
           },
           {
-            "path": "it/fable5-opus5-switching-task",
+            "path": "it/qwen38-27b",
+            "views": 10
+          },
+          {
+            "path": "it/aisi-agente-inganno.html",
             "views": 7
           },
           {
@@ -5484,11 +5537,11 @@
             "views": 6
           },
           {
-            "path": "it/muse-glimmer30b",
-            "views": 5
+            "path": "it/fable5-opus5-switching-task.html",
+            "views": 6
           },
           {
-            "path": "it/fable5-opus5-switching-task.html",
+            "path": "it/muse-glimmer30b",
             "views": 5
           },
           {
@@ -5500,24 +5553,24 @@
     },
     "yearly": {
       "2026": {
-        "total_views": 2691,
+        "total_views": 2716,
         "views_by_lang": {
-          "it": 1832,
-          "en": 388,
-          "de": 161,
+          "it": 1852,
+          "en": 392,
+          "de": 162,
           "fr": 166,
           "es": 144
         },
         "views_by_tag": {
-          "Generative AI": 1074,
-          "Applications": 498,
-          "Security": 301,
-          "Research": 523,
-          "Ethics & Society": 733,
+          "Generative AI": 1077,
+          "Applications": 499,
+          "Security": 302,
+          "Research": 525,
+          "Ethics & Society": 735,
           "Training": 273,
-          "Business": 355,
+          "Business": 357,
           "Copyright": 41,
-          "Startups": 90,
+          "Startups": 91,
           "E-learning": 110
         }
       }

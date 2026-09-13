@@ -862,3 +862,59 @@ body {
                 justify-content: flex-start;
             }
         }
+
+/* === Form iscrizione in-place (in-articolo + home) === */
+.newsletter-inline-form {
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch;
+    text-align: left;
+}
+.newsletter-inline-form input[type="text"],
+.newsletter-inline-form input[type="email"] {
+    flex: 1 1 180px;
+    min-width: 140px;
+    padding: 12px 14px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    background: #fff;
+    color: #1c1e21;
+    font-size: 1em;
+    font-family: inherit;
+}
+.newsletter-inline-form input[type="text"]:focus,
+.newsletter-inline-form input[type="email"]:focus {
+    outline: 2px solid #1877f2;
+    outline-offset: 1px;
+    border-color: #1877f2;
+}
+.newsletter-inline-form .subscribe-button {
+    flex: 1 1 100%;
+    border: 0;
+    font-size: 1em;
+    font-family: inherit;
+    cursor: pointer;
+}
+.newsletter-inline-form .nl-privacy {
+    flex-basis: 100%;
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+    margin-top: 2px;
+    font-size: .82em;
+    line-height: 1.35;
+    color: #606770;
+}
+.newsletter-inline-form .nl-privacy input {
+    flex: 0 0 auto;
+    margin: 2px 0 0 0;
+}
+.nl-decline {
+    margin: 10px 0 0;
+    font-size: .78em;
+    color: #8a9099;
+}
+.newsletter-band { margin-top: 0; margin-bottom: 30px; }

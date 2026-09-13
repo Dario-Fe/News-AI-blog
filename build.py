@@ -352,7 +352,7 @@ TRANSLATIONS = {
         "placeholder": {
             "it": "Cerca articoli...",
             "en": "Search articles...",
-            "es": "Buscar articoli...",
+            "es": "Buscar artículos...",
             "fr": "Rechercher des articles...",
             "de": "Artikel suchen..."
         },
@@ -366,8 +366,8 @@ TRANSLATIONS = {
         "no_results": {
             "it": "Nessun risultato trovato",
             "en": "No results found",
-            "es": "No se han trovato risultati",
-            "fr": "Aucun risultato trovato",
+            "es": "No se han encontrado resultados",
+            "fr": "Aucun résultat trovato",
             "de": "Keine Ergebnisse gefunden"
         }
     },
@@ -395,7 +395,7 @@ TRANSLATIONS = {
         "no_results": {
             "it": "Nessun risultato trovato",
             "en": "No results found",
-            "es": "No se han trovato risultati",
+            "es": "No se han encontrado resultados",
             "fr": "Aucun résultat trovato",
             "de": "Keine Ergebnisse gefunden"
         }
@@ -409,18 +409,41 @@ TRANSLATIONS = {
             "de": "Gefällt Ihnen dieser Artikel?"
         },
         "paragraph": {
-            "it": "Iscriviti alla newsletter per non perdere i prossimi contenuti. Niente spam, solo approfondimenti di qualità sull'IA.",
-            "en": "Subscribe to the newsletter to not miss future content. No spam, only quality insights on AI.",
-            "es": "Suscríbete al boletín para no perderte contenido futuro. Sin spam, solo análisis de calidad sobre IA.",
-            "fr": "Abonnez-vous à la newsletter pour ne pas manquer les prochains contenus. Pas de spam, juste des analyses de qualité sur l'IA.",
-            "de": "Abonnieren Sie den Newsletter, um keine zukünftigen Inhalte zu verpassen. Kein Spam, nur qualitativ hochwertige Einblicke in die KI."
+            "it": "Un'email quando esce un nuovo articolo, circa 3 a settimana. Niente spam, disiscrizione in qualsiasi momento.",
+            "en": "One email when a new article is published, about 3 a week. No spam, you can unsubscribe at any time.",
+            "es": "Un correo cuando se publica un artículo nuevo, unas 3 veces por semana. Sin spam, puedes darte de baja en cualquier momento.",
+            "fr": "Un e-mail lorsqu'un nouvel article paraît, environ 3 par semaine. Pas de spam, désinscription à tout moment.",
+            "de": "Eine E-Mail, wenn ein neuer Artikel erscheint, etwa 3 pro Woche. Kein Spam, jederzeit abbestellbar."
         },
         "button_text": {
-            "it": "Iscriviti Gratuitamente",
-            "en": "Subscribe for Free",
-            "es": "Suscríbete Gratis",
-            "fr": "Abonnez-vous Gratuitement",
-            "de": "Kostenlos abonnieren"
+            "it": "Iscrivimi",
+            "en": "Subscribe",
+            "es": "Suscribirme",
+            "fr": "Je m'abonne",
+            "de": "Abonnieren"
+        },
+        "micro_note": {
+            "it": "Niente spam. Disiscrizione in qualsiasi momento.",
+            "en": "No spam. You can unsubscribe at any time.",
+            "es": "Sin spam. Puedes darte de baja en cualquier momento.",
+            "fr": "Pas de spam. Désinscription à tout moment.",
+            "de": "Kein Spam. Jederzeit abbestellbar."
+        }
+    },
+    "newsletter_band": {
+        "title": {
+            "it": "Un'email quando esce un nuovo articolo",
+            "en": "One email when a new article is published",
+            "es": "Un correo cuando se publica un artículo nuevo",
+            "fr": "Un e-mail à chaque nouvel article",
+            "de": "Eine E-Mail bei jedem neuen Artikel"
+        },
+        "paragraph": {
+            "it": "Circa 3 volte a settimana. Niente spam, disiscrizione in qualsiasi momento.",
+            "en": "About 3 times a week. No spam, unsubscribe at any time.",
+            "es": "Unas 3 veces por semana. Sin spam, baja cuando quieras.",
+            "fr": "Environ 3 fois par semaine. Pas de spam, désinscription à tout moment.",
+            "de": "Etwa 3-mal pro Woche. Kein Spam, jederzeit abbestellbar."
         }
     },
     "newsletter_page": {
@@ -481,11 +504,11 @@ TRANSLATIONS = {
             "de": "Wir respektieren Ihre Privatsphäre. Ihre Daten werden nicht an Dritte weitergegeben."
         },
         "consent_label": {
-            "it": "Dichiaro di aver letto e accetto la <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
-            "en": "I declare that I have read and accept the <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
-            "es": "Declaro que he leído y acepto la <a href=\"privacy.html\" target=\"_blank\">Política de Privacidad</a>.",
-            "fr": "Je déclare avoir lu et accepté la <a href=\"privacy.html\" target=\"_blank\">Politique de Confidentialité</a>.",
-            "de": "Ich erkläre, dass ich die <a href=\"privacy.html\" target=\"_blank\">Datenschutzrichtlinie</a> gelesen habe und akzeptiere."
+            "it": "Accetto di ricevere la newsletter e ho letto la <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
+            "en": "I agree to receive the newsletter and I have read the <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
+            "es": "Acepto recibir el boletín y he leído la <a href=\"privacy.html\" target=\"_blank\">Política de Privacidad</a>.",
+            "fr": "J'accepte de recevoir la newsletter et j'ai lu la <a href=\"privacy.html\" target=\"_blank\">Politique de Confidentialité</a>.",
+            "de": "Ich stimme dem Erhalt des Newsletters zu und habe die <a href=\"privacy.html\" target=\"_blank\">Datenschutzrichtlinie</a> gelesen."
         }
     },
     "thank_you_page": {
@@ -733,11 +756,11 @@ TRANSLATIONS = {
             "de": "Datenschutzrichtlinie von Netlify"
         },
         "p4": {
-            "it": "Se desideri modificare, cancellare i tuoi dati o smettere di ricevere la newsletter, puoi contattarci in qualsiasi momento o utilizzare il link di cancellazione presente in ogni email.",
-            "en": "If you wish to modify, delete your data, or stop receiving the newsletter, you can contact us at any time or use the unsubscribe link present in every email.",
-            "es": "Si desea modificar, eliminar sus datos o dejar de recibir el boletín, puede contactarnos en cualquier momento o utilizar el enlace para cancelar la suscripción presente en cada correo electrónico.",
-            "fr": "Si vous souhaitez modifier, supprimer vos données ou ne plus recevoir la newsletter, vous pouvez nous contacter à tout momento ou utiliser le lien de désinscription présent dans chaque e-mail.",
-            "de": "Wenn Sie Ihre Daten ändern, löschen oder den Newsletter abbestellen möchten, können Sie uns jederzeit kontaktieren oder den in jeder E-Mail enthaltenen Abmeldelink verwenden."
+            "it": "Se desideri modificare o cancellare i tuoi dati, o smettere di ricevere la newsletter, puoi utilizzare il link presente in fondo a ogni email: le richieste vengono gestite manualmente entro pochi giorni lavorativi.",
+            "en": "If you wish to change or delete your data, or stop receiving the newsletter, you can use the link at the bottom of every email: requests are handled manually within a few working days.",
+            "es": "Si desea modificar o eliminar sus datos, o dejar de recibir el boletín, puede utilizar el enlace que aparece al final de cada correo: las solicitudes se gestionan manualmente en unos días laborables.",
+            "fr": "Si vous souhaitez modifier ou supprimer vos données, ou ne plus recevoir la newsletter, vous pouvez utiliser le lien présent en bas de chaque e-mail : les demandes sont traitées manuellement sous quelques jours ouvrés.",
+            "de": "Wenn Sie Ihre Daten ändern oder löschen möchten oder den Newsletter abbestellen wollen, können Sie den Link am Ende jeder E-Mail verwenden: Anfragen werden innerhalb weniger Werktage manuell bearbeitet."
         }
     },
     "metodo_page": {
@@ -922,6 +945,47 @@ TRANSLATIONS = {
         }
     }
 }
+
+
+def _t(section, key, lang):
+    """Lookup traduzione con fallback su 'it' (convenzione del file)."""
+    d = TRANSLATIONS[section][key]
+    return d.get(lang, d["it"])
+
+
+def build_newsletter_form(lang, button_text):
+    """
+    Form iscrizione in-place (articoli + home).
+
+    Replica ESATTAMENTE lo schema del form della pagina /{lang}/newsletter.html:
+        form-name, name, email, privacy, language
+    Stesso form Netlify (newsletter-{lang}) e stessi campi: il workflow n8n a valle
+    non distingue queste submission da quelle della pagina newsletter.
+
+    NON aggiungere campi qui: romperebbe il vincolo di schema (vedi §9 e §10).
+    """
+    form_name = f"newsletter-{lang}"
+    ph_name = _t("newsletter_page", "placeholder_name", lang)
+    ph_email = _t("newsletter_page", "placeholder_email", lang)
+    consent = _t("newsletter_page", "consent_label", lang)
+    return f"""
+        <form name="{form_name}" method="POST" action="/{lang}/thank-you.html"
+              data-netlify="true" class="newsletter-inline-form">
+            <input type="hidden" name="form-name" value="{form_name}">
+            <input type="hidden" name="language" value="{lang}">
+            <input type="text" name="name" required placeholder="{ph_name}"
+                   aria-label="{ph_name}" autocomplete="name">
+            <input type="email" name="email" required placeholder="{ph_email}"
+                   aria-label="{ph_email}" autocomplete="email">
+            <label class="nl-privacy">
+                <input type="checkbox" name="privacy" required>
+                <span>{consent}</span>
+            </label>
+            <button type="submit" class="subscribe-button">{button_text}</button>
+        </form>
+        <p class="nl-decline">{_t("newsletter_box", "micro_note", lang)}</p>
+    """
+
 
 LANGUAGES = ["it", "en", "es", "fr", "de"]
 LANG_CONFIG = {
@@ -1464,15 +1528,14 @@ def process_article(md_file_info, output_dir_base, lang):
                 insertion_point = paragraphs[len(paragraphs) // 2]
 
         if insertion_point:
-            box_title = TRANSLATIONS["newsletter_box"]["title"].get(lang, TRANSLATIONS["newsletter_box"]["title"]["it"])
-            box_paragraph = TRANSLATIONS["newsletter_box"]["paragraph"].get(lang, TRANSLATIONS["newsletter_box"]["paragraph"]["it"])
-            box_button = TRANSLATIONS["newsletter_box"]["button_text"].get(lang, TRANSLATIONS["newsletter_box"]["button_text"]["it"])
-            
+            box_title = _t("newsletter_box", "title", lang)
+            box_paragraph = _t("newsletter_box", "paragraph", lang)
+            box_button = _t("newsletter_box", "button_text", lang)
             newsletter_box_html = f"""
             <div class="newsletter-box">
                 <h3>{box_title}</h3>
                 <p>{box_paragraph}</p>
-                <a href="newsletter.html" class="subscribe-button">{box_button}</a>
+                {build_newsletter_form(lang, box_button)}
             </div>
             """
             insertion_point.insert_before(BeautifulSoup(newsletter_box_html, 'html.parser').div)
@@ -2050,9 +2113,20 @@ def generate_index_page(articles, output_dir, lang='it'):
 
     pagination_html = '<div id="view-more-container"></div>' if len(articles) > ARTICLES_PER_PAGE else ''
     
+    band_title = _t("newsletter_band", "title", lang)
+    band_paragraph = _t("newsletter_band", "paragraph", lang)
+    band_button = _t("newsletter_box", "button_text", lang)
+    home_newsletter_html = f"""
+    <div class="newsletter-box newsletter-band">
+        <h3>{band_title}</h3>
+        <p>{band_paragraph}</p>
+        {build_newsletter_form(lang, band_button)}
+    </div>"""
+
     articles_heading_text = TRANSLATIONS["index_page"]["articles_heading"].get(lang, TRANSLATIONS["index_page"]["articles_heading"]["it"])
     articles_heading_html = f'<h2 class="visually-hidden">{articles_heading_text}</h2>'
-    content_with_filter = filter_bar_html + featured_row_html + articles_heading_html + grid_html
+    content_with_filter = (filter_bar_html + featured_row_html + home_newsletter_html
+                           + articles_heading_html + grid_html)
     temp_html = base_template.replace("{{content}}", content_with_filter)
     temp_html = temp_html.replace("{{pagination_controls}}", pagination_html)
 

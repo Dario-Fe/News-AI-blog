@@ -865,24 +865,36 @@ body {
 
 /* === Form iscrizione in-place (in-articolo + home) === */
 .newsletter-inline-form {
-    max-width: 520px;
+    max-width: 620px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    align-items: stretch;
+    align-items: center;
     text-align: left;
 }
-.newsletter-inline-form input[type="text"],
-.newsletter-inline-form input[type="email"] {
-    flex: 1 1 180px;
-    min-width: 140px;
-    padding: 12px 14px;
+.newsletter-inline-form input[type="text"] {
+    order: 1;
+    flex: 1 1 160px;
+    min-width: 130px;
+    padding: 10px 12px;
     border: 1px solid #dddfe2;
     border-radius: 6px;
     background: #fff;
     color: #1c1e21;
-    font-size: 1em;
+    font-size: 0.95em;
+    font-family: inherit;
+}
+.newsletter-inline-form input[type="email"] {
+    order: 2;
+    flex: 1 1 160px;
+    min-width: 130px;
+    padding: 10px 12px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    background: #fff;
+    color: #1c1e21;
+    font-size: 0.95em;
     font-family: inherit;
 }
 .newsletter-inline-form input[type="text"]:focus,
@@ -892,13 +904,17 @@ body {
     border-color: #1877f2;
 }
 .newsletter-inline-form .subscribe-button {
-    flex: 1 1 100%;
+    order: 3;
+    flex: 0 0 auto;
+    min-width: 120px;
+    padding: 10px 18px;
     border: 0;
-    font-size: 1em;
+    font-size: 0.95em;
     font-family: inherit;
     cursor: pointer;
 }
 .newsletter-inline-form .nl-privacy {
+    order: 4;
     flex-basis: 100%;
     display: flex;
     gap: 7px;
@@ -913,8 +929,33 @@ body {
     margin: 2px 0 0 0;
 }
 .nl-decline {
-    margin: 10px 0 0;
+    margin: 8px 0 0;
     font-size: .78em;
     color: #8a9099;
 }
-.newsletter-band { margin-top: 0; margin-bottom: 30px; }
+
+/* Homepage Band Specific Compact Styles */
+.newsletter-band {
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding: 18px 20px;
+}
+.newsletter-band h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 1.3em;
+}
+.newsletter-band p {
+    margin-bottom: 12px;
+    font-size: 0.9em;
+}
+
+@media (max-width: 580px) {
+    .newsletter-inline-form input[type="text"],
+    .newsletter-inline-form input[type="email"] {
+        flex: 1 1 100%;
+    }
+    .newsletter-inline-form .subscribe-button {
+        flex: 1 1 100%;
+    }
+}

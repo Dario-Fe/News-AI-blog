@@ -352,7 +352,7 @@ TRANSLATIONS = {
         "placeholder": {
             "it": "Cerca articoli...",
             "en": "Search articles...",
-            "es": "Buscar artículos...",
+            "es": "Buscar articoli...",
             "fr": "Rechercher des articles...",
             "de": "Artikel suchen..."
         },
@@ -367,7 +367,7 @@ TRANSLATIONS = {
             "it": "Nessun risultato trovato",
             "en": "No results found",
             "es": "No se han encontrado resultados",
-            "fr": "Aucun résultat trovato",
+            "fr": "Aucun risultato trovato",
             "de": "Keine Ergebnisse gefunden"
         }
     },
@@ -504,11 +504,11 @@ TRANSLATIONS = {
             "de": "Wir respektieren Ihre Privatsphäre. Ihre Daten werden nicht an Dritte weitergegeben."
         },
         "consent_label": {
-            "it": "Accetto di ricevere la newsletter e ho letto la <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
-            "en": "I agree to receive the newsletter and I have read the <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
-            "es": "Acepto recibir el boletín y he leído la <a href=\"privacy.html\" target=\"_blank\">Política de Privacidad</a>.",
-            "fr": "J'accepte de recevoir la newsletter et j'ai lu la <a href=\"privacy.html\" target=\"_blank\">Politique de Confidentialité</a>.",
-            "de": "Ich stimme dem Erhalt des Newsletters zu und habe die <a href=\"privacy.html\" target=\"_blank\">Datenschutzrichtlinie</a> gelesen."
+            "it": "Dichiaro di aver letto e accetto la <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
+            "en": "I declare that I have read and accept the <a href=\"privacy.html\" target=\"_blank\">Privacy Policy</a>.",
+            "es": "Declaro que he leído y acepto la <a href=\"privacy.html\" target=\"_blank\">Política de Privacidad</a>.",
+            "fr": "Je déclare avoir lu et accepté la <a href=\"privacy.html\" target=\"_blank\">Politique de Confidentialité</a>.",
+            "de": "Ich erkläre, dass ich die <a href=\"privacy.html\" target=\"_blank\">Datenschutzrichtlinie</a> gelesen habe und akzeptiere."
         }
     },
     "thank_you_page": {

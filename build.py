@@ -421,13 +421,6 @@ TRANSLATIONS = {
             "es": "Suscribirme",
             "fr": "Je m'abonne",
             "de": "Abonnieren"
-        },
-        "micro_note": {
-            "it": "Niente spam. Disiscrizione in qualsiasi momento.",
-            "en": "No spam. You can unsubscribe at any time.",
-            "es": "Sin spam. Puedes darte de baja en cualquier momento.",
-            "fr": "Pas de spam. Désinscription à tout moment.",
-            "de": "Kein Spam. Jederzeit abbestellbar."
         }
     },
     "newsletter_band": {
@@ -983,7 +976,6 @@ def build_newsletter_form(lang, button_text):
             </label>
             <button type="submit" class="subscribe-button">{button_text}</button>
         </form>
-        <p class="nl-decline">{_t("newsletter_box", "micro_note", lang)}</p>
     """
 
 

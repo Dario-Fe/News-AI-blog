@@ -928,11 +928,6 @@ body {
     flex: 0 0 auto;
     margin: 2px 0 0 0;
 }
-.nl-decline {
-    margin: 8px 0 0;
-    font-size: .78em;
-    color: #8a9099;
-}
 
 /* Homepage Band Specific Compact Styles */
 .newsletter-band {

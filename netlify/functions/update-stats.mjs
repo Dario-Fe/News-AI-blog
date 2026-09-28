@@ -21,8 +21,17 @@ const STORE_NAME = 'page-views';
 const SUMMARY_KEY = '__summary__';
 const LOST_PREFIX = '__lost__/';
 const BATCH_SIZE = 50;
-const ANOMALY_LIMIT = 25;   // quanti path elencare nel dettaglio
-const LOST_DAYS_KEPT = 10;  // per quanti giorni tenere il conteggio delle scritture perse
+const ANOMALY_LIMIT = 25;      // quanti path elencare nel dettaglio
+const LOST_DAYS_KEPT = 10;     // per quanti giorni tenere il conteggio delle scritture perse
+const REGRESSION_MIN_LOST = 5; // sotto questa soglia il calo e' rumore, non un reset
+
+// NOTA sulle prestazioni (causa del timeout del 28/09/2026):
+// i ~1580 contatori si leggono con la consistenza di default (eventual, servita
+// dal edge) perche' il confronto avviene con un riepilogo vecchio di un'ora:
+// una lettura in ritardo di 60 secondi non falsa nulla. La consistenza "strong"
+// (che va sempre all'origin) resta solo sulla lettura del riepilogo precedente,
+// dove serve il valore esatto. Con strong su tutte le letture la function superava
+// il timeout, non riscriveva il riepilogo e la pagina /stats restava ferma.
 
 function todayUtc() {
   return new Date().toISOString().slice(0, 10);
@@ -37,7 +46,7 @@ function jsonResponse(body, status = 200) {
 
 export default async (req, context) => {
   console.log('Inizio aggregazione statistiche...');
-  const store = getStore({ name: STORE_NAME, consistency: 'strong' });
+  const store = getStore({ name: STORE_NAME });
   let processedCount = 0;
 
   try {
@@ -80,7 +89,7 @@ export default async (req, context) => {
       const results = await Promise.all(
         batch.map(async (key) => {
           try {
-            const data = await store.get(key, { type: 'json', consistency: 'strong' });
+            const data = await store.get(key, { type: 'json' });
             if (!data || typeof data.count !== 'number' || !Number.isFinite(data.count)) {
               return { path: key, count: null, reason: data ? 'count non numerico' : 'blob vuoto' };
             }
@@ -113,13 +122,23 @@ export default async (req, context) => {
 
     const regressions = [];
     let regressedViews = 0;
+    let ignoredDips = 0;
+    let ignoredDipsViews = 0;
     for (const item of allViews) {
       const prev = previousCounts.get(item.path);
       if (prev === undefined || item.unreadable) continue;
       if (item.count < prev) {
-        regressedViews += prev - item.count;
+        const lost = prev - item.count;
+        // Cali piccoli possono essere il ritardo di propagazione di una lettura
+        // eventual: si contano a parte, non come reset.
+        if (lost < REGRESSION_MIN_LOST) {
+          ignoredDips += 1;
+          ignoredDipsViews += lost;
+          continue;
+        }
+        regressedViews += lost;
         if (regressions.length < ANOMALY_LIMIT) {
-          regressions.push({ path: item.path, from: prev, to: item.count, lost: prev - item.count });
+          regressions.push({ path: item.path, from: prev, to: item.count, lost });
         }
       }
     }
@@ -155,6 +174,8 @@ export default async (req, context) => {
         regressions,
         regressionsCount: regressions.length,
         regressedViews,
+        ignoredDips,
+        ignoredDipsViews,
         missing,
         missingCount: missing.length,
         missingViews,

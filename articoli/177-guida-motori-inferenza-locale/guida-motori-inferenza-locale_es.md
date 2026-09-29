@@ -118,7 +118,7 @@ El precio a pagar es el despliegue: requiere Docker y una mínima configuración
 
 ### KoboldCPP
 
-[KoboldCPP](https://koboldcpp.com/) nace del ecosistema KoboldAI y se dirige a un público concreto: quienes escribís narrativa extensa, juego de rol o narrativa asistida. Sobre un motor basado en llama.cpp construye un conjunto de opciones de generación, ajustes predeterminados y herramientas de edición concebidos para el texto creativo, como la gestión de la memoria narrativa o los World Info, que otros clientes ni siquiera ofrecen. Es un ejecutable único, ligero, pensado para quienes proceden del mundo de los juegos de texto más que del desarrollo de software.
+[KoboldCPP](https://github.com/LostRuins/koboldcpp) nace del ecosistema KoboldAI y se dirige a un público concreto: quienes escribís narrativa extensa, juego de rol o narrativa asistida. Sobre un motor basado en llama.cpp construye un conjunto de opciones de generación, ajustes predeterminados y herramientas de edición concebidos para el texto creativo, como la gestión de la memoria narrativa o los World Info, que otros clientes ni siquiera ofrecen. Es un ejecutable único, ligero, pensado para quienes proceden del mundo de los juegos de texto más que del desarrollo de software.
 
 Su limitación reside en su propia especialización: fuera del ámbito de la escritura creativa, KoboldCPP resulta menos cómodo que LM Studio u Ollama para un uso genérico, y su interfaz, aunque funcional, tiene el aspecto de una herramienta creada por aficionados para aficionados, más que por un equipo de producto.
 

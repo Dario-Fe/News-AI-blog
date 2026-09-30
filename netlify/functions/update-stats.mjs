@@ -16,17 +16,37 @@ import { getStore } from '@netlify/blobs';
 //
 // Queste informazioni viaggiano dentro __summary__ e quindi finiscono nel JSON
 // servito da stats.mjs (?format=json), che è la sorgente del brief giornaliero.
+//
+// STORIA (settembre 2026): i confronti path-per-path fra gli snapshot notturni
+// hanno dimostrato che il contatore dopo la patch è rigorosamente monotono
+// (zero cali, zero path spariti), eppure il totale mostrato da /stats durante
+// le raffiche di traffico salpava di ~150-250 unità rispetto a quanto lo
+// snapshot successivo confermava. Un totale soprastimato non può nascere da
+// letture in ritardo (eventual), che possono solo sottostimare: l'unico
+// vettore plausibile è il LISTING PAGINATO, che sotto centinaia di scritture
+// concorrenti può restituire la stessa chiave più di una volta mentre le
+// pagine si spostano. Da qui i due interventi di questa versione:
+//
+//   1. DEDUPLICAZIONE delle chiavi dopo il listing + log del confronto
+//      "chiavi elencate vs chiavi distinte": la prima ora in cui le due cifre
+//      divergono, il colpevole del gonfiamento è fotografato nei log;
+//   2. TRAIL ORARIO dei totali (__trail__): ogni giro lascia una riga con
+//      totale, path e qualità, così le discrepanze restano attribuibili ora
+//      per ora invece di evaporare col riepilogo sovrascritto.
 
 const STORE_NAME = 'page-views';
 const SUMMARY_KEY = '__summary__';
+const TRAIL_KEY = '__trail__';
 const LOST_PREFIX = '__lost__/';
 const BATCH_SIZE = 50;
 const ANOMALY_LIMIT = 25;      // quanti path elencare nel dettaglio
 const LOST_DAYS_KEPT = 10;     // per quanti giorni tenere il conteggio delle scritture perse
 const REGRESSION_MIN_LOST = 5; // sotto questa soglia il calo e' rumore, non un reset
+const TRAIL_DAYS_KEPT = 30;    // retention del trail orario, in giorni
+const TRAIL_SAME_HOUR_TOLERANCE_MS = 5 * 60 * 1000; // ritento entro l'ora: niente seconda riga
 
 // NOTA sulle prestazioni (causa del timeout del 28/09/2026):
-// i ~1580 contatori si leggono con la consistenza di default (eventual, servita
+// i ~1600 contatori si leggono con la consistenza di default (eventual, servita
 // dal edge) perche' il confronto avviene con un riepilogo vecchio di un'ora:
 // una lettura in ritardo di 60 secondi non falsa nulla. La consistenza "strong"
 // (che va sempre all'origin) resta solo sulla lettura del riepilogo precedente,
@@ -35,6 +55,15 @@ const REGRESSION_MIN_LOST = 5; // sotto questa soglia il calo e' rumore, non un 
 
 function todayUtc() {
   return new Date().toISOString().slice(0, 10);
+}
+
+// Inquadra un timestamp nel suo bucket orario UTC ('2026-09-30T09:00:00.000Z').
+// Il listing con pagina corrotta salta ore intere: senza normalizzazione le
+// 10:00:53 e le 10:15:41 finirebbero in due bucket diversi.
+function hourBucketUtc(iso) {
+  const t = new Date(iso);
+  if (Number.isNaN(t.getTime())) return null;
+  return new Date(Math.floor(t.getTime() / 3600000) * 3600000).toISOString();
 }
 
 function jsonResponse(body, status = 200) {
@@ -60,25 +89,53 @@ export default async (req, context) => {
       }
     }
 
-    // 2. Elenco completo delle chiavi. list() pagina automaticamente (1000 voci
-    //    per pagina), quindi va usato { paginate: true } per non perdere i path
-    //    oltre la prima pagina.
-    const keys = [];
+    // Trail orario precedente: base su cui aggiungere la riga di questo giro.
+    // La lettura NON è strong: un'ora di ritardo sul trail non falsa nulla.
+    const previousTrail = await store.get(TRAIL_KEY, { type: 'json' });
+
+    // 2. Elenco completo delle chiavi, con DEDUPLICAZIONE.
+    //
+    //    list({ paginate: true }) pagina automaticamente (1000 chiavi per
+    //    pagina), ma mentre le pagine vengono scritte i blob si spostano da una
+    //    pagina all'altra: la stessa chiave può comparire due volte (il totale
+    //    soprastimato delle raffiche) o un'ora può essere saltata (una futura
+    //    candela negativa). La deduplicazione con un Set elimina il primo
+    //    problema e rende il secondo misurabile dai log.
+    const keys = [];        // chiavi DISTINTE da leggere
+    const seen = new Set();
+    let listedKeys = 0;     // quante chiavi ha prodotto il listing, prima della dedup
+    let duplicateKeys = 0;  // chiavi viste più di una volta
     const lostByDay = {};
     for await (const page of store.list({ paginate: true })) {
       for (const entry of page.blobs) {
-        if (entry.key === SUMMARY_KEY) continue;
+        const key = entry.key;
+        if (key === SUMMARY_KEY || key === TRAIL_KEY) continue;
 
-        if (entry.key.startsWith(LOST_PREFIX)) {
-          const day = entry.key.slice(LOST_PREFIX.length, LOST_PREFIX.length + 10);
+        if (key.startsWith(LOST_PREFIX)) {
+          const day = key.slice(LOST_PREFIX.length, LOST_PREFIX.length + 10);
           if (/^\d{4}-\d{2}-\d{2}$/.test(day)) {
             lostByDay[day] = (lostByDay[day] || 0) + 1;
           }
           continue;
         }
 
-        keys.push(entry.key);
+        listedKeys += 1;
+        if (seen.has(key)) {
+          duplicateKeys += 1;
+          continue;
+        }
+        seen.add(key);
+        keys.push(key);
       }
+    }
+
+    if (duplicateKeys > 0) {
+      console.warn(
+        `Listing paginato: ${listedKeys} chiavi elencate ma solo ${keys.length} distinte ` +
+        `(${duplicateKeys} duplicate). Il totale del riepilogo PRECEDENTE potrebbe essere gonfiato.`
+      );
+    } else {
+      console.log(`Listing paginato: ${listedKeys} chiavi, tutte distinte.`);
     }
 
     // 3. Lettura dei contatori a batch.
@@ -163,6 +220,56 @@ export default async (req, context) => {
     const totalViews = allViews.reduce((sum, item) => sum + item.count, 0);
     const previousTotal = previous && typeof previous.totalViews === 'number' ? previous.totalViews : null;
 
+    // 5-bis. TRAIL ORARIO dei totali.
+    //
+    // Il riepilogo viene sovrascritto a ogni giro: se un totale anomalamente
+    // alto (o un calo) passa per un'ora, alle ore successive non resta traccia
+    // e la discrepanza con lo snapshot notturno diventa non attribuibile. Ogni
+    // giro appende qui una riga (bucket orario UTC) con totale, path e qualità.
+    const nowIso = new Date().toISOString();
+    const thisHour = hourBucketUtc(nowIso);
+    const droppedWritesToday = droppedWrites[todayUtc()] || 0;
+
+    const trail = { updatedAt: nowIso, buckets: {} };
+    if (previousTrail && previousTrail.buckets) {
+      const minBucket = hourBucketUtc(
+        new Date(Date.now() - TRAIL_DAYS_KEPT * 86400000).toISOString()
+      );
+      for (const [bucket, row] of Object.entries(previousTrail.buckets)) {
+        if (minBucket && bucket < minBucket) continue;
+        trail.buckets[bucket] = row;
+      }
+    }
+
+    // "Run now" a pochi minuti di distanza: non ammucchiamo righe nella stessa ora.
+    const lastSameHour = trail.buckets[thisHour];
+    const shouldAppend = !lastSameHour ||
+      Date.now() - Date.parse(lastSameHour.at) >= TRAIL_SAME_HOUR_TOLERANCE_MS;
+
+    if (shouldAppend) {
+      trail.buckets[thisHour] = {
+        at: nowIso,
+        totalViews,
+        paths: keys.length,
+        listedKeys,
+        duplicateKeys,
+        regressions: regressions.length,
+        regressedViews,
+        missing: missing.length,
+        missingViews,
+        unreadable: unreadable.length,
+        droppedWritesToday,
+        ignoredDips,
+      };
+      try {
+        await store.setJSON(TRAIL_KEY, trail);
+        console.log(`Trail orario aggiornato: ${thisHour}, totale ${totalViews}.`);
+      } catch (error) {
+        // Il trail è diagnostica, non dato: un fallimento non deve fermare il riepilogo.
+        console.error('Impossibile aggiornare il trail orario:', error);
+      }
+    }
+
     const summary = {
       lastUpdate: new Date().toISOString(),
       statsData: allViews.map((item) => ({ path: item.path, count: item.count })),
@@ -171,6 +278,10 @@ export default async (req, context) => {
       dataQuality: {
         previousTotal,
         totalChange: previousTotal === null ? null : totalViews - previousTotal,
+        // Diagnostica listing: chiavi elencate vs distinte. duplicateKeys > 0
+        // implica che il totalViews di QUESTO riepilogo può essere gonfiato
+        // (una chiave duplicata conta due volte) e che i log vanno guardati.
+        dedupe: { listedKeys, distinctKeys: keys.length, duplicateKeys },
         regressions,
         regressionsCount: regressions.length,
         regressedViews,
@@ -181,7 +292,7 @@ export default async (req, context) => {
         missingViews,
         unreadable,
         unreadableCount: unreadable.length,
-        droppedWritesToday: droppedWrites[todayUtc()] || 0,
+        droppedWritesToday,
         droppedWrites,
       },
     };
@@ -204,12 +315,18 @@ export default async (req, context) => {
       success: true,
       processed: processedCount,
       paths: allViews.length,
+      totalViews,
       lastUpdate: summary.lastUpdate,
+      listedKeys,
+      distinctKeys: keys.length,
+      duplicateKeys,
+      dedupe: summary.dataQuality.dedupe,
       regressions: summary.dataQuality.regressionsCount,
-      droppedWritesToday: summary.dataQuality.droppedWritesToday,
+      droppedWritesToday,
+      trail: shouldAppend ? 'scritto' : 'invariato (riga già presente per questa ora)',
     });
   } catch (error) {
-    console.error('Errore critico durante l\'aggregazione:', error);
+    console.error(`Errore critico durante l'aggregazione:`, error);
     return new Response(`Errore aggregazione: ${error.message}`, { status: 500 });
   }
 };

@@ -144,7 +144,7 @@ def fetch_stats_summary():
     Fetches the current cumulative page views and the data-quality block
     detected by the hourly aggregator (update-stats.mjs) from the Netlify Function.
 
-    Returns a tuple (cumulative_views, summary_quality).
+    Returns a tuple (cumulative_views, summary_quality, collisions).
     """
     user = os.environ.get("STATS_USER")
     password = os.environ.get("STATS_PASSWORD")
@@ -163,15 +163,45 @@ def fetch_stats_summary():
         # Servono solo a documentare; non modificano le visite conteggiate.
         summary_quality = data.get("dataQuality") or {}
         
-        # Converte la lista di [{path, count}] in un dizionario {path: count}
+        # Converte la lista di [{path, count}] in un dizionario {path: count}.
+        # BUG DEL 01/10/2026: prima si faceva solo clean_path = path.strip("/")
+        # e riassegnazione. Due path distinti puliti diventano identici
+        # (es. "it" e "it/"): sono blob SEPARATI con visite vere, e il vecchio
+        # codice SOVRASCRIVEVA il gemello invece di conservarlo. Risultato: il
+        # totale dello snapshot restava per sempre sotto quello di /stats,
+        # di esattamente la quota cumulata dei path gemelli (l'offset costante
+        # visto a fine settembre), e le visite giornaliere del gemello sparivano
+        # dal conteggio. Il gemello si conserva come chiave separata col path
+        # ORIGINALE (col suo slash), cosi' i totali tornano a coincidere.
         cumulative = {}
+        collisions = []
         for item in data.get("statsData", []):
             path = item["path"]
             # Pulisce il path rimuovendo slash iniziale/finale per uniformità
             clean_path = path.strip("/")
-            cumulative[clean_path] = item["count"]
-            
-        return cumulative, summary_quality
+            if clean_path in cumulative and path != clean_path and path not in cumulative:
+                # Path gemello (es. "it/x/" mentre "it/x" esiste gia'):
+                # chiave separata col path originale, non si scarta nulla.
+                collisions.append({
+                    "path": clean_path,
+                    "raw_path": path,
+                    "count": item["count"],
+                })
+                cumulative[path] = item["count"]
+            elif clean_path in cumulative:
+                # Duplicato vero della stessa chiave nel riepilogo (non dovrebbe
+                # succedere: update-stats deduplica). Si somma e si segnala.
+                collisions.append({
+                    "path": clean_path,
+                    "raw_path": path,
+                    "count": item["count"],
+                    "duplicate_same_key": True,
+                })
+                cumulative[clean_path] += item["count"]
+            else:
+                cumulative[clean_path] = item["count"]
+
+        return cumulative, summary_quality, collisions
     except Exception as e:
         print(f"Errore nel recupero delle statistiche cumulative: {e}")
         sys.exit(1)
@@ -316,7 +346,7 @@ def main():
     previous_cumulative = history.get("cumulative_history", {})
 
     # 2. Recupera le visualizzazioni cumulative correnti da Netlify
-    current_cumulative, summary_quality = fetch_stats_summary()
+    current_cumulative, summary_quality, path_collisions = fetch_stats_summary()
 
     # 3. Scansiona gli articoli locali per mappare i tag e recuperare lo snapshot statico
     article_mapping, portal_snapshot = scan_local_articles()
@@ -330,6 +360,9 @@ def main():
     # Anomalie del contatore rilevate durante il calcolo del delta del giorno
     regressions = []            # path il cui contatore e' tornato indietro
     suspicious_new_paths = []   # path nuovi con un conteggio sospettosamente alto
+    collisions = path_collisions   # riempito dentro fetch_stats_summary, prima del loop dei delta
+    baseline_new_paths = []     # gemelli visti per la prima volta: totale = baseline, non visite di oggi
+    collision_raw_paths = {c.get("raw_path") for c in collisions if c.get("raw_path")}
 
     previous_last_update = history.get("last_update")
     current_total = sum(current_cumulative.values())
@@ -354,10 +387,18 @@ def main():
                 })
                 increment = 0
         else:
-            # Path mai visto prima: le visite sono genuinamente nuove.
-            increment = count
-            if count > NEW_PATH_VIEWS_ALERT:
-                suspicious_new_paths.append({"path": path, "views": count})
+            # Path mai visto prima.
+            if path in collision_raw_paths:
+                # Gemello con slash (es. "it/") visto per la prima volta: il suo
+                # totale accumulato e' baseline, NON visite di oggi — altrimenti
+                # il giorno del fix gonfierebbe il giornaliero di tutta la storia
+                # del gemello. Da domani i suoi incrementi entrano normalmente.
+                increment = 0
+                baseline_new_paths.append({"path": path, "views": count})
+            else:
+                increment = count
+                if count > NEW_PATH_VIEWS_ALERT:
+                    suspicious_new_paths.append({"path": path, "views": count})
 
         if increment > 0:
             total_views += increment
@@ -399,6 +440,11 @@ def main():
     hourly_regressions = summary_quality.get("regressions") or []
     missing_paths = summary_quality.get("missing") or []
     unreadable_paths = summary_quality.get("unreadable") or []
+    # Cali per-path sotto REGRESSION_MIN_LOST (5 visite) che l'aggregatore orario
+    # ignora come rumore: se la quota cumulata e' grande (es. un difetto che
+    # sgonfia tanti path di 1 visita a giro), prima non lasciava traccia da
+    # nessuna parte. Da qui e' visibile nel warning e nel blocco data_quality.
+    ignored_dips_views = summary_quality.get("ignoredDipsViews") or 0
 
     warnings = []
     if regressions_count:
@@ -416,6 +462,24 @@ def main():
     if unreadable_paths:
         warnings.append(
             f"{len(unreadable_paths)} contatori illeggibili: conservato l'ultimo valore noto."
+        )
+    if collisions:
+        twin_total = sum(c["count"] for c in collisions if not c.get("duplicate_same_key"))
+        warnings.append(
+            f"{len(collisions)} path gemelli con slash finale conservati come chiavi separate "
+            f"({twin_total} visite cumulate): prima del fix il gemello veniva sovrascritto da "
+            "path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
+        )
+    if baseline_new_paths:
+        warnings.append(
+            f"{len(baseline_new_paths)} path gemelli al primo giro dopo il fix: il loro totale "
+            f"({sum(p['views'] for p in baseline_new_paths)}) e' baseline e NON e' conteggiato come visite del giorno; "
+            "la variazione del contatore sara' dunque superiore al totale del giorno di questa quota."
+        )
+    if ignored_dips_views >= 50:
+        warnings.append(
+            f"Il riepilogo orario ha ignorato cali diffusi per un totale di {ignored_dips_views} visite "
+            "(sotto soglia per singolo path): possibile sgonfiamento diffuso dei blob."
         )
     if missing_paths:
         warnings.append(f"{len(missing_paths)} path spariti dal contatore.")
@@ -452,6 +516,9 @@ def main():
             "dropped_writes": dropped_writes_day,
             "missing_paths": missing_paths,
             "unreadable_paths": unreadable_paths,
+            "ignored_dips_views": ignored_dips_views,
+            "twin_collisions": collisions,
+            "twin_baseline": baseline_new_paths,
             "suspicious_new_paths": suspicious_new_paths,
             "counter_before": previous_total,
             "counter_after": current_total,

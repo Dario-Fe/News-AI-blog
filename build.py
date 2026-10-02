@@ -1018,7 +1018,7 @@ def generate_language_dropdown_html(current_lang, depth=1):
     current_lang_info = LANG_CONFIG[current_lang]
 
     toggle_html = f"""<button class="language-dropdown-toggle">
-                        <img src="{asset_prefix}flags/{current_lang_info['flag']}" alt="{current_lang_info['name']}" class="language-flag">
+                        <img src="{asset_prefix}flags/{current_lang_info['flag']}" alt="{current_lang_info['name']}" class="language-flag" width="18" height="12" decoding="async">
                         <span>{current_lang_info['abbr']}</span>
                         <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </button>"""
@@ -1028,7 +1028,7 @@ def generate_language_dropdown_html(current_lang, depth=1):
         link = f"{link_prefix}{lang_code}/index.html"
         menu_items_html += f"""
                         <a href="{link}" title="{lang_info['name']}">
-                            <img src="{asset_prefix}flags/{lang_info['flag']}" alt="{lang_info['name']}" class="language-flag">
+                            <img src="{asset_prefix}flags/{lang_info['flag']}" alt="{lang_info['name']}" class="language-flag" width="18" height="12" decoding="async">
                             <span>{lang_info['name']}</span>
                         </a>"""
 

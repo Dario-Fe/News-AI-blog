@@ -58,6 +58,71 @@
             clip: rect(0, 0, 0, 0);
             border: 0;
         }
+        /* Critical layout for the header language selector: prevents the
+           dropdown and flag images from flashing before style.css loads. */
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        #language-selector-container {
+            display: flex;
+            gap: 10px;
+            font-size: 1.2em;
+            align-items: center;
+        }
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .language-dropdown-toggle {
+            background-color: #f0f2f5;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8em;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        .language-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #ffffff;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 5px;
+            z-index: 1000;
+            min-width: 150px;
+        }
+        .language-dropdown.open .language-dropdown-menu {
+            display: block;
+        }
+        .language-flag {
+            height: 0.85em;
+            width: 1.275em;
+            vertical-align: middle;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+        @media (min-width: 769px) {
+            .header-top-row {
+                margin-bottom: 0;
+            }
+            #language-selector-container {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+        }
     </style>
     <!-- Asynchronously load the full stylesheet -->
     <link rel="preload" href="{{css_path}}" as="style" onload="this.onload=null;this.rel='stylesheet'">

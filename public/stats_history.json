@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-10-01T13:27:19.756508+00:00",
+  "last_update": "2026-10-02T06:02:32.489020+00:00",
   "portal_snapshot": {
     "total_articles": 930,
     "articles_by_lang": {
@@ -34,7 +34,7 @@
     "video_articles_count": 186
   },
   "cumulative_history": {
-    "it/index.html": 2856,
+    "it/index.html": 2861,
     "it": 1246,
     "fr": 331,
     "en": 244,
@@ -43,7 +43,7 @@
     "es": 193,
     "fr/trm-samsung-fr.html": 159,
     "it/thank-you": 121,
-    "it/ai-epanortosi": 87,
+    "it/ai-epanortosi": 88,
     "en/grief-tech-en.html": 85,
     "it/papalini-interview.html": 82,
     "it/agent-hospital.html": 79,
@@ -60,7 +60,7 @@
     "en/robotica-2025-en.html": 52,
     "fr/ai-epanortosi-fr.html": 52,
     "it/apply-ai-eu-strategy.html": 52,
-    "it/gina-assistente-vocale.html": 51,
+    "it/gina-assistente-vocale.html": 52,
     "it/ai-bournout.html": 50,
     "it/deepseek-mhc.html": 50,
     "it/robot-tax-sanders.html": 49,
@@ -89,9 +89,9 @@
     "en/malattie-mentali-ai-en.html": 35,
     "it/aaio-floridi.html": 35,
     "it/ars-notoria-e-ai.html": 35,
+    "it/cookie": 35,
     "it/sistema-sicurezza-ai.html": 35,
     "it/autoresearch-karpathy.html": 34,
-    "it/cookie": 34,
     "it/deepseek-ocr.html": 34,
     "it/guida-motori-inferenza-locale": 34,
     "it/mondiale-2026-gemini.html": 34,
@@ -180,6 +180,7 @@
     "it/codespeak.html": 22,
     "it/last30days.html": 22,
     "it/malta-openai.html": 22,
+    "it/pignataro-intervista2.html": 22,
     "it/project-glasswing-mythos.html": 22,
     "it/slm-2026.html": 22,
     "it/startup-europa-2025.html": 22,
@@ -187,7 +188,6 @@
     "it/ai-creazione-contenuti": 21,
     "it/cina-token-economy": 21,
     "it/laguna-s21.html": 21,
-    "it/pignataro-intervista2.html": 21,
     "it/datacenter-proteste-usa.html": 20,
     "it/degregori-ai-war.html": 20,
     "it/fable5-opus5-switching-task": 20,
@@ -243,6 +243,7 @@
     "it/ai-winter.html": 13,
     "it/claude-watermark.html": 13,
     "it/muse-glimmer30b.html": 13,
+    "it/navier-stokes": 13,
     "it/robot-tax-sanders": 13,
     "it/tml-determinism": 13,
     "it/trm-samsung": 13,
@@ -252,7 +253,6 @@
     "it/humanebench": 12,
     "it/mind-viruses": 12,
     "it/mind-viruses.html": 12,
-    "it/navier-stokes": 12,
     "it/omnivoice-studio": 12,
     "it/onu-report-2026.html": 12,
     "it/poesia-ai-security": 12,
@@ -303,6 +303,7 @@
     "es/kimik2.5-es.html": 9,
     "es/steerling-es.html": 9,
     "fr/newsletter": 9,
+    "fr/stanford-ai-index-2026-fr": 9,
     "it/agenti-ai-open-source-confronto": 9,
     "it/ai-lutto-digitale.html": 9,
     "it/aisi-agente-inganno.html": 9,
@@ -333,7 +334,6 @@
     "fr/antigravity-security-fr.html": 8,
     "fr/pentagono-anthropic-openai-fr.html": 8,
     "fr/qwen3.5-locale-puntata1-fr.html": 8,
-    "fr/stanford-ai-index-2026-fr": 8,
     "it/ai-coding-security": 8,
     "it/ai-consumer-2025": 8,
     "it/deepseek-mhc": 8,
@@ -362,6 +362,7 @@
     "en/gemma4-12b-q8-en": 7,
     "en/glm-5-en.html": 7,
     "en/headroom-en.html": 7,
+    "en/kimik2.5-en": 7,
     "en/kv-cache-approach-en.html": 7,
     "en/mini-max-m2.7-en.html": 7,
     "en/msa-100m-token-en.html": 7,
@@ -419,6 +420,7 @@
     "en/ai-rsponsabilità-en.html": 6,
     "en/ai-water-consumption-en": 6,
     "en/andon-fm-en.html": 6,
+    "en/ars-notoria-e-ai-en.html": 6,
     "en/bodo-glimt-fokus-ai-en.html": 6,
     "en/contributo-automazione-bacchiocchi-en": 6,
     "en/dataland-museo-ai-en.html": 6,
@@ -427,7 +429,6 @@
     "en/emergence-world-en.html": 6,
     "en/eset-apt-report-en.html": 6,
     "en/jacobian-lens-en.html": 6,
-    "en/kimik2.5-en": 6,
     "en/last30days-en.html": 6,
     "en/llm-knowledge-base-en.html": 6,
     "en/llm-wiki-autocostruita-en.html": 6,
@@ -436,6 +437,7 @@
     "en/pignataro-intervista2-en": 6,
     "en/pocketos-disaster-en.html": 6,
     "en/prompt-injection-camel-en.html": 6,
+    "en/qwen38-27b-en.html": 6,
     "en/rapporto-leonardo-2026-parte1-en.html": 6,
     "en/rapporto-leonardo-2026-parte2-en.html": 6,
     "en/recursivemas-en.html": 6,
@@ -503,7 +505,6 @@
     "en/anthropic-fear-en": 5,
     "en/anthropic-fear-en.html": 5,
     "en/apply-ai-eu-strategy-en.html": 5,
-    "en/ars-notoria-e-ai-en.html": 5,
     "en/cassieri-remoti-ai-en.html": 5,
     "en/gemma4-26b-en.html": 5,
     "en/glm-5-en": 5,
@@ -515,7 +516,6 @@
     "en/malta-openai-en": 5,
     "en/onu-report-2026-en.html": 5,
     "en/poesia-ai-security-en": 5,
-    "en/qwen38-27b-en.html": 5,
     "en/sistema-sicurezza-ai-en.html": 5,
     "en/stanford-ai-index-2026-en.html": 5,
     "en/subliminal-learning-en.html": 5,
@@ -647,6 +647,7 @@
     "en/convergenza-modelli-scientifici-en.html": 4,
     "en/cookie": 4,
     "en/cyborg-centauri-automi-en.html": 4,
+    "en/dspark-en": 4,
     "en/dwarfstar-antirez-en": 4,
     "en/esodo-silenzioso-en.html": 4,
     "en/google-ue-indagine-en.html": 4,
@@ -657,6 +658,7 @@
     "en/mdash-microsoft-en.html": 4,
     "en/ornith-1.0-en": 4,
     "en/project-glasswing-mythos-en.html": 4,
+    "en/prompt-injection-camel-en": 4,
     "en/quantum-echoes-en.html": 4,
     "en/qwen3.5-locale-puntata2-en.html": 4,
     "en/qwen36-35b-ai-en.html": 4,
@@ -762,6 +764,7 @@
     "it/robotica-2025": 4,
     "it/rsl-really-simple-licensing.html": 4,
     "it/silicon-valley-ai-pac.html": 4,
+    "it/strumenti-oracoli-caso-deloitte": 4,
     "de/AI_Aziende_e_Servizi_de.html": 3,
     "de/AI_Valutazione_ed_etica_de.html": 3,
     "de/AI_coding_security_de.html": 3,
@@ -836,7 +839,6 @@
     "en/claude-watermark-en.html": 3,
     "en/colibri-en": 3,
     "en/degregori-ai-war-en": 3,
-    "en/dspark-en": 3,
     "en/eset-apt-report-en": 3,
     "en/gemma4-12b-q8-en.html": 3,
     "en/giganti-ai-bocciati-seconda-puntata-en": 3,
@@ -859,7 +861,6 @@
     "en/pentagono-anthropic-openai-en.html": 3,
     "en/poesia-ai-security-en.html": 3,
     "en/power-sampling-en": 3,
-    "en/prompt-injection-camel-en": 3,
     "en/quantum-echoes_en.html": 3,
     "en/qwen3.5-locale-puntata1-en": 3,
     "en/robot-tax-sanders-en": 3,
@@ -993,7 +994,6 @@
     "it/prompt-repetition": 3,
     "it/soofi-s": 3,
     "it/steering-llm": 3,
-    "it/strumenti-oracoli-caso-deloitte": 3,
     "de/AI-Cosciente_de.html": 2,
     "de/AI_Creazione_Contenuti_de.html": 2,
     "de/AI_fronte_Cyber_de.html": 2,
@@ -1082,6 +1082,7 @@
     "en/dspark-en.html": 2,
     "en/dwarfstar-antirez-en.html": 2,
     "en/esodo-silenzioso-en": 2,
+    "en/fable5-opus5-switching-task-en": 2,
     "en/gina-assistente-vocale-en": 2,
     "en/google-ai-revolution-en": 2,
     "en/google-threat-intelligence-en": 2,
@@ -1109,6 +1110,7 @@
     "en/prompt-repetition-en": 2,
     "en/qwen3.5-locale-puntata2-en": 2,
     "en/qwen38-27b-en": 2,
+    "en/qwen38-27b-uncensored-en": 2,
     "en/rapporto-leonardo-2026-parte2-en": 2,
     "en/recursivemas.html": 2,
     "en/robot-tax-sanders_en.html": 2,
@@ -1308,6 +1310,7 @@
     "de/aisi-benchmark-de": 1,
     "de/alibaba-qwen3-de.html": 1,
     "de/alibaba-qwen3_de.html": 1,
+    "de/anonimizzazione-de": 1,
     "de/antigravity-security-de": 1,
     "de/apply-ai-eu-strategy-de": 1,
     "de/apply-ai-eu-strategy-de.html": 1,
@@ -1406,8 +1409,8 @@
     "en/codespeak-en": 1,
     "en/datacenter-proteste-usa-en": 1,
     "en/emergence-world-en": 1,
+    "en/engram-en.html": 1,
     "en/european-tech-map-en": 1,
-    "en/fable5-opus5-switching-task-en": 1,
     "en/fda-ema-aim-nash-ai-en": 1,
     "en/feed": 1,
     "en/freebuff-en": 1,
@@ -1451,7 +1454,6 @@
     "en/quantum-echoes-en": 1,
     "en/qwen3-tts-en": 1,
     "en/qwen36-35b-ai-en": 1,
-    "en/qwen38-27b-uncensored-en": 1,
     "en/rapporto-leonardo-2026-parte1-en": 1,
     "en/recursivemas-en": 1,
     "en/rsl-really-simple-licensing_en.html": 1,
@@ -1491,6 +1493,7 @@
     "es/deepseek-ocr-es.html": 1,
     "es/deepseek-ocr_es.html": 1,
     "es/diffusion-vs-autoregressive-es": 1,
+    "es/fable5-opus5-switching-task-es": 1,
     "es/fable5-opus5-switching-task-es.html": 1,
     "es/freebuff-es.html": 1,
     "es/gemma4-26b-es": 1,
@@ -1580,6 +1583,7 @@
     "fr/mercury2-fr": 1,
     "fr/msa-100m-token-fr": 1,
     "fr/muse-glimmer30b-fr": 1,
+    "fr/navier-stokes-fr": 1,
     "fr/navier-stokes-fr.html": 1,
     "fr/omnivoice-studio-fr": 1,
     "fr/onu-report-2026-fr.html": 1,
@@ -9063,6 +9067,97 @@
             "1 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
           ]
         }
+      },
+      "2026-10-01": {
+        "total_views": 23,
+        "views_by_lang": {
+          "it": 11,
+          "fr": 2,
+          "en": 8,
+          "de": 1,
+          "es": 1
+        },
+        "views_by_tag": {
+          "Generative AI": 5,
+          "Ethics & Society": 3,
+          "Applications": 3,
+          "Business": 1,
+          "E-learning": 1,
+          "Training": 1,
+          "Research": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/ai-epanortosi",
+            "views": 1
+          },
+          {
+            "path": "it/gina-assistente-vocale.html",
+            "views": 1
+          },
+          {
+            "path": "it/cookie",
+            "views": 1
+          },
+          {
+            "path": "it/pignataro-intervista2.html",
+            "views": 1
+          },
+          {
+            "path": "it/navier-stokes",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 5,
+          "it/ai-epanortosi": 1,
+          "it/gina-assistente-vocale.html": 1,
+          "it/cookie": 1,
+          "it/pignataro-intervista2.html": 1,
+          "it/navier-stokes": 1,
+          "fr/stanford-ai-index-2026-fr": 1,
+          "en/kimik2.5-en": 1,
+          "en/ars-notoria-e-ai-en.html": 1,
+          "en/qwen38-27b-en.html": 1,
+          "en/dspark-en": 1,
+          "en/prompt-injection-camel-en": 1,
+          "it/strumenti-oracoli-caso-deloitte": 1,
+          "en/fable5-opus5-switching-task-en": 1,
+          "en/qwen38-27b-uncensored-en": 1,
+          "de/anonimizzazione-de": 1,
+          "en/engram-en.html": 1,
+          "es/fable5-opus5-switching-task-es": 1,
+          "fr/navier-stokes-fr": 1
+        },
+        "counter_total": 16199,
+        "window_start": "2026-10-01T13:27:19.756508+00:00",
+        "window_end": "2026-10-02T06:02:32.489020+00:00",
+        "data_quality": {
+          "lost_views": 0,
+          "regressions": [],
+          "regressions_count": 0,
+          "hourly_regressions": [],
+          "dropped_writes": 0,
+          "missing_paths": [],
+          "unreadable_paths": [],
+          "ignored_dips_views": 0,
+          "twin_collisions": [
+            {
+              "path": "de",
+              "raw_path": "de",
+              "count": 1,
+              "duplicate_same_key": true
+            }
+          ],
+          "twin_baseline": [],
+          "suspicious_new_paths": [],
+          "counter_before": 16176,
+          "counter_after": 16199,
+          "net_change": 23,
+          "warnings": [
+            "1 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
+          ]
+        }
       }
     },
     "monthly": {
@@ -9263,36 +9358,99 @@
         ],
         "dropped_views": 0,
         "counter_total": 16176
+      },
+      "2026-10": {
+        "total_views": 23,
+        "views_by_lang": {
+          "it": 11,
+          "fr": 2,
+          "en": 8,
+          "de": 1,
+          "es": 1
+        },
+        "views_by_tag": {
+          "Generative AI": 5,
+          "Ethics & Society": 3,
+          "Applications": 3,
+          "Business": 1,
+          "E-learning": 1,
+          "Training": 1,
+          "Research": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/ai-epanortosi",
+            "views": 1
+          },
+          {
+            "path": "it/gina-assistente-vocale.html",
+            "views": 1
+          },
+          {
+            "path": "it/cookie",
+            "views": 1
+          },
+          {
+            "path": "it/pignataro-intervista2.html",
+            "views": 1
+          },
+          {
+            "path": "it/navier-stokes",
+            "views": 1
+          },
+          {
+            "path": "fr/stanford-ai-index-2026-fr",
+            "views": 1
+          },
+          {
+            "path": "en/kimik2.5-en",
+            "views": 1
+          },
+          {
+            "path": "en/ars-notoria-e-ai-en.html",
+            "views": 1
+          },
+          {
+            "path": "en/qwen38-27b-en.html",
+            "views": 1
+          },
+          {
+            "path": "en/dspark-en",
+            "views": 1
+          }
+        ],
+        "dropped_views": 0,
+        "counter_total": 16199
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 5775,
+        "total_views": 5798,
         "views_by_lang": {
-          "it": 3183,
-          "en": 887,
-          "de": 573,
-          "fr": 573,
-          "es": 559
+          "it": 3194,
+          "en": 895,
+          "de": 574,
+          "fr": 575,
+          "es": 560
         },
         "views_by_tag": {
-          "Generative AI": 2269,
-          "Applications": 1020,
+          "Generative AI": 2274,
+          "Applications": 1023,
           "Security": 607,
-          "Research": 1093,
-          "Ethics & Society": 1556,
-          "Training": 614,
-          "Business": 901,
+          "Research": 1094,
+          "Ethics & Society": 1559,
+          "Training": 615,
+          "Business": 902,
           "Copyright": 90,
           "Startups": 201,
-          "E-learning": 174
+          "E-learning": 175
         },
         "dropped_views": 0,
-        "counter_total": 16176
+        "counter_total": 16199
       }
     }
   },
-  "cumulative_total": 16176,
-  "previous_cumulative_total": 15941,
+  "cumulative_total": 16199,
+  "previous_cumulative_total": 16176,
   "dropped_writes_by_day": {}
 }

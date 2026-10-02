@@ -20,6 +20,10 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 # Constants
 SITE_URL = "https://aitalk.it/"
 BASE_OUTPUT_DIR = "dist"
+# Build cache is kept OUTSIDE the published directory so it doesn't get
+# deployed (it used to end up publicly downloadable at /build_cache.json).
+CACHE_DIR = ".cache"
+CACHE_FILE = os.path.join(CACHE_DIR, "build_cache.json")
 ARTICLES_DIR = "articoli" # New constant for local articles path
 IMAGE_ASSETS_DIR = "assets/images"
 AUDIO_ASSETS_DIR = "assets/audio"
@@ -50,7 +54,7 @@ def json_serial(obj):
     raise TypeError("Type %s not serializable" % type(obj))
 
 def load_build_cache():
-    cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
+    cache_path = CACHE_FILE
     if os.path.exists(cache_path):
         try:
             with open(cache_path, 'r', encoding='utf-8') as f:
@@ -60,8 +64,8 @@ def load_build_cache():
     return {}
 
 def save_build_cache(cache):
-    os.makedirs(BASE_OUTPUT_DIR, exist_ok=True)
-    cache_path = os.path.join(BASE_OUTPUT_DIR, "build_cache.json")
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    cache_path = CACHE_FILE
     with open(cache_path, 'w', encoding='utf-8') as f:
         json.dump(cache, f, indent=2, default=json_serial)
 

@@ -6,7 +6,7 @@
 [[plugins]]
   package = "netlify-plugin-cache"
   [plugins.inputs]
-    paths = ["dist"]
+    paths = ["dist", ".cache"]
 
 # Istruzioni per il reindirizzamento per le pagine 404
 

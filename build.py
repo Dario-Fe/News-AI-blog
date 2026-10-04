@@ -79,7 +79,7 @@ def write_if_changed(filepath, content):
                     return False
         except Exception:
             pass # Fallback to writing if reading fails
-    
+
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
@@ -100,7 +100,7 @@ def process_and_save_image(image_source, output_dir_base, article_dir=""):
 
     image_bytes = None
     source_filename = ""
-    
+
     if image_source.startswith("http"):
         try:
             response = requests.get(image_source, timeout=15)
@@ -124,7 +124,7 @@ def process_and_save_image(image_source, output_dir_base, article_dir=""):
         raise ValueError("Image processing failed: image_bytes is empty.")
 
     try:
-        content_hash = hashlib.sha1(image_bytes).hexdigest()[:10]
+        content_hash = hashlib.sha1(image_bytes + b"v2:w1400:q78").hexdigest()[:10]
         base_name, _ = os.path.splitext(source_filename)
         base_name = re.sub(r'[^a-zA-Z0-9_-]', '', base_name.replace(' ', '-'))
         if not base_name:
@@ -146,26 +146,34 @@ def process_and_save_image(image_source, output_dir_base, article_dir=""):
             if not os.path.exists(os.path.join(output_dir_base, p)):
                 all_exist = False
                 break
-        
+
         if all_exist:
             return image_paths
 
         img = Image.open(BytesIO(image_bytes))
         img = img.convert("RGB")
 
+        # Cap della larghezza: le "full" non vengono più salvate alla
+        # risoluzione originale. Contiene il peso della pagina (dominato
+        # dalle immagini) sia per i lettori sia per i crawler.
+        MAX_FULL_WIDTH = 1400
+        if img.width > MAX_FULL_WIDTH:
+            ratio = MAX_FULL_WIDTH / img.width
+            img = img.resize((MAX_FULL_WIDTH, round(img.height * ratio)), Image.LANCZOS)
+
         thumb = img.copy()
         thumb.thumbnail((400, 400))
         thumb_path_webp = os.path.join(output_dir_images, f"{base_filename}-thumb.webp")
         thumb.save(thumb_path_webp, "webp", quality=80)
-        
+
         full_path_webp = os.path.join(output_dir_images, f"{base_filename}-full.webp")
-        img.save(full_path_webp, "webp", quality=85)
+        img.save(full_path_webp, "webp", quality=78)
 
         thumb_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-thumb.jpeg")
         thumb.save(thumb_path_jpeg, "jpeg", quality=80)
-        
+
         full_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-full.jpeg")
-        img.save(full_path_jpeg, "jpeg", quality=85)
+        img.save(full_path_jpeg, "jpeg", quality=80)
 
         return image_paths
 
@@ -217,7 +225,7 @@ def process_author_photo(photo_path, output_dir_base):
     try:
         photo_filename_webp = f"{base_filename}.webp"
         photo_filename_jpeg = f"{base_filename}.jpeg"
-        
+
         photo_paths = {
             'webp': f"{IMAGE_ASSETS_DIR}/authors/{photo_filename_webp}",
             'jpeg': f"{IMAGE_ASSETS_DIR}/authors/{photo_filename_jpeg}"
@@ -235,7 +243,7 @@ def process_author_photo(photo_path, output_dir_base):
         img.save(os.path.join(output_dir_images, photo_filename_jpeg), "jpeg", quality=85)
 
         return photo_paths
-        
+
     except Exception as e:
         print(f"  - ERROR: Could not process author image {photo_path}. Error: {e}")
         raise
@@ -248,23 +256,23 @@ def pre_process_article_media(md_file_info, output_dir_base):
     try:
         with open(md_file_info['path'], 'r', encoding='utf-8') as f:
             post = frontmatter.load(f)
-        
+
         # Process images in content
         html_content = markdown2.markdown(post.content)
         soup = BeautifulSoup(html_content, 'html.parser')
-        
+
         for img in soup.find_all('img'):
             src = img.get('src')
             if src:
                 process_and_save_image(src, output_dir_base, article_dir=md_file_info['parent_dir'])
-        
+
         # Process audio if exists
         if md_file_info.get('audio_path'):
             process_audio(md_file_info['audio_path'], output_dir_base)
-            
+
     except Exception as e:
         print(f"  - ERROR pre-processing media for {md_file_info['name']}: {e}")
-        # We don't raise here to allow the build to attempt to continue, 
+        # We don't raise here to allow the build to attempt to continue,
         # but errors will likely resurface in the main phase.
 
 def format_spotify_embed_url(url):
@@ -301,7 +309,7 @@ def process_audio(audio_path, output_dir_base):
     try:
         with open(audio_path, "rb") as f:
             audio_bytes = f.read()
-            
+
         content_hash = hashlib.sha1(audio_bytes).hexdigest()[:10]
         original_filename = os.path.basename(audio_path)
         base_name, ext = os.path.splitext(original_filename)
@@ -318,7 +326,7 @@ def process_audio(audio_path, output_dir_base):
 
         with open(dest_path, "wb") as f:
             f.write(audio_bytes)
-        
+
         print(f"  - Saved audio to {relative_path}")
         return relative_path
 
@@ -1084,7 +1092,7 @@ def get_local_articles_db():
 
         if article_dir not in file_groups:
             file_groups[article_dir] = {'md': [], 'mp3': []}
-        
+
         for filename in files:
             file_path = os.path.join(root, filename)
             if filename.endswith('.md'):
@@ -1098,23 +1106,23 @@ def get_local_articles_db():
 
         for md_file in files['md']:
             md_basename = os.path.splitext(md_file['name'])[0]
-            
+
             lang = 'it' # Default language
             if md_basename.endswith('_en'): lang = 'en'
             elif md_basename.endswith('_es'): lang = 'es'
             elif md_basename.endswith('_fr'): lang = 'fr'
             elif md_basename.endswith('_de'): lang = 'de'
-            
+
             md_file['audio_path'] = mp3_lookup.get(md_basename)
             md_file['parent_dir'] = article_dir
-            
+
             if article_dir not in articles_db:
                 articles_db[article_dir] = {}
             if lang not in articles_db[article_dir]:
                 articles_db[article_dir][lang] = []
-            
+
             articles_db[article_dir][lang].append(md_file)
-            
+
     return articles_db
 
 def get_files_for_lang(articles_db, lang='it'):
@@ -1143,7 +1151,7 @@ def load_authors(lang='it'):
         return authors_db
 
     all_author_files = [f for f in os.listdir(authors_dir) if f.endswith(".md")]
-    
+
     author_slugs = {}
     for filename in all_author_files:
         slug = re.sub(r'(_[a-z]{2})?\.md$', '', filename)
@@ -1164,7 +1172,7 @@ def load_authors(lang='it'):
                 target_filename = lang_file
             elif base_file in files:
                 target_filename = base_file
-        
+
         if not target_filename:
             print(f"  - WARN: No suitable file found for author slug '{slug}' and lang '{lang}'.")
             continue
@@ -1172,7 +1180,7 @@ def load_authors(lang='it'):
         filepath = os.path.join(authors_dir, target_filename)
         try:
             author_post = frontmatter.load(filepath)
-            
+
             authors_db[slug] = {
                 "slug": slug,
                 "name": author_post.metadata.get("name"),
@@ -1184,7 +1192,7 @@ def load_authors(lang='it'):
         except Exception as e:
             print(f"  - ERROR: Could not process author file {target_filename}. Error: {e}")
             raise
-    
+
     return authors_db
 
 def main():
@@ -1214,7 +1222,7 @@ def main():
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    
+
     image_dir = os.path.join(BASE_OUTPUT_DIR, IMAGE_ASSETS_DIR)
     os.makedirs(image_dir, exist_ok=True)
     os.makedirs(os.path.join(BASE_OUTPUT_DIR, AUDIO_ASSETS_DIR), exist_ok=True)
@@ -1231,7 +1239,7 @@ def main():
 
     # Load cache and check dependencies
     cache = load_build_cache()
-    
+
     # Calculate global hashes
     global_hashes = {
         "templates/base.html": get_file_hash("templates/base.html"),
@@ -1240,7 +1248,7 @@ def main():
         "style.css": get_file_hash("style.css"),
         "build.py": get_file_hash("build.py")
     }
-    
+
     # Check if any global file has changed
     global_changed = False
     if "globals" not in cache:
@@ -1255,21 +1263,21 @@ def main():
     # We also check if this specific language has seen the global changes
     if "lang_globals_seen" not in cache:
         cache["lang_globals_seen"] = {}
-    
+
     # Generate a single hash representing the state of all globals
     combined_globals_hash = get_string_hash("".join([h for h in global_hashes.values() if h]))
-    
+
     if cache["lang_globals_seen"].get(lang) != combined_globals_hash:
         print(f"  - GLOBAL CHANGES NOT YET APPLIED FOR LANGUAGE: {lang}")
         global_changed = True
-    
+
     # Track if anything specific to this language changed
     language_changed = global_changed
 
     # Author Hashing
     if "authors" not in cache: cache["authors"] = {}
     if lang not in cache["authors"]: cache["authors"][lang] = {}
-    
+
     authors_dir = "content/authors"
     if os.path.exists(authors_dir):
         for filename in os.listdir(authors_dir):
@@ -1284,7 +1292,7 @@ def main():
     # Static Pages Hashing
     if "pages" not in cache: cache["pages"] = {}
     if lang not in cache["pages"]: cache["pages"][lang] = {}
-    
+
     pages_dir = "pages"
     if os.path.exists(pages_dir):
         for filename in os.listdir(pages_dir):
@@ -1308,7 +1316,7 @@ def main():
     articles_to_process = []
     expected_html_files = set()
     slugs_seen = {}
-    
+
     if "articles" not in cache:
         cache["articles"] = {}
     if lang not in cache["articles"]:
@@ -1316,7 +1324,7 @@ def main():
 
     for md_file in sorted_md_files:
         md_path = md_file['path']
-        
+
         # Composite hash: MD content + all files in the same directory (images, audio)
         article_dir = os.path.dirname(md_path)
         all_dir_files = sorted([os.path.join(article_dir, f) for f in os.listdir(article_dir) if os.path.isfile(os.path.join(article_dir, f))])
@@ -1325,14 +1333,14 @@ def main():
         md_file['_composite_hash'] = current_hash # Store for later use in cache update
 
         article_slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
-        
+
         # Duplicate slug detection
         if article_slug in slugs_seen:
             print(f"WARNING: Duplicate slug detected: '{article_slug}'")
             print(f"  - Original: {slugs_seen[article_slug]}")
             print(f"  - Duplicate: {md_path}")
         slugs_seen[article_slug] = md_path
-        
+
         expected_html_files.add(f"{article_slug}.html")
         output_path = os.path.join(output_dir, f"{article_slug}.html")
 
@@ -1388,7 +1396,7 @@ def main():
         slug = os.path.splitext(md_file['name'])[0].strip().replace('_', '-')
         if slug in slug_to_data:
             final_processed_articles.append(slug_to_data[slug])
-    
+
     processed_articles = final_processed_articles
 
     # 4. Cleanup and Cache Sanification
@@ -1431,7 +1439,7 @@ def main():
     save_build_cache(cache)
 
     generate_article_pages(authors_data, processed_articles, output_dir, lang, global_changed)
-    
+
     if language_changed:
         generate_author_pages(authors_data, processed_articles, output_dir, lang)
         generate_index_page(processed_articles, output_dir, lang)
@@ -1507,11 +1515,11 @@ def process_article(md_file_info, output_dir_base, lang):
             if processed_paths:
                 if i == 0:
                     main_image_paths = processed_paths
-                
+
                 picture_tag = soup.new_tag("picture")
                 source_webp = soup.new_tag("source", attrs={"srcset": f"../{processed_paths['full_webp']}", "type": "image/webp"})
                 source_jpeg = soup.new_tag("source", attrs={"srcset": f"../{processed_paths['full_jpeg']}", "type": "image/jpeg"})
-                fallback_img = soup.new_tag("img", attrs={"src": f"../{processed_paths['full_jpeg']}", "alt": img.get('alt', 'Article image'), "loading": "lazy"})
+                fallback_img = soup.new_tag("img", attrs={"src": f"../{processed_paths['full_jpeg']}", "alt": img.get('alt', 'Article image'), "loading": "lazy", "decoding": "async"})
                 picture_tag.append(source_webp)
                 picture_tag.append(source_jpeg)
                 picture_tag.append(fallback_img)
@@ -1552,7 +1560,7 @@ def process_article(md_file_info, output_dir_base, lang):
 
         final_html_content = str(soup)
         slug = os.path.splitext(md_file_info['name'])[0].strip().replace('_', '-')
-        
+
         return {
             "title": title,
             "summary": summary,
@@ -1578,7 +1586,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
     Generates an HTML page for each article.
     """
     print("\nGenerating article pages...")
-    
+
     # Check if we can skip all together (this print is mostly for user feedback)
     if not global_changed and all(a.get("_is_cached") for a in articles):
         # We still might want to check if files exist, but main() already did that for _is_cached articles
@@ -1659,7 +1667,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
             {tags_html}
             {media_container_html}
             {article['html_content']}
-            
+
             <div class="a2a_kit a2a_kit_size_32 a2a_default_style" style="margin-top: 30px; text-align: center;">
                 <a class="a2a_button_facebook"></a>
                 <a class="a2a_button_x"></a>
@@ -1677,7 +1685,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
 
         temp_html = base_template.replace("{{content}}", article_view_html)
         temp_html = temp_html.replace("{{pagination_controls}}", "")
-        
+
         page_title = f"{article['title']} - AITalk"
         meta_description = article['summary']
         og_url = f"{SITE_URL}{lang}/{article['path']}"
@@ -1725,7 +1733,7 @@ def generate_article_pages(authors_data, articles, output_dir, lang='it', global
         base_data = get_base_template_data(depth=1)
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
-        
+
         dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
         temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
@@ -1754,7 +1762,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
 
         author_articles = [p for p in articles if p.get('author') == author['name']]
         author_articles.sort(key=lambda p: p.get('date'), reverse=True)
-        
+
         article_list_html = ""
         if author_articles:
             for article in author_articles[:10]:
@@ -1779,7 +1787,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
                     <img src="../../{photo_paths['jpeg']}" alt="{author['name']}" loading="lazy" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
                 </picture>
                 """
-        
+
         content_html = author_template.replace("{{author_name}}", author['name'])
         content_html = content_html.replace("{{author_photo_picture_tag}}", photo_tag)
         content_html = content_html.replace("{{author_links_html}}", links_html)
@@ -1792,7 +1800,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         page_title_suffix = TRANSLATIONS["author_page"]["page_title_suffix"].get(lang, "Author at AITalk")
         page_title = f"{author['name']} - {page_title_suffix}"
         meta_description = BeautifulSoup(author['bio'], 'html.parser').get_text(strip=True)[:155]
-        
+
         temp_html = base_template.replace("{{content}}", content_html)
         temp_html = temp_html.replace("{{page_title}}", page_title)
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
@@ -1828,7 +1836,7 @@ def generate_author_pages(authors_data, articles, output_dir, lang='it'):
         base_data = get_base_template_data(depth=2)
         for placeholder, path in base_data.items():
             temp_html = temp_html.replace(placeholder, path)
-        
+
         dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=2)
         temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
@@ -1871,7 +1879,7 @@ def load_popular_articles(lang='it'):
             parent_dir_to_file_info[parent_dir] = file_info
             art_slug = os.path.splitext(file_info['name'])[0].strip().replace('_', '-')
             slug_to_parent_dir[art_slug] = parent_dir
-            
+
             slug_no_suffix = re.sub(r'-(en|es|fr|de)$', '', art_slug)
             if slug_no_suffix not in slug_to_parent_dir:
                 slug_to_parent_dir[slug_no_suffix] = parent_dir
@@ -2033,7 +2041,7 @@ def generate_index_page(articles, output_dir, lang='it'):
         tags_html = ""
         if featured_article.get('tags'):
             tags_html = '<div class="article-card-tags">' + "".join([f'<span class="tag">{tag}</span>' for tag in featured_article['tags']]) + '</div>'
-        
+
         image_html = f'<img src="logo_vn_ia.png" alt="{featured_article["title"]}" loading="lazy">'
         if featured_article.get('image_paths'):
             paths = featured_article['image_paths']
@@ -2070,7 +2078,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     # Grid contains articles from index 1 to 16 (exactly 15 articles)
     ARTICLES_PER_PAGE = 16
     initial_grid_articles = articles[1:ARTICLES_PER_PAGE]
-    
+
     grid_html = '<div id="articles-grid" data-is-home="true">\n'
     for article in initial_grid_articles:
         date_html = ""
@@ -2081,7 +2089,7 @@ def generate_index_page(articles, output_dir, lang='it'):
         tags_html = ""
         if article.get('tags'):
             tags_html = '<div class="article-card-tags">' + "".join([f'<span class="tag">{tag}</span>' for tag in article['tags']]) + '</div>'
-        
+
         image_html = f'<img src="logo_vn_ia.png" alt="{article["title"]}" loading="lazy">'
         if article.get('image_paths'):
             paths = article['image_paths']
@@ -2122,7 +2130,7 @@ def generate_index_page(articles, output_dir, lang='it'):
         print(f"  - Generated articles.json with {len(articles)} articles.")
 
     pagination_html = '<div id="view-more-container"></div>' if len(articles) > ARTICLES_PER_PAGE else ''
-    
+
     band_title = _t("newsletter_band", "title", lang)
     band_paragraph = _t("newsletter_band", "paragraph", lang)
     band_button = _t("newsletter_box", "button_text", lang)
@@ -2162,7 +2170,7 @@ def generate_index_page(articles, output_dir, lang='it'):
     base_data = get_base_template_data(depth=1)
     for placeholder, path in base_data.items():
         temp_html = temp_html.replace(placeholder, path)
-    
+
     dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
     temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
@@ -2235,7 +2243,7 @@ def generate_local_pages(output_dir, lang='it'):
                     placeholder = f"{{{{metodo_page_{key}}}}}"
                     translation = trans_dict.get(lang, trans_dict["it"])
                     final_content = final_content.replace(placeholder, translation)
-            
+
             thank_you_link = f"/{lang}/thank-you.html"
             final_content = final_content.replace("{{thank_you_link}}", thank_you_link)
 
@@ -2251,11 +2259,11 @@ def generate_local_pages(output_dir, lang='it'):
                     hidden_input = soup.new_tag('input', attrs={'type': 'hidden', 'name': 'language', 'value': lang})
                     form.append(hidden_input)
                 final_content = str(soup)
-            
+
             # Replace placeholders in the base template
             temp_html = base_template.replace("{{content}}", final_content)
             temp_html = temp_html.replace("{{pagination_controls}}", "")
-            
+
             # SEO
             subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
             meta_info = local_pages_meta.get(filename, {"title": {"it": "AITalk"}, "description": {"it": subtitle}})
@@ -2267,7 +2275,7 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{meta_description}}", meta_description)
             temp_html = temp_html.replace("{{og_url}}", og_url)
             temp_html = temp_html.replace("{{og_image}}", og_image)
-            
+
             temp_html = temp_html.replace("{{subtitle}}", TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"]))
             temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
             temp_html = temp_html.replace("{{lang}}", lang)
@@ -2278,7 +2286,7 @@ def generate_local_pages(output_dir, lang='it'):
             temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
             temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
             temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
-            
+
             depth = 1
 
             temp_html = temp_html.replace("{{lang}}", lang)
@@ -2289,7 +2297,7 @@ def generate_local_pages(output_dir, lang='it'):
             base_data = get_base_template_data(depth=1)
             for placeholder, path in base_data.items():
                 temp_html = temp_html.replace(placeholder, path)
-            
+
             dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
             temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
@@ -2297,76 +2305,28 @@ def generate_local_pages(output_dir, lang='it'):
 
 def generate_404_page(output_dir, lang='it'):
     """
-    Generates a 404.html page for the given language.
+    Genera un 404.html autonomo e minimale: nessun asset esterno, nessuno
+    script e nessun beacon. Riduce la banda consumata dai crawler sugli URL
+    inesistenti e non inquina il contatore visite.
     """
     print(f"\nGenerating 404 page for language: '{lang}'...")
     try:
-        with open("templates/base.html", "r", encoding='utf-8') as f:
-            base_template = f.read()
         with open("templates/404.html", "r", encoding='utf-8') as f:
-            not_found_content = f.read()
+            temp_html = f.read()
 
-        # Translate the content of the 404 page itself
+        # Traduzioni del contenuto (heading, paragraph, button_text, ...)
         for key, trans_dict in TRANSLATIONS["not_found_page"].items():
-            placeholder = f"{{{{not_found_page_{key}}}}}"
             translation = trans_dict.get(lang, trans_dict["it"])
-            not_found_content = not_found_content.replace(placeholder, translation)
+            temp_html = temp_html.replace(f"{{{{not_found_page_{key}}}}}", translation)
 
-        # Inject the 404 content into the base template
-        temp_html = base_template.replace("{{content}}", not_found_content)
-        temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on 404 page
-
-        # Set up translations and paths for the base template
-        subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
-        temp_html = temp_html.replace("{{subtitle}}", subtitle)
-        temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
-        temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", "1")
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", "2")
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", "1")
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
-        temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
-        temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
-
-        # SEO and metadata
+        # SEO e metadata
         meta_info = TRANSLATIONS["not_found_page"]
         page_title = f"{meta_info['title'].get(lang, meta_info['title']['it'])} - AITalk"
         meta_description = meta_info['paragraph'].get(lang, meta_info['paragraph']['it'])
-        og_url = f"{SITE_URL}{lang}/404.html"
-        og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo
-
         temp_html = temp_html.replace("{{page_title}}", page_title)
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
-        temp_html = temp_html.replace("{{og_url}}", og_url)
-        temp_html = temp_html.replace("{{og_image}}", og_image)
-
-        # Asset paths (depth is 1, as it's in the root of the lang folder)
-        depth = 1
-
         temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", str(depth))
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        base_data = get_base_template_data(depth=1)
-        for placeholder, path in base_data.items():
-            temp_html = temp_html.replace(placeholder, path)
-        
-        dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
-        temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
-        # Write the final file
         output_path = os.path.join(output_dir, "404.html")
         if write_if_changed(output_path, temp_html):
             print(f"  - Generated 404.html for '{lang}'")
@@ -2385,7 +2345,7 @@ def prune_orphaned_assets(cache):
     """
     print("\nPruning orphaned assets across all languages...")
     expected_media_files = set()
-    
+
     if "articles" not in cache:
         print("  - No articles in cache. Skipping pruning to be safe.")
         return
@@ -2400,11 +2360,11 @@ def prune_orphaned_assets(cache):
             if article_data.get('image_paths'):
                 for p in article_data['image_paths'].values():
                     expected_media_files.add(os.path.basename(p))
-            
+
             # Audio
             if article_data.get('audio_path'):
                 expected_media_files.add(os.path.basename(article_data['audio_path']))
-                
+
             # Images in content
             if article_data.get('html_content'):
                 soup = BeautifulSoup(article_data['html_content'], 'html.parser')
@@ -2451,24 +2411,24 @@ def copy_static_assets(output_dir):
     Uses write_if_changed logic to avoid redundant disk I/O.
     """
     # print(f"\nCopying static assets to {output_dir}...")
-    
+
     # Copy root files
     static_extensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.css', '.js', '.html', '.webp', '.ico']
     for item in os.listdir('.'):
         if os.path.isfile(item) and any(item.endswith(ext) for ext in static_extensions):
             if item in ["forms.html"]: # Skip system/template files
                 continue
-            
+
             dest_path = os.path.join(output_dir, item)
             with open(item, 'rb') as f:
                 content = f.read()
-            
+
             # Binary check for images/assets
             if os.path.exists(dest_path):
                 with open(dest_path, 'rb') as f:
                     if f.read() == content:
                         continue
-            
+
             os.makedirs(os.path.dirname(dest_path), exist_ok=True)
             with open(dest_path, 'wb') as f:
                 f.write(content)
@@ -2481,15 +2441,15 @@ def copy_static_assets(output_dir):
                 src_path = os.path.join(root, filename)
                 rel_path = os.path.relpath(src_path, public_dir)
                 dest_path = os.path.join(output_dir, rel_path)
-                
+
                 with open(src_path, 'rb') as f:
                     content = f.read()
-                
+
                 if os.path.exists(dest_path):
                     with open(dest_path, 'rb') as f:
                         if f.read() == content:
                             continue
-                
+
                 os.makedirs(os.path.dirname(dest_path), exist_ok=True)
                 with open(dest_path, 'wb') as f:
                     f.write(content)
@@ -2500,7 +2460,7 @@ def generate_rss_feed(articles, output_dir, lang='it'):
     """
     print("\nGenerating RSS feed...")
     fg = FeedGenerator()
-    
+
     rss_title = TRANSLATIONS["rss"]["title"].get(lang, TRANSLATIONS["rss"]["title"]["it"])
     rss_description = TRANSLATIONS["rss"]["description"].get(lang, TRANSLATIONS["rss"]["description"]["it"])
 
@@ -2524,7 +2484,7 @@ def generate_rss_feed(articles, output_dir, lang='it'):
             dt_obj = pub_date_val
             if isinstance(dt_obj, date) and not isinstance(dt_obj, datetime):
                 dt_obj = datetime.combine(dt_obj, datetime.min.time())
-            
+
             if dt_obj.tzinfo is None:
                 dt_obj = dt_obj.replace(tzinfo=timezone.utc)
             fe.pubDate(dt_obj)
@@ -2532,7 +2492,7 @@ def generate_rss_feed(articles, output_dir, lang='it'):
         if article.get('image_paths'):
             enclosure_url = f"{SITE_URL}{article['image_paths']['full_jpeg']}"
             fe.enclosure(url=enclosure_url, length='0', type='image/jpeg')
-            
+
     fg.rss_file(os.path.join(output_dir, 'rss.xml'), pretty=True)
     print(f"  - rss.xml (for {lang})")
 
@@ -2568,12 +2528,34 @@ def generate_robots_txt():
         "User-agent: *\n"
         "Allow: /\n"
         "Disallow: /*/assets/audio/\n"
-        "Disallow: /stats\n\n"
+        "Disallow: /stats\n"
+        "Crawl-delay: 1\n"
+        "\n"
+        "# Crawler aggressivi / SEO esclusi per contenere la banda.\n"
+        "# Motori di ricerca e crawler IA principali restano ammessi.\n"
+        "User-agent: Bytespider\n"
+        "Disallow: /\n\n"
+        "User-agent: MJ12bot\n"
+        "Disallow: /\n\n"
+        "User-agent: SemrushBot\n"
+        "Disallow: /\n\n"
+        "User-agent: AhrefsBot\n"
+        "Disallow: /\n\n"
+        "User-agent: DotBot\n"
+        "Disallow: /\n\n"
+        "User-agent: PetalBot\n"
+        "Disallow: /\n\n"
+        "User-agent: DataForSeoBot\n"
+        "Disallow: /\n\n"
+        "User-agent: serpstatbot\n"
+        "Disallow: /\n\n"
         f"Sitemap: {SITE_URL}sitemap.xml"
     )
     with open(os.path.join(BASE_OUTPUT_DIR, "robots.txt"), "w", encoding='utf-8') as f:
         f.write(content)
     print("  - robots.txt generated.")
+
+
 
 
 if __name__ == "__main__":

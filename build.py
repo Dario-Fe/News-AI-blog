@@ -124,7 +124,7 @@ def process_and_save_image(image_source, output_dir_base, article_dir=""):
         raise ValueError("Image processing failed: image_bytes is empty.")
 
     try:
-        content_hash = hashlib.sha1(image_bytes).hexdigest()[:10]
+        content_hash = hashlib.sha1(image_bytes + b"v2:w1400:q78").hexdigest()[:10]
         base_name, _ = os.path.splitext(source_filename)
         base_name = re.sub(r'[^a-zA-Z0-9_-]', '', base_name.replace(' ', '-'))
         if not base_name:
@@ -153,19 +153,27 @@ def process_and_save_image(image_source, output_dir_base, article_dir=""):
         img = Image.open(BytesIO(image_bytes))
         img = img.convert("RGB")
 
+        # Cap della larghezza: le "full" non vengono più salvate alla
+        # risoluzione originale. Contiene il peso della pagina (dominato
+        # dalle immagini) sia per i lettori sia per i crawler.
+        MAX_FULL_WIDTH = 1400
+        if img.width > MAX_FULL_WIDTH:
+            ratio = MAX_FULL_WIDTH / img.width
+            img = img.resize((MAX_FULL_WIDTH, round(img.height * ratio)), Image.LANCZOS)
+
         thumb = img.copy()
         thumb.thumbnail((400, 400))
         thumb_path_webp = os.path.join(output_dir_images, f"{base_filename}-thumb.webp")
         thumb.save(thumb_path_webp, "webp", quality=80)
         
         full_path_webp = os.path.join(output_dir_images, f"{base_filename}-full.webp")
-        img.save(full_path_webp, "webp", quality=85)
+        img.save(full_path_webp, "webp", quality=78)
 
         thumb_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-thumb.jpeg")
         thumb.save(thumb_path_jpeg, "jpeg", quality=80)
         
         full_path_jpeg = os.path.join(output_dir_images, f"{base_filename}-full.jpeg")
-        img.save(full_path_jpeg, "jpeg", quality=85)
+        img.save(full_path_jpeg, "jpeg", quality=80)
 
         return image_paths
 
@@ -1511,7 +1519,7 @@ def process_article(md_file_info, output_dir_base, lang):
                 picture_tag = soup.new_tag("picture")
                 source_webp = soup.new_tag("source", attrs={"srcset": f"../{processed_paths['full_webp']}", "type": "image/webp"})
                 source_jpeg = soup.new_tag("source", attrs={"srcset": f"../{processed_paths['full_jpeg']}", "type": "image/jpeg"})
-                fallback_img = soup.new_tag("img", attrs={"src": f"../{processed_paths['full_jpeg']}", "alt": img.get('alt', 'Article image'), "loading": "lazy"})
+                fallback_img = soup.new_tag("img", attrs={"src": f"../{processed_paths['full_jpeg']}", "alt": img.get('alt', 'Article image'), "loading": "lazy", "decoding": "async"})
                 picture_tag.append(source_webp)
                 picture_tag.append(source_jpeg)
                 picture_tag.append(fallback_img)
@@ -2297,76 +2305,28 @@ def generate_local_pages(output_dir, lang='it'):
 
 def generate_404_page(output_dir, lang='it'):
     """
-    Generates a 404.html page for the given language.
+    Genera un 404.html autonomo e minimale: nessun asset esterno, nessuno
+    script e nessun beacon. Riduce la banda consumata dai crawler sugli URL
+    inesistenti e non inquina il contatore visite.
     """
     print(f"\nGenerating 404 page for language: '{lang}'...")
     try:
-        with open("templates/base.html", "r", encoding='utf-8') as f:
-            base_template = f.read()
         with open("templates/404.html", "r", encoding='utf-8') as f:
-            not_found_content = f.read()
+            temp_html = f.read()
 
-        # Translate the content of the 404 page itself
+        # Traduzioni del contenuto (heading, paragraph, button_text, ...)
         for key, trans_dict in TRANSLATIONS["not_found_page"].items():
-            placeholder = f"{{{{not_found_page_{key}}}}}"
             translation = trans_dict.get(lang, trans_dict["it"])
-            not_found_content = not_found_content.replace(placeholder, translation)
+            temp_html = temp_html.replace(f"{{{{not_found_page_{key}}}}}", translation)
 
-        # Inject the 404 content into the base template
-        temp_html = base_template.replace("{{content}}", not_found_content)
-        temp_html = temp_html.replace("{{pagination_controls}}", "") # No pagination on 404 page
-
-        # Set up translations and paths for the base template
-        subtitle = TRANSLATIONS["subtitle"].get(lang, TRANSLATIONS["subtitle"]["it"])
-        temp_html = temp_html.replace("{{subtitle}}", subtitle)
-        temp_html = temp_html.replace("{{subscribe_link_text}}", TRANSLATIONS["subscribe"].get(lang, TRANSLATIONS["subscribe"]["it"]))
-        temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", "1")
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", "2")
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", "1")
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        temp_html = temp_html.replace("{{footer_curated_by}}", TRANSLATIONS["footer"]["curated_by"].get(lang, TRANSLATIONS["footer"]["curated_by"]["it"]))
-        temp_html = temp_html.replace("{{footer_contacts}}", TRANSLATIONS["footer"]["contacts"].get(lang, TRANSLATIONS["footer"]["contacts"]["it"]))
-        temp_html = temp_html.replace("{{footer_editorial_method}}", TRANSLATIONS["footer"]["editorial_method"].get(lang, TRANSLATIONS["footer"]["editorial_method"]["it"]))
-
-        # SEO and metadata
+        # SEO e metadata
         meta_info = TRANSLATIONS["not_found_page"]
         page_title = f"{meta_info['title'].get(lang, meta_info['title']['it'])} - AITalk"
         meta_description = meta_info['paragraph'].get(lang, meta_info['paragraph']['it'])
-        og_url = f"{SITE_URL}{lang}/404.html"
-        og_image = f"{SITE_URL}logo_vn_ia.png" # Use the main logo
-
         temp_html = temp_html.replace("{{page_title}}", page_title)
         temp_html = temp_html.replace("{{meta_description}}", meta_description)
-        temp_html = temp_html.replace("{{og_url}}", og_url)
-        temp_html = temp_html.replace("{{og_image}}", og_image)
-
-        # Asset paths (depth is 1, as it's in the root of the lang folder)
-        depth = 1
-
         temp_html = temp_html.replace("{{lang}}", lang)
-        temp_html = temp_html.replace("{{depth}}", str(depth))
-        temp_html = temp_html.replace("{{search_placeholder}}", TRANSLATIONS["search"]["placeholder"].get(lang, TRANSLATIONS["search"]["placeholder"]["it"]))
-        temp_html = temp_html.replace("{{search_label}}", TRANSLATIONS["search"]["label"].get(lang, TRANSLATIONS["search"]["label"]["it"]))
-        temp_html = temp_html.replace("{{search_no_results}}", TRANSLATIONS["search"]["no_results"].get(lang, TRANSLATIONS["search"]["no_results"]["it"]))
-        base_data = get_base_template_data(depth=1)
-        for placeholder, path in base_data.items():
-            temp_html = temp_html.replace(placeholder, path)
-        
-        dropdown_html = generate_language_dropdown_html(current_lang=lang, depth=1)
-        temp_html = temp_html.replace("{{language_dropdown_html}}", dropdown_html)
 
-        # Write the final file
         output_path = os.path.join(output_dir, "404.html")
         if write_if_changed(output_path, temp_html):
             print(f"  - Generated 404.html for '{lang}'")
@@ -2568,12 +2528,34 @@ def generate_robots_txt():
         "User-agent: *\n"
         "Allow: /\n"
         "Disallow: /*/assets/audio/\n"
-        "Disallow: /stats\n\n"
+        "Disallow: /stats\n"
+        "Crawl-delay: 1\n"
+        "\n"
+        "# Crawler aggressivi / SEO esclusi per contenere la banda.\n"
+        "# Motori di ricerca e crawler IA principali restano ammessi.\n"
+        "User-agent: Bytespider\n"
+        "Disallow: /\n\n"
+        "User-agent: MJ12bot\n"
+        "Disallow: /\n\n"
+        "User-agent: SemrushBot\n"
+        "Disallow: /\n\n"
+        "User-agent: AhrefsBot\n"
+        "Disallow: /\n\n"
+        "User-agent: DotBot\n"
+        "Disallow: /\n\n"
+        "User-agent: PetalBot\n"
+        "Disallow: /\n\n"
+        "User-agent: DataForSeoBot\n"
+        "Disallow: /\n\n"
+        "User-agent: serpstatbot\n"
+        "Disallow: /\n\n"
         f"Sitemap: {SITE_URL}sitemap.xml"
     )
     with open(os.path.join(BASE_OUTPUT_DIR, "robots.txt"), "w", encoding='utf-8') as f:
         f.write(content)
     print("  - robots.txt generated.")
+
+
 
 
 if __name__ == "__main__":

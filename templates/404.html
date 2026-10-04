@@ -1,5 +1,37 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{page_title}}</title>
+  <meta name="description" content="{{meta_description}}">
+  <meta name="robots" content="noindex, follow">
+  <!-- Nessuna favicon esterna: evita la richiesta di /favicon.ico sui 404. -->
+  <link rel="icon" href="data:,">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 24px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #0f1117; color: #e6e8ee;
+    }
+    .container { max-width: 560px; }
+    h1 { font-size: 2rem; margin: 0 0 12px; }
+    p { line-height: 1.6; color: #a9b0c0; margin: 0 0 24px; }
+    .back-button {
+      display: inline-block; padding: 12px 20px; border-radius: 8px;
+      background: #4f7cff; color: #fff; text-decoration: none; font-weight: 600;
+    }
+    .back-button:hover { background: #3f68e0; }
+  </style>
+</head>
+<body>
+  <main class="container">
     <h1>{{not_found_page_heading}}</h1>
     <p>{{not_found_page_paragraph}}</p>
-    <a href="index.html" class="back-button">{{not_found_page_button_text}}</a>
-</div>
+    <a href="/{{lang}}/index.html" class="back-button">{{not_found_page_button_text}}</a>
+  </main>
+</body>
+</html>

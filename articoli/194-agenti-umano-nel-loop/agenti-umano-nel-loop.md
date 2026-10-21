@@ -2,7 +2,7 @@
 tags: ["Ethics & Society", "Generative AI", "Security"]
 date: 2026-10-21
 author: "Dario Ferrero"
-youtube_url: "https://youtu.be/xTbbHu1AmyE?si=NmGEClCZ8n6NugFj"
+youtube_url: "https://youtu.be/Sx3KBPhj9Yk?si=f5EQGOf43FiuIAvA"
 spotify_url: "https://open.spotify.com/episode/3xicRe6OYWDcgdmNQwY48h?si=PH1VbP7nTSOQK9QsINNlAA"
 ---
 

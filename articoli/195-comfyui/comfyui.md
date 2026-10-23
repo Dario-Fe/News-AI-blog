@@ -31,6 +31,7 @@ L'errore da principiante è arrivato puntuale: `KeyError: 'g'`. Il messaggio cit
 
 Poi è arrivata la prima immagine, dal mio prompt a dir poco banale: "a cat on a windowsill, sunlight", a 1024x1024. Un disastro: tripla testa sovrapposta, dettagli confusi, colori strani. La causa era nella scheda del modello, che racconta un addestramento a 512x512. Tornato a quella risoluzione, ho aggiunto al prompt le parole propiziatorie di rito (masterpiece, best quality, detailed fur, soft lighting, photorealistic) e ritoccato i parametri del KSampler: passi da 20 a 30, CFG da 8 a 7, scheduler da simple a karras. Non so dire quale ingrediente abbia fatto più effetto, come in ogni rituale, ma il risultato è migliorato molto.
 ![gatto1.jpg](gatto1.jpg)
+
 *L'immagine creata al secondo tentativo con stable-diffusion-v1-5*
 
 ## Flux cambia le regole
@@ -45,6 +46,7 @@ C'è però una controindicazione estetica. Flux tende a un look lucidato, quasi 
 
 Dopo una ventina di prove, i limiti di Flux schnell si sono rivelati meno casuali di quanto pensassi. Le scene statiche gli riescono benissimo, e anche il movimento non lo spaventa: ghepardo, auto in derapata e papera gigante sono usciti bene. Il guaio è il corpo umano in azione dinamica, perché corsa, calcio e sci producono arti che si fondono o si moltiplicano. L'altra debolezza è il testo, tipico del metodo a diffusione. Sono osservazioni mie, su un solo modello e un solo sistema.
 ![gatto2.jpg](gatto2.jpg)
+
 *L'immagine creata al primo tentativo con Flux.1 schnell*
 
 ## Il muro della VRAM

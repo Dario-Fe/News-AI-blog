@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-10-27T05:26:23.471938+00:00",
+  "last_update": "2026-10-28T06:07:29.699522+00:00",
   "portal_snapshot": {
     "total_articles": 985,
     "articles_by_lang": {
@@ -34,16 +34,16 @@
     "video_articles_count": 197
   },
   "cumulative_history": {
-    "it/index.html": 3141,
-    "it": 1402,
+    "it/index.html": 3148,
+    "it": 1403,
     "fr": 349,
     "en": 267,
     "de": 240,
     "it/newsletter": 229,
     "es": 211,
-    "it/colibri.html": 167,
+    "it/colibri.html": 169,
     "fr/trm-samsung-fr.html": 159,
-    "it/ai-epanortosi": 140,
+    "it/ai-epanortosi": 141,
     "it/thank-you": 124,
     "en/grief-tech-en.html": 85,
     "it/papalini-interview.html": 85,
@@ -134,6 +134,7 @@
     "it/freebuff": 31,
     "it/mistral-devstral.html": 31,
     "it/pentagono-anthropic-openai.html": 31,
+    "it/qwen38-27b": 31,
     "it/strumenti-oracoli-caso-deloitte.html": 31,
     "en/cyborg-centauri-automi-en": 30,
     "it/amodei-intervista-parte2.html": 30,
@@ -142,7 +143,6 @@
     "it/mit-ai-umile.html": 30,
     "it/pignataro-intervista1.html": 30,
     "it/prompt-injection-camel.html": 30,
-    "it/qwen38-27b": 30,
     "it/switching-task.html": 30,
     "it/trm-samsung.html": 30,
     "it/ai-epanortosi.html": 29,
@@ -174,6 +174,7 @@
     "it/startup-europa-2025.html": 26,
     "it/subliminal-learning.html": 26,
     "en/amodei-intervista-parte2-en.html": 25,
+    "en/qwen38-27b-uncensored-en": 25,
     "es/introspection-anthropic-es": 25,
     "it/antigravity-security": 25,
     "it/datacenter-proteste-usa.html": 25,
@@ -193,7 +194,6 @@
     "it/mdash-microsoft.html": 24,
     "it/slm-2026.html": 24,
     "en/agent-hospital-en.html": 23,
-    "en/qwen38-27b-uncensored-en": 23,
     "it/agenti-ai-open-source-confronto.html": 23,
     "it/ai-creazione-contenuti": 23,
     "it/cina-token-economy": 23,
@@ -203,13 +203,13 @@
     "it/alibaba-qwen3": 22,
     "it/degregori-ai-war.html": 22,
     "it/turboquant.html": 22,
+    "en/robotica-2025-en": 21,
     "es/stanford-ai-index-2026-es": 21,
     "it/fable5-opus5-switching-task": 21,
     "it/minicpm5-2b": 21,
     "it/muse-glimmer30b": 21,
     "it/muse-glimmer30b.html": 21,
     "it/navier-stokes": 21,
-    "en/robotica-2025-en": 20,
     "en/shutdown-resistance-en.html": 20,
     "it/chartnet.html": 20,
     "it/glm-5": 20,
@@ -224,6 +224,7 @@
     "it/poesia-ai-security.html": 19,
     "it/toon.html": 19,
     "en/alibaba-qwen3-en": 18,
+    "en/longcat-video-en": 18,
     "en/trm-samsung-en": 18,
     "it/anthropic-hacker": 18,
     "it/dataland-museo-ai.html": 18,
@@ -231,7 +232,6 @@
     "it/onu-report-2026.html": 18,
     "it/quantum-echoes.html": 18,
     "de/cyborg-centauri-automi-de.html": 17,
-    "en/longcat-video-en": 17,
     "en/prompt-repetition-en.html": 17,
     "es/antigravity-security-es": 17,
     "it/agente-attacco-gym": 17,
@@ -240,6 +240,7 @@
     "it/contributo-automazione-bacchiocchi": 17,
     "it/pagedattention-radixattention": 17,
     "it/power-sampling.html": 17,
+    "en/diffusion-vs-autoregressive-en.html": 16,
     "en/iceberg-index-en": 16,
     "it/agenti-umano-nel-loop.html": 16,
     "it/engram": 16,
@@ -247,7 +248,6 @@
     "it/memoria-agenti-ai-guida": 16,
     "it/memvid-ai-memory.html": 16,
     "it/mit-adaptive-scaling": 16,
-    "en/diffusion-vs-autoregressive-en.html": 15,
     "en/slm-2026-en.html": 15,
     "fr/10-regole-ai-fr": 15,
     "fr/malattie-mentali-ai-fr.html": 15,
@@ -285,6 +285,7 @@
     "it/agenti-ai-open-source-confronto": 13,
     "it/aisi-agente-inganno.html": 13,
     "it/anonimizzazione.html": 13,
+    "it/comfyui": 13,
     "it/manifesto-etico-intervista": 13,
     "it/qwen38-27b.html": 13,
     "it/robot-tax-sanders": 13,
@@ -313,6 +314,7 @@
     "fr/antigravity-security-fr.html": 12,
     "fr/pentagono-anthropic-openai-fr.html": 12,
     "fr/qwen3.5-locale-puntata1-fr.html": 12,
+    "it/agenti-umano-nel-loop": 12,
     "it/ai-cosciente": 12,
     "it/ai-metacognition.html": 12,
     "it/ai-video-generativa-ovi.html": 12,
@@ -346,10 +348,9 @@
     "es/pignataro-intervista2-es.html": 11,
     "fr/ai-epanortosi-fr": 11,
     "fr/pignataro-intervista2-fr.html": 11,
-    "it/agenti-umano-nel-loop": 11,
     "it/agentic-ai-foundation": 11,
     "it/ai-water-consumption": 11,
-    "it/comfyui": 11,
+    "it/clm-8b": 11,
     "it/comfyui.html": 11,
     "it/engram.html": 11,
     "it/jev.html": 11,
@@ -375,6 +376,7 @@
     "en/authors/dario-ferrero": 10,
     "en/autoresearch-karpathy-en.html": 10,
     "en/cassieri-remoti-ai-en.html": 10,
+    "en/emergence-world-en.html": 10,
     "en/glm-5-en.html": 10,
     "en/headroom-en.html": 10,
     "en/index.html": 10,
@@ -411,6 +413,7 @@
     "it/iceberg-index": 10,
     "it/manifesto-etico-intervista.html": 10,
     "it/memoria-agenti-ai-guida.html": 10,
+    "it/shutdown-resistance": 10,
     "it/subliminal-learning": 10,
     "de/aaio-floridi-de.html": 9,
     "de/agentic-ai-foundation-de.html": 9,
@@ -433,7 +436,6 @@
     "en/ai-creativity-ethics-en.html": 9,
     "en/chartnet-en.html": 9,
     "en/dataland-museo-ai-en.html": 9,
-    "en/emergence-world-en.html": 9,
     "en/freebuff-en": 9,
     "en/graphify-en.html": 9,
     "en/jacobian-lens-en.html": 9,
@@ -485,13 +487,11 @@
     "fr/subliminal-learning-fr.html": 9,
     "fr/wave-former-raggix-fr.html": 9,
     "it/ai-lutto-digitale.html": 9,
-    "it/clm-8b": 9,
     "it/fable5-opus5-switching-task.html": 9,
     "it/fideuram": 9,
     "it/longcat-video": 9,
     "it/minicpm5-2b.html": 9,
     "it/robotica-2025": 9,
-    "it/shutdown-resistance": 9,
     "it/tml-determinism.html": 9,
     "it/turboquant": 9,
     "de/agenti-multipli-stanford-de.html": 8,
@@ -575,6 +575,7 @@
     "it/ai-coding-security": 8,
     "it/ai-consumer-2025": 8,
     "it/cina-token-economy.html": 8,
+    "it/clm-8b.html": 8,
     "it/colibri": 8,
     "it/deepseek-mhc": 8,
     "it/emergence-world": 8,
@@ -682,7 +683,6 @@
     "fr/steerling-fr.html": 7,
     "fr/talkie-vintage-llm-fr.html": 7,
     "it/alibaba-qwen3.html": 7,
-    "it/clm-8b.html": 7,
     "it/deepseek-ocr": 7,
     "it/llm-knowledge-base": 7,
     "it/navier-stokes.html": 7,
@@ -821,6 +821,7 @@
     "en/autoresearch-karpathy-en": 5,
     "en/chatgpt-ads-en": 5,
     "en/dwarfstar-antirez-en": 5,
+    "en/engram-en": 5,
     "en/fable5-opus5-switching-task-en": 5,
     "en/gemma4-12b-q8-en.html": 5,
     "en/glm-5-en": 5,
@@ -848,6 +849,7 @@
     "es/cina-token-economy-es.html": 5,
     "es/european-tech-map-es.html": 5,
     "es/gemma4-12b-q8-es.html": 5,
+    "es/guida-motori-inferenza-locale-es": 5,
     "es/guida-motori-inferenza-locale-es.html": 5,
     "es/headroom-es.html": 5,
     "es/humanebench-es.html": 5,
@@ -933,7 +935,6 @@
     "en/claude-watermark-en": 4,
     "en/colibri-en": 4,
     "en/contributo-automazione-bacchiocchi-en.html": 4,
-    "en/engram-en": 4,
     "en/fable5-opus5-switching-task-en.html": 4,
     "en/google-ue-indagine-en.html": 4,
     "en/humanebench-en": 4,
@@ -974,7 +975,6 @@
     "es/google-ai-revolution_es.html": 4,
     "es/google-threat-intelligence-es.html": 4,
     "es/grief-tech_es.html": 4,
-    "es/guida-motori-inferenza-locale-es": 4,
     "es/intervista-ricco-ai-es.html": 4,
     "es/kimi-k2-article-es": 4,
     "es/kimi-k2-thinking-es.html": 4,
@@ -1267,6 +1267,7 @@
     "en/articolo-ai-lavoro-en.html": 2,
     "en/articolo_ai_lavoro_en.html": 2,
     "en/articolo_hrm_en.html": 2,
+    "en/bodo-glimt-fokus-ai-en": 2,
     "en/cassieri-remoti-ai-en": 2,
     "en/cmFwcG9ydG": 2,
     "en/convergenza-modelli-scientifici-en": 2,
@@ -1523,6 +1524,7 @@
     "de/turboquant-de": 1,
     "en/AI_Musica_Copyright_en.html": 1,
     "en/agenti-marxisti.html": 1,
+    "en/agenti-umano-nel-loop-en": 1,
     "en/ai-coding-security-en": 1,
     "en/ai-creazione-contenuti-en": 1,
     "en/ai-lutto-digitale-en": 1,
@@ -1533,7 +1535,6 @@
     "en/apply-ai-eu-strategy-en": 1,
     "en/assets/images/schema1-d7bb5dff4a-full.jpeg": 1,
     "en/assets/images/schema2-1802e8cf13-full.jpeg": 1,
-    "en/bodo-glimt-fokus-ai-en": 1,
     "en/browser-ai-en.html": 1,
     "en/caveman-en": 1,
     "en/chartnet-en": 1,
@@ -13742,6 +13743,100 @@
             "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
           ]
         }
+      },
+      "2026-10-27": {
+        "total_views": 29,
+        "views_by_lang": {
+          "it": 19,
+          "en": 9,
+          "es": 1
+        },
+        "views_by_tag": {
+          "Research": 5,
+          "Generative AI": 4,
+          "Applications": 3,
+          "Training": 1,
+          "Security": 1,
+          "Startups": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/colibri.html",
+            "views": 2
+          },
+          {
+            "path": "en/qwen38-27b-uncensored-en",
+            "views": 2
+          },
+          {
+            "path": "it/comfyui",
+            "views": 2
+          },
+          {
+            "path": "it/clm-8b",
+            "views": 2
+          },
+          {
+            "path": "it/ai-epanortosi",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 7,
+          "it": 1,
+          "it/colibri.html": 2,
+          "it/ai-epanortosi": 1,
+          "it/qwen38-27b": 1,
+          "en/qwen38-27b-uncensored-en": 2,
+          "en/robotica-2025-en": 1,
+          "en/longcat-video-en": 1,
+          "en/diffusion-vs-autoregressive-en.html": 1,
+          "it/comfyui": 2,
+          "it/agenti-umano-nel-loop": 1,
+          "it/clm-8b": 2,
+          "en/emergence-world-en.html": 1,
+          "it/shutdown-resistance": 1,
+          "it/clm-8b.html": 1,
+          "en/engram-en": 1,
+          "es/guida-motori-inferenza-locale-es": 1,
+          "en/bodo-glimt-fokus-ai-en": 1,
+          "en/agenti-umano-nel-loop-en": 1
+        },
+        "counter_total": 19978,
+        "window_start": "2026-10-27T05:26:23.471938+00:00",
+        "window_end": "2026-10-28T06:07:29.699522+00:00",
+        "data_quality": {
+          "lost_views": 0,
+          "regressions": [],
+          "regressions_count": 0,
+          "hourly_regressions": [],
+          "dropped_writes": 0,
+          "missing_paths": [],
+          "unreadable_paths": [],
+          "ignored_dips_views": 0,
+          "twin_collisions": [
+            {
+              "path": "de",
+              "raw_path": "de",
+              "count": 1,
+              "duplicate_same_key": true
+            },
+            {
+              "path": "es",
+              "raw_path": "es",
+              "count": 1,
+              "duplicate_same_key": true
+            }
+          ],
+          "twin_baseline": [],
+          "suspicious_new_paths": [],
+          "counter_before": 19949,
+          "counter_after": 19978,
+          "net_change": 29,
+          "warnings": [
+            "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
+          ]
+        }
       }
     },
     "monthly": {
@@ -13944,34 +14039,34 @@
         "counter_total": 16176
       },
       "2026-10": {
-        "total_views": 3773,
+        "total_views": 3802,
         "views_by_lang": {
-          "it": 1684,
+          "it": 1703,
           "fr": 446,
-          "en": 676,
+          "en": 685,
           "de": 469,
-          "es": 498
+          "es": 499
         },
         "views_by_tag": {
-          "Generative AI": 1825,
+          "Generative AI": 1829,
           "Ethics & Society": 1184,
-          "Applications": 873,
+          "Applications": 876,
           "Business": 768,
           "E-learning": 83,
-          "Training": 465,
-          "Research": 914,
-          "Security": 489,
-          "Startups": 173,
+          "Training": 466,
+          "Research": 919,
+          "Security": 490,
+          "Startups": 174,
           "Copyright": 86
         },
         "top_articles": [
           {
             "path": "it/colibri.html",
-            "views": 110
+            "views": 112
           },
           {
             "path": "it/ai-epanortosi",
-            "views": 53
+            "views": 54
           },
           {
             "path": "it/anonimizzazione",
@@ -13991,7 +14086,7 @@
           },
           {
             "path": "en/qwen38-27b-uncensored-en",
-            "views": 22
+            "views": 24
           },
           {
             "path": "it/minicpm5-2b",
@@ -14007,37 +14102,37 @@
           }
         ],
         "dropped_views": 0,
-        "counter_total": 19949
+        "counter_total": 19978
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 9548,
+        "total_views": 9577,
         "views_by_lang": {
-          "it": 4867,
-          "en": 1563,
+          "it": 4886,
+          "en": 1572,
           "de": 1042,
           "fr": 1019,
-          "es": 1057
+          "es": 1058
         },
         "views_by_tag": {
-          "Generative AI": 4094,
-          "Applications": 1893,
-          "Security": 1096,
-          "Research": 2007,
+          "Generative AI": 4098,
+          "Applications": 1896,
+          "Security": 1097,
+          "Research": 2012,
           "Ethics & Society": 2740,
-          "Training": 1079,
+          "Training": 1080,
           "Business": 1669,
           "Copyright": 176,
-          "Startups": 374,
+          "Startups": 375,
           "E-learning": 257
         },
         "dropped_views": 0,
-        "counter_total": 19949
+        "counter_total": 19978
       }
     }
   },
-  "cumulative_total": 19949,
-  "previous_cumulative_total": 19890,
+  "cumulative_total": 19978,
+  "previous_cumulative_total": 19949,
   "dropped_writes_by_day": {}
 }

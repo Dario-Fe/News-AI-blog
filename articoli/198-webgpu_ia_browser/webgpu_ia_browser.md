@@ -2,6 +2,8 @@
 tags: ["Applications", "Generative AI", "Research"]
 date: 2026-10-30
 author: "Dario Ferrero"
+youtube_url: "https://youtu.be/S9Do39Ja4Ac?si=K0RfjPQ9Ce7MD4qG"
+spotify_url: "https://open.spotify.com/episode/0gjZvOIySjFxpenzb7G6wi?si=GaAq4hE_RaWQ13DV8VDr0g"
 ---
 
 # WebGPU: l'IA nel browser, sulla tua GPU

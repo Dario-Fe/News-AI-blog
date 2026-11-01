@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-10-31T06:09:30.669408+00:00",
+  "last_update": "2026-11-01T06:41:08.333491+00:00",
   "portal_snapshot": {
     "total_articles": 995,
     "articles_by_lang": {
@@ -34,8 +34,8 @@
     "video_articles_count": 199
   },
   "cumulative_history": {
-    "it/index.html": 3175,
-    "it": 1425,
+    "it/index.html": 3178,
+    "it": 1428,
     "fr": 352,
     "en": 269,
     "de": 242,
@@ -81,13 +81,14 @@
     "it/ai-safety-report-2026.html": 43,
     "it/aaio-floridi.html": 42,
     "it/ornith-1.0.html": 42,
+    "it/ai-musica-copyright": 41,
     "it/autoresearch-karpathy.html": 41,
     "it/grief-tech.html": 41,
     "it/qwen3-tts.html": 41,
-    "it/ai-musica-copyright": 40,
     "it/anonimizzazione": 40,
     "it/guida-motori-inferenza-locale": 40,
     "it/kv-cache-approach.html": 40,
+    "it/msa-100m-token.html": 40,
     "it/rapporto-leonardo-2026-parte2.html": 40,
     "it/contributo-automazione-bacchiocchi.html": 39,
     "it/meetily.html": 39,
@@ -95,7 +96,6 @@
     "it/diffusion-vs-autoregressive.html": 38,
     "it/mercury2.html": 38,
     "it/mondiale-2026-gemini.html": 38,
-    "it/msa-100m-token.html": 38,
     "it/sistema-sicurezza-ai.html": 38,
     "it/chatgpt-ads.html": 37,
     "it/esodo-silenzioso.html": 37,
@@ -243,6 +243,7 @@
     "it/power-sampling.html": 17,
     "en/diffusion-vs-autoregressive-en.html": 16,
     "en/iceberg-index-en": 16,
+    "it/agenti-umano-nel-loop": 16,
     "it/agenti-umano-nel-loop.html": 16,
     "it/engram": 16,
     "it/freebuff.html": 16,
@@ -251,7 +252,6 @@
     "en/slm-2026-en.html": 15,
     "fr/10-regole-ai-fr": 15,
     "fr/malattie-mentali-ai-fr.html": 15,
-    "it/agenti-umano-nel-loop": 15,
     "it/clm-8b": 15,
     "it/guida-motori-inferenza-locale.html": 15,
     "it/machine learning, deep learning e algoritmi generativi": 15,
@@ -278,6 +278,7 @@
     "en/andon-fm-en.html": 13,
     "en/chatgpt-ads-en.html": 13,
     "en/guerra-algoritmica-en.html": 13,
+    "en/mini-max-m2.7-en.html": 13,
     "en/mistral-devstral-en.html": 13,
     "es/10-regole-ai-es": 13,
     "es/ai-water-consumption-es.html": 13,
@@ -302,9 +303,9 @@
     "en/fda-ema-aim-nash-ai-en.html": 12,
     "en/gina-assistente-vocale-en.html": 12,
     "en/mercury2-en.html": 12,
-    "en/mini-max-m2.7-en.html": 12,
     "en/msa-100m-token-en.html": 12,
     "en/pocketos-disaster-en.html": 12,
+    "en/prompt-injection-camel-en": 12,
     "en/qwen3-tts-en.html": 12,
     "en/rapporto-leonardo-2026-parte1-en.html": 12,
     "en/steerling-en.html": 12,
@@ -313,12 +314,14 @@
     "es/steerling-es.html": 12,
     "es/subliminal-learning-es.html": 12,
     "fr/ai-bournout-fr.html": 12,
+    "fr/ai-epanortosi-fr": 12,
     "fr/antigravity-security-fr.html": 12,
     "fr/pentagono-anthropic-openai-fr.html": 12,
     "fr/qwen3.5-locale-puntata1-fr.html": 12,
     "it/ai-cosciente": 12,
     "it/ai-metacognition.html": 12,
     "it/ai-video-generativa-ovi.html": 12,
+    "it/comfyui.html": 12,
     "it/humanebench": 12,
     "it/llm-wiki-autocostruita": 12,
     "it/mind-viruses": 12,
@@ -339,22 +342,20 @@
     "en/deepseek-mhc-en.html": 11,
     "en/diffusion-vs-autoregressive-en": 11,
     "en/eset-apt-report-en.html": 11,
+    "en/freebuff-en": 11,
     "en/llm-knowledge-base-en.html": 11,
     "en/memoria-agenti-ai-guida-en": 11,
     "en/ornith-1.0-en.html": 11,
-    "en/prompt-injection-camel-en": 11,
     "es/ai-bournout-es.html": 11,
     "es/ai-safety-report-2026-es.html": 11,
     "es/andon-fm-es.html": 11,
     "es/convergenza-modelli-scientifici-es.html": 11,
     "es/cyborg-centauri-automi-es.html": 11,
     "es/pignataro-intervista2-es.html": 11,
-    "fr/ai-epanortosi-fr": 11,
     "fr/pignataro-intervista2-fr.html": 11,
     "it/agentic-ai-foundation": 11,
     "it/ai-supply-chain-sostenibile": 11,
     "it/ai-water-consumption": 11,
-    "it/comfyui.html": 11,
     "it/engram.html": 11,
     "it/graphify": 11,
     "it/jev.html": 11,
@@ -417,6 +418,7 @@
     "it/memoria-agenti-ai-guida.html": 10,
     "it/shutdown-resistance": 10,
     "it/subliminal-learning": 10,
+    "it/webgpu-ia-browser": 10,
     "de/aaio-floridi-de.html": 9,
     "de/agentic-ai-foundation-de.html": 9,
     "de/ai-cosciente-de": 9,
@@ -438,7 +440,6 @@
     "en/ai-creativity-ethics-en.html": 9,
     "en/chartnet-en.html": 9,
     "en/dataland-museo-ai-en.html": 9,
-    "en/freebuff-en": 9,
     "en/graphify-en.html": 9,
     "en/guida-motori-inferenza-locale-en": 9,
     "en/jacobian-lens-en.html": 9,
@@ -586,11 +587,11 @@
     "it/guida-quantizzazioni.html": 8,
     "it/intervista-fornaro-colibri.html": 8,
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 8,
+    "it/legge-ai-italia.html": 8,
     "it/proof-of-continuity.html": 8,
     "it/qwen3-tts": 8,
     "it/slm-2026": 8,
     "it/waymo-blackout-analysis": 8,
-    "it/webgpu-ia-browser": 8,
     "de/agenti-al-lavoro-de.html": 7,
     "de/andon-fm-de.html": 7,
     "de/antigravity-security-de.html": 7,
@@ -688,7 +689,6 @@
     "fr/talkie-vintage-llm-fr.html": 7,
     "it/alibaba-qwen3.html": 7,
     "it/deepseek-ocr": 7,
-    "it/legge-ai-italia.html": 7,
     "it/llm-knowledge-base": 7,
     "it/navier-stokes.html": 7,
     "it/ornith-1.0": 7,
@@ -1030,6 +1030,7 @@
     "it/silicon-valley-ai-pac.html": 4,
     "it/strumenti-oracoli-caso-deloitte": 4,
     "it/tilly-norwood-ai-actor": 4,
+    "it/webgpu-ia-browser.html": 4,
     "de/AI-Cosciente_de.html": 3,
     "de/AI_Aziende_e_Servizi_de.html": 3,
     "de/AI_fronte_Cyber_de.html": 3,
@@ -1124,6 +1125,7 @@
     "es/ai-fronte-cyber-es": 3,
     "es/ai-video-generativa-ovi-es.html": 3,
     "es/amodei-intervista-parte2-es": 3,
+    "es/andon-fm-es": 3,
     "es/chartnet-es.html": 3,
     "es/chatgpt-use-study-es.html": 3,
     "es/cina-token-economy-es": 3,
@@ -1199,7 +1201,6 @@
     "it/soofi-s": 3,
     "it/steering-llm": 3,
     "it/toon": 3,
-    "it/webgpu-ia-browser.html": 3,
     "de/AI-deepconf_de.html": 2,
     "de/AI_Creazione_Contenuti_de.html": 2,
     "de/Giganti_AI_Bocciati_seconda_puntata_de.html": 2,
@@ -1304,6 +1305,7 @@
     "en/programmatori-vs-ai-en": 2,
     "en/prompt-repetition-en": 2,
     "en/quantum-echoes-en": 2,
+    "en/qwen3-tts-en": 2,
     "en/rapporto-leonardo-2026-parte2-en": 2,
     "en/recursivemas.html": 2,
     "en/rsl-really-simple-licensing_en.html": 2,
@@ -1331,7 +1333,6 @@
     "es/aisi-agente-inganno-es": 2,
     "es/alibaba-qwen3_es.html": 2,
     "es/amazon-down-es": 2,
-    "es/andon-fm-es": 2,
     "es/anonimizzazione-es": 2,
     "es/anonimizzazione-es.html": 2,
     "es/apply-ai-eu-strategy-es": 2,
@@ -1583,7 +1584,6 @@
     "en/power-sampling-en.html": 1,
     "en/project-glasswing-mythos-en": 1,
     "en/proof-of-continuity-en.html": 1,
-    "en/qwen3-tts-en": 1,
     "en/qwen36-35b-ai-en": 1,
     "en/rapporto-leonardo-2026-parte1-en": 1,
     "en/recursivemas-en": 1,
@@ -14125,6 +14125,99 @@
             "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
           ]
         }
+      },
+      "2026-10-31": {
+        "total_views": 22,
+        "views_by_lang": {
+          "it": 15,
+          "en": 5,
+          "fr": 1,
+          "es": 1
+        },
+        "views_by_tag": {
+          "Research": 3,
+          "Generative AI": 5,
+          "Applications": 4,
+          "Training": 1,
+          "Business": 2,
+          "E-learning": 1,
+          "Ethics & Society": 1,
+          "Security": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/msa-100m-token.html",
+            "views": 2
+          },
+          {
+            "path": "en/freebuff-en",
+            "views": 2
+          },
+          {
+            "path": "it/webgpu-ia-browser",
+            "views": 2
+          },
+          {
+            "path": "it/ai-musica-copyright",
+            "views": 1
+          },
+          {
+            "path": "it/agenti-umano-nel-loop",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 3,
+          "it": 3,
+          "it/ai-musica-copyright": 1,
+          "it/msa-100m-token.html": 2,
+          "it/agenti-umano-nel-loop": 1,
+          "en/mini-max-m2.7-en.html": 1,
+          "en/prompt-injection-camel-en": 1,
+          "fr/ai-epanortosi-fr": 1,
+          "it/comfyui.html": 1,
+          "en/freebuff-en": 2,
+          "it/webgpu-ia-browser": 2,
+          "it/legge-ai-italia.html": 1,
+          "it/webgpu-ia-browser.html": 1,
+          "es/andon-fm-es": 1,
+          "en/qwen3-tts-en": 1
+        },
+        "counter_total": 20130,
+        "window_start": "2026-10-31T06:09:30.669408+00:00",
+        "window_end": "2026-11-01T06:41:08.333491+00:00",
+        "data_quality": {
+          "lost_views": 0,
+          "regressions": [],
+          "regressions_count": 0,
+          "hourly_regressions": [],
+          "dropped_writes": 0,
+          "missing_paths": [],
+          "unreadable_paths": [],
+          "ignored_dips_views": 0,
+          "twin_collisions": [
+            {
+              "path": "de",
+              "raw_path": "de",
+              "count": 1,
+              "duplicate_same_key": true
+            },
+            {
+              "path": "es",
+              "raw_path": "es",
+              "count": 1,
+              "duplicate_same_key": true
+            }
+          ],
+          "twin_baseline": [],
+          "suspicious_new_paths": [],
+          "counter_before": 20108,
+          "counter_after": 20130,
+          "net_change": 22,
+          "warnings": [
+            "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
+          ]
+        }
       }
     },
     "monthly": {
@@ -14327,23 +14420,23 @@
         "counter_total": 16176
       },
       "2026-10": {
-        "total_views": 3932,
+        "total_views": 3954,
         "views_by_lang": {
-          "it": 1817,
-          "fr": 446,
-          "en": 697,
+          "it": 1832,
+          "fr": 447,
+          "en": 702,
           "de": 470,
-          "es": 502
+          "es": 503
         },
         "views_by_tag": {
-          "Generative AI": 1848,
-          "Ethics & Society": 1186,
-          "Applications": 885,
-          "Business": 778,
-          "E-learning": 83,
-          "Training": 468,
-          "Research": 936,
-          "Security": 494,
+          "Generative AI": 1853,
+          "Ethics & Society": 1187,
+          "Applications": 889,
+          "Business": 780,
+          "E-learning": 84,
+          "Training": 469,
+          "Research": 939,
+          "Security": 495,
           "Startups": 174,
           "Copyright": 86
         },
@@ -14386,41 +14479,41 @@
           },
           {
             "path": "it/agenti-umano-nel-loop",
-            "views": 15
+            "views": 16
           }
         ],
         "dropped_views": 0,
-        "counter_total": 20108
+        "counter_total": 20130
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 9707,
+        "total_views": 9729,
         "views_by_lang": {
-          "it": 5000,
-          "en": 1584,
+          "it": 5015,
+          "en": 1589,
           "de": 1043,
-          "fr": 1019,
-          "es": 1061
+          "fr": 1020,
+          "es": 1062
         },
         "views_by_tag": {
-          "Generative AI": 4117,
-          "Applications": 1905,
-          "Security": 1101,
-          "Research": 2029,
-          "Ethics & Society": 2742,
-          "Training": 1082,
-          "Business": 1679,
+          "Generative AI": 4122,
+          "Applications": 1909,
+          "Security": 1102,
+          "Research": 2032,
+          "Ethics & Society": 2743,
+          "Training": 1083,
+          "Business": 1681,
           "Copyright": 176,
           "Startups": 375,
-          "E-learning": 257
+          "E-learning": 258
         },
         "dropped_views": 0,
-        "counter_total": 20108
+        "counter_total": 20130
       }
     }
   },
-  "cumulative_total": 20108,
-  "previous_cumulative_total": 20061,
+  "cumulative_total": 20130,
+  "previous_cumulative_total": 20108,
   "dropped_writes_by_day": {}
 }

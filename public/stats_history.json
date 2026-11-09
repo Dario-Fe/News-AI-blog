@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-11-08T06:33:51.677360+00:00",
+  "last_update": "2026-11-09T07:02:38.312007+00:00",
   "portal_snapshot": {
     "total_articles": 1010,
     "articles_by_lang": {
@@ -19,29 +19,29 @@
     "total_authors": 1,
     "total_tags": 10,
     "tags_popularity": {
-      "Ethics & Society": 525,
       "Generative AI": 700,
+      "Training": 240,
+      "Startups": 80,
+      "Security": 235,
+      "Ethics & Society": 525,
       "Business": 370,
       "Research": 395,
-      "Startups": 80,
-      "Training": 240,
+      "E-learning": 60,
       "Applications": 320,
-      "Security": 235,
-      "Copyright": 50,
-      "E-learning": 60
+      "Copyright": 50
     },
     "podcast_articles_count": 202,
     "video_articles_count": 202
   },
   "cumulative_history": {
-    "it/index.html": 3227,
+    "it/index.html": 3231,
     "it": 1494,
     "fr": 356,
     "en": 273,
     "de": 245,
     "it/newsletter": 231,
     "es": 216,
-    "it/colibri.html": 173,
+    "it/colibri.html": 174,
     "fr/trm-samsung-fr.html": 159,
     "it/ai-epanortosi": 147,
     "it/thank-you": 124,
@@ -66,8 +66,8 @@
     "en/kimik2.5-en.html": 51,
     "it/qwen3.5-locale-puntata1.html": 51,
     "it/robot-tax-sanders.html": 50,
+    "it/ai-musica-copyright": 49,
     "it/rapporto-leonardo-2026-parte1.html": 49,
-    "it/ai-musica-copyright": 48,
     "it/cassieri-remoti-ai.html": 48,
     "it/kimi-k2-thinking.html": 48,
     "it/qwen3.5-locale-puntata2.html": 48,
@@ -83,8 +83,8 @@
     "it/ai-safety-report-2026.html": 43,
     "it/qwen3-tts.html": 43,
     "it/aaio-floridi.html": 42,
+    "it/anonimizzazione": 42,
     "it/ornith-1.0.html": 42,
-    "it/anonimizzazione": 41,
     "it/autoresearch-karpathy.html": 41,
     "it/grief-tech.html": 41,
     "it/guida-motori-inferenza-locale": 41,
@@ -218,6 +218,7 @@
     "it/guerra-algoritmica.html": 20,
     "it/loop-engineering.html": 20,
     "it/stanford-ai-index-2026.html": 20,
+    "en/longcat-video-en": 19,
     "en/memvid-ai-memory-en.html": 19,
     "en/papalini-interview-en.html": 19,
     "en/trm-samsung-en": 19,
@@ -229,7 +230,6 @@
     "it/toon.html": 19,
     "de/cyborg-centauri-automi-de.html": 18,
     "en/alibaba-qwen3-en": 18,
-    "en/longcat-video-en": 18,
     "it/anthropic-hacker": 18,
     "it/dataland-museo-ai.html": 18,
     "it/mit-adaptive-scaling.html": 18,
@@ -512,6 +512,7 @@
     "it/guida-quantizzazioni.html": 9,
     "it/longcat-video": 9,
     "it/minicpm5-2b.html": 9,
+    "it/openweight-win": 9,
     "it/tml-determinism.html": 9,
     "it/turboquant": 9,
     "de/agenti-multipli-stanford-de.html": 8,
@@ -598,7 +599,6 @@
     "it/deepseek-mhc": 8,
     "it/intervista-fornaro-colibri.html": 8,
     "it/l'intelligenza artificiale - un viaggio nella tecnologia che sta ridefinendo il nostro mondo": 8,
-    "it/openweight-win": 8,
     "it/proof-of-continuity.html": 8,
     "it/qwen3-tts": 8,
     "it/slm-2026": 8,
@@ -629,6 +629,7 @@
     "en/ai-metacognition-en.html": 7,
     "en/ai-musica-copyright-en": 7,
     "en/aisi-benchmark-en.html": 7,
+    "en/anthropic-fear-en": 7,
     "en/anthropic-fear-en.html": 7,
     "en/ars-notoria-e-ai-en.html": 7,
     "en/cina-universita-en.html": 7,
@@ -732,7 +733,6 @@
     "en/ai-cosciente-en": 6,
     "en/ai-water-consumption-en": 6,
     "en/anonimizzazione-en": 6,
-    "en/anthropic-fear-en": 6,
     "en/apply-ai-eu-strategy-en.html": 6,
     "en/benzup-en.html": 6,
     "en/cina-token-economy-en.html": 6,
@@ -1197,6 +1197,7 @@
     "it/agent-hospital.html\"": 3,
     "it/agenti-al-lavoro": 3,
     "it/ai-bournout": 3,
+    "it/ai-creativity-ethics": 3,
     "it/ai-slop-entropia": 3,
     "it/articolo-hrm.html": 3,
     "it/bodo-glimt-fokus-ai": 3,
@@ -1455,7 +1456,6 @@
     "fr/tml-determinism_fr.html": 2,
     "it/AI_Valutazione_ed_etica.html": 2,
     "it/Giganti_AI_Bocciati_seconda_puntata.html": 2,
-    "it/ai-creativity-ethics": 2,
     "it/ai-metacognition": 2,
     "it/ai-prompt-scandalo": 2,
     "it/ai-rsponsabilit": 2,
@@ -14969,6 +14969,85 @@
             "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
           ]
         }
+      },
+      "2026-11-08": {
+        "total_views": 11,
+        "views_by_lang": {
+          "it": 9,
+          "en": 2
+        },
+        "views_by_tag": {
+          "Research": 1,
+          "Generative AI": 1,
+          "Applications": 1
+        },
+        "top_articles": [
+          {
+            "path": "it/colibri.html",
+            "views": 1
+          },
+          {
+            "path": "it/ai-musica-copyright",
+            "views": 1
+          },
+          {
+            "path": "it/anonimizzazione",
+            "views": 1
+          },
+          {
+            "path": "en/longcat-video-en",
+            "views": 1
+          },
+          {
+            "path": "it/openweight-win",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 4,
+          "it/colibri.html": 1,
+          "it/ai-musica-copyright": 1,
+          "it/anonimizzazione": 1,
+          "en/longcat-video-en": 1,
+          "it/openweight-win": 1,
+          "en/anthropic-fear-en": 1,
+          "it/ai-creativity-ethics": 1
+        },
+        "counter_total": 20530,
+        "window_start": "2026-11-08T06:33:51.677360+00:00",
+        "window_end": "2026-11-09T07:02:38.312007+00:00",
+        "data_quality": {
+          "lost_views": 0,
+          "regressions": [],
+          "regressions_count": 0,
+          "hourly_regressions": [],
+          "dropped_writes": 0,
+          "missing_paths": [],
+          "unreadable_paths": [],
+          "ignored_dips_views": 0,
+          "twin_collisions": [
+            {
+              "path": "de",
+              "raw_path": "de",
+              "count": 1,
+              "duplicate_same_key": true
+            },
+            {
+              "path": "es",
+              "raw_path": "es",
+              "count": 1,
+              "duplicate_same_key": true
+            }
+          ],
+          "twin_baseline": [],
+          "suspicious_new_paths": [],
+          "counter_before": 20519,
+          "counter_after": 20530,
+          "net_change": 11,
+          "warnings": [
+            "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
+          ]
+        }
       }
     },
     "monthly": {
@@ -15237,19 +15316,19 @@
         "counter_total": 20130
       },
       "2026-11": {
-        "total_views": 389,
+        "total_views": 400,
         "views_by_lang": {
-          "it": 313,
-          "en": 35,
+          "it": 322,
+          "en": 37,
           "de": 8,
           "fr": 23,
           "es": 10
         },
         "views_by_tag": {
-          "Research": 28,
-          "Generative AI": 87,
+          "Research": 29,
+          "Generative AI": 88,
           "Business": 46,
-          "Applications": 43,
+          "Applications": 44,
           "Ethics & Society": 34,
           "Security": 12,
           "Training": 45,
@@ -15284,11 +15363,11 @@
           },
           {
             "path": "it/openweight-win",
-            "views": 8
+            "views": 9
           },
           {
             "path": "it/ai-musica-copyright",
-            "views": 7
+            "views": 8
           },
           {
             "path": "it/ai-epanortosi",
@@ -15300,24 +15379,24 @@
           }
         ],
         "dropped_views": 0,
-        "counter_total": 20519
+        "counter_total": 20530
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 10118,
+        "total_views": 10129,
         "views_by_lang": {
-          "it": 5328,
-          "en": 1624,
+          "it": 5337,
+          "en": 1626,
           "de": 1051,
           "fr": 1043,
           "es": 1072
         },
         "views_by_tag": {
-          "Generative AI": 4209,
-          "Applications": 1952,
+          "Generative AI": 4210,
+          "Applications": 1953,
           "Security": 1114,
-          "Research": 2060,
+          "Research": 2061,
           "Ethics & Society": 2777,
           "Training": 1128,
           "Business": 1727,
@@ -15326,11 +15405,11 @@
           "E-learning": 260
         },
         "dropped_views": 0,
-        "counter_total": 20519
+        "counter_total": 20530
       }
     }
   },
-  "cumulative_total": 20519,
-  "previous_cumulative_total": 20475,
+  "cumulative_total": 20530,
+  "previous_cumulative_total": 20519,
   "dropped_writes_by_day": {}
 }

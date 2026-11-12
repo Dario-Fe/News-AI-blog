@@ -1,49 +1,49 @@
 {
-  "last_update": "2026-11-11T06:58:22.119173+00:00",
+  "last_update": "2026-11-12T07:35:14.263205+00:00",
   "portal_snapshot": {
-    "total_articles": 1015,
+    "total_articles": 1020,
     "articles_by_lang": {
-      "it": 203,
-      "en": 203,
-      "es": 203,
-      "fr": 203,
-      "de": 203
+      "it": 204,
+      "en": 204,
+      "es": 204,
+      "fr": 204,
+      "de": 204
     },
     "total_words_by_lang": {
-      "it": 582550,
-      "en": 567284,
-      "es": 618769,
-      "fr": 663640,
-      "de": 571130
+      "it": 585276,
+      "en": 570174,
+      "es": 621885,
+      "fr": 667077,
+      "de": 574058
     },
     "total_authors": 1,
     "total_tags": 10,
     "tags_popularity": {
-      "Generative AI": 705,
+      "Generative AI": 710,
       "Training": 240,
       "Startups": 80,
-      "Security": 240,
-      "Ethics & Society": 530,
+      "Security": 245,
+      "Ethics & Society": 535,
       "Business": 370,
       "Research": 395,
       "E-learning": 60,
       "Applications": 320,
       "Copyright": 50
     },
-    "podcast_articles_count": 203,
-    "video_articles_count": 203
+    "podcast_articles_count": 204,
+    "video_articles_count": 204
   },
   "cumulative_history": {
-    "it/index.html": 3251,
-    "it": 1508,
-    "fr": 359,
-    "en": 274,
-    "de": 246,
+    "it/index.html": 3265,
+    "it": 1515,
+    "fr": 360,
+    "en": 275,
+    "de": 247,
     "it/newsletter": 231,
-    "es": 217,
-    "it/colibri.html": 178,
+    "es": 218,
+    "it/colibri.html": 179,
     "fr/trm-samsung-fr.html": 159,
-    "it/ai-epanortosi": 149,
+    "it/ai-epanortosi": 150,
     "it/thank-you": 124,
     "it/papalini-interview.html": 86,
     "en/grief-tech-en.html": 85,
@@ -63,8 +63,8 @@
     "it/apply-ai-eu-strategy.html": 53,
     "it/privacy": 53,
     "it/ai-bournout.html": 52,
+    "it/ai-musica-copyright": 52,
     "en/kimik2.5-en.html": 51,
-    "it/ai-musica-copyright": 51,
     "it/qwen3.5-locale-puntata1.html": 51,
     "it/robot-tax-sanders.html": 50,
     "it/rapporto-leonardo-2026-parte1.html": 49,
@@ -208,6 +208,7 @@
     "it/degregori-ai-war.html": 22,
     "it/fable5-opus5-switching-task": 22,
     "it/minicpm5-2b": 22,
+    "it/chartnet.html": 21,
     "it/glm-5": 21,
     "it/muse-glimmer30b": 21,
     "it/muse-glimmer30b.html": 21,
@@ -215,10 +216,10 @@
     "en/memvid-ai-memory-en.html": 20,
     "en/shutdown-resistance-en.html": 20,
     "it/agenti-umano-nel-loop": 20,
-    "it/chartnet.html": 20,
     "it/guerra-algoritmica.html": 20,
     "it/loop-engineering.html": 20,
     "it/stanford-ai-index-2026.html": 20,
+    "de/cyborg-centauri-automi-de.html": 19,
     "en/longcat-video-en": 19,
     "en/papalini-interview-en.html": 19,
     "en/trm-samsung-en": 19,
@@ -228,16 +229,15 @@
     "it/poesia-ai-security.html": 19,
     "it/quantum-echoes.html": 19,
     "it/toon.html": 19,
-    "de/cyborg-centauri-automi-de.html": 18,
     "en/alibaba-qwen3-en": 18,
+    "en/diffusion-vs-autoregressive-en.html": 18,
+    "en/prompt-injection-camel-en": 18,
     "it/anthropic-hacker": 18,
     "it/dataland-museo-ai.html": 18,
     "it/lfm2-5-24b-a2b": 18,
     "it/mit-adaptive-scaling.html": 18,
     "it/onu-report-2026.html": 18,
     "it/timestral.html": 18,
-    "en/diffusion-vs-autoregressive-en.html": 17,
-    "en/prompt-injection-camel-en": 17,
     "en/prompt-repetition-en.html": 17,
     "es/antigravity-security-es": 17,
     "it/agente-attacco-gym": 17,
@@ -276,6 +276,7 @@
     "it/mind-viruses.html": 14,
     "it/mistral-devstral": 14,
     "it/monocultura-algoritmica": 14,
+    "it/openweight-win": 14,
     "it/timestral": 14,
     "de/authors/dario-ferrero": 13,
     "de/bodo-glimt-fokus-ai-de.html": 13,
@@ -298,6 +299,7 @@
     "fr/ai-epanortosi-fr": 13,
     "fr/soofi-s-fr.html": 13,
     "fr/toon-fr.html": 13,
+    "it/agenti-50-dollari-intrusione": 13,
     "it/agenti-50-dollari-intrusione.html": 13,
     "it/agenti-ai-open-source-confronto": 13,
     "it/anonimizzazione.html": 13,
@@ -305,7 +307,6 @@
     "it/humanebench": 13,
     "it/manifesto-etico-intervista": 13,
     "it/omnivoice-studio": 13,
-    "it/openweight-win": 13,
     "it/openweight-win.html": 13,
     "it/qwen38-27b.html": 13,
     "it/robot-tax-sanders": 13,
@@ -322,6 +323,7 @@
     "en/msa-100m-token-en.html": 12,
     "en/pocketos-disaster-en.html": 12,
     "en/qwen3-tts-en.html": 12,
+    "en/qwen38-27b-en": 12,
     "en/rapporto-leonardo-2026-parte1-en.html": 12,
     "en/steerling-en.html": 12,
     "es/qwen38-27b-uncensored-es": 12,
@@ -359,7 +361,6 @@
     "en/llm-knowledge-base-en.html": 11,
     "en/ornith-1.0-en.html": 11,
     "en/pignataro-intervista1-en.html": 11,
-    "en/qwen38-27b-en": 11,
     "es/ai-bournout-es.html": 11,
     "es/ai-safety-report-2026-es.html": 11,
     "es/andon-fm-es.html": 11,
@@ -429,7 +430,6 @@
     "fr/newsletter": 10,
     "fr/rlm-ai-fr.html": 10,
     "fr/steering-llm-fr.html": 10,
-    "it/agenti-50-dollari-intrusione": 10,
     "it/ai-deepconf": 10,
     "it/ai-supply-chain-sostenibile.html": 10,
     "it/colibri": 10,
@@ -543,6 +543,7 @@
     "en/amodei-intervista-parte2-en": 8,
     "en/anthropic-hacker-en": 8,
     "en/bodo-glimt-fokus-ai-en.html": 8,
+    "en/codespeak-en.html": 8,
     "en/colibri-en.html": 8,
     "en/convergenza-modelli-scientifici-en.html": 8,
     "en/gemma4-26b-en.html": 8,
@@ -637,7 +638,6 @@
     "en/ars-notoria-e-ai-en.html": 7,
     "en/cina-universita-en.html": 7,
     "en/claude-code-en.html": 7,
-    "en/codespeak-en.html": 7,
     "en/deepseek-ocr-en.html": 7,
     "en/gemma4-12b-q8-en": 7,
     "en/glm5.2-en.html": 7,
@@ -704,6 +704,7 @@
     "it/google-threat-intelligence": 7,
     "it/llm-knowledge-base": 7,
     "it/navier-stokes.html": 7,
+    "it/qwen38-cohere.html": 7,
     "de/agenti-ai-open-source-confronto-de.html": 6,
     "de/ai-aziende-e-servizi-de": 6,
     "de/ai-critiche-sutton-de": 6,
@@ -915,6 +916,7 @@
     "it/qwen35-locale-puntata1.html": 5,
     "it/qwen35-locale-puntata1.html)": 5,
     "it/qwen36-35b-ai": 5,
+    "it/qwen38-cohere": 5,
     "it/wave-former-raggix": 5,
     "it/webgpu-ia-browser.html": 5,
     "de/AI_Musica_Copyright_de.html": 4,
@@ -15251,6 +15253,101 @@
             "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
           ]
         }
+      },
+      "2026-11-11": {
+        "total_views": 50,
+        "views_by_lang": {
+          "it": 45,
+          "de": 1,
+          "en": 4
+        },
+        "views_by_tag": {
+          "Research": 4,
+          "Generative AI": 12,
+          "Applications": 2,
+          "Training": 2,
+          "Ethics & Society": 8,
+          "Startups": 1,
+          "Security": 7
+        },
+        "top_articles": [
+          {
+            "path": "it/qwen38-cohere.html",
+            "views": 7
+          },
+          {
+            "path": "it/qwen38-cohere",
+            "views": 5
+          },
+          {
+            "path": "it/agenti-50-dollari-intrusione",
+            "views": 3
+          },
+          {
+            "path": "it/colibri.html",
+            "views": 1
+          },
+          {
+            "path": "it/ai-epanortosi",
+            "views": 1
+          }
+        ],
+        "detailed_views": {
+          "it/index.html": 14,
+          "it": 7,
+          "fr": 1,
+          "en": 1,
+          "de": 1,
+          "es": 1,
+          "it/colibri.html": 1,
+          "it/ai-epanortosi": 1,
+          "it/ai-musica-copyright": 1,
+          "it/chartnet.html": 1,
+          "de/cyborg-centauri-automi-de.html": 1,
+          "en/diffusion-vs-autoregressive-en.html": 1,
+          "en/prompt-injection-camel-en": 1,
+          "it/openweight-win": 1,
+          "it/agenti-50-dollari-intrusione": 3,
+          "en/qwen38-27b-en": 1,
+          "en/codespeak-en.html": 1,
+          "it/qwen38-cohere.html": 7,
+          "it/qwen38-cohere": 5
+        },
+        "counter_total": 20683,
+        "window_start": "2026-11-11T06:58:22.119173+00:00",
+        "window_end": "2026-11-12T07:35:14.263205+00:00",
+        "data_quality": {
+          "lost_views": 0,
+          "regressions": [],
+          "regressions_count": 0,
+          "hourly_regressions": [],
+          "dropped_writes": 0,
+          "missing_paths": [],
+          "unreadable_paths": [],
+          "ignored_dips_views": 0,
+          "twin_collisions": [
+            {
+              "path": "de",
+              "raw_path": "de",
+              "count": 1,
+              "duplicate_same_key": true
+            },
+            {
+              "path": "es",
+              "raw_path": "es",
+              "count": 1,
+              "duplicate_same_key": true
+            }
+          ],
+          "twin_baseline": [],
+          "suspicious_new_paths": [],
+          "counter_before": 20633,
+          "counter_after": 20683,
+          "net_change": 50,
+          "warnings": [
+            "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
+          ]
+        }
       }
     },
     "monthly": {
@@ -15519,23 +15616,23 @@
         "counter_total": 20130
       },
       "2026-11": {
-        "total_views": 503,
+        "total_views": 553,
         "views_by_lang": {
-          "it": 407,
-          "en": 46,
-          "de": 9,
+          "it": 452,
+          "en": 50,
+          "de": 10,
           "fr": 29,
           "es": 12
         },
         "views_by_tag": {
-          "Research": 39,
-          "Generative AI": 115,
+          "Research": 43,
+          "Generative AI": 127,
           "Business": 50,
-          "Applications": 55,
-          "Ethics & Society": 54,
-          "Security": 27,
-          "Training": 47,
-          "Startups": 5,
+          "Applications": 57,
+          "Ethics & Society": 62,
+          "Security": 34,
+          "Training": 49,
+          "Startups": 6,
           "E-learning": 2,
           "Copyright": 1
         },
@@ -15557,15 +15654,19 @@
             "views": 14
           },
           {
+            "path": "it/openweight-win",
+            "views": 14
+          },
+          {
             "path": "it/openweight-win.html",
             "views": 13
           },
           {
-            "path": "it/openweight-win",
+            "path": "it/agenti-50-dollari-intrusione.html",
             "views": 13
           },
           {
-            "path": "it/agenti-50-dollari-intrusione.html",
+            "path": "it/agenti-50-dollari-intrusione",
             "views": 13
           },
           {
@@ -15574,45 +15675,41 @@
           },
           {
             "path": "it/ai-musica-copyright",
-            "views": 10
-          },
-          {
-            "path": "it/agenti-50-dollari-intrusione",
-            "views": 10
+            "views": 11
           }
         ],
         "dropped_views": 0,
-        "counter_total": 20633
+        "counter_total": 20683
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 10232,
+        "total_views": 10282,
         "views_by_lang": {
-          "it": 5422,
-          "en": 1635,
-          "de": 1052,
+          "it": 5467,
+          "en": 1639,
+          "de": 1053,
           "fr": 1049,
           "es": 1074
         },
         "views_by_tag": {
-          "Generative AI": 4237,
-          "Applications": 1964,
-          "Security": 1129,
-          "Research": 2071,
-          "Ethics & Society": 2797,
-          "Training": 1130,
+          "Generative AI": 4249,
+          "Applications": 1966,
+          "Security": 1136,
+          "Research": 2075,
+          "Ethics & Society": 2805,
+          "Training": 1132,
           "Business": 1731,
           "Copyright": 177,
-          "Startups": 380,
+          "Startups": 381,
           "E-learning": 260
         },
         "dropped_views": 0,
-        "counter_total": 20633
+        "counter_total": 20683
       }
     }
   },
-  "cumulative_total": 20633,
-  "previous_cumulative_total": 20607,
+  "cumulative_total": 20683,
+  "previous_cumulative_total": 20633,
   "dropped_writes_by_day": {}
 }

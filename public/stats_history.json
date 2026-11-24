@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-11-24T08:31:39.681658+00:00",
+  "last_update": "2026-11-24T10:18:30.919263+00:00",
   "portal_snapshot": {
     "total_articles": 1045,
     "articles_by_lang": {
@@ -19,23 +19,23 @@
     "total_authors": 1,
     "total_tags": 10,
     "tags_popularity": {
-      "Generative AI": 730,
-      "Security": 250,
       "Ethics & Society": 550,
-      "Business": 380,
-      "Copyright": 55,
       "Research": 405,
-      "Applications": 330,
-      "Training": 240,
       "E-learning": 60,
-      "Startups": 80
+      "Applications": 330,
+      "Generative AI": 730,
+      "Startups": 80,
+      "Security": 250,
+      "Business": 380,
+      "Training": 240,
+      "Copyright": 55
     },
     "podcast_articles_count": 209,
     "video_articles_count": 209
   },
   "cumulative_history": {
-    "it/index.html": 3386,
-    "it": 1580,
+    "it/index.html": 3390,
+    "it": 1582,
     "fr": 367,
     "en": 284,
     "de": 252,
@@ -397,6 +397,7 @@
     "it/manifesto-etico-intervista.html": 11,
     "it/ornith-1.0": 11,
     "it/qwen3.5-locale-puntata1": 11,
+    "it/reverse-engineering": 11,
     "it/tilly-norwood-ai-actor.html": 11,
     "de/ai-consumer-2025-de.html": 10,
     "de/ai-safety-report-2026-de.html": 10,
@@ -445,6 +446,7 @@
     "fr/newsletter": 10,
     "fr/rlm-ai-fr.html": 10,
     "fr/steering-llm-fr.html": 10,
+    "it/7paper-memoria-llm": 10,
     "it/ai-deepconf": 10,
     "it/ai-supply-chain-sostenibile.html": 10,
     "it/dwarfstar-antirez": 10,
@@ -452,7 +454,6 @@
     "it/eset-apt-report": 10,
     "it/fideuram": 10,
     "it/memoria-agenti-ai-guida.html": 10,
-    "it/reverse-engineering": 10,
     "it/reverse-engineering.html": 10,
     "it/robotica-2025": 10,
     "it/scamworld": 10,
@@ -522,7 +523,6 @@
     "fr/recursivemas-fr.html": 9,
     "fr/subliminal-learning-fr.html": 9,
     "fr/wave-former-raggix-fr.html": 9,
-    "it/7paper-memoria-llm": 9,
     "it/agent-hospital": 9,
     "it/ai-coding-security": 9,
     "it/ai-lutto-digitale.html": 9,
@@ -770,6 +770,7 @@
     "en/dspark-en.html": 6,
     "en/esodo-silenzioso-en.html": 6,
     "en/muse-glimmer30b-en.html": 6,
+    "en/omnivoice-studio-en": 6,
     "en/ornith1-5-en.html": 6,
     "en/papalini-interview2-en.html": 6,
     "en/proof-of-continuity-en": 6,
@@ -869,7 +870,6 @@
     "en/loop-engineering-en.html": 5,
     "en/malta-openai-en": 5,
     "en/memoria-agenti-ai-guida-en.html": 5,
-    "en/omnivoice-studio-en": 5,
     "en/poesia-ai-security-en": 5,
     "en/privacy": 5,
     "en/qwen3.5-locale-puntata2-en": 5,
@@ -16468,70 +16468,36 @@
         }
       },
       "2026-11-23": {
-        "total_views": 68,
+        "total_views": 9,
         "views_by_lang": {
-          "it": 59,
-          "en": 4,
-          "es": 2,
-          "de": 2,
-          "fr": 1
+          "it": 8,
+          "en": 1
         },
-        "views_by_tag": {
-          "Ethics & Society": 13,
-          "Business": 3,
-          "Generative AI": 11,
-          "Security": 1,
-          "Copyright": 11
-        },
+        "views_by_tag": {},
         "top_articles": [
           {
             "path": "it/reverse-engineering",
-            "views": 10
-          },
-          {
-            "path": "it/reverse-engineering.html",
-            "views": 10
-          },
-          {
-            "path": "it/7paper-memoria-llm",
-            "views": 2
-          },
-          {
-            "path": "it/ai-musica-copyright",
             "views": 1
           },
           {
-            "path": "en/memvid-ai-memory-en",
+            "path": "it/7paper-memoria-llm",
+            "views": 1
+          },
+          {
+            "path": "en/omnivoice-studio-en",
             "views": 1
           }
         ],
         "detailed_views": {
-          "it/index.html": 19,
-          "it": 9,
-          "fr": 2,
-          "en": 1,
-          "de": 1,
-          "es": 1,
-          "it/ai-musica-copyright": 1,
-          "en/memvid-ai-memory-en": 1,
-          "it/rapporto-leonardo-2026-parte2.html": 1,
-          "it/guida-motori-inferenza-locale": 1,
-          "en/amodei-intervista-parte2-en.html": 1,
-          "es/degregori-ai-war-es.html": 1,
-          "it/reverse-engineering": 10,
-          "it/reverse-engineering.html": 10,
-          "it/7paper-memoria-llm": 2,
-          "en/engram-en": 1,
-          "en/grief-tech-en": 1,
-          "de/agentic-ai-foundation-de": 1,
-          "de/empero-qwen38-35b-de": 1,
-          "es/cina-token-economy-es": 1,
-          "fr/intervista-fornaro-colibri-fr": 1,
-          "it/authors/dario-ferrero.html": 1
+          "it/index.html": 4,
+          "it": 2,
+          "it/reverse-engineering": 1,
+          "it/7paper-memoria-llm": 1,
+          "en/omnivoice-studio-en": 1
         },
-        "counter_total": 21252,
-        "window_start": "2026-11-23T08:01:54.665708+00:00",
-        "window_end": "2026-11-24T08:31:39.681658+00:00",
+        "counter_total": 21261,
+        "window_start": "2026-11-24T08:31:39.681658+00:00",
+        "window_end": "2026-11-24T10:18:30.919263+00:00",
         "data_quality": {
           "lost_views": 0,
           "regressions": [],
@@ -16557,9 +16523,9 @@
           ],
           "twin_baseline": [],
           "suspicious_new_paths": [],
-          "counter_before": 21184,
-          "counter_after": 21252,
-          "net_change": 68,
+          "counter_before": 21252,
+          "counter_after": 21261,
+          "net_change": 9,
           "warnings": [
             "2 path gemelli con slash finale conservati come chiavi separate (0 visite cumulate): prima del fix il gemello veniva sovrascritto da path.strip(\"/\") e il suo totale spariva dallo snapshot (offset costante rispetto a /stats)."
           ]
@@ -16832,25 +16798,25 @@
         "counter_total": 20130
       },
       "2026-11": {
-        "total_views": 1122,
+        "total_views": 1063,
         "views_by_lang": {
-          "it": 904,
-          "en": 120,
-          "de": 27,
-          "fr": 46,
-          "es": 25
+          "it": 853,
+          "en": 117,
+          "de": 25,
+          "fr": 45,
+          "es": 23
         },
         "views_by_tag": {
           "Research": 112,
-          "Generative AI": 260,
-          "Business": 113,
+          "Generative AI": 249,
+          "Business": 110,
           "Applications": 135,
-          "Ethics & Society": 143,
-          "Security": 63,
+          "Ethics & Society": 130,
+          "Security": 62,
           "Training": 71,
           "Startups": 17,
           "E-learning": 4,
-          "Copyright": 16
+          "Copyright": 5
         },
         "top_articles": [
           {
@@ -16858,12 +16824,12 @@
             "views": 23
           },
           {
-            "path": "it/ai-musica-copyright",
+            "path": "it/agenti-50-dollari-intrusione",
             "views": 22
           },
           {
-            "path": "it/agenti-50-dollari-intrusione",
-            "views": 22
+            "path": "it/ai-musica-copyright",
+            "views": 21
           },
           {
             "path": "it/7paper-memoria-llm.html",
@@ -16895,37 +16861,37 @@
           }
         ],
         "dropped_views": 0,
-        "counter_total": 21252
+        "counter_total": 21261
       }
     },
     "yearly": {
       "2026": {
-        "total_views": 10851,
+        "total_views": 10792,
         "views_by_lang": {
-          "it": 5919,
-          "en": 1709,
-          "de": 1070,
-          "fr": 1066,
-          "es": 1087
+          "it": 5868,
+          "en": 1706,
+          "de": 1068,
+          "fr": 1065,
+          "es": 1085
         },
         "views_by_tag": {
-          "Generative AI": 4382,
+          "Generative AI": 4371,
           "Applications": 2044,
-          "Security": 1165,
+          "Security": 1164,
           "Research": 2144,
-          "Ethics & Society": 2886,
+          "Ethics & Society": 2873,
           "Training": 1154,
-          "Business": 1794,
-          "Copyright": 192,
+          "Business": 1791,
+          "Copyright": 181,
           "Startups": 392,
           "E-learning": 262
         },
         "dropped_views": 0,
-        "counter_total": 21252
+        "counter_total": 21261
       }
     }
   },
-  "cumulative_total": 21252,
-  "previous_cumulative_total": 21184,
+  "cumulative_total": 21261,
+  "previous_cumulative_total": 21252,
   "dropped_writes_by_day": {}
 }
